@@ -1,5 +1,14 @@
 #!/usr/bin/perl
 
+=head2 SYNOPSIS
+
+This script updates the database with CPAN ratings.  You'll need to have updated
+the modules table before running this.  The csv file can be downloaded from:
+
+http://cpanratings.perl.org/csv/all_ratings.csv
+
+=cut
+
 use Data::Dump qw( dump );
 use Find::Lib 'lib';
 use iCPAN;

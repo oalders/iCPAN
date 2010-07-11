@@ -1,24 +1,48 @@
 =head1 SYNOPSIS
 
-iCPAN is CPAN on your iPhone/iPod/iPad. For a full description of what iCPAN
-is, please see the iCPAN app store page:
+iCPAN is the CPAN on your iPhone/iPod/iPad. For a full description of what
+iCPAN is, please see the iCPAN app store page:
 L<http://itunes.apple.com/app/icpan/id377340561?mt=8>
 
 =head1 GETTING STARTED
 
-To edit the code and/or deploy to your iDevice, you'll need to install
+=head2 INSTALL THE SDK
+
+To edit the code and/or deploy to your iDevice, you'll first need to install
 the iPhone SDK: L<http://developer.apple.com/iphone/index.action>
 
-After installing the SDK and cloning this repository, you'll need to add the
-iCPAN.sqlite database to your project before you build. You can find the
-database snapshots at: L<http://icpan.wundercounter.com/sqlite> The folders
-are organized by version number. Download the iCPAN.sqlite.zip file in the
-appropriate folder, unzip it and add it to your Xcode project.
+=head2 GET THE CODE
 
-To add the file to your Xcode project, open your project and ctrl-click on the
-Resources folder. Choose "Add" -> "Existing Files". Choose the sqlite file.
-You will then be presented with a list of options for adding the file. You
-should be fine to accept the defaults.
+You can either clone the main repository:
+
+    git clone git@github.com:oalders/iCPAN.git
+
+Or, you can fork this on GitHub and then clone your own fork of the repo.  This
+would be the recommended way of doing things:
+
+    git clone git@github.com:yournamehere/iCPAN.git
+    
+=head2 GET THE DATABASE
+
+You can find the database snapshots at:
+L<http://icpan.wundercounter.com/sqlite> The folders are organized by version
+number. Download the iCPAN.sqlite.zip file in the appropriate folder, unzip it
+and copy it into your top iCPAN folder. For example, to download the code for
+v1.0.0
+
+    cd iCPAN
+    git checkout -b v1.0.0 v1.0.0
+    curl -C - -O http://icpan.wundercounter.com/sqlite/1.0.0/iCPAN.sqlite.zip
+    unzip iCPAN.sqlite.zip
+
+=head2 ADD THE DATABASE TO YOUR XCODE PROJECT
+
+To add the file to your Xcode project, open your project in Xcode and
+CTRL-click on the Resources folder. Choose "Add" -> "Existing Files". Choose
+the sqlite file you just unzipped. You will then be presented with a list of
+options for adding the file. You should be fine to accept the defaults.
+
+=head2 BUILD AND RUN
 
 At this point, you can click the Xcode "Build and Run" button to deploy the
 app to your iPhone simulator.  

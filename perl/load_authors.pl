@@ -23,6 +23,7 @@ my $schema = iCPAN::Schema->connect( $dsn, '', '', '' );
 while ( my $line = $z->getline() ) {
 
     if ( $line =~ m{alias\s(\w*)\s{1,}"(.*)<(.*)>"}gxms ) {
+        say "author: $2";
         my $author = $schema->resultset( 'iCPAN::Schema::Zauthor' )
             ->find_or_create({ zpauseid => $1, zname => $2, zemail => $3 });
     }
