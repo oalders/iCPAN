@@ -1,14 +1,13 @@
 =head1 SYNOPSIS
 
 iCPAN is CPAN on your iPhone.  For a full description of what iCPAN is,
-please see the L<<a
-href="http://itunes.apple.com/app/icpan/id377340561?mt=8">iCPAN app store
-page</a>>
+please see the iCPAN app store
+page: B<http://itunes.apple.com/app/icpan/id377340561?mt=8
 
 =head1 GETTING STARTED
 
 To edit the code and/or deploy to your iPhone/iPod/iPad, you'll need to install
-L<<a href="http://developer.apple.com/iphone/index.action">the iPhone SDK</a>>
+the iPhone SDK: B<http://developer.apple.com/iphone/index.action>
 
 After installing the SDK and cloning this repository, you'll need to add the
 iCPAN.sqlite database to your project. To do so, in your XCode project,
