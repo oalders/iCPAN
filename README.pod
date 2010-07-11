@@ -1,19 +1,33 @@
 =head1 SYNOPSIS
 
-iCPAN is CPAN on your iPhone.  For a full description of what iCPAN is,
-please see the iCPAN app store
-page: L<http://itunes.apple.com/app/icpan/id377340561?mt=8>
+iCPAN is CPAN on your iPhone/iPod/iPad. For a full description of what iCPAN
+is, please see the iCPAN app store page:
+L<http://itunes.apple.com/app/icpan/id377340561?mt=8>
 
 =head1 GETTING STARTED
 
-To edit the code and/or deploy to your iPhone/iPod/iPad, you'll need to install
+To edit the code and/or deploy to your iDevice, you'll need to install
 the iPhone SDK: L<http://developer.apple.com/iphone/index.action>
 
 After installing the SDK and cloning this repository, you'll need to add the
-iCPAN.sqlite database to your project. To do so, in your XCode project,
-ctrl-click on the Resources folder. Choose "Add" -> "Existing Files". Choose
-the sqlite file. You will then be presented with a list of options for adding
-the file. You should be fine to accept the defaults.
+iCPAN.sqlite database to your project before you build. You can find the
+database snapshots at: L<http://icpan.wundercounter.com/sqlite> The folders
+are organized by version number. Download the iCPAN.sqlite.zip file in the
+appropriate folder, unzip it and add it to your Xcode project.
+
+To add the file to your Xcode project, open your project and ctrl-click on the
+Resources folder. Choose "Add" -> "Existing Files". Choose the sqlite file.
+You will then be presented with a list of options for adding the file. You
+should be fine to accept the defaults.
 
 At this point, you can click the Xcode "Build and Run" button to deploy the
 app to your iPhone simulator.  
+
+=head1 CONTACT
+
+There is currently no mailing list. If you have any questions, feel free to
+send a message via GitHub. You can also follow us on Twitter for updates:
+
+L<http://twitter.com/wundercounter>
+
+L<http://twitter.com/ioncache>
