@@ -1,0 +1,3 @@
+To install pygments on OS X:
+
+sudo easy_install Pygments

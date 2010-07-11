@@ -1,0 +1,8 @@
+# folders to ignore
+build
+iCPAN.xcodeproj
+perl/cpanpod
+
+# files to ignore
+.DS_Store
+*.sqlite
