@@ -5,5 +5,6 @@ perl/cpanpod
 
 # files to ignore
 .DS_Store
-*.sqlite
+*.sqlite*
 all_ratings.csv
+*.kpf

@@ -28,24 +28,43 @@ You can find the database snapshots at:
 L<http://icpan.wundercounter.com/sqlite> The folders are organized by version
 number. Download the iCPAN.sqlite.zip file in the appropriate folder, unzip it
 and copy it into your top iCPAN folder. For example, to download the code for
-v1.0.0
+the very latest version of the code:
+
+    cd iCPAN
+    curl -C - -O http://icpan.wundercounter.com/sqlite/latest/iCPAN.sqlite.zip
+    unzip iCPAN.sqlite.zip
+    
+To work with a tagged release, like version 1.0.0:
 
     cd iCPAN
     git checkout -b v1.0.0 v1.0.0
     curl -C - -O http://icpan.wundercounter.com/sqlite/1.0.0/iCPAN.sqlite.zip
     unzip iCPAN.sqlite.zip
 
-=head2 ADD THE DATABASE TO YOUR XCODE PROJECT
-
-To add the file to your Xcode project, open your project in Xcode and
-CTRL-click on the Resources folder. Choose "Add" -> "Existing Files". Choose
-the sqlite file you just unzipped. You will then be presented with a list of
-options for adding the file. You should be fine to accept the defaults.
 
 =head2 BUILD AND RUN
 
 At this point, you can click the Xcode "Build and Run" button to deploy the
-app to your iPhone simulator.  
+app to your iPhone simulator.
+
+=head3 OPTIMIZING BUILD AND RUN FOR SPEED
+
+Because the unzipped database is currently over 450 MB, a simple "build and
+run" can be quite slow. This is partially due to the fact that the database
+needs to be copied over to the iPhone emulator with each "build and run". You
+can speed up this process by using a smaller database. One strategy would be
+to drop all modules from the modules table with an id > 1000. This would leave
+you with a much smaller database and it speeds up the process considerably.
+
+Just keep the missing modules in mind when choosing which modules to search
+for while testing.  Try searching on modules starting with "A" when using this
+method.  If you decide to deploy to a device, you'll likely want to use the
+full database, so keep a copy of it handy as well.
+
+If you run into problems deploying to the simulator after altering the
+database, try resetting it and then building again. "iPhone Simulator" ->
+"Reset Content and Settings"
+
 
 =head1 CONTACT
 
