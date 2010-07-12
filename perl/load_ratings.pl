@@ -2,8 +2,8 @@
 
 =head2 SYNOPSIS
 
-This script updates the database with CPAN ratings.  You'll need to have updated
-the modules table before running this.  The csv file can be downloaded from:
+Loads module ratings into module table.  Requires the following file
+in the /perl directory:
 
 http://cpanratings.perl.org/csv/all_ratings.csv
 
@@ -28,12 +28,12 @@ my $parser = Parse::CSV->new(
 
 while ( my $rating = $parser->fetch ) {
     
-    say dump $rating;
+    #say dump $rating;
     my $distro = $rating->{distribution};
     $distro =~ s{-}{::}g;
     #say $distro;
 
-    my $module = $schema->resultset( 'iCPAN::Schema::Zmodule' )
+    my $module = $schema->resultset( 'iCPAN::Schema::Result::Zmodule' )
         ->find( { zname => $distro } );
         
     if ( !$module ) {

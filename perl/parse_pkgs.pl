@@ -18,12 +18,13 @@ my $tar      = Archive::Tar->new;
 my $z = new IO::Uncompress::AnyInflate $file
     or die "anyinflate failed: $AnyInflateError\n";
 
-my $base  = Find::Lib->base;
-my $count = 0;
-my $debug = $ENV{'DEBUG'};
-my $iCPAN = iCPAN->new;
-my $off   = 1;
-my $schema = $iCPAN->schema;
+my $base         = Find::Lib->base;
+my $count        = 0;
+my $debug        = $ENV{'DEBUG'};
+my $iCPAN        = iCPAN->new;
+my $off          = 1;
+my $save_to_file = 0;
+my $schema       = $iCPAN->schema;
 
 chdir $base or die $!;
 
@@ -40,14 +41,14 @@ while ( my $line = $z->getline() ) {
     my @parts = split( "/", $archive_path );
     my $pauseid = $parts[2];
 
-    my $author = $schema->resultset( 'iCPAN::Schema::Zauthor' )
+    my $author = $schema->resultset( 'iCPAN::Schema::Result::Zauthor' )
         ->find( { zpauseid => $pauseid } );
 
     if ( !$author ) {
         say "skipping $line ($pauseid). cannot find in author table";
         next;
     }
-    
+
     my $filename = $iCPAN->mod2file( $module_name );
 
     my @module_parts = split( "::", $module_name );
@@ -103,17 +104,18 @@ while ( my $line = $z->getline() ) {
         }
 
         my $parser = iCPAN::Pod->new();
-        #$parser->icpan_base_href( $base_href );
+
         $parser->perldoc_url_prefix( '' );
         $parser->index( 1 );
         $parser->html_css( 'style.css' );
 
-        #$parser->html_header_tags(qq[<base href="$base_href">]);
-
         say "opening $html_file";
 
         # filehandle must be created *before* parsing begins
-        open TXTOUT, ">$html_file" or die "Can't write to $html_file: $!";
+        if ( $save_to_file ) {
+            open TXTOUT, ">$html_file" or die "Can't write to $html_file: $!";
+        }
+
         my $xhtml = "";
         $parser->output_string( \$xhtml );
         $parser->parse_string_document( $content );
@@ -122,29 +124,32 @@ while ( my $line = $z->getline() ) {
         $xhtml =~ s{<body>}{<body>\n<div class="pod">};
         $xhtml =~ s{<\/body>}{<\/div>\n<\/body>};
 
-        #print TXTOUT sprintf( "%s", $xhtml );
-        close TXTOUT;
-        
-        my $module = $schema->resultset( 'iCPAN::Schema::Zmodule' )->find_or_create(
-            {   zauthor => $author->z_pk,
-                zname   => $module_name,
-            }
-        );
-    
+        if ( $save_to_file ) {
+            print TXTOUT sprintf( "%s", $xhtml );
+            close TXTOUT;
+        }
+
+        my $module = $schema->resultset( 'iCPAN::Schema::Result::Zmodule' )
+            ->find_or_create( { zname => $module_name, } );
+
+        # author may have changed since last version
+        $module->zauthor( $author->z_pk );
+
         if ( $version && $version ne 'undef' ) {
             $module->zversion( $version );
         }
         else {
             $module->zversion( undef );
         }
-        
+
         $module->zpod( $xhtml );
         $module->update;
-        
+
         next LINE;
 
-
     }
+
+    last LINE if $module_name eq 'Abstract::Meta::Attribute::Method';
 
 }
 

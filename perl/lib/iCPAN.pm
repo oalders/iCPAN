@@ -6,8 +6,8 @@ use Moose;
 use Modern::Perl;
 
 has 'schema' => (
-    is => 'ro',
-    isa => 'iCPAN::Schema',
+    is         => 'ro',
+    isa        => 'iCPAN::Schema',
     lazy_build => 1,
 );
 
@@ -20,15 +20,12 @@ sub mod2file {
     $file =~ s{::}{-}gxms;
     $file .= '.html';
 
-    #say "got $module_name";
-    #say "returning $file";
-
     return $file;
 }
 
 sub _build_schema {
 
-    my $self = shift;
+    my $self   = shift;
     my $dsn    = "dbi:SQLite:dbname=../iCPAN.sqlite";
     my $dbh    = DBI->connect( $dsn, "", "" );
     my $schema = iCPAN::Schema->connect( $dsn, '', '', '' );
