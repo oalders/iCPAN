@@ -34,7 +34,10 @@
 </head>
 
 <body>
-  <a href="http://github.com/oalders/iCPAN"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
+  <a href="http://github.com/oalders/iCPAN"><img style="position: absolute;
+  top: 0; right: 0; border: 0;"
+  src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"
+  alt="Fork me on GitHub" /></a>
 
   <div id="container">
 
@@ -46,16 +49,22 @@
     </div>
 
     <h1><a href="http://github.com/oalders/iCPAN">iCPAN</a>
-      <span class="small">by <a href="http://github.com/oalders">oalders</a></span></h1>
+      <span class="small">by <a href="http://github.com/ioncache">Mark
+      Jubenville</a> and <a href="http://github.com/oalders">Olaf
+      Alders</a></span></h1>
 
     <div class="description">
       CPAN on your iPhone/iPod/iPad
     </div>
 
     <h2>Authors</h2>
-<p>Olaf Alders (olaf@wundersolutions.com)<br/><br/>      </p>
+<p>
+Mark Jubenville<br />
+Olaf Alders (<a href="mailto:olaf@wundersolutions.com">olaf@wundersolutions.com</a>)<br/><br/>      </p>
 <h2>Contact</h2>
-<p>Olaf Alders (olaf@wundersolutions.com)<br/>      </p>
+<p>
+Olaf Alders (<a href="mailto:olaf@wundersolutions.com">olaf@wundersolutions.com</a>)
+<br/>      </p>
 
 
     <h2>Download</h2>
@@ -68,13 +77,25 @@
       by running:
       <pre>$ git clone git://github.com/oalders/iCPAN</pre>
     </p>
+    
+    <p>If you would like to edit the source of this GitHub project page, get
+    the source code on GitHub. Make sure you have no uncommitted changes in
+    your directory before you run the following commands:
+    </p>
+    <pre>
+cd iCPAN
+git symbolic-ref HEAD refs/heads/gh-pages
+rm .git/index
+git clean -f -d -x
+git pull origin gh-pages
+    </pre>
+
 
     <div class="footer">
       get the source code on GitHub : <a href="http://github.com/oalders/iCPAN">oalders/iCPAN</a>
     </div>
 
   </div>
-
   
 </body>
 </html>
