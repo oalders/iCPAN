@@ -1,0 +1,234 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>iCPAN</title>
+<!-- metadata -->
+<meta name="generator" content="S5" />
+<meta name="version" content="S5 1.1" />
+<meta name="presdate" content="20050728" />
+<meta name="author" content="Eric A. Meyer" />
+<meta name="company" content="Complex Spiral Consulting" />
+<!-- configuration parameters -->
+<meta name="defaultView" content="slideshow" />
+<meta name="controlVis" content="hidden" />
+<!-- style sheet links -->
+<link rel="stylesheet" href="ui/default/slides.css" type="text/css" media="projection" id="slideProj" />
+<link rel="stylesheet" href="ui/default/outline.css" type="text/css" media="screen" id="outlineStyle" />
+<link rel="stylesheet" href="ui/default/print.css" type="text/css" media="print" id="slidePrint" />
+<link rel="stylesheet" href="ui/default/opera.css" type="text/css" media="projection" id="operaFix" />
+<!-- embedded styles -->
+<style type="text/css" media="all">
+.imgcon {width: 525px; margin: 0 auto; padding: 0; text-align: center;}
+#anim {width: 270px; height: 320px; position: relative; margin-top: 0.5em;}
+#anim img {position: absolute; top: 42px; left: 24px;}
+img#me01 {top: 0; left: 0;}
+img#me02 {left: 23px;}
+img#me04 {top: 44px;}
+img#me05 {top: 43px;left: 36px;}
+</style>
+<!-- S5 JS -->
+<script src="ui/default/slides.js" type="text/javascript"></script>
+</head>
+<body>
+
+<div class="layout">
+<div id="controls"><!-- DO NOT EDIT --></div>
+<div id="currentSlide"><!-- DO NOT EDIT --></div>
+<div id="header"></div>
+<div id="footer">
+<h1>CPAN on Your iPhone/Pod/Pad</h1>
+<h2>Toronto.pm &#8226; May 27, 2010</h2>
+</div>
+
+</div>
+<div class="presentation">
+
+<div class="slide">
+<h1 style="text-transform: none">iCPAN</h1>
+<h3>Mark Jubenville and Olaf Alders</h3>
+</div>
+
+
+<div class="slide">
+<h1 style="text-transform: none">What is iCPAN?</h1>
+<ul>
+<li><strong>CPAN</strong> for offline browsing</li>
+<li>Based on minicpan</li>
+<li>8,174 authors</li>
+<li>56,483 modules</li>
+<li>POD Generation and Database Population in Perl</li>
+<li>Implementation in Objective-C</li>
+<li>Database abstraction via Apple's <strong>Core Data</strong></li>
+</ul>
+</div>
+
+
+<div class="slide">
+<h1>Offline Browsing</h1>
+<ul>
+<li>We wanted a system that can be used without any kind of Internet access</li>
+<li>Ideal for use on subway, airplane, in a canoe, etc</li>
+<li>Nothing similar was already available in the App Store</li>
+<li>Was a good opportunity to learn Objective-C and Xcode</li>
+<li>Decided to include <strong>all</strong> modules rather than picking and choosing</li>
+</ul>
+</div>
+
+
+<div class="slide">
+<h1>Authors and Modules</h1>
+<ul>
+<li>Data is stored in an SQLite database</li>
+<li>All CPAN authors in the minicpan index are included (name, email, PAUSEID)</li>
+<li>All modules which include POD are stored in the database (name, author, version, rating, review_count, pod)</li>
+<li>POD is stored in the database</li>
+</ul>
+</div>
+
+
+<div class="slide">
+<h1>POD Generation</h1>
+<ul>
+<li>AAC::Pvoice - 0.91 - J/JO/JOUKE/AAC-Pvoice-0.91.tar.gz</li>
+<li>Subclassing Pod::Simple::XHTML</li>
+<li>Create custom file paths to documentation links (POD -- not man pages or external URLs)</li>
+<li>Wrapping all code samples in &lt;pre&gt; tags</li>
+<li>Wrap inside of body with a special div</li>
+<li>We'll use this same method for syntax highlighting in future (pygments)</li>
+</ul>
+</div>
+
+
+<div class="slide">
+<h1>Database Population</h1>
+<ul>
+    <li>DBIx::Class</li>
+    <li>my $dsn    = "dbi:SQLite:dbname=../iCPAN.sqlite";</li>
+    <li>We use 2 different databases for development</li>
+    <li>Complete database 317 MB</li>
+    <li>Build and deploy extremely slow with such a large file</li>
+    <li>A subset of all modules is good enough for most testing</li>
+    <li>Individual HTML files proved to be too cumbersome to deal with</li>
+</ul>
+</div>
+
+
+<div class="slide">
+<h1>Learning Objective-C</h1>
+<ul>
+<li>Objective-C is not Perl</li>
+<li>Descriptive to the point of extreme verbosity</li>
+<li>Apple's documentation lacks examples of the quality CPAN has</li>
+</ul>
+</div>
+
+
+<div class="slide">
+<h1>Find and Replace</h1>
+<p>
+	fileName = [fileName stringByReplacingOccurrencesOfString:@"::" withString:@"-"];<br /><br />
+    vs.
+    <br /><br />
+	$filename =~ s{::}{-}g;
+</p>
+</div>
+
+<div class="slide">
+<h1>String Concatenation</h1>
+<p>
+	fileName = [fileName stringByAppendingString:@".html"];<br /><br />
+    vs.
+    <br /><br />
+    $filename .= '.html';
+</p>
+</div>
+
+
+<div class="slide">
+<h1>File Exists?</h1>
+<p>
+	if ( ![[NSFileManager defaultManager] fileExistsAtPath:filePath] ) {
+   <br /><br />
+    vs.
+    <br /><br />
+    if ( -e $file_path ) {
+</p>
+</div>
+
+<div class="slide">
+<h1>Trim Whitespace</h1>
+<p>
+	searchText = [searchText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+   <br /><br />
+    vs.
+    <br /><br />
+    $search_text =~ s{\A\s+(.*)\s+\z}{$1};<br />
+    $search_text =~ s{\s+}{ }g;
+</p>
+</div>
+
+
+
+<div class="slide">
+<h1>Split</h1>
+<p>
+	NSArray *searchWords = [searchText componentsSeparatedByString:@" "];
+   <br /><br />
+    vs.
+    <br /><br />
+    my @search_words = split " ", $search_text;
+</p>
+</div>
+
+<div class="slide">
+<h1>Core Data</h1>
+<ul>
+    <li>Suffers from same problems of all of Objective-C (verbosity, complexity)</li>
+    <li>GUI for database setup</li>
+    <li>You <strong>must</strong> use the GUI to get a proper core data schema</li>
+    <li>Create relationships in the GUI</li>
+    <li>All field names are in caps and prefixed with "Z"</li>
+    <li>TMTOWDI</li>
+    <li>Tight integration with Xcode makes it easier to perform database operations</li>
+</ul>
+</div>
+
+<div class="slide">
+<h1>What's Wrong?</h1>
+<ul>
+    <li>Speed of searching on iPhone hardware vs simulator</li>
+    <li>No built-in API for asynchronous searching</li>
+</ul>
+</div>
+
+<div class="slide">
+<h1>What's Missing?</h1>
+<ul>
+    <li>Syntax Highlighting</li>
+    <li>Version numbers on POD</li>
+    <li>Gravatar support</li>
+    <li>Fixing web browser icons</li>
+    <li>Web view progress indicator</li>
+    <li>Author tab</li>
+    <li>Author search</li>
+    <li>Full text search</li>
+    <li>iPad support</li>
+</ul>
+</div>
+
+<div class="slide">
+<h1>In Summary</h1>
+<ul>
+<li>Hoping to send to the App Store before YAPC</li>
+<li>Free application</li>
+<li>Will make GitHub repo public</li>
+</ul>
+</div>
+
+</div>
+
+</body>
+</html>

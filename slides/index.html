@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>iCPAN<title>
+<!-- metadata -->
+<meta name="generator" content="S5" />
+<meta name="version" content="S5 1.1" />
+<meta name="presdate" content="20050728" />
+<meta name="author" content="Eric A. Meyer" />
+<meta name="company" content="Complex Spiral Consulting" />
+<!-- configuration parameters -->
+<meta name="defaultView" content="slideshow" />
+<meta name="controlVis" content="hidden" />
+<!-- style sheet links -->
+<link rel="stylesheet" href="ui/default/slides.css" type="text/css" media="projection" id="slideProj" />
+<link rel="stylesheet" href="ui/default/outline.css" type="text/css" media="screen" id="outlineStyle" />
+<link rel="stylesheet" href="ui/default/print.css" type="text/css" media="print" id="slidePrint" />
+<link rel="stylesheet" href="ui/default/opera.css" type="text/css" media="projection" id="operaFix" />
+<!-- embedded styles -->
+<style type="text/css" media="all">
+.imgcon {width: 525px; margin: 0 auto; padding: 0; text-align: center;}
+#anim {width: 270px; height: 320px; position: relative; margin-top: 0.5em;}
+#anim img {position: absolute; top: 42px; left: 24px;}
+img#me01 {top: 0; left: 0;}
+img#me02 {left: 23px;}
+img#me04 {top: 44px;}
+img#me05 {top: 43px;left: 36px;}
+</style>
+<!-- S5 JS -->
+<script src="ui/default/slides.js" type="text/javascript"></script>
+</head>
+<body>
+
+<div class="layout">
+<div id="controls"><!-- DO NOT EDIT --></div>
+<div id="currentSlide"><!-- DO NOT EDIT --></div>
+<div id="header"></div>
+<div id="footer">
+<h1>CPAN on Your iPhone/Pod/Pad</h1>
+<h2>YAPC::NA 2010 &#8226; June 21, 2010</h2>
+<div style="position: absolute; right: 0px; top: 8px; padding-right: 10px;">
+    Follow us on Twitter for updates:<br />
+    @wundercounter<br />
+    @ioncache<br />
+</h1>
+</div>
+
+</div>
+<div class="presentation">
+
+<div class="slide">
+<img src="pix/Screenshot%202010.05.12%2012.28.29.png" align="right" style="border: 1px solid #DDD; margin-right: 40px; position: relative; top: 40px;" />
+<h1 style="text-transform: none">iCPAN - CPAN on your iPhone</h1>
+<h3>Mark Jubenville and Olaf Alders</h3>
+</div>
+
+
+<div class="slide">
+<h1 style="text-transform: none">What is iCPAN?</h1>
+<ul>
+<li><strong>CPAN</strong> for offline browsing</li>
+<li>Based on minicpan</li>
+<li>8,174 authors</li>
+<li>56,483 modules</li>
+<li>POD Generation and Database Population in Perl</li>
+<li>Syntax highlighting via Pygments (Python)</li>
+<li>Implementation in Objective-C</li>
+<li>Database abstraction via Apple's <strong>Core Data</strong></li>
+</ul>
+</div>
+
+
+<div class="slide">
+<h1>Motivation</h1>
+<ul>
+<li>We wanted a system that can be used without any kind of Internet access</li>
+<li>Ideal for use on subway, airplane, in a canoe, etc</li>
+<li>Nothing similar was already available in the App Store</li>
+<li>Was a good opportunity to learn Objective-C and Xcode</li>
+</ul>
+</div>
+
+
+
+<div class="slide">
+<h1>Learning Objective-C</h1>
+<ul>
+<li>Objective-C is not Perl</li>
+<li>Descriptive to the point of extreme verbosity</li>
+<li>Like the following examples:</li>
+</ul>
+</div>
+
+
+<div class="slide">
+<h1>Find and Replace</h1>
+<p>
+    $filename =~ s{::}{-}g;<br /><br />
+    vs.<br /><br />
+    fileName = [fileName stringByReplacingOccurrencesOfString:@"::" withString:@"-"];<br /><br />
+</p>
+</div>
+
+<div class="slide">
+<h1>String Concatenation</h1>
+<p>
+
+    $filename .= '.html';<br /><br />
+    
+    vs.
+    <br /><br />
+
+    fileName = [fileName stringByAppendingString:@".html"];<br /><br /></p>
+</div>
+
+
+<div class="slide">
+<h1>File Exists?</h1>
+<p>
+    if ( -e $file_path ) { }
+   <br /><br />
+    vs.
+    <br /><br />
+    if ( [[NSFileManager defaultManager] fileExistsAtPath:filePath] ) { }
+</p>
+</div>
+
+<div class="slide">
+<h1>In Summary</h1>
+<ul>
+<li>Free application</li>
+<li>Application now availiable at:</li>
+<li><a href="http://itunes.apple.com/app/icpan/id377340561?mt=8" style="font-size: 50px;">http://itunes.apple.com/app/icpan/id377340561?mt=8</a></li>
+<li>Will make GitHub repo public shortly: <a href="http://github.com/oalders/iCPAN">http://github.com/oalders/iCPAN</a></li>
+</ul>
+</div>
+
+
+<div class="slide">
+<h1>What's Missing?</h1>
+<ul>
+    <li>Speed of searching on iPhone hardware vs simulator</li>
+    <li>Version numbers in HTML</li>
+    <li>Gravatar support</li>
+    <li>Web view progress indicator</li>
+    <li>Author tab</li>
+    <li>Author search</li>
+    <li>Full text search</li>
+    <li>iPad support</li>
+</ul>
+</div>
+
+
+</div>
+
+</body>
+</html>
