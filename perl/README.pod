@@ -28,7 +28,7 @@ L<http://search.cpan.org/perldoc?App::cpanminus>
 =head2 MINICPAN
 
 The load_modules script requires the presence of a local minicpan. The
-minicpan docs can be found here: l<http://search.cpan.org/perldoc?minicpan>
+minicpan docs can be found here: L<http://search.cpan.org/perldoc?minicpan>
 
 Here's one way to do it.  Create a file at ~/.minicpanrc
 
@@ -59,7 +59,7 @@ script.
 
 =head2 PYGMENTS
 
-The load_modules.pl script uses a Python library called "Pygments" to handle
+The load_modules script uses a Python library called "Pygments" to handle
 syntax highlighting.
 
 To install pygments on OS X:
@@ -71,6 +71,6 @@ To install pygments on OS X:
 You can drop an arbitrary number of rows in the module table by using the
 trim_db.pl script.  For example, to keep only the first 1,000 rows:
 
-    perl trim_db.pl 1000
+    perl script/trim_db.pl 1000
     
 Make a backup of your db first!
