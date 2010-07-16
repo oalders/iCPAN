@@ -10,7 +10,7 @@ http://cpanratings.perl.org/csv/all_ratings.csv
 =cut
 
 use Data::Dump qw( dump );
-use Find::Lib 'lib';
+use Find::Lib '../lib';
 use iCPAN;
 use Modern::Perl;
 use Parse::CSV;

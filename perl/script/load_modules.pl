@@ -5,7 +5,7 @@ use Modern::Perl;
 use Archive::Tar;
 use Data::Dump qw( dump );
 use File::Path qw( make_path );
-use Find::Lib 'lib';
+use Find::Lib '../lib';
 use IO::File;
 use IO::Uncompress::AnyInflate qw(anyinflate $AnyInflateError);
 use iCPAN;
