@@ -32,7 +32,7 @@
         self.savedSearchTerm = nil;
     }
 
-    // get the contex object -- for some reason it the order of loading of our files is causing this
+    // get the context object -- for some reason, the order of loading of our files is causing this
     // implementation to load before the AppDelegate, so pushing the context into here doesn't work.
     if (managedObjectContext == nil) 
     { 
@@ -57,7 +57,6 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
     return YES;
-    //return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 
@@ -258,15 +257,6 @@
     return YES;
 }
 
-
-- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption
-{
-    [self filterContentForSearchText:[self.searchDisplayController.searchBar text] scope:
-	 [[self.searchDisplayController.searchBar scopeButtonTitles] objectAtIndex:searchOption]];
-    
-    // Return YES to cause the search result table view to be reloaded.
-    return YES;
-}
 
 - (void)dealloc {
     
