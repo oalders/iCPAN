@@ -13,7 +13,6 @@
     
     NSString		*savedSearchTerm;
     NSString        *prevSearchText;
-    NSInteger		savedScopeButtonIndex;
     BOOL			searchWasActive;
     
 }
@@ -23,7 +22,6 @@
 
 @property (nonatomic, retain) NSString *savedSearchTerm;
 @property (nonatomic, retain) NSString *prevSearchText;
-@property (nonatomic) NSInteger savedScopeButtonIndex;
 @property (nonatomic) BOOL searchWasActive;
 
 @end

@@ -16,7 +16,7 @@
 
 @implementation SearchModuleViewController
 
-@synthesize savedSearchTerm, savedScopeButtonIndex, searchWasActive, prevSearchText;
+@synthesize savedSearchTerm, searchWasActive, prevSearchText;
 @synthesize fetchedResultsController, managedObjectContext;
 
 
@@ -26,7 +26,6 @@
     if (self.savedSearchTerm)
 	{
         [self.searchDisplayController setActive:self.searchWasActive];
-        [self.searchDisplayController.searchBar setSelectedScopeButtonIndex:self.savedScopeButtonIndex];
         [self.searchDisplayController.searchBar setText:savedSearchTerm];
         
         self.savedSearchTerm = nil;
@@ -190,7 +189,7 @@
 #pragma mark -
 #pragma mark Content Filtering
 
-- (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
+- (void)filterContentForSearchText:(NSString*)searchText
 {
     
     searchText = [searchText stringByReplacingOccurrencesOfString:@"-" withString:@"::"];
@@ -250,8 +249,7 @@
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
 {
-    [self filterContentForSearchText:searchString scope:
-	 [[self.searchDisplayController.searchBar scopeButtonTitles] objectAtIndex:[self.searchDisplayController.searchBar selectedScopeButtonIndex]]];
+    [self filterContentForSearchText:searchString];
     
     // Return YES to cause the search result table view to be reloaded.
     return YES;
