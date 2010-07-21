@@ -18,10 +18,29 @@
 
 @synthesize savedSearchTerm, searchWasActive, prevSearchText;
 @synthesize fetchedResultsController, managedObjectContext;
+@synthesize recentlyViewedOverlay;
 
 
 - (void)viewDidLoad {
-	
+
+    [super viewDidLoad];
+
+    
+    // sets up a new view that shows an overlay over the recently viewed list
+    CGRect frame = [[UIScreen mainScreen] bounds];
+    // Use the max dimension for width and height
+    if (frame.size.width > frame.size.height) {
+        frame.size.height = frame.size.width;
+    } else {
+        frame.size.width = frame.size.height;
+    }
+    
+    frame.origin.y = 44.0f; // Offset the UISearchBar
+    self.recentlyViewedOverlay = [[UIView alloc] initWithFrame:frame];    
+    self.recentlyViewedOverlay.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    self.recentlyViewedOverlay.backgroundColor=[UIColor blackColor];
+    self.recentlyViewedOverlay.alpha = 0.8;	
+    
     // restore search settings if they were saved in didReceiveMemoryWarning.
     if (self.savedSearchTerm)
 	{
@@ -46,11 +65,11 @@
 		exit(1);
 	}    
     [[self fetchedResultsController] performFetch:&error];
-	[self.tableView reloadData];
+	[[self tableView] reloadData];
     self.tableView.scrollEnabled = YES;
 
-    [super viewDidLoad];
 }
+
 
 // Override to allow orientations other than the default portrait orientation.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -238,7 +257,6 @@
     }
 
     self.prevSearchText = searchText;
-    [self.tableView reloadData];
 
     [predicateArgs release];
 }
@@ -247,14 +265,82 @@
 #pragma mark -
 #pragma mark UISearchDisplayController Delegate Methods
 
+/*
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
-{
-    [self filterContentForSearchText:searchString];
+{    
+    //[self filterContentForSearchText:searchString];
     
     // Return YES to cause the search result table view to be reloaded.
-    return YES;
+    return NO;
+}
+*/
+
+ 
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    if ([[searchBar text] length]) {
+        [self searchBar:searchBar activate:YES];
+    } else {
+        [self searchBar:searchBar activate:NO];
+    }
 }
 
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    if ([[searchBar text] length]) {
+        [self searchBar:searchBar activate:YES];
+    } else {
+        [self searchBar:searchBar activate:NO];
+    }
+}
+
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    [self filterContentForSearchText:[searchBar text]];
+    [[[self searchDisplayController] searchResultsTableView] reloadData];
+    [self searchBar:searchBar activate:NO];
+}
+
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    iCPANAppDelegate *appDelegate = (iCPANAppDelegate*)[[UIApplication sharedApplication] delegate];
+    NSArray *recentlyViewed = appDelegate.getRecentlyViewed;
+
+    NSPredicate *predicate = nil;
+    NSString *attributeName = @"name";
+    if([recentlyViewed count]) {
+        predicate = [NSPredicate predicateWithFormat:@"%K IN[cd] %@", attributeName, recentlyViewed];
+    } else {
+        predicate = [NSPredicate predicateWithFormat:@"%K == ''", attributeName];
+    }   
+    
+    [fetchedResultsController.fetchRequest setPredicate:predicate];
+    
+    NSError *error = nil;
+    if (![[self fetchedResultsController] performFetch:&error]) {
+        // Handle error
+        NSLog(@"cancelled search bar error %@, %@", error, [error userInfo]);
+        exit(1);
+    }
+    
+    [[self tableView] reloadData];
+    
+    searchBar.text=@"";
+
+    [self searchBar:searchBar activate:NO];
+    
+}
+
+
+// activates or deactivates the search overlay
+- (void)searchBar:(UISearchBar *)searchBar activate:(BOOL) active{	
+    self.tableView.allowsSelection = !active;
+    self.tableView.scrollEnabled = !active;
+    if (!active) {
+        [recentlyViewedOverlay removeFromSuperview];
+    } else {
+        [self.view addSubview:self.recentlyViewedOverlay];
+    }
+}
 
 - (void)dealloc {
     
@@ -262,6 +348,7 @@
 	[managedObjectContext release];
 	[prevSearchText release];
 	[savedSearchTerm release];
+    [recentlyViewedOverlay dealloc];
     
     [super dealloc];
 }
