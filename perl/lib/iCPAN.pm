@@ -1,8 +1,13 @@
 package iCPAN;
 
+use Archive::Tar;
+use Data::Dump qw( dump );
 use DBI;
 use Find::Lib;
+use iCPAN::Module;
+use iCPAN::Pod::XHTML;
 use iCPAN::Schema;
+use IO::Uncompress::AnyInflate qw(anyinflate $AnyInflateError);
 use Moose;
 use Modern::Perl;
 
@@ -13,8 +18,8 @@ has 'schema' => (
 );
 
 has 'db_file' => (
-    is => 'rw',
-    isa => 'Str',
+    is         => 'rw',
+    isa        => 'Str',
     lazy_build => 1,
 );
 
@@ -24,10 +29,51 @@ has 'dbh' => (
     lazy_build => 1,
 );
 
+has 'debug' => (
+    is      => 'rw',
+    default => 0,
+);
+
 has 'dsn' => (
+    is         => 'rw',
+    isa        => 'Str',
+    lazy_build => 1,
+);
+
+has 'db_path' => (
     is      => 'rw',
     isa     => 'Str',
-    default => sub { my $self = shift; return "dbi:SQLite:dbname=" . $self->db_file },
+    default => '/../../iCPAN.sqlite',
+);
+
+has 'module' => (
+    is         => 'rw',
+    lazy_build => 1,
+);
+
+has 'module_name' => (
+    is         => 'rw',
+    isa        => 'Str',
+    lazy_build => 1,
+);
+
+has 'minicpan' => (
+    is         => 'rw',
+    isa        => 'Str',
+    lazy_build => 1,
+);
+
+has 'pkg_index' => (
+    is => 'rw',
+
+    #isa => 'Hashref',
+    lazy_build => 1,
+);
+
+has 'tar' => (
+    is      => 'rw',
+    lazy    => 1,
+    default => sub { return Archive::Tar->new },
 );
 
 sub mod2file {
@@ -42,12 +88,51 @@ sub mod2file {
     return $file;
 }
 
+sub open_pkg_index {
+
+    my $self     = shift;
+    my $minicpan = "$ENV{'HOME'}/minicpan" || $ENV{'minicpan'};
+    my $file     = "$minicpan/modules/02packages.details.txt.gz";
+    my $tar      = Archive::Tar->new;
+
+    my $z = new IO::Uncompress::AnyInflate $file
+        or die "anyinflate failed: $AnyInflateError\n";
+
+    return $z;
+
+}
+
+sub _build_pkg_index {
+
+    my $self  = shift;
+    my $file  = $self->open_pkg_index;
+    my %index = ();
+
+    my $skip = 1;
+
+LINE:
+    while ( my $line = $file->getline ) {
+        if ( $skip ) {
+            $skip = 0 if $line eq "\n";
+            next LINE;
+        }
+
+        my ( $module, $version, $path ) = split m{\s{1,}}xms, $line;
+
+        my @parts = split( "/", $path );
+        my $pauseid = $parts[2];
+        $index{$module}
+            = { path => $path, version => $version, pauseid => $pauseid };
+    }
+
+    return \%index;
+
+}
+
 sub _build_schema {
 
-    my $self    = shift;
-
-
-    my $dsn = "dbi:SQLite:dbname=../iCPAN.sqlite";
+    my $self   = shift;
+    my $dsn    = "dbi:SQLite:dbname=" . $self->db_file;
     my $schema = iCPAN::Schema->connect( $self->dsn, '', '', '' );
     return $schema;
 }
@@ -58,17 +143,48 @@ sub _build_dbh {
     return DBI->connect( $self->dsn, "", "" );
 }
 
-sub _build_db_file {
-    
+sub _build_dsn {
+
     my $self = shift;
-    my $db_file = Find::Lib->base . '/../../iCPAN.sqlite';
+    return "dbi:SQLite:dbname=" . $self->db_file;
+
+}
+
+sub _build_db_file {
+
+    my $self    = shift;
+    my @caller  = caller();
+    my $db_file = Find::Lib->base . $self->db_path;
 
     if ( !-e $db_file ) {
         die "$db_file not found";
     }
-    
+
     return $db_file;
-    
+
+}
+
+sub _build_minicpan {
+
+    my $self = shift;
+    return "$ENV{'HOME'}/minicpan" || $ENV{'minicpan'};
+
+}
+
+sub _build_module {
+
+    my $self = shift;
+
+    die "module name missing" if !$self->module_name;
+    my $ref = $self->pkg_index->{ $self->module_name };
+    return if !$ref;
+
+    return iCPAN::Module->new(
+        %{$ref},
+        name  => $self->module_name,
+        debug => $self->debug
+    );
+
 }
 
 1;

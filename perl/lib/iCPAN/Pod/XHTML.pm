@@ -46,41 +46,27 @@ sub start_Verbatim {
 
 sub end_Verbatim {
 
-    #$_[0]{'scratch'}     .= '</code></pre>';
-
-    my $pygmentize = 1;
+    my $perltidy   = 1;
+    my $pygmentize = 0;
 
     my $filename = '/tmp/iCPAN.code';
     unlink $filename;
 
     my $code = $_[0]{'scratch'};
     $code = decode_entities( $code );
-    my $err = undef;
-    my $fh = IO::File->new( \$err, 'w' )
-        || die "could not create file handle";
-    my @lines = ();
-    
-    eval {
-        perltidy( source => \$code, destination => \@lines, stderr => $fh );        
-    };
-    
-    warn @! if @!;
+    $code = ${ tidy_perl( \$code ) } if $perltidy;
 
-    if ( !$err && !@! ) {
-        $code = join "", @lines;
+    if ( $pygmentize ) {
 
-        if ( $pygmentize ) {
+        my $file = Path::Class::File->new( $filename );
 
-            my $file = Path::Class::File->new( $filename );
+        my $fh = $file->openw();
+        print $fh $code;
+        $fh->close;
 
-            my $fh = $file->openw();
-            print $fh $code;
-            $fh->close;
-
-            $code = `pygmentize -f html -l perl $filename 2>&1`;
-            if ( $code =~ m{Error\swhile\shighlighting}gxms ) {
-                $code = '<pre><code>' . $_[0]{'scratch'} . '</code></pre>';
-            }
+        $code = `pygmentize -f html -l perl $filename 2>&1`;
+        if ( $code =~ m{Error\swhile\shighlighting}gxms ) {
+            $code = '<pre><code>' . $_[0]{'scratch'} . '</code></pre>';
         }
     }
     else {
@@ -90,8 +76,35 @@ sub end_Verbatim {
 
     $_[0]{'scratch'} = $code;
 
-    #say $_[0]{'scratch'};
     $_[0]->emit;
+}
+
+sub tidy_perl {
+
+    my $code = shift;
+    my $err  = undef;
+    my $fh   = IO::File->new( \$err, 'w' )
+        || die "could not create file handle";
+    my @lines = ();
+
+    eval {
+        Perl::Tidy::perltidy(
+            source      => $code,
+            destination => \@lines,
+            stderr      => $fh
+        );
+    };
+
+    #say "code i got:" . dump( ${$code} );
+    #say "tidied lines: " . dump \@lines;
+    warn @! if @!;
+    
+    if ( @lines && !$err && !@! ) {
+        $code = join "", @lines;
+    }
+
+    return \$code;
+
 }
 
 1;
