@@ -2,6 +2,7 @@
 build
 iCPAN.xcodeproj
 perl/cpanpod
+website/logs/*
 
 # files to ignore
 .DS_Store
