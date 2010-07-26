@@ -136,7 +136,8 @@ sub parse_pod {
     my $start_body = qq[<body><div class="pod">];
     $start_body .= qq[$module_name];
     if ( $self->version ) {
-        $start_body .= qq[ ($self->version)];
+        $start_body .= sprintf(' (%s) ', $self->version );
+say $start_body;
     }
 
     $xhtml =~ s{<body>}{$start_body};
