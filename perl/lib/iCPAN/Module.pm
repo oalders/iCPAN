@@ -134,11 +134,11 @@ sub parse_pod {
 
     # modify HTML directly
     my $start_body = qq[<body><div class="pod">];
-    $start_body .= qq[$module_name];
+    $start_body .= qq[<div style="position:fixed;height:50px;width:100%;background-color:#fff;"><h1 id="iCPAN">$module_name];
     if ( $self->version ) {
         $start_body .= sprintf(' (%s) ', $self->version );
-say $start_body;
     }
+    $start_body .= qq[</h1><hr /></div><div style="height:50px">&nbsp;</div>];
 
     $xhtml =~ s{<body>}{$start_body};
     $xhtml =~ s{<\/body>}{<\/div>\n<\/body>};
