@@ -48,6 +48,21 @@ This updates/creates a local copy of CPAN at ~/minicpan.  That's it!  You can,
 of course, choose your favourite mirror site instead of this , but this will
 get you started.
 
+=head2 USING MINICPAN AT A DIFFERENT LOCATION
+
+Your minicpan will need to be on a local disk.  If it's local but not in your 
+home directory, the easiest fix is to symlink from your home folder to the
+minicpan:
+
+    ln -s /path/to/minicpan ~/minicpan
+
+If this is not workable for you, try setting an environment variable:
+
+    EXPORT MINICPAN=/path/to/minicpan
+
+OR:
+
+    MINICPAN=/path/to/minicpan perl perl/script/load_modules HTTP::BrowserDetect
 
 =head2 REQUIRED CPAN MODULES
 

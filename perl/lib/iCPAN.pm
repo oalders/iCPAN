@@ -91,8 +91,7 @@ sub mod2file {
 sub open_pkg_index {
 
     my $self     = shift;
-    my $minicpan = $ENV{'MINICPAN'} || "$ENV{'HOME'}/minicpan";
-    my $file     = "$minicpan/modules/02packages.details.txt.gz";
+    my $file     = $self->minicpan . '/modules/02packages.details.txt.gz';
     my $tar      = Archive::Tar->new;
 
     my $z = new IO::Uncompress::AnyInflate $file
@@ -167,7 +166,7 @@ sub _build_db_file {
 sub _build_minicpan {
 
     my $self = shift;
-    return "$ENV{'HOME'}/minicpan" || $ENV{'minicpan'};
+    return $ENV{'MINICPAN'} || "$ENV{'HOME'}/minicpan";
 
 }
 

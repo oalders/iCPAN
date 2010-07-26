@@ -46,8 +46,8 @@ sub start_Verbatim {
 
 sub end_Verbatim {
 
-    my $perltidy   = 1;
-    my $pygmentize = 0;
+    my $perltidy   = 0;
+    my $pygmentize = 1;
 
     my $filename = '/tmp/iCPAN.code';
     unlink $filename;
@@ -95,8 +95,8 @@ sub tidy_perl {
         );
     };
 
-    #say "code i got:" . dump( ${$code} );
-    #say "tidied lines: " . dump \@lines;
+    say "code i got:" . dump( ${$code} );
+    say "tidied lines: " . dump \@lines;
     warn @! if @!;
     
     if ( @lines && !$err && !@! ) {

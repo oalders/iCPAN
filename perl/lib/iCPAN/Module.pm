@@ -47,6 +47,11 @@ has 'pm_name' => (
     lazy_build => 1,
 );
 
+has 'version' => (
+    is         => 'ro',
+    lazy_build => 1,
+);
+
 has 'files' => (
     is         => 'ro',
     isa        => "ArrayRef",
@@ -138,7 +143,7 @@ sub parse_pod {
     $xhtml =~ s{<\/body>}{<\/div>\n<\/body>};
 
     my $module_row
-        = $self->schema->resultset( 'iCPAN::Schema::Result::Zmodule' )
+        = $self->icpan->schema->resultset( 'iCPAN::Schema::Result::Zmodule' )
         ->find_or_create( { zname => $module_name, } );
 
     # author may have changed since last version
