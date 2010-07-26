@@ -145,7 +145,6 @@ sub parse_pod {
         $("pre").wrap(\'<div style="padding: 1px 5px; background-color: #000;overflow:hidden;" />\').addClass("brush: pl"));
         SyntaxHighlighter.defaults[\'gutter\'] = false;
         SyntaxHighlighter.all();
-        $("div.pl").parent().css("overflow", "hidden");
     });
 </script>
 ';
