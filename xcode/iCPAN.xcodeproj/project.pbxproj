@@ -43,6 +43,12 @@
 		D8F9C1A7118CCEFE00CDA6DF /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = D8F9C1A6118CCEFE00CDA6DF /* style.css */; };
 		D8F9C1D1118CD34A00CDA6DF /* ModuleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8F9C1D0118CD34A00CDA6DF /* ModuleTableViewCell.m */; };
 		ED3211D111F6B3E200D66A76 /* iCPAN.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = ED3211D011F6B3E200D66A76 /* iCPAN.sqlite */; };
+		ED6977C511FE3C2C00895FE2 /* jquery.min.js in Sources */ = {isa = PBXBuildFile; fileRef = ED6977BF11FE3C2C00895FE2 /* jquery.min.js */; };
+		ED6977C611FE3C2C00895FE2 /* shBrushJScript.js in Sources */ = {isa = PBXBuildFile; fileRef = ED6977C011FE3C2C00895FE2 /* shBrushJScript.js */; };
+		ED6977C711FE3C2C00895FE2 /* shBrushPerl.js in Sources */ = {isa = PBXBuildFile; fileRef = ED6977C111FE3C2C00895FE2 /* shBrushPerl.js */; };
+		ED6977C811FE3C2C00895FE2 /* shCore.css in Resources */ = {isa = PBXBuildFile; fileRef = ED6977C211FE3C2C00895FE2 /* shCore.css */; };
+		ED6977C911FE3C2C00895FE2 /* shCore.js in Sources */ = {isa = PBXBuildFile; fileRef = ED6977C311FE3C2C00895FE2 /* shCore.js */; };
+		ED6977CA11FE3C2C00895FE2 /* shThemeEmacs.css in Resources */ = {isa = PBXBuildFile; fileRef = ED6977C411FE3C2C00895FE2 /* shThemeEmacs.css */; };
 		ED87466411659335003DCD57 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = ED87466311659335003DCD57 /* Settings.bundle */; };
 /* End PBXBuildFile section */
 
@@ -94,6 +100,12 @@
 		D8F9C1CF118CD34A00CDA6DF /* ModuleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModuleTableViewCell.h; sourceTree = "<group>"; };
 		D8F9C1D0118CD34A00CDA6DF /* ModuleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModuleTableViewCell.m; sourceTree = "<group>"; };
 		ED3211D011F6B3E200D66A76 /* iCPAN.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = iCPAN.sqlite; path = ../iCPAN.sqlite; sourceTree = SOURCE_ROOT; };
+		ED6977BF11FE3C2C00895FE2 /* jquery.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.min.js; sourceTree = "<group>"; };
+		ED6977C011FE3C2C00895FE2 /* shBrushJScript.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = shBrushJScript.js; sourceTree = "<group>"; };
+		ED6977C111FE3C2C00895FE2 /* shBrushPerl.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = shBrushPerl.js; sourceTree = "<group>"; };
+		ED6977C211FE3C2C00895FE2 /* shCore.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = shCore.css; sourceTree = "<group>"; };
+		ED6977C311FE3C2C00895FE2 /* shCore.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = shCore.js; sourceTree = "<group>"; };
+		ED6977C411FE3C2C00895FE2 /* shThemeEmacs.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = shThemeEmacs.css; sourceTree = "<group>"; };
 		ED87466311659335003DCD57 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -165,6 +177,12 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				ED6977BF11FE3C2C00895FE2 /* jquery.min.js */,
+				ED6977C011FE3C2C00895FE2 /* shBrushJScript.js */,
+				ED6977C111FE3C2C00895FE2 /* shBrushPerl.js */,
+				ED6977C211FE3C2C00895FE2 /* shCore.css */,
+				ED6977C311FE3C2C00895FE2 /* shCore.js */,
+				ED6977C411FE3C2C00895FE2 /* shThemeEmacs.css */,
 				ED3211D011F6B3E200D66A76 /* iCPAN.sqlite */,
 				D8097B6D118803420062EACA /* BookmarksView.xib */,
 				D8097B6E118803420062EACA /* MainWindow.xib */,
@@ -289,6 +307,8 @@
 				D8C6583D11C1A6A3000886F6 /* icon_cancel.png in Resources */,
 				D8C6583E11C1A6A3000886F6 /* icon_error.png in Resources */,
 				ED3211D111F6B3E200D66A76 /* iCPAN.sqlite in Resources */,
+				ED6977C811FE3C2C00895FE2 /* shCore.css in Resources */,
+				ED6977CA11FE3C2C00895FE2 /* shThemeEmacs.css in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,6 +328,10 @@
 				D8097B871188036F0062EACA /* Author.m in Sources */,
 				D8097B881188036F0062EACA /* Module.m in Sources */,
 				D8F9C1D1118CD34A00CDA6DF /* ModuleTableViewCell.m in Sources */,
+				ED6977C511FE3C2C00895FE2 /* jquery.min.js in Sources */,
+				ED6977C611FE3C2C00895FE2 /* shBrushJScript.js in Sources */,
+				ED6977C711FE3C2C00895FE2 /* shBrushPerl.js in Sources */,
+				ED6977C911FE3C2C00895FE2 /* shCore.js in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

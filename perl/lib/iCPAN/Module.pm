@@ -135,11 +135,11 @@ sub parse_pod {
     # modify HTML directly
 
     my $head_tags = '
-<link rel="stylesheet" type="text/css" media="all" href="/shCore.css" />
-<link rel="stylesheet" type="text/css" media="all" href="/shThemeEmacs.css" />
-<script type="text/javascript" src="/jquery.min.js"></script>
-<script type="text/javascript" src="/shCore.js"></script>
-<script type="text/javascript" src="/shBrushPerl.js"></script>
+<link rel="stylesheet" type="text/css" media="all" href="shCore.css" />
+<link rel="stylesheet" type="text/css" media="all" href="shThemeEmacs.css" />
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="shCore.js"></script>
+<script type="text/javascript" src="shBrushPerl.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         $("pre").wrap(\'<div style="padding: 1px 5px; background-color: #000;overflow:hidden;" />\').addClass("brush: pl"));
