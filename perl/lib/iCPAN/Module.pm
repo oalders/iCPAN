@@ -137,12 +137,13 @@ sub parse_pod {
     my $head_tags = '
 <link rel="stylesheet" type="text/css" media="all" href="shCore.css" />
 <link rel="stylesheet" type="text/css" media="all" href="shThemeEmacs.css" />
+</style>
 <script type="text/javascript" src="jquery.min.js"></script>
 <script type="text/javascript" src="shCore.js"></script>
 <script type="text/javascript" src="shBrushPerl.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
-        $("pre").wrap(\'<div style="padding: 1px 10px; background-color: #000;overflow:hidden;" />\').addClass("brush: pl");
+        $("pre").wrap(\'<div style="padding: 1px 10px; background-color: #000;" />\').addClass("brush: pl");
         SyntaxHighlighter.defaults[\'gutter\'] = false;
         SyntaxHighlighter.all();
     });
