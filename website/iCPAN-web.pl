@@ -1,4 +1,4 @@
-#!/Users/olaf/local/bin/perl
+#!/usr/bin/env perl
 use Dancer;
 
 use Find::Lib '../perl/lib/';

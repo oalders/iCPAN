@@ -6,6 +6,7 @@
 cpanm --skip-installed Archive::Tar
 cpanm --skip-installed DBI
 cpanm --skip-installed DBIx::Class
+cpanm --skip-installed DBIx::Class::Schema::Loader
 cpanm --skip-installed Find::Lib
 cpanm --skip-installed HTML::Entities
 cpanm --skip-installed IO::File
@@ -15,3 +16,4 @@ cpanm --skip-installed Moose
 cpanm --skip-installed Parse::CSV
 cpanm --skip-installed Path::Class::File
 cpanm --skip-installed Perl::Tidy
+cpanm --skip-installed Pod::Simple::XHTML

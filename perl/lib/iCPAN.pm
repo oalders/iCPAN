@@ -91,7 +91,7 @@ sub mod2file {
 sub open_pkg_index {
 
     my $self     = shift;
-    my $minicpan = "$ENV{'HOME'}/minicpan" || $ENV{'minicpan'};
+    my $minicpan = $ENV{'MINICPAN'} || "$ENV{'HOME'}/minicpan";
     my $file     = "$minicpan/modules/02packages.details.txt.gz";
     my $tar      = Archive::Tar->new;
 

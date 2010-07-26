@@ -1,3 +1,5 @@
-#!/Users/olaf/local/bin/perl
+#!/usr/bin/env perl
 use Plack::Runner;
-Plack::Runner->run('/Users/olaf/Documents/developer/iphone/iCPAN/website/app.psgi');
+use Find::Lib '../../perl/lib/', '../lib';
+
+Plack::Runner->run( Find::Lib->base . '/../app.psgi');

@@ -65,6 +65,10 @@ syntax highlighting.
 To install pygments on OS X:
 
     sudo easy_install Pygments
+
+To install pygments on Ubuntu:
+
+    sudo apt-get install python-pygments
     
 =head2 SHRINKING YOUR DB
 
