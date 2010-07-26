@@ -133,8 +133,23 @@ sub parse_pod {
     $parser->parse_string_document( $content );
 
     # modify HTML directly
+
+    my $head_tags = '
+<link rel="stylesheet" type="text/css" media="all" href="/shCore.css" />
+<link rel="stylesheet" type="text/css" media="all" href="/shThemeEmacs.css" />
+<script type="text/javascript" src="/jquery.min.js"></script>
+<script type="text/javascript" src="/shCore.js"></script>
+<script type="text/javascript" src="/shBrushPerl.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("pre").wrap(\'<div style="padding: 1px 5px; background-color: #000;" />\').addClass("brush: pl");
+        SyntaxHighlighter.all();
+    });
+</script>
+';
+
     my $start_body = qq[<body><div class="pod">];
-    $start_body .= qq[<div style="position:fixed;height:50px;width:100%;background-color:#fff;"><h1 id="iCPAN">$module_name];
+    $start_body .= qq[<div style="position:fixed;z-index: 5000;height:50px;width:100%;background-color:#fff;"><h1 id="iCPAN">$module_name];
     if ( $self->version ) {
         $start_body .= sprintf(' (%s) ', $self->version );
     }
@@ -142,6 +157,8 @@ sub parse_pod {
 
     $xhtml =~ s{<body>}{$start_body};
     $xhtml =~ s{<\/body>}{<\/div>\n<\/body>};
+
+    $xhtml =~ s{<head>}{<head>\n$head_tags};
 
     my $module_row
         = $self->icpan->schema->resultset( 'iCPAN::Schema::Result::Zmodule' )

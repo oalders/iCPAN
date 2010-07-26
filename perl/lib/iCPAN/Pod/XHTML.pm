@@ -47,7 +47,7 @@ sub start_Verbatim {
 sub end_Verbatim {
 
     my $perltidy   = 0;
-    my $pygmentize = 1;
+    my $pygmentize = 0;
 
     my $filename = '/tmp/iCPAN.code';
     unlink $filename;
@@ -71,7 +71,7 @@ sub end_Verbatim {
     }
     else {
         $code = encode_entities( $code );
-        $code = '<pre><code>' . $_[0]{'scratch'} . '</code></pre>';
+        $code = '<pre>' . $_[0]{'scratch'} . '</pre>';
     }
 
     $_[0]{'scratch'} = $code;
