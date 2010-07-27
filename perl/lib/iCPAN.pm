@@ -31,7 +31,7 @@ has 'dbh' => (
 
 has 'debug' => (
     is      => 'rw',
-    default => 0,
+    lazy_build => 1,
 );
 
 has 'dsn' => (
@@ -54,7 +54,6 @@ has 'module' => (
 has 'module_name' => (
     is         => 'rw',
     isa        => 'Str',
-    lazy_build => 1,
 );
 
 has 'minicpan' => (
@@ -140,6 +139,13 @@ sub _build_dbh {
 
     my $self = shift;
     return DBI->connect( $self->dsn, "", "" );
+}
+
+sub _build_debug {
+    
+    my $self = shift;
+    return $ENV{'DEBUG'} || 0;
+    
 }
 
 sub _build_dsn {

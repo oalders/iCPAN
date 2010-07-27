@@ -2,6 +2,7 @@ package iCPAN::Module;
 
 use Moose;
 use Modern::Perl;
+use Data::Dump qw( dump );
 use iCPAN;
 
 has 'author' => (
@@ -18,7 +19,7 @@ has 'content' => (
 
 has 'debug' => (
     is      => 'rw',
-    default => 0,
+    lazy_build => 1,
 );
 
 has 'icpan' => (
@@ -75,8 +76,6 @@ sub _build_path {
 sub archive_path {
 
     my $self         = shift;
-    my @module_parts = split( "::", $self->name );
-    my $pm_name      = pop( @module_parts ) . '.pm';
     return $self->icpan->minicpan . "/authors/id/" . $self->path;
 
 }
@@ -101,7 +100,7 @@ FILE:
     # locate the file we care about in the archive
     foreach my $file ( @files ) {
 
-        say "checking: $file" if $debug;
+        print "checking: $file " if $debug;
 
         next FILE if !$self->file_ok( $file );
 
@@ -112,8 +111,11 @@ FILE:
         return;
     }
 
-    warn "no success!!!!!!!!!!!!!!!!";
+    $self->icpan->tar->clear; # avoid "Too many open files" errors
+    warn $self->name . " no success!!!!!!!!!!!!!!!!";
+
     return;
+
 }
 
 sub parse_pod {
@@ -189,7 +191,16 @@ sub file_ok {
     my $file        = shift;
     my $pm_name     = $self->pm_name;
 
-    if ( $file !~ m{$pm_name\z} ) {
+    # look for a .pm or .pod file
+    # DBM::Deep is an example of a distro with a .pod file (Deep.pod)
+    my $root = $self->_module_root;
+    my $pattern = qr{$root\.(pm|pod)\z};
+    my $extension = undef;
+
+    if ( $file =~ m{$pattern}xms ) {
+        $extension = $1;
+    }
+    else {
         say "skipping --  " . $pm_name . " -- $file" if $self->debug;
         return;
     }
@@ -201,7 +212,7 @@ sub file_ok {
         return;
     }
 
-    if ( $content !~ m{package\s*$module_name} ) {
+    if ( $extension ne 'pod' && $content !~ m{package\s*$module_name} ) {
         say "skipping -- not the correct package name" if $self->debug;
         return;
     }
@@ -223,9 +234,25 @@ sub _build_files {
 
 sub _build_pm_name {
     my $self         = shift;
+    return $self->_module_root . '.pm';
+}
+
+sub _build_pod_name {
+    my $self         = shift;
+    return $self->_module_root . '.pod';
+}
+
+sub _build_debug {
+    
+    my $self = shift;
+    return $self->icpan->debug;
+    
+}
+
+sub _module_root {
+    my $self         = shift;
     my @module_parts = split( "::", $self->name );
-    my $pm_name      = pop( @module_parts ) . '.pm';
-    return $pm_name;
+    return pop( @module_parts ); 
 }
 
 1;
