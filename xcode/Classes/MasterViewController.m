@@ -155,6 +155,9 @@
 		self.navigationItem.rightBarButtonItem = nil;
 		self.title = [url absoluteString];
 	}
+	
+	//NSArray *dirContents = [[NSFileManager defaultManager] directoryContentsAtPath:appDelegate.cpanpod];
+	//NSLog(@"contents %@", dirContents);
 
 	return TRUE;
 }

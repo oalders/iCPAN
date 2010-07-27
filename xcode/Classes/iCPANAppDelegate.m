@@ -61,27 +61,48 @@
 }
 
 
+// When the application launches, we'll clear out the cpanpod folder by 
+// removing it completely.  We'll then recreate it and copy over the files
+// we care about.  This means that we'll have a cache of files per session,
+// but that we don't have to worry about these files when the app is upgraded
+
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
 
     // Add the tab bar controller's current view as a subview of the window
     [window addSubview:tabBarController.view];
-	
-    //NSLog(@"Path: %@", [self applicationDocumentsDirectory]);
-	
+		
 	NSFileManager *NSFm= [NSFileManager defaultManager]; 
+	
+	//start clean each time
+	if ([NSFm removeItemAtPath: [self cpanpod] error: NULL]  == YES) {
+        //NSLog (@"Remove successful");
+	}
+	else {
+        NSLog (@"Remove failed");
+	}
+
 	[NSFm createDirectoryAtPath:[self cpanpod] attributes:nil];
 	
 	NSString *bundlePath = [[NSBundle mainBundle] bundlePath];
-	NSString *source = [bundlePath stringByAppendingString:@"/style.css"];
-	NSString *destination = [self.cpanpod stringByAppendingString:@"/style.css"];
+	bundlePath = [bundlePath stringByAppendingString:@"/"];
 	NSError *error = nil;
 	
-	if ( [[NSFileManager defaultManager] fileExistsAtPath:destination] ) {
-		return;
+	// Not sure of the best way to handle this, but it seems like we can't reliably predict where the cpanpod
+    // folder will be, so we'll just copy over some resource files when needed
+	NSString *bundleRoot = [[NSBundle mainBundle] bundlePath];
+	NSArray *dirContents = [[NSFileManager defaultManager] directoryContentsAtPath:bundleRoot];
+	NSArray *css = [dirContents filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self ENDSWITH 's'"]];
+
+	NSEnumerator *e = [css objectEnumerator];
+	id file;
+	while (file = [e nextObject]) {
+		
+		NSString *src = [bundlePath stringByAppendingString:file];
+		NSString *dest = [self.cpanpod stringByAppendingString:file];
+
+		if ( [[NSFileManager defaultManager] isReadableFileAtPath:src] )
+			[[NSFileManager defaultManager] copyItemAtPath:src toPath:dest error:&error];
 	}
-	
-	if ( [[NSFileManager defaultManager] isReadableFileAtPath:source] )
-		[[NSFileManager defaultManager] copyItemAtPath:source toPath:destination error:&error];
 
 }
 
