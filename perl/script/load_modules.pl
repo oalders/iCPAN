@@ -18,17 +18,27 @@ if ( scalar @modules == 0 ) {
     @modules = sort keys %{$index};
 }
 
+my $attempts = 0;
+my $schema = $icpan->schema;
+
 MODULE:
 foreach my $module_name ( @modules ) {
 
     my $t0 = [ gettimeofday];
     say "$module_name";# if $icpan->debug;
-    my $icpan = iCPAN->new;
     $icpan->module_name( $module_name );
-    $icpan->module->process;
+    my $module = $icpan->module;
+    $module->process;
 
-    my $elapsed = tv_interval( $t0, [gettimeofday] );
-    say "$elapsed time gone" if $icpan->debug;
+    my $iter_time = tv_interval( $t0, [gettimeofday] );
+    my $elapsed = tv_interval( $t_begin, [gettimeofday] );
+    
+    #if ( $icpan->debug ) {
+        ++$attempts;
+        say "$iter_time to process module";
+        say "$elapsed so far... ($attempts modules)";        
+    #}
+  
 }
 
 my $t_elapsed = tv_interval( $t_begin, [ gettimeofday ] );

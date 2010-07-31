@@ -32,9 +32,12 @@ my $schema = $iCPAN->schema;
 
 while ( my $line = $z->getline() ) {
 
-    if ( $line =~ m{alias\s(\w*)\s{1,}"(.*)<(.*)>"}gxms ) {
+    if ( $line =~ m{alias\s([\w\-]*)\s{1,}"(.*)<(.*)>"}gxms ) {
         my $author = $schema->resultset( 'iCPAN::Schema::Result::Zauthor' )
-            ->find_or_create( { zpauseid => $1, zname => $2, zemail => $3 } );
+            ->find_or_create( { zpauseid => $1 });
+        $author->zname( $2 );
+        $author->zemail( $3 );
+        $author->update;
     }
 
 }

@@ -1,5 +1,6 @@
 package iCPAN::Module;
 
+use Archive::Tar;
 use Moose;
 use Modern::Perl;
 use Data::Dump qw( dump );
@@ -18,8 +19,7 @@ has 'content' => (
 );
 
 has 'debug' => (
-    is      => 'rw',
-    lazy_build => 1,
+    is         => 'rw',
 );
 
 has 'icpan' => (
@@ -39,13 +39,18 @@ has 'path' => (
 
 has 'pauseid' => (
     is         => 'ro',
-    required => 1,
+    required   => 1,
     lazy_build => 1,
 );
 
 has 'pm_name' => (
     is         => 'rw',
     lazy_build => 1,
+);
+
+has 'schema' => (
+    is         => 'rw',
+#    lazy => 1,
 );
 
 has 'version' => (
@@ -59,12 +64,20 @@ has 'files' => (
     lazy_build => 1,
 );
 
+has 'tar' => (
+    is      => 'rw',
+    lazy_build    => 1,
+);
+
 sub _build_author {
 
     my $self = shift;
+    
+    die "no pauseid" if !$self->pauseid;
     my $author
-        = $self->icpan->schema->resultset( 'iCPAN::Schema::Result::Zauthor' )
-        ->find( { zpauseid => $self->pauseid } );
+        = $self->schema->resultset( 'iCPAN::Schema::Result::Zauthor' )
+        ->find_or_create( { zpauseid => $self->pauseid } );
+    return $author;
 
 }
 
@@ -75,7 +88,7 @@ sub _build_path {
 
 sub archive_path {
 
-    my $self         = shift;
+    my $self = shift;
     return $self->icpan->minicpan . "/authors/id/" . $self->path;
 
 }
@@ -89,17 +102,21 @@ sub process {
     if ( !$self->author ) {
         say
             "skipping $module_name. cannot find $self->pauseid in author table";
-        next;
+        return;
     }
 
-    # get a list of all files in the .tar archive
+    #my $iter = Archive::Tar->iter( $self->archive_path, 1,
+    #    { filter => qr/\.(pm|pod)$/ } );
+
     my @files = @{ $self->files };
 
 FILE:
 
     # locate the file we care about in the archive
     foreach my $file ( @files ) {
+    #while ( my $f = $iter->() ) {
 
+        #my $file = $f->name;
         print "checking: $file " if $debug;
 
         next FILE if !$self->file_ok( $file );
@@ -108,10 +125,11 @@ FILE:
 
         $self->parse_pod( $file );
 
+        $self->tar->clear;
         return;
     }
 
-    $self->icpan->tar->clear; # avoid "Too many open files" errors
+    $self->tar->clear if $self->tar; 
     warn $self->name . " no success!!!!!!!!!!!!!!!!";
 
     return;
@@ -153,9 +171,10 @@ sub parse_pod {
 ';
 
     my $start_body = qq[<body><div class="pod">];
-    $start_body .= qq[<div style="position:fixed;z-index: 5000;height:50px;width:100%;background-color:#fff;"><h1 id="iCPAN">$module_name];
+    $start_body
+        .= qq[<div style="position:fixed;z-index: 5000;height:50px;width:100%;background-color:#fff;"><h1 id="iCPAN">$module_name];
     if ( $self->version ) {
-        $start_body .= sprintf(' (%s) ', $self->version );
+        $start_body .= sprintf( ' (%s) ', $self->version );
     }
     $start_body .= qq[</h1><hr /></div><div style="height:50px">&nbsp;</div>];
 
@@ -165,7 +184,7 @@ sub parse_pod {
     $xhtml =~ s{<head>}{<head>\n$head_tags};
 
     my $module_row
-        = $self->icpan->schema->resultset( 'iCPAN::Schema::Result::Zmodule' )
+        = $self->schema->resultset( 'iCPAN::Schema::Result::Zmodule' )
         ->find_or_create( { zname => $module_name, } );
 
     # author may have changed since last version
@@ -193,8 +212,8 @@ sub file_ok {
 
     # look for a .pm or .pod file
     # DBM::Deep is an example of a distro with a .pod file (Deep.pod)
-    my $root = $self->_module_root;
-    my $pattern = qr{$root\.(pm|pod)\z};
+    my $root      = $self->_module_root;
+    my $pattern   = qr{$root\.(pm|pod)\z};
     my $extension = undef;
 
     if ( $file =~ m{$pattern}xms ) {
@@ -206,7 +225,7 @@ sub file_ok {
     }
 
     # not every module contains POD
-    my $content = $self->icpan->tar->get_content( $file );
+    my $content = $self->tar->get_content( $file );
     if ( !$content || $content !~ m{=head} ) {
         say "skipping -- no POD    -- $file" if $self->debug;
         return;
@@ -225,34 +244,41 @@ sub file_ok {
 sub _build_files {
 
     my $self = shift;
-    my $tar  = $self->icpan->tar;
-    $tar->read( $self->archive_path );
+    my $tar  = $self->tar;
+    
+    eval { $tar->read( $self->archive_path ) };
+    if ( $@ ) {
+        warn $@;
+        return [];
+    }
+    
     my @files = $tar->list_files;
     return \@files;
 
 }
 
 sub _build_pm_name {
-    my $self         = shift;
+    my $self = shift;
     return $self->_module_root . '.pm';
 }
 
 sub _build_pod_name {
-    my $self         = shift;
+    my $self = shift;
     return $self->_module_root . '.pod';
 }
 
-sub _build_debug {
+sub _build_tar {
     
     my $self = shift;
-    return $self->icpan->debug;
+    say "archive path: " . $self->archive_path if $self->debug;
+    return Archive::Tar->new( $self->archive_path );
     
 }
 
 sub _module_root {
-    my $self         = shift;
+    my $self = shift;
     my @module_parts = split( "::", $self->name );
-    return pop( @module_parts ); 
+    return pop( @module_parts );
 }
 
 1;

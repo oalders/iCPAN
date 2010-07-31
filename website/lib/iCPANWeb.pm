@@ -34,7 +34,13 @@ get '/docs/:name' => sub {
     my $rs = $icpan->schema->resultset( 'iCPAN::Schema::Result::Zmodule' );
     #my $module = $rs->find( { 'lower(me.zname)' => lc($name) } );
     my $module = $rs->find( { zname => $name } );
-    return $module->zpod if $module;
+    
+    if ( $module ) {
+        my $pod = $module->zpod;
+        $pod =~ s{shThemeEmacs}{shThemeDefault};
+        $pod =~ s{background-color: #000}{background-color: #fff;border: 1px solid #999;};
+        return $pod;
+    }
 
     status 'not_found';
     return 'Not found';

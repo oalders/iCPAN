@@ -46,11 +46,6 @@ has 'db_path' => (
     default => '/../../iCPAN.sqlite',
 );
 
-has 'module' => (
-    is         => 'rw',
-    lazy_build => 1,
-);
-
 has 'module_name' => (
     is         => 'rw',
     isa        => 'Str',
@@ -67,12 +62,6 @@ has 'pkg_index' => (
 
     #isa => 'Hashref',
     lazy_build => 1,
-);
-
-has 'tar' => (
-    is      => 'rw',
-    lazy    => 1,
-    default => sub { return Archive::Tar->new },
 );
 
 sub mod2file {
@@ -176,18 +165,22 @@ sub _build_minicpan {
 
 }
 
-sub _build_module {
+sub module {
 
     my $self = shift;
 
     die "module name missing" if !$self->module_name;
     my $ref = $self->pkg_index->{ $self->module_name };
     return if !$ref;
+    
+    say dump( $ref );
 
     return iCPAN::Module->new(
         %{$ref},
         name  => $self->module_name,
-        debug => $self->debug
+        debug => $self->debug,
+        icpan => $self,
+        schema => $self->schema,
     );
 
 }
