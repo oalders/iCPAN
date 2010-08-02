@@ -32,9 +32,13 @@ has 'name' => (
     lazy_build => 1,
 );
 
-has 'path' => (
+has 'archive' => (
     is         => 'ro',
     lazy_build => 1,
+);
+
+has 'file' => (
+    is         => 'rw',
 );
 
 has 'pauseid' => (
@@ -83,13 +87,13 @@ sub _build_author {
 
 sub _build_path {
     my $self = shift;
-    return $self->module->{path};
+    return $self->module->{archive};
 }
 
 sub archive_path {
 
     my $self = shift;
-    return $self->icpan->minicpan . "/authors/id/" . $self->path;
+    return $self->icpan->minicpan . "/authors/id/" . $self->archive;
 
 }
 
@@ -122,6 +126,7 @@ FILE:
         next FILE if !$self->file_ok( $file );
 
         say "found : $file ";
+        $self->file( $file );
 
         $self->parse_pod( $file );
 
@@ -169,6 +174,7 @@ sub parse_pod {
     });
 </script>
 ';
+#        SyntaxHiglighter.defaults[\'toolbar\'] = false;
 
     my $start_body = qq[<body><div class="pod">];
     $start_body

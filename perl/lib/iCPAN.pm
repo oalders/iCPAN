@@ -1,4 +1,7 @@
 package iCPAN;
+use Moose;
+
+with 'iCPAN::Role::DB';
 
 use Archive::Tar;
 use Data::Dump qw( dump );
@@ -8,7 +11,6 @@ use iCPAN::Module;
 use iCPAN::Pod::XHTML;
 use iCPAN::Schema;
 use IO::Uncompress::AnyInflate qw(anyinflate $AnyInflateError);
-use Moose;
 use Modern::Perl;
 
 has 'schema' => (
@@ -17,33 +19,15 @@ has 'schema' => (
     lazy_build => 1,
 );
 
-has 'db_file' => (
-    is         => 'rw',
-    isa        => 'Str',
-    lazy_build => 1,
-);
-
-has 'dbh' => (
-    is         => 'rw',
-    isa        => 'DBI::db',
-    lazy_build => 1,
+has 'db_path' => (
+    is      => 'rw',
+    isa     => 'Str',
+    default => '/../../iCPAN.sqlite',
 );
 
 has 'debug' => (
     is      => 'rw',
     lazy_build => 1,
-);
-
-has 'dsn' => (
-    is         => 'rw',
-    isa        => 'Str',
-    lazy_build => 1,
-);
-
-has 'db_path' => (
-    is      => 'rw',
-    isa     => 'Str',
-    default => '/../../iCPAN.sqlite',
 );
 
 has 'module_name' => (
@@ -104,12 +88,12 @@ LINE:
             next LINE;
         }
 
-        my ( $module, $version, $path ) = split m{\s{1,}}xms, $line;
+        my ( $module, $version, $archive ) = split m{\s{1,}}xms, $line;
 
-        my @parts = split( "/", $path );
+        my @parts = split( "/", $archive );
         my $pauseid = $parts[2];
         $index{$module}
-            = { path => $path, version => $version, pauseid => $pauseid };
+            = { archive=> $archive, version => $version, pauseid => $pauseid };
     }
 
     return \%index;
@@ -124,38 +108,12 @@ sub _build_schema {
     return $schema;
 }
 
-sub _build_dbh {
-
-    my $self = shift;
-    return DBI->connect( $self->dsn, "", "" );
-}
 
 sub _build_debug {
     
     my $self = shift;
     return $ENV{'DEBUG'} || 0;
     
-}
-
-sub _build_dsn {
-
-    my $self = shift;
-    return "dbi:SQLite:dbname=" . $self->db_file;
-
-}
-
-sub _build_db_file {
-
-    my $self    = shift;
-    my @caller  = caller();
-    my $db_file = Find::Lib->base . $self->db_path;
-
-    if ( !-e $db_file ) {
-        die "$db_file not found";
-    }
-
-    return $db_file;
-
 }
 
 sub _build_minicpan {
