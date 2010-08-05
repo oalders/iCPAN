@@ -14,15 +14,27 @@ use Find::Lib '../lib';
 use iCPAN;
 use Modern::Perl;
 use Parse::CSV;
+use Path::Class::File;
+use WWW::Mechanize;
+#use WWW::Mechanize::Cached;
+
+my $filename = '/tmp/all_ratings.csv';
+my $file = Path::Class::File->new( $filename );
+#my $mech = WWW::Mechanize::Cached->new;
+my $mech = WWW::Mechanize->new;
+
+$mech->get( 'http://cpanratings.perl.org/csv/all_ratings.csv' );
+my $fh = $file->openw();
+print $fh $mech->content;
 
 #use Parse::CPAN::Ratings;
-#my $ratings = Parse::CPAN::Ratings->new( filename => 'all_ratings.csv' );
+#my $ratings = Parse::CPAN::Ratings->new( filename => $filename );
 
 my $iCPAN  = iCPAN->new;
 my $schema = $iCPAN->schema;
 
 my $parser = Parse::CSV->new(
-    file   => 'all_ratings.csv',
+    file   => $filename,
     fields => 'auto',
 );
 
@@ -37,8 +49,11 @@ while ( my $rating = $parser->fetch ) {
         ->find( { zname => $distro } );
         
     if ( !$module ) {
-        say "cannot find $distro";
+        say "----> cannot find $distro";
         next;
+    }
+    else {
+        say "$distro";
     }
     
     $module->zrating( $rating->{rating} );
@@ -46,3 +61,5 @@ while ( my $rating = $parser->fetch ) {
     $module->update;
     
 }
+
+unlink $filename;

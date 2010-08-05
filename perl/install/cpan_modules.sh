@@ -7,6 +7,7 @@ cpanm --skip-installed Archive::Tar
 cpanm --skip-installed DBI
 cpanm --skip-installed DBIx::Class
 cpanm --skip-installed DBIx::Class::Schema::Loader
+cpanm --skip-installed Every
 cpanm --skip-installed Find::Lib
 cpanm --skip-installed HTML::Entities
 cpanm --skip-installed IO::File

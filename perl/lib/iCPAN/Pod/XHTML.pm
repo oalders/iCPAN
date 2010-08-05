@@ -47,34 +47,17 @@ sub start_Verbatim {
 sub end_Verbatim {
 
     my $perltidy   = 0;
-    my $pygmentize = 0;
-
-    my $filename = '/tmp/iCPAN.code';
-    unlink $filename;
-
-    my $code = $_[0]{'scratch'};
-    $code = decode_entities( $code );
-    $code = ${ tidy_perl( \$code ) } if $perltidy;
-
-    if ( $pygmentize ) {
-
-        my $file = Path::Class::File->new( $filename );
-
-        my $fh = $file->openw();
-        print $fh $code;
-        $fh->close;
-
-        $code = `pygmentize -f html -l perl $filename 2>&1`;
-        if ( $code =~ m{Error\swhile\shighlighting}gxms ) {
-            $code = '<pre><code>' . $_[0]{'scratch'} . '</code></pre>';
-        }
-    }
-    else {
-        $code = encode_entities( $code );
-        $code = '<pre>' . $_[0]{'scratch'} . '</pre>';
+    
+    # if there's no semicolon, it may not be Perl
+    if ( $perltidy && $_[0]{'scratch'} =~ m{;} ) {
+        $_[0]{'scratch'} = decode_entities( $_[0]{'scratch'} );
+        $_[0]{'scratch'} = tidy_perl( $_[0]{'scratch'} );
+        $_[0]{'scratch'} = encode_entities( $_[0]{'scratch'} );
     }
 
-    $_[0]{'scratch'} = $code;
+    $_[0]{'scratch'} = '<pre>' . $_[0]{'scratch'} . '</pre>';
+    
+    #say "going to emit $_[0]{'scratch'}";
 
     $_[0]->emit;
 }
@@ -83,27 +66,35 @@ sub tidy_perl {
 
     my $code = shift;
     my $err  = undef;
-    my $fh   = IO::File->new( \$err, 'w' )
+    my $fh   = IO::File->new( 'error.txt', 'w' )
         || die "could not create file handle";
-    my @lines = ();
+    my @lines;
+    #say "code i got:" . dump( $code );
+    my $orig = $code;
 
     eval {
-        Perl::Tidy::perltidy(
-            source      => $code,
+        perltidy(
+            source      => \$code,
             destination => \@lines,
-            stderr      => $fh
+            stderr      => $fh,
+            #perltidyrc  => Find::Lib::base() . '/../.perltidyrc',
         );
     };
 
-    say "code i got:" . dump( ${$code} );
-    say "tidied lines: " . dump \@lines;
+    #say "tidied lines: " . dump \@lines;
     warn @! if @!;
-    
+
     if ( @lines && !$err && !@! ) {
         $code = join "", @lines;
     }
+    else {
+        use File::Slurp;
+        $fh->close;
+        say "-------------------> error?";
+        print read_file( 'error.txt' );
+    }
 
-    return \$code;
+    return $code;
 
 }
 

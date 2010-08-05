@@ -11,6 +11,7 @@ Loads author info into db.  Requires the presence of a local minicpan.
 use Modern::Perl;
 
 use Data::Dump qw( dump );
+use Every;
 use Find::Lib '../lib';
 use iCPAN;
 use IO::File;
@@ -38,6 +39,8 @@ while ( my $line = $z->getline() ) {
         $author->zname( $2 );
         $author->zemail( $3 );
         $author->update;
+        
+        say $author->zpauseid if every(100);
     }
 
 }

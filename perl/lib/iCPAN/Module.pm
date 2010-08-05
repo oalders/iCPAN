@@ -18,9 +18,7 @@ has 'content' => (
     lazy_build => 1,
 );
 
-has 'debug' => (
-    is         => 'rw',
-);
+has 'debug' => ( is => 'rw', );
 
 has 'icpan' => (
     is      => 'rw',
@@ -37,9 +35,7 @@ has 'archive' => (
     lazy_build => 1,
 );
 
-has 'file' => (
-    is         => 'rw',
-);
+has 'file' => ( is => 'rw', );
 
 has 'pauseid' => (
     is         => 'ro',
@@ -53,8 +49,9 @@ has 'pm_name' => (
 );
 
 has 'schema' => (
-    is         => 'rw',
-#    lazy => 1,
+    is => 'rw',
+
+    #    lazy => 1,
 );
 
 has 'version' => (
@@ -69,17 +66,16 @@ has 'files' => (
 );
 
 has 'tar' => (
-    is      => 'rw',
-    lazy_build    => 1,
+    is         => 'rw',
+    lazy_build => 1,
 );
 
 sub _build_author {
 
     my $self = shift;
-    
+
     die "no pauseid" if !$self->pauseid;
-    my $author
-        = $self->schema->resultset( 'iCPAN::Schema::Result::Zauthor' )
+    my $author = $self->schema->resultset( 'iCPAN::Schema::Result::Zauthor' )
         ->find_or_create( { zpauseid => $self->pauseid } );
     return $author;
 
@@ -118,7 +114,8 @@ FILE:
 
     # locate the file we care about in the archive
     foreach my $file ( @files ) {
-    #while ( my $f = $iter->() ) {
+
+        #while ( my $f = $iter->() ) {
 
         #my $file = $f->name;
         print "checking: $file " if $debug;
@@ -134,8 +131,8 @@ FILE:
         return;
     }
 
-    $self->tar->clear if $self->tar; 
-    warn $self->name . " no success!!!!!!!!!!!!!!!!";
+    $self->tar->clear if $self->tar;
+    warn $self->name . " no success!!!!!!!!!!!!!!!!" if $self->debug;
 
     return;
 
@@ -161,20 +158,20 @@ sub parse_pod {
 
     my $head_tags = '
 <link rel="stylesheet" type="text/css" media="all" href="shCore.css" />
-<link rel="stylesheet" type="text/css" media="all" href="shThemeEmacs.css" />
+<link rel="stylesheet" type="text/css" media="all" href="shThemeDefault.css" />
 </style>
 <script type="text/javascript" src="jquery.min.js"></script>
 <script type="text/javascript" src="shCore.js"></script>
 <script type="text/javascript" src="shBrushPerl.js"></script>
+<script type="text/javascript" src="iCPAN.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
-        $("pre").wrap(\'<div style="padding: 1px 10px; background-color: #000;" />\').addClass("brush: pl");
-        SyntaxHighlighter.defaults[\'gutter\'] = false;
-        SyntaxHighlighter.all();
+        icpan_highlight();
     });
 </script>
 ';
-#        SyntaxHiglighter.defaults[\'toolbar\'] = false;
+
+    #        SyntaxHiglighter.defaults[\'toolbar\'] = false;
 
     my $start_body = qq[<body><div class="pod">];
     $start_body
@@ -251,13 +248,13 @@ sub _build_files {
 
     my $self = shift;
     my $tar  = $self->tar;
-    
+
     eval { $tar->read( $self->archive_path ) };
     if ( $@ ) {
         warn $@;
         return [];
     }
-    
+
     my @files = $tar->list_files;
     return \@files;
 
@@ -274,11 +271,11 @@ sub _build_pod_name {
 }
 
 sub _build_tar {
-    
+
     my $self = shift;
     say "archive path: " . $self->archive_path if $self->debug;
     return Archive::Tar->new( $self->archive_path );
-    
+
 }
 
 sub _module_root {

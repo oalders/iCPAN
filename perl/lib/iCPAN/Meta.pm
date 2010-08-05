@@ -20,7 +20,6 @@ has 'schema' => (
     lazy_build => 1,
 );
 
-
 sub _build_schema {
 
     my $self   = shift;

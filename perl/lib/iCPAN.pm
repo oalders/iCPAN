@@ -26,13 +26,13 @@ has 'db_path' => (
 );
 
 has 'debug' => (
-    is      => 'rw',
+    is         => 'rw',
     lazy_build => 1,
 );
 
 has 'module_name' => (
-    is         => 'rw',
-    isa        => 'Str',
+    is  => 'rw',
+    isa => 'Str',
 );
 
 has 'minicpan' => (
@@ -62,9 +62,9 @@ sub mod2file {
 
 sub open_pkg_index {
 
-    my $self     = shift;
-    my $file     = $self->minicpan . '/modules/02packages.details.txt.gz';
-    my $tar      = Archive::Tar->new;
+    my $self = shift;
+    my $file = $self->minicpan . '/modules/02packages.details.txt.gz';
+    my $tar  = Archive::Tar->new;
 
     my $z = new IO::Uncompress::AnyInflate $file
         or die "anyinflate failed: $AnyInflateError\n";
@@ -92,8 +92,8 @@ LINE:
 
         my @parts = split( "/", $archive );
         my $pauseid = $parts[2];
-        $index{$module}
-            = { archive=> $archive, version => $version, pauseid => $pauseid };
+        $index{$module} = { archive => $archive, version => $version,
+            pauseid => $pauseid };
     }
 
     return \%index;
@@ -108,12 +108,11 @@ sub _build_schema {
     return $schema;
 }
 
-
 sub _build_debug {
-    
+
     my $self = shift;
     return $ENV{'DEBUG'} || 0;
-    
+
 }
 
 sub _build_minicpan {
@@ -130,14 +129,12 @@ sub module {
     die "module name missing" if !$self->module_name;
     my $ref = $self->pkg_index->{ $self->module_name };
     return if !$ref;
-    
-    say dump( $ref );
 
     return iCPAN::Module->new(
         %{$ref},
-        name  => $self->module_name,
-        debug => $self->debug,
-        icpan => $self,
+        name   => $self->module_name,
+        debug  => $self->debug,
+        icpan  => $self,
         schema => $self->schema,
     );
 
