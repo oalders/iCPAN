@@ -42,7 +42,6 @@
 		D8CFAC74114F1A690073867B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8CFAC73114F1A690073867B /* CoreData.framework */; };
 		D8F9C1A7118CCEFE00CDA6DF /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = D8F9C1A6118CCEFE00CDA6DF /* style.css */; };
 		D8F9C1D1118CD34A00CDA6DF /* ModuleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8F9C1D0118CD34A00CDA6DF /* ModuleTableViewCell.m */; };
-		ED3211D111F6B3E200D66A76 /* iCPAN.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = ED3211D011F6B3E200D66A76 /* iCPAN.sqlite */; };
 		ED6977C811FE3C2C00895FE2 /* shCore.css in Resources */ = {isa = PBXBuildFile; fileRef = ED6977C211FE3C2C00895FE2 /* shCore.css */; };
 		ED6977CA11FE3C2C00895FE2 /* shThemeEmacs.css in Resources */ = {isa = PBXBuildFile; fileRef = ED6977C411FE3C2C00895FE2 /* shThemeEmacs.css */; };
 		ED77C3DC11FE740100252EA8 /* shBrushJScript.js in Resources */ = {isa = PBXBuildFile; fileRef = ED77C3DB11FE740100252EA8 /* shBrushJScript.js */; };
@@ -50,6 +49,8 @@
 		ED77C3EA11FE743800252EA8 /* shBrushPerl.js in Resources */ = {isa = PBXBuildFile; fileRef = ED77C3E711FE743800252EA8 /* shBrushPerl.js */; };
 		ED77C3EB11FE743800252EA8 /* shCore.js in Resources */ = {isa = PBXBuildFile; fileRef = ED77C3E811FE743800252EA8 /* shCore.js */; };
 		ED87466411659335003DCD57 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = ED87466311659335003DCD57 /* Settings.bundle */; };
+		EDBE702E1209E0A4004D3793 /* shThemeDefault.css in Resources */ = {isa = PBXBuildFile; fileRef = EDBE702D1209E0A4004D3793 /* shThemeDefault.css */; };
+		EDBE703F120A48AA004D3793 /* iCPAN.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = EDBE703E120A48AA004D3793 /* iCPAN.sqlite */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -99,7 +100,6 @@
 		D8F9C1A6118CCEFE00CDA6DF /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
 		D8F9C1CF118CD34A00CDA6DF /* ModuleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModuleTableViewCell.h; sourceTree = "<group>"; };
 		D8F9C1D0118CD34A00CDA6DF /* ModuleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModuleTableViewCell.m; sourceTree = "<group>"; };
-		ED3211D011F6B3E200D66A76 /* iCPAN.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = iCPAN.sqlite; path = ../iCPAN.sqlite; sourceTree = SOURCE_ROOT; };
 		ED6977C211FE3C2C00895FE2 /* shCore.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = shCore.css; sourceTree = "<group>"; };
 		ED6977C411FE3C2C00895FE2 /* shThemeEmacs.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = shThemeEmacs.css; sourceTree = "<group>"; };
 		ED77C3DB11FE740100252EA8 /* shBrushJScript.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = shBrushJScript.js; sourceTree = "<group>"; };
@@ -107,6 +107,8 @@
 		ED77C3E711FE743800252EA8 /* shBrushPerl.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = shBrushPerl.js; sourceTree = "<group>"; };
 		ED77C3E811FE743800252EA8 /* shCore.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = shCore.js; sourceTree = "<group>"; };
 		ED87466311659335003DCD57 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		EDBE702D1209E0A4004D3793 /* shThemeDefault.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = shThemeDefault.css; sourceTree = "<group>"; };
+		EDBE703E120A48AA004D3793 /* iCPAN.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = iCPAN.sqlite; path = ../iCPAN.sqlite; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,13 +179,14 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				EDBE703E120A48AA004D3793 /* iCPAN.sqlite */,
+				EDBE702D1209E0A4004D3793 /* shThemeDefault.css */,
 				ED77C3E611FE743800252EA8 /* jquery.min.js */,
 				ED77C3E711FE743800252EA8 /* shBrushPerl.js */,
 				ED77C3E811FE743800252EA8 /* shCore.js */,
 				ED77C3DB11FE740100252EA8 /* shBrushJScript.js */,
 				ED6977C211FE3C2C00895FE2 /* shCore.css */,
 				ED6977C411FE3C2C00895FE2 /* shThemeEmacs.css */,
-				ED3211D011F6B3E200D66A76 /* iCPAN.sqlite */,
 				D8097B6D118803420062EACA /* BookmarksView.xib */,
 				D8097B6E118803420062EACA /* MainWindow.xib */,
 				D8097B6F118803420062EACA /* MasterView.xib */,
@@ -306,13 +309,14 @@
 				D8C6582311C1A367000886F6 /* icon_magnify_glass.png in Resources */,
 				D8C6583D11C1A6A3000886F6 /* icon_cancel.png in Resources */,
 				D8C6583E11C1A6A3000886F6 /* icon_error.png in Resources */,
-				ED3211D111F6B3E200D66A76 /* iCPAN.sqlite in Resources */,
 				ED6977C811FE3C2C00895FE2 /* shCore.css in Resources */,
+				EDBE702E1209E0A4004D3793 /* shThemeDefault.css in Resources */,
 				ED6977CA11FE3C2C00895FE2 /* shThemeEmacs.css in Resources */,
 				ED77C3E911FE743800252EA8 /* jquery.min.js in Resources */,
 				ED77C3DC11FE740100252EA8 /* shBrushJScript.js in Resources */,
 				ED77C3EB11FE743800252EA8 /* shCore.js in Resources */,
 				ED77C3EA11FE743800252EA8 /* shBrushPerl.js in Resources */,
+				EDBE703F120A48AA004D3793 /* iCPAN.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
