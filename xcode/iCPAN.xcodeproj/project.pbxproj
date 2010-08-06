@@ -42,17 +42,17 @@
 		D8CFAC74114F1A690073867B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8CFAC73114F1A690073867B /* CoreData.framework */; };
 		D8F9C1A7118CCEFE00CDA6DF /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = D8F9C1A6118CCEFE00CDA6DF /* style.css */; };
 		D8F9C1D1118CD34A00CDA6DF /* ModuleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8F9C1D0118CD34A00CDA6DF /* ModuleTableViewCell.m */; };
+		ED53A711120B459D00E6761D /* iCPAN.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = ED53A710120B459D00E6761D /* iCPAN.sqlite */; };
 		ED6977C811FE3C2C00895FE2 /* shCore.css in Resources */ = {isa = PBXBuildFile; fileRef = ED6977C211FE3C2C00895FE2 /* shCore.css */; };
 		ED6977CA11FE3C2C00895FE2 /* shThemeEmacs.css in Resources */ = {isa = PBXBuildFile; fileRef = ED6977C411FE3C2C00895FE2 /* shThemeEmacs.css */; };
-		ED77C3DC11FE740100252EA8 /* shBrushJScript.js in Resources */ = {isa = PBXBuildFile; fileRef = ED77C3DB11FE740100252EA8 /* shBrushJScript.js */; };
-		ED77C3E911FE743800252EA8 /* jquery.min.js in Resources */ = {isa = PBXBuildFile; fileRef = ED77C3E611FE743800252EA8 /* jquery.min.js */; };
-		ED77C3EA11FE743800252EA8 /* shBrushPerl.js in Resources */ = {isa = PBXBuildFile; fileRef = ED77C3E711FE743800252EA8 /* shBrushPerl.js */; };
-		ED77C3EB11FE743800252EA8 /* shCore.js in Resources */ = {isa = PBXBuildFile; fileRef = ED77C3E811FE743800252EA8 /* shCore.js */; };
 		ED87466411659335003DCD57 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = ED87466311659335003DCD57 /* Settings.bundle */; };
 		EDBE702E1209E0A4004D3793 /* shThemeDefault.css in Resources */ = {isa = PBXBuildFile; fileRef = EDBE702D1209E0A4004D3793 /* shThemeDefault.css */; };
-		EDBE703F120A48AA004D3793 /* iCPAN.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = EDBE703E120A48AA004D3793 /* iCPAN.sqlite */; };
 		EDBE7047120A80C6004D3793 /* iCPAN.js in Sources */ = {isa = PBXBuildFile; fileRef = EDBE7046120A80C6004D3793 /* iCPAN.js */; };
-		EDBE7048120A80D6004D3793 /* iCPAN.js in Resources */ = {isa = PBXBuildFile; fileRef = EDBE7046120A80C6004D3793 /* iCPAN.js */; };
+		EDBE70B4120B4375004D3793 /* iCPAN.js in Resources */ = {isa = PBXBuildFile; fileRef = EDBE7046120A80C6004D3793 /* iCPAN.js */; };
+		EDBE70B6120B4381004D3793 /* shBrushJScript.js in Resources */ = {isa = PBXBuildFile; fileRef = ED77C3DB11FE740100252EA8 /* shBrushJScript.js */; };
+		EDBE70B7120B4387004D3793 /* shCore.js in Resources */ = {isa = PBXBuildFile; fileRef = ED77C3E811FE743800252EA8 /* shCore.js */; };
+		EDBE70B8120B438D004D3793 /* shBrushPerl.js in Resources */ = {isa = PBXBuildFile; fileRef = ED77C3E711FE743800252EA8 /* shBrushPerl.js */; };
+		EDBE70B9120B439A004D3793 /* jquery.min.js in Resources */ = {isa = PBXBuildFile; fileRef = ED77C3E611FE743800252EA8 /* jquery.min.js */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -102,6 +102,7 @@
 		D8F9C1A6118CCEFE00CDA6DF /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
 		D8F9C1CF118CD34A00CDA6DF /* ModuleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModuleTableViewCell.h; sourceTree = "<group>"; };
 		D8F9C1D0118CD34A00CDA6DF /* ModuleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModuleTableViewCell.m; sourceTree = "<group>"; };
+		ED53A710120B459D00E6761D /* iCPAN.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = iCPAN.sqlite; path = ../iCPAN.sqlite; sourceTree = SOURCE_ROOT; };
 		ED6977C211FE3C2C00895FE2 /* shCore.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = shCore.css; sourceTree = "<group>"; };
 		ED6977C411FE3C2C00895FE2 /* shThemeEmacs.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = shThemeEmacs.css; sourceTree = "<group>"; };
 		ED77C3DB11FE740100252EA8 /* shBrushJScript.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = shBrushJScript.js; sourceTree = "<group>"; };
@@ -110,7 +111,6 @@
 		ED77C3E811FE743800252EA8 /* shCore.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = shCore.js; sourceTree = "<group>"; };
 		ED87466311659335003DCD57 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		EDBE702D1209E0A4004D3793 /* shThemeDefault.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = shThemeDefault.css; sourceTree = "<group>"; };
-		EDBE703E120A48AA004D3793 /* iCPAN.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = iCPAN.sqlite; path = ../iCPAN.sqlite; sourceTree = SOURCE_ROOT; };
 		EDBE7046120A80C6004D3793 /* iCPAN.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = iCPAN.js; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -182,10 +182,9 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				EDBE7046120A80C6004D3793 /* iCPAN.js */,
-				EDBE703E120A48AA004D3793 /* iCPAN.sqlite */,
-				EDBE702D1209E0A4004D3793 /* shThemeDefault.css */,
+				ED53A710120B459D00E6761D /* iCPAN.sqlite */,
 				ED77C3E611FE743800252EA8 /* jquery.min.js */,
+				EDBE702D1209E0A4004D3793 /* shThemeDefault.css */,
 				ED77C3E711FE743800252EA8 /* shBrushPerl.js */,
 				ED77C3E811FE743800252EA8 /* shCore.js */,
 				ED77C3DB11FE740100252EA8 /* shBrushJScript.js */,
@@ -196,6 +195,7 @@
 				D8097B6F118803420062EACA /* MasterView.xib */,
 				D8F9C1A6118CCEFE00CDA6DF /* style.css */,
 				8D1107310486CEB800E47090 /* iCPAN-Info.plist */,
+				EDBE7046120A80C6004D3793 /* iCPAN.js */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -290,6 +290,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDBE70B4120B4375004D3793 /* iCPAN.js in Resources */,
+				EDBE70B9120B439A004D3793 /* jquery.min.js in Resources */,
+				EDBE70B6120B4381004D3793 /* shBrushJScript.js in Resources */,
+				EDBE70B8120B438D004D3793 /* shBrushPerl.js in Resources */,
+				EDBE70B7120B4387004D3793 /* shCore.js in Resources */,
 				D87501DC113F43F4000A7193 /* Default.png in Resources */,
 				D87501DD113F43F4000A7193 /* icon.png in Resources */,
 				ED87466411659335003DCD57 /* Settings.bundle in Resources */,
@@ -316,12 +321,7 @@
 				ED6977C811FE3C2C00895FE2 /* shCore.css in Resources */,
 				EDBE702E1209E0A4004D3793 /* shThemeDefault.css in Resources */,
 				ED6977CA11FE3C2C00895FE2 /* shThemeEmacs.css in Resources */,
-				EDBE7048120A80D6004D3793 /* iCPAN.js in Resources */,
-				ED77C3E911FE743800252EA8 /* jquery.min.js in Resources */,
-				ED77C3DC11FE740100252EA8 /* shBrushJScript.js in Resources */,
-				ED77C3EB11FE743800252EA8 /* shCore.js in Resources */,
-				ED77C3EA11FE743800252EA8 /* shBrushPerl.js in Resources */,
-				EDBE703F120A48AA004D3793 /* iCPAN.sqlite in Resources */,
+				ED53A711120B459D00E6761D /* iCPAN.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -384,7 +384,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
-				SDKROOT = iphonesimulator3.2;
+				SDKROOT = iphonesimulator3.1;
 			};
 			name = Debug;
 		};
@@ -397,7 +397,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
-				SDKROOT = iphonesimulator3.2;
+				SDKROOT = iphonesimulator3.1;
 			};
 			name = Release;
 		};
@@ -410,7 +410,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
-				SDKROOT = iphonesimulator3.2;
+				SDKROOT = iphonesimulator3.1;
 			};
 			name = Distribution;
 		};
@@ -433,8 +433,8 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
-				1D6058950D05DD3E006BFB54 /* Release */,
 				ED0C886111C492F5006230F2 /* Distribution */,
+				1D6058950D05DD3E006BFB54 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -443,8 +443,8 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
-				C01FCF5008A954540054247B /* Release */,
 				ED0C886011C492F5006230F2 /* Distribution */,
+				C01FCF5008A954540054247B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

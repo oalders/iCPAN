@@ -159,7 +159,6 @@ sub parse_pod {
     my $head_tags = '
 <link rel="stylesheet" type="text/css" media="all" href="shCore.css" />
 <link rel="stylesheet" type="text/css" media="all" href="shThemeDefault.css" />
-</style>
 <script type="text/javascript" src="jquery.min.js"></script>
 <script type="text/javascript" src="shCore.js"></script>
 <script type="text/javascript" src="shBrushPerl.js"></script>
@@ -170,8 +169,6 @@ sub parse_pod {
     });
 </script>
 ';
-
-    #        SyntaxHiglighter.defaults[\'toolbar\'] = false;
 
     my $start_body = qq[<body><div class="pod">];
     $start_body

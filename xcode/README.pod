@@ -1,0 +1,3 @@
+=head1 BUILDING A RELEASE
+
+L<https://developer.apple.com/iphone/manage/distribution/index.action>

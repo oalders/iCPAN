@@ -71,19 +71,6 @@ script.
 
     sh install/cpan_modules.sh
 
-
-=head2 PYGMENTS
-
-The load_modules script uses a Python library called "Pygments" to handle
-syntax highlighting.
-
-To install pygments on OS X:
-
-    sudo easy_install Pygments
-
-To install pygments on Ubuntu:
-
-    sudo apt-get install python-pygments
     
 =head2 SHRINKING YOUR DB
 
