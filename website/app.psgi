@@ -1,8 +1,8 @@
 # PSGI application bootstrapper for Dancer
+# you can fire it up like this: plackup -Ilib -I../perl/lib
+
 use Dancer;
 load_app 'iCPANWeb';
-
-use Find::Lib '../perl/lib';
 
 use Dancer::Config 'setting';
 setting apphandler  => 'PSGI';
