@@ -11,7 +11,7 @@ use Modern::Perl;
 has 'db_path' => (
     is      => 'rw',
     isa     => 'Str',
-    default => '/../../iCPAN-meta.sqlite',
+    default => '../../iCPAN-meta.sqlite',
 );
 
 has 'schema' => (

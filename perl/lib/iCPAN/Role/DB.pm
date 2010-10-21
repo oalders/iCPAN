@@ -1,7 +1,8 @@
 package iCPAN::Role::DB;
 
 use Moose::Role;
-use Cwd;
+use DBI;
+use Find::Lib;
 
 has 'db_file' => (
     is         => 'rw',
@@ -39,7 +40,7 @@ sub _build_db_file {
     my $self    = shift;
     my @caller  = caller();
 
-    my $db_file = getcwd . $self->db_path;
+    my $db_file = Find::Lib::base() . '/'. $self->db_path;
 
     if ( !-e $db_file ) {
         die "$db_file not found";

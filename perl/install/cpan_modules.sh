@@ -4,6 +4,7 @@
 # any modules are missing from this script, please add them.
 
 cpanm --skip-installed Archive::Tar
+cpanm --skip-installed CPAN::DistnameInfo
 cpanm --skip-installed DBI
 cpanm --skip-installed DBIx::Class
 cpanm --skip-installed DBIx::Class::Schema::Loader

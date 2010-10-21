@@ -4,6 +4,7 @@ use Moose;
 with 'iCPAN::Role::DB';
 
 use Archive::Tar;
+use CPAN::DistnameInfo;
 use Data::Dump qw( dump );
 use DBI;
 use Find::Lib;
@@ -22,7 +23,7 @@ has 'schema' => (
 has 'db_path' => (
     is      => 'rw',
     isa     => 'Str',
-    default => '/../../iCPAN.sqlite',
+    default => '../../iCPAN.sqlite',
 );
 
 has 'debug' => (
@@ -90,15 +91,21 @@ LINE:
 
         my ( $module, $version, $archive ) = split m{\s{1,}}xms, $line;
 
-        my @parts = split( "/", $archive );
-        my $pauseid = $parts[2];
-        $index{$module} = { archive => $archive, version => $version,
-            pauseid => $pauseid };
+        # DistNameInfo converts 1.006001 to 1.6.1
+        my $d = CPAN::DistnameInfo->new( $archive );
+
+        $index{$module} = {
+            archive => $d->pathname,
+            version => $d->version,
+            pauseid => $d->cpanid,
+            dist    => $d->dist,
+        };
     }
 
     return \%index;
 
 }
+
 
 sub _build_schema {
 

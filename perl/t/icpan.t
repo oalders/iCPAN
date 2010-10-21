@@ -13,11 +13,11 @@ isa_ok( $icpan->dbh, 'DBI::db');
 
 ok( $icpan->dsn, "got dsn: " . $icpan->dsn );
 
-cmp_ok( $icpan->db_path, 'eq', '/../../iCPAN.sqlite', 'correct default db path' );
+cmp_ok( $icpan->db_path, 'eq', '../../iCPAN.sqlite', 'correct default db path' );
 
 my $icpan2 = iCPAN->new;
-$icpan->db_path('/../iCPAN.sqlite');
-cmp_ok( $icpan->db_path, 'eq', '/../iCPAN.sqlite',  'correct custom db path');
+$icpan->db_path('../iCPAN.sqlite');
+cmp_ok( $icpan->db_path, 'eq', '../iCPAN.sqlite',  'correct custom db path');
 
 my $file = $icpan->open_pkg_index;
 isa_ok( $file, 'IO::File');
