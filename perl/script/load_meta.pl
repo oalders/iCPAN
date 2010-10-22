@@ -19,7 +19,7 @@ foreach my $key ( sort keys %{$index} ) {
         = $meta->schema->resultset( 'iCPAN::Meta::Schema::Result::Module' )
         ->find_or_create( { name => $key } );
 
-    foreach my $col ( 'archive', 'pauseid', 'version' ) {
+    foreach my $col ( 'archive', 'pauseid', 'version', 'dist' ) {
         $module->$col( $index->{$key}->{$col} );
     }
 

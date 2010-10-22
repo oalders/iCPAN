@@ -16,12 +16,12 @@ use Modern::Perl;
 use Parse::CSV;
 use Path::Class::File;
 use WWW::Mechanize;
-#use WWW::Mechanize::Cached;
+use WWW::Mechanize::Cached;
 
 my $filename = '/tmp/all_ratings.csv';
 my $file = Path::Class::File->new( $filename );
-#my $mech = WWW::Mechanize::Cached->new;
-my $mech = WWW::Mechanize->new;
+my $mech = WWW::Mechanize::Cached->new;
+#my $mech = WWW::Mechanize->new;
 
 $mech->get( 'http://cpanratings.perl.org/csv/all_ratings.csv' );
 my $fh = $file->openw();
@@ -39,7 +39,7 @@ my $parser = Parse::CSV->new(
 );
 
 while ( my $rating = $parser->fetch ) {
-    
+
     #say dump $rating;
     my $distro = $rating->{distribution};
     $distro =~ s{-}{::}g;
@@ -47,7 +47,7 @@ while ( my $rating = $parser->fetch ) {
 
     my $module = $schema->resultset( 'iCPAN::Schema::Result::Zmodule' )
         ->find( { zname => $distro } );
-        
+
     if ( !$module ) {
         say "----> cannot find $distro";
         next;
@@ -55,11 +55,11 @@ while ( my $rating = $parser->fetch ) {
     else {
         say "$distro";
     }
-    
+
     $module->zrating( $rating->{rating} );
     $module->zreview_count( $rating->{review_count} );
     $module->update;
-    
+
 }
 
 unlink $filename;
