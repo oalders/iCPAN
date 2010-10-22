@@ -22,6 +22,16 @@ has 'dsn' => (
     lazy_build => 1,
 );
 
+has 'schema' => (
+    is         => 'ro',
+    lazy_build => 1,
+);
+
+has 'schema_class' => (
+    is         => 'rw',
+    default => 'iCPAN::Schema',
+);
+
 sub _build_dbh {
 
     my $self = shift;
@@ -48,6 +58,14 @@ sub _build_db_file {
 
     return $db_file;
 
+}
+
+sub _build_schema {
+
+    my $self   = shift;
+    my $dsn    = "dbi:SQLite:dbname=" . $self->db_file;
+    my $schema = $self->schema_class->connect( $self->dsn, '', '', '' );
+    return $schema;
 }
 
 1;

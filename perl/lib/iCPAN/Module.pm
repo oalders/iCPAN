@@ -4,137 +4,72 @@ use Archive::Tar;
 use Moose;
 use Modern::Perl;
 use Data::Dump qw( dump );
-use iCPAN;
-
-has 'author' => (
-    is         => 'ro',
-    isa        => 'iCPAN::Schema::Result::Zauthor',
-    lazy_build => 1,
-);
-
-has 'content' => (
-    is         => 'rw',
-    isa        => 'Str',
-    lazy_build => 1,
-);
 
 has 'debug' => ( is => 'rw', );
-
-has 'icpan' => (
-    is      => 'rw',
-    default => sub { return iCPAN->new() },
-);
 
 has 'name' => (
     is         => 'ro',
     lazy_build => 1,
 );
 
-has 'archive' => (
-    is         => 'ro',
-    lazy_build => 1,
-);
-
 has 'file' => ( is => 'rw', );
-
-has 'pauseid' => (
-    is         => 'ro',
-    required   => 1,
-    lazy_build => 1,
-);
-
-has 'pm_name' => (
-    is         => 'rw',
-    lazy_build => 1,
-);
-
-has 'schema' => (
-    is => 'rw',
-
-    #    lazy => 1,
-);
 
 has 'version' => (
     is         => 'ro',
     lazy_build => 1,
 );
 
-has 'files' => (
-    is         => 'ro',
-    isa        => "ArrayRef",
-    lazy_build => 1,
-);
-
-has 'tar' => (
-    is         => 'rw',
-    lazy_build => 1,
-);
-
-sub _build_author {
-
-    my $self = shift;
-
-    die "no pauseid" if !$self->pauseid;
-    my $author = $self->schema->resultset( 'iCPAN::Schema::Result::Zauthor' )
-        ->find_or_create( { zpauseid => $self->pauseid } );
-    return $author;
-
-}
-
-sub _build_path {
-    my $self = shift;
-    return $self->module->{archive};
-}
-
-sub archive_path {
-
-    my $self = shift;
-    return $self->icpan->minicpan . "/authors/id/" . $self->archive;
-
-}
 
 sub process {
 
     my $self        = shift;
     my $module_name = $self->name;
-    my $debug       = $self->debug;
 
-    if ( !$self->author ) {
-        say
-            "skipping $module_name. cannot find $self->pauseid in author table";
+    print "checking: " . $self->file if $self->debug;
+
+    return 0 if !$self->file_ok( $self->file );
+
+    $self->parse_pod;
+
+    return 1;
+
+}
+
+sub file_ok {
+
+    my $self        = shift;
+    my $module_name = $self->name;
+    my $file        = shift;
+    my $pm_name     = $self->pm_name;
+
+    # look for a .pm or .pod file
+    # DBM::Deep is an example of a distro with a .pod file (Deep.pod)
+    my $root      = $self->_module_root;
+    my $pattern   = qr{$root\.(pm|pod)\z};
+    my $extension = undef;
+
+    if ( $file =~ m{$pattern}xms ) {
+        $extension = $1;
+    }
+    else {
+        say "skipping --  " . $pm_name . " -- $file" if $self->debug;
         return;
     }
 
-    #my $iter = Archive::Tar->iter( $self->archive_path, 1,
-    #    { filter => qr/\.(pm|pod)$/ } );
-
-    my @files = @{ $self->files };
-
-FILE:
-
-    # locate the file we care about in the archive
-    foreach my $file ( @files ) {
-
-        #while ( my $f = $iter->() ) {
-
-        #my $file = $f->name;
-        print "checking: $file " if $debug;
-
-        next FILE if !$self->file_ok( $file );
-
-        say "found : $file ";
-        $self->file( $file );
-
-        $self->parse_pod( $file );
-
-        $self->tar->clear;
+    # not every module contains POD
+    my $content = $self->tar->get_content( $file );
+    if ( !$content || $content !~ m{=head} ) {
+        say "skipping -- no POD    -- $file" if $self->debug;
         return;
     }
 
-    $self->tar->clear if $self->tar;
-    warn $self->name . " no success!!!!!!!!!!!!!!!!" if $self->debug;
+    if ( $extension ne 'pod' && $content !~ m{package\s*$module_name} ) {
+        say "skipping -- not the correct package name" if $self->debug;
+        return;
+    }
 
-    return;
+    $self->content( $content );
+    return $content;
 
 }
 
@@ -201,84 +136,6 @@ sub parse_pod {
     $module_row->zpod( $xhtml );
     $module_row->update;
 
-}
-
-sub file_ok {
-
-    my $self        = shift;
-    my $module_name = $self->name;
-    my $file        = shift;
-    my $pm_name     = $self->pm_name;
-
-    # look for a .pm or .pod file
-    # DBM::Deep is an example of a distro with a .pod file (Deep.pod)
-    my $root      = $self->_module_root;
-    my $pattern   = qr{$root\.(pm|pod)\z};
-    my $extension = undef;
-
-    if ( $file =~ m{$pattern}xms ) {
-        $extension = $1;
-    }
-    else {
-        say "skipping --  " . $pm_name . " -- $file" if $self->debug;
-        return;
-    }
-
-    # not every module contains POD
-    my $content = $self->tar->get_content( $file );
-    if ( !$content || $content !~ m{=head} ) {
-        say "skipping -- no POD    -- $file" if $self->debug;
-        return;
-    }
-
-    if ( $extension ne 'pod' && $content !~ m{package\s*$module_name} ) {
-        say "skipping -- not the correct package name" if $self->debug;
-        return;
-    }
-
-    $self->content( $content );
-    return $content;
-
-}
-
-sub _build_files {
-
-    my $self = shift;
-    my $tar  = $self->tar;
-
-    eval { $tar->read( $self->archive_path ) };
-    if ( $@ ) {
-        warn $@;
-        return [];
-    }
-
-    my @files = $tar->list_files;
-    return \@files;
-
-}
-
-sub _build_pm_name {
-    my $self = shift;
-    return $self->_module_root . '.pm';
-}
-
-sub _build_pod_name {
-    my $self = shift;
-    return $self->_module_root . '.pod';
-}
-
-sub _build_tar {
-
-    my $self = shift;
-    say "archive path: " . $self->archive_path if $self->debug;
-    return Archive::Tar->new( $self->archive_path );
-
-}
-
-sub _module_root {
-    my $self = shift;
-    my @module_parts = split( "::", $self->name );
-    return pop( @module_parts );
 }
 
 1;

@@ -4,11 +4,11 @@ use Data::Dump qw( dump );
 use Modern::Perl;
 use Test::More qw( no_plan );
 
-require_ok('iCPAN::Meta');
+require_ok('iCPAN::MetaIndex');
 
-my $meta = iCPAN::Meta->new;
+my $meta = iCPAN::MetaIndex->new;
 
-isa_ok( $meta, 'iCPAN::Meta');
+isa_ok( $meta, 'iCPAN::MetaIndex');
 ok( $meta->dbh, "got dbh");
 isa_ok( $meta->dbh, 'DBI::db');
 

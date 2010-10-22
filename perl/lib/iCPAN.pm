@@ -1,6 +1,7 @@
 package iCPAN;
 use Moose;
 
+with 'iCPAN::Role::Common';
 with 'iCPAN::Role::DB';
 
 use Archive::Tar;
@@ -8,17 +9,12 @@ use CPAN::DistnameInfo;
 use Data::Dump qw( dump );
 use DBI;
 use Find::Lib;
-use iCPAN::Module;
+use iCPAN::Dist;
 use iCPAN::Pod::XHTML;
+use iCPAN::MetaIndex;
 use iCPAN::Schema;
 use IO::Uncompress::AnyInflate qw(anyinflate $AnyInflateError);
 use Modern::Perl;
-
-has 'schema' => (
-    is         => 'ro',
-    isa        => 'iCPAN::Schema',
-    lazy_build => 1,
-);
 
 has 'db_path' => (
     is      => 'rw',
@@ -26,20 +22,9 @@ has 'db_path' => (
     default => '../../iCPAN.sqlite',
 );
 
-has 'debug' => (
-    is         => 'rw',
-    lazy_build => 1,
-);
-
 has 'module_name' => (
     is  => 'rw',
     isa => 'Str',
-);
-
-has 'minicpan' => (
-    is         => 'rw',
-    isa        => 'Str',
-    lazy_build => 1,
 );
 
 has 'pkg_index' => (
@@ -106,29 +91,6 @@ LINE:
 
 }
 
-
-sub _build_schema {
-
-    my $self   = shift;
-    my $dsn    = "dbi:SQLite:dbname=" . $self->db_file;
-    my $schema = iCPAN::Schema->connect( $self->dsn, '', '', '' );
-    return $schema;
-}
-
-sub _build_debug {
-
-    my $self = shift;
-    return $ENV{'DEBUG'} || 0;
-
-}
-
-sub _build_minicpan {
-
-    my $self = shift;
-    return $ENV{'MINICPAN'} || "$ENV{'HOME'}/minicpan";
-
-}
-
 sub module {
 
     my $self = shift;
@@ -144,6 +106,23 @@ sub module {
         icpan  => $self,
         schema => $self->schema,
     );
+
+}
+
+sub meta_index {
+
+    my $self = shift;
+    my $meta = iCPAN::MetaIndex->new();
+    $meta->schema_class( 'iCPAN::Meta::Schema' );
+    return $meta;
+}
+
+sub dist {
+
+    my $self = shift;
+    my $name = shift;
+
+    return iCPAN::Dist->new( name => $name );
 
 }
 

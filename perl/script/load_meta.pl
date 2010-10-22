@@ -6,10 +6,8 @@ use Every;
 use Find::Lib '../lib';
 
 use iCPAN;
-use iCPAN::Meta;
-
 my $icpan = iCPAN->new;
-my $meta  = iCPAN::Meta->new;
+my $meta  = icpan->module_metadata;
 
 my $index = $icpan->pkg_index;
 my $count = 0;
