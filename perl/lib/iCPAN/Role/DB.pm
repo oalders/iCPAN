@@ -32,6 +32,14 @@ has 'schema_class' => (
     default => 'iCPAN::Schema',
 );
 
+sub meta_index {
+
+    my $self = shift;
+    my $meta = iCPAN::MetaIndex->new();
+    $meta->schema_class( 'iCPAN::Meta::Schema' );
+    return $meta;
+}
+
 sub _build_dbh {
 
     my $self = shift;

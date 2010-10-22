@@ -109,20 +109,12 @@ sub module {
 
 }
 
-sub meta_index {
-
-    my $self = shift;
-    my $meta = iCPAN::MetaIndex->new();
-    $meta->schema_class( 'iCPAN::Meta::Schema' );
-    return $meta;
-}
-
 sub dist {
 
     my $self = shift;
     my $name = shift;
 
-    return iCPAN::Dist->new( name => $name );
+    return iCPAN::Dist->new( name => $name, schema => $self->schema );
 
 }
 

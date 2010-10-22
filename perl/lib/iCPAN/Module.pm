@@ -5,14 +5,39 @@ use Moose;
 use Modern::Perl;
 use Data::Dump qw( dump );
 
-has 'debug' => ( is => 'rw', );
+with 'iCPAN::Role::Author';
+with 'iCPAN::Role::Common';
+with 'iCPAN::Role::DB';
 
-has 'name' => (
-    is         => 'ro',
+has 'content' => (
+    is         => 'rw',
+    isa        => 'Str',
     lazy_build => 1,
 );
 
+has 'db_path' => (
+    is      => 'rw',
+    isa     => 'Str',
+    default => '../../iCPAN-meta.sqlite',
+);
+
+has 'debug' => ( is => 'rw', );
+
 has 'file' => ( is => 'rw', );
+
+has 'metadata' => (
+    is         => 'rw',
+    isa        => 'iCPAN::Meta::Schema::Result::Module',
+);
+
+has 'pm_name' => (
+    is         => 'rw',
+    lazy_build => 1,
+);
+
+has 'tar' => (
+    is         => 'rw',
+);
 
 has 'version' => (
     is         => 'ro',
@@ -23,23 +48,89 @@ has 'version' => (
 sub process {
 
     my $self        = shift;
-    my $module_name = $self->name;
+    my $file        = shift;
+    print "checking: " . $file if $self->debug;
 
-    print "checking: " . $self->file if $self->debug;
+    return 0 if !$self->file_ok( $file );
 
-    return 0 if !$self->file_ok( $self->file );
-
-    $self->parse_pod;
+    $self->parse_pod( $file );
 
     return 1;
+
+}
+
+
+
+sub parse_pod {
+
+    my $self        = shift;
+    my $file        = shift;
+    my $content     = $self->content;
+    my $module_name = $self->metadata->name;
+    my $parser      = iCPAN::Pod->new();
+
+    $parser->perldoc_url_prefix( '' );
+    $parser->index( 1 );
+    $parser->html_css( 'style.css' );
+
+    my $xhtml = "";
+    $parser->output_string( \$xhtml );
+    $parser->parse_string_document( $content );
+
+    # modify HTML directly
+
+    my $head_tags = '
+<link rel="stylesheet" type="text/css" media="all" href="shCore.css" />
+<link rel="stylesheet" type="text/css" media="all" href="shThemeDefault.css" />
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="shCore.js"></script>
+<script type="text/javascript" src="shBrushPerl.js"></script>
+<script type="text/javascript" src="iCPAN.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        icpan_highlight();
+    });
+</script>
+';
+
+    my $start_body = qq[<body><div class="pod">];
+    $start_body
+        .= qq[<div style="position:fixed;z-index: 5000;height:50px;width:100%;background-color:#fff;"><h1 id="iCPAN">$module_name];
+    if ( $self->metadata->version ) {
+        $start_body .= sprintf( ' (%s) ', $self->metadata->version );
+    }
+    $start_body .= qq[</h1><hr /></div><div style="height:50px">&nbsp;</div>];
+
+    $xhtml =~ s{<body>}{$start_body};
+    $xhtml =~ s{<\/body>}{<\/div>\n<\/body>};
+
+    $xhtml =~ s{<head>}{<head>\n$head_tags};
+
+    my $module_row
+        = $self->schema->resultset( 'iCPAN::Schema::Result::Zmodule' )
+        ->find_or_create( { zname => $module_name, } );
+
+    # author may have changed since last version
+    $module_row->zauthor( $self->author->z_pk );
+
+    my $version = $self->metadata->version;
+    if ( $version && $version ne 'undef' ) {
+        $module_row->zversion( $version );
+    }
+    else {
+        $module_row->zversion( undef );
+    }
+
+    $module_row->zpod( $xhtml );
+    $module_row->update;
 
 }
 
 sub file_ok {
 
     my $self        = shift;
-    my $module_name = $self->name;
     my $file        = shift;
+    my $module_name = $self->metadata->name;
     my $pm_name     = $self->pm_name;
 
     # look for a .pm or .pod file
@@ -73,69 +164,20 @@ sub file_ok {
 
 }
 
-sub parse_pod {
+sub _build_pm_name {
+    my $self = shift;
+    return $self->_module_root . '.pm';
+}
 
-    my $self        = shift;
-    my $file        = shift;
-    my $content     = $self->content;
-    my $module_name = $self->name;
-    my $parser      = iCPAN::Pod->new();
+sub _build_pod_name {
+    my $self = shift;
+    return $self->_module_root . '.pod';
+}
 
-    $parser->perldoc_url_prefix( '' );
-    $parser->index( 1 );
-    $parser->html_css( 'style.css' );
-
-    my $xhtml = "";
-    $parser->output_string( \$xhtml );
-    $parser->parse_string_document( $content );
-
-    # modify HTML directly
-
-    my $head_tags = '
-<link rel="stylesheet" type="text/css" media="all" href="shCore.css" />
-<link rel="stylesheet" type="text/css" media="all" href="shThemeDefault.css" />
-<script type="text/javascript" src="jquery.min.js"></script>
-<script type="text/javascript" src="shCore.js"></script>
-<script type="text/javascript" src="shBrushPerl.js"></script>
-<script type="text/javascript" src="iCPAN.js"></script>
-<script type="text/javascript">
-    $(document).ready(function() {
-        icpan_highlight();
-    });
-</script>
-';
-
-    my $start_body = qq[<body><div class="pod">];
-    $start_body
-        .= qq[<div style="position:fixed;z-index: 5000;height:50px;width:100%;background-color:#fff;"><h1 id="iCPAN">$module_name];
-    if ( $self->version ) {
-        $start_body .= sprintf( ' (%s) ', $self->version );
-    }
-    $start_body .= qq[</h1><hr /></div><div style="height:50px">&nbsp;</div>];
-
-    $xhtml =~ s{<body>}{$start_body};
-    $xhtml =~ s{<\/body>}{<\/div>\n<\/body>};
-
-    $xhtml =~ s{<head>}{<head>\n$head_tags};
-
-    my $module_row
-        = $self->schema->resultset( 'iCPAN::Schema::Result::Zmodule' )
-        ->find_or_create( { zname => $module_name, } );
-
-    # author may have changed since last version
-    $module_row->zauthor( $self->author->z_pk );
-
-    my $version = $self->version;
-    if ( $version && $version ne 'undef' ) {
-        $module_row->zversion( $version );
-    }
-    else {
-        $module_row->zversion( undef );
-    }
-
-    $module_row->zpod( $xhtml );
-    $module_row->update;
-
+sub _module_root {
+    my $self = shift;
+    my @module_parts = split( "::", $self->metadata->name );
+    return pop( @module_parts );
 }
 
 1;

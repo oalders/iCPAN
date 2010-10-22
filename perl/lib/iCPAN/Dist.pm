@@ -4,23 +4,17 @@ use Archive::Tar;
 use Moose;
 use Modern::Perl;
 use Data::Dump qw( dump );
+use Devel::SimpleTrace;
 
+use iCPAN::MetaIndex;
+use iCPAN::Module;
+
+with 'iCPAN::Role::Author';
 with 'iCPAN::Role::Common';
-
-has 'author' => (
-    is         => 'ro',
-    isa        => 'iCPAN::Schema::Result::Zauthor',
-    lazy_build => 1,
-);
-
-has 'content' => (
-    is         => 'rw',
-    isa        => 'Str',
-    lazy_build => 1,
-);
+with 'iCPAN::Role::DB';
 
 has 'name' => (
-    is         => 'ro',
+    is         => 'rw',
     lazy_build => 1,
 );
 
@@ -31,16 +25,17 @@ has 'archive' => (
 
 has 'file' => ( is => 'rw', );
 
-has 'metadata' => ( is => 'rw', isa => 'iCPAN::Meta::Schema::Result::Module' );
+has 'metadata' => (
+    is         => 'rw',
+    isa        => 'iCPAN::Meta::Schema::Result::Module',
+    lazy_build => 1
+);
+
+has 'module' => ( is => 'rw', isa => 'iCPAN::Module' );
 
 has 'pauseid' => (
     is         => 'ro',
     required   => 1,
-    lazy_build => 1,
-);
-
-has 'pm_name' => (
-    is         => 'rw',
     lazy_build => 1,
 );
 
@@ -60,16 +55,7 @@ has 'tar' => (
     lazy_build => 1,
 );
 
-sub _build_author {
 
-    my $self = shift;
-
-    die "no pauseid" if !$self->pauseid;
-    my $author = $self->schema->resultset( 'iCPAN::Schema::Result::Zauthor' )
-        ->find_or_create( { zpauseid => $self->pauseid } );
-    return $author;
-
-}
 
 sub _build_path {
     my $self = shift;
@@ -79,52 +65,53 @@ sub _build_path {
 sub archive_path {
 
     my $self = shift;
-    return $self->minicpan . "/authors/id/" . $self->meta->archive;
+    return $self->minicpan . "/authors/id/" . $self->metadata->archive;
 
 }
 
 sub process {
 
-    my $self        = shift;
-    my $module_name = $self->name;
-    my $debug       = $self->debug;
+    my $self    = shift;
+    my $success = 0;
+    my $module_rs = $self->modules;
+    while ( my $found = $module_rs->next ) {
 
-    if ( !$self->author ) {
-        say
-            "skipping $module_name. cannot find $self->pauseid in author table";
-        return;
+        say "checking " . $found->name if $self->debug;
+
+        $self->module(
+            iCPAN::Module->new( metadata => $found, tar => $self->tar, schema => $self->schema ) );
+
+    FILE:
+        foreach my $file ( @{ $self->files } ) {
+            print "checking: $file " if $self->debug;
+            next FILE if !$self->module->process( $file );
+
+            say "found : $file ";
+            ++$success;
+            last FILE;
+        }
+
     }
 
-    #my $iter = Archive::Tar->iter( $self->archive_path, 1,
-    #    { filter => qr/\.(pm|pod)$/ } );
-
-    my @files = @{ $self->files };
-
-FILE:
-
-    # locate the file we care about in the archive
-    foreach my $file ( @files ) {
-
-        #while ( my $f = $iter->() ) {
-
-        #my $file = $f->name;
-        print "checking: $file " if $debug;
-
-        next FILE if !$self->file_ok( $file );
-
-        say "found : $file ";
-        $self->file( $file );
-
-        $self->parse_pod( $file );
-
-        $self->tar->clear;
-        return;
+    if ( !$success && $self->debug ) {
+        warn $self->name . " no success" . "!" x 20;
     }
 
     $self->tar->clear if $self->tar;
-    warn $self->name . " no success!!!!!!!!!!!!!!!!" if $self->debug;
-
     return;
+
+}
+
+sub modules {
+
+    my $self = shift;
+    my $name = $self->name;
+    $name =~ s{::}{-}g;
+    $self->name( $name );
+
+    return $self->meta_index->schema->resultset(
+        'iCPAN::Meta::Schema::Result::Module' )
+        ->search( { dist => $self->name } );
 
 }
 
@@ -144,14 +131,16 @@ sub _build_files {
 
 }
 
-sub _build_pm_name {
-    my $self = shift;
-    return $self->_module_root . '.pm';
-}
+sub _build_metadata {
 
-sub _build_pod_name {
     my $self = shift;
-    return $self->_module_root . '.pod';
+    my $metadata
+        = $self->meta_index->schema->resultset(
+        'iCPAN::Meta::Schema::Result::Module' )
+        ->search( { dist => $self->name } )->first;
+
+    return $metadata;
+
 }
 
 sub _build_tar {
@@ -160,12 +149,6 @@ sub _build_tar {
     say "archive path: " . $self->archive_path if $self->debug;
     return Archive::Tar->new( $self->archive_path );
 
-}
-
-sub _module_root {
-    my $self = shift;
-    my @module_parts = split( "::", $self->name );
-    return pop( @module_parts );
 }
 
 1;

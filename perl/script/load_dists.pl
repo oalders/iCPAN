@@ -5,7 +5,6 @@ use Data::Dump qw( dump );
 use Every;
 use Find::Lib '../lib';
 use iCPAN;
-use iCPAN::Meta;
 use Time::HiRes qw( gettimeofday tv_interval );
 
 my $t_begin = [gettimeofday];
@@ -13,7 +12,7 @@ my $t_begin = [gettimeofday];
 my $attempts = 0;
 my $every    = 20;
 my $icpan    = iCPAN->new;
-my $meta     = iCPAN::Meta->new;
+my $meta     = $icpan->meta_index;
 $icpan->debug( $ENV{'DEBUG'} );
 
 my @dists = @ARGV;
@@ -48,9 +47,8 @@ say "Entire process took $t_elapsed";
 sub process_dist {
 
     my $dist_name = shift;
-    my $t0          = [gettimeofday];
-    $icpan->dist_name( $dist_name );
-    my $dist = $icpan->dist;
+    my $t0        = [gettimeofday];
+    my $dist      = $icpan->dist( $dist_name );
     $dist->process;
 
     my $iter_time = tv_interval( $t0,      [gettimeofday] );

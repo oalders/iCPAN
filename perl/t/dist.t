@@ -10,9 +10,13 @@ require_ok( 'iCPAN::Dist' );
 my $icpan = iCPAN->new;
 my $meta  = iCPAN->meta_index;
 
-#isa_ok( $dist, 'iCPAN::Dist' );
 
 my $distro = $meta->schema->resultset( 'iCPAN::Meta::Schema::Result::Module' )
     ->find( { name => 'Moose' } );
 
 diag( $distro->name );
+
+my $dist = iCPAN->dist( 'Moose' );
+isa_ok( $dist, 'iCPAN::Dist' );
+
+ok ( $dist->modules->count, "got some modules" );
