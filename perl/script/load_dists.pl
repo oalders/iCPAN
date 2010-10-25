@@ -28,13 +28,13 @@ if ( scalar @dists ) {
 }
 
 else {
-    my $schema = $meta->schema;
-    my $constraints = { columns => ['dist'] };
+    my $schema      = $meta->schema;
+    my $constraints = {};
 
     my $search
         = $meta->schema->resultset( 'iCPAN::Meta::Schema::Result::Module' )
-        ->search( { columns => ['dist'] },
-        { distinct => 1, order_by => 'id asc' } );
+        ->search( {},
+        { columns => ['dist'], distinct => 1, order_by => 'id asc' } );
 
     while ( my $row = $search->next ) {
         my $dist = process_dist( $row->dist );

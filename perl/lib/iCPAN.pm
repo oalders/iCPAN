@@ -34,18 +34,6 @@ has 'pkg_index' => (
     lazy_build => 1,
 );
 
-sub mod2file {
-
-    my $self        = shift;
-    my $module_name = shift;
-
-    my $file = $module_name;
-    $file =~ s{::}{-}gxms;
-    $file .= '.html';
-
-    return $file;
-}
-
 sub open_pkg_index {
 
     my $self = shift;
@@ -80,10 +68,11 @@ LINE:
         my $d = CPAN::DistnameInfo->new( $archive );
 
         $index{$module} = {
-            archive => $d->pathname,
-            version => $d->version,
-            pauseid => $d->cpanid,
-            dist    => $d->dist,
+            archive   => $d->pathname,
+            version   => $d->version,
+            pauseid   => $d->cpanid,
+            dist      => $d->dist,
+            distvname => $d->distvname,
         };
     }
 

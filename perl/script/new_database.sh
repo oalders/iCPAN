@@ -14,9 +14,9 @@ minicpan
 # the dbs might actually be symlinks, so we don't necessarily want to copy
 # a new file over them
 mv iCPAN.sqlite iCPAN.sqlite.bak
-mv iCPAN-meta.sqlite iCPAN.sqlite.bak
-
 cp schema/iCPAN.sqlite .
+
+mv iCPAN-meta.sqlite iCPAN.sqlite.bak
 cp schema/iCPAN-meta.sqlite .
 
 cd perl

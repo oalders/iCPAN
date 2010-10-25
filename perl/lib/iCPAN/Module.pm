@@ -21,10 +21,6 @@ has 'db_path' => (
     default => '../../iCPAN-meta.sqlite',
 );
 
-has 'debug' => ( is => 'rw', );
-
-has 'file' => ( is => 'rw', );
-
 has 'metadata' => (
     is         => 'rw',
     isa        => 'iCPAN::Meta::Schema::Result::Module',
@@ -49,6 +45,8 @@ sub process {
 
     my $self        = shift;
     my $file        = shift;
+    $file = $self->metadata->distvname . '/' . $file;
+
     print "checking: " . $file if $self->debug;
 
     return 0 if !$self->file_ok( $file );
@@ -132,6 +130,8 @@ sub file_ok {
     my $file        = shift;
     my $module_name = $self->metadata->name;
     my $pm_name     = $self->pm_name;
+
+    say "@"x20;
 
     # look for a .pm or .pod file
     # DBM::Deep is an example of a distro with a .pod file (Deep.pod)
