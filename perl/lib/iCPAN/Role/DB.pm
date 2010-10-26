@@ -10,12 +10,6 @@ has 'db_file' => (
     lazy_build => 1,
 );
 
-has 'dbh' => (
-    is         => 'rw',
-    isa        => 'DBI::db',
-    lazy_build => 1,
-);
-
 has 'dsn' => (
     is         => 'rw',
     isa        => 'Str',
@@ -28,7 +22,7 @@ has 'schema' => (
 );
 
 has 'schema_class' => (
-    is         => 'rw',
+    is      => 'rw',
     default => 'iCPAN::Schema',
 );
 
@@ -40,12 +34,6 @@ sub meta_index {
     return $meta;
 }
 
-sub _build_dbh {
-
-    my $self = shift;
-    return DBI->connect( $self->dsn, "", "" );
-}
-
 sub _build_dsn {
 
     my $self = shift;
@@ -55,10 +43,10 @@ sub _build_dsn {
 
 sub _build_db_file {
 
-    my $self    = shift;
-    my @caller  = caller();
+    my $self   = shift;
+    my @caller = caller();
 
-    my $db_file = Find::Lib::base() . '/'. $self->db_path;
+    my $db_file = Find::Lib::base() . '/' . $self->db_path;
 
     if ( !-e $db_file ) {
         die "$db_file not found";
@@ -71,8 +59,9 @@ sub _build_db_file {
 sub _build_schema {
 
     my $self   = shift;
-    my $dsn    = "dbi:SQLite:dbname=" . $self->db_file;
-    my $schema = $self->schema_class->connect( $self->dsn, '', '', '' );
+    my $schema = $self->schema_class->connect( $self->dsn, '', '', '',
+        { sqlite_use_immediate_transaction => 1, AutoCommit => 1 } );
+    #$schema->storage->dbh->sqlite_busy_timeout(0);
     return $schema;
 }
 

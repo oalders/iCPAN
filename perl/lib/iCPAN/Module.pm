@@ -45,9 +45,9 @@ sub process {
 
     my $self        = shift;
     my $file        = shift;
-    $file = $self->metadata->distvname . '/' . $file;
+    #$file = $self->metadata->distvname . '/' . $file;
 
-    print "checking: " . $file if $self->debug;
+    say "checking: " . $file if $self->debug;
 
     return 0 if !$self->file_ok( $file );
 
@@ -131,8 +131,6 @@ sub file_ok {
     my $module_name = $self->metadata->name;
     my $pm_name     = $self->pm_name;
 
-    say "@"x20;
-
     # look for a .pm or .pod file
     # DBM::Deep is an example of a distro with a .pod file (Deep.pod)
     my $root      = $self->_module_root;
@@ -143,7 +141,7 @@ sub file_ok {
         $extension = $1;
     }
     else {
-        say "skipping --  " . $pm_name . " -- $file" if $self->debug;
+        say "skipping -- $file -- $pm_name " if $self->debug;
         return;
     }
 

@@ -21,7 +21,8 @@ cp schema/iCPAN-meta.sqlite .
 
 cd perl
 
-perl script/load_authors.pl
 perl script/load_meta.pl
-perl script/load_modules.pl
+
+perl script/load_authors.pl
+perl script/load_dists.pl
 perl script/load_ratings.pl

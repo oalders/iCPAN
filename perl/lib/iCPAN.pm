@@ -102,6 +102,7 @@ sub dist {
 
     my $self = shift;
     my $name = shift;
+    $name =~ s{::}{-}g;
 
     return iCPAN::Dist->new( name => $name, schema => $self->schema );
 

@@ -5,6 +5,7 @@ use Moose;
 use Modern::Perl;
 use Data::Dump qw( dump );
 use Devel::SimpleTrace;
+use Try::Tiny;
 
 use iCPAN::MetaIndex;
 use iCPAN::Module;
@@ -12,6 +13,10 @@ use iCPAN::Module;
 with 'iCPAN::Role::Author';
 with 'iCPAN::Role::Common';
 with 'iCPAN::Role::DB';
+
+has 'archive_parent' => (
+    is => 'rw',
+);
 
 has 'name' => (
     is         => 'rw',
@@ -68,10 +73,24 @@ sub process {
 
     my $self      = shift;
     my $success   = 0;
+
+    if ( !$self->tar || $self->tar->error ) {
+        say "!"x 20 . "bad tar file";
+        $self->tar->clear;
+        $self->tar( undef );
+        return 0;
+    }
+
     my $module_rs = $self->modules;
 
-MODULE:
+    my @modules = ( );
     while ( my $found = $module_rs->next ) {
+        push @modules, $found;
+    }
+
+MODULE:
+    #while ( my $found = $module_rs->next ) {
+    foreach my $found ( @modules ) {
 
         say "checking dist " . $found->name if $self->debug;
 
@@ -79,7 +98,8 @@ MODULE:
             iCPAN::Module->new(
                 metadata => $found,
                 tar      => $self->tar,
-                schema   => $self->schema
+                schema   => $self->schema,
+                author   => $self->author,
             )
         );
 
@@ -101,14 +121,10 @@ MODULE:
 
     FILE:
         foreach my $file ( sort keys %{ $self->files } ) {
-            print "checking: $file " if $self->debug;
-            if ( $self->debug ) {
-                say "#" x 20;
-                say "found files: " . scalar keys %{ $self->files };
-            }
+            say "checking files: $file " if $self->debug;
             next FILE if !$self->validate_file( $file );
 
-            say "found : $file ";
+            say "found: $file ";
             ++$success;
             next MODULE;
         }
@@ -121,7 +137,8 @@ MODULE:
         warn $self->name . " no success" . "!" x 20;
     }
 
-    $self->tar->clear if $self->tar;
+    $self->tar->clear;
+    $self->tar( undef );
     return;
 
 }
@@ -170,9 +187,9 @@ sub validate_file {
     my $filename = shift;
 
     return 0 if !exists $self->files->{$filename};
-    return 0 if !$self->module->process( $filename );
+    return 0 if !$self->module->process( $self->archive_parent . $filename );
 
-    say "found : $filename ";
+    say "ok: $filename ";
     delete $self->files->{$filename};
 
 }
@@ -184,6 +201,10 @@ were passed over previous to 1.0.2
 
 This should be run on any files left over in the distribution.
 
+Distributions which have .pod files outside of lib folders will be skipped,
+since there's often no clear way of discerning which modules (if any) those
+docs explicitly pertain to.
+
 =cut
 
 sub process_cookbooks {
@@ -191,7 +212,7 @@ sub process_cookbooks {
     my $self = shift;
 
     foreach my $file ( sort keys %{ $self->files } ) {
-        next if $file !~ m{\.pod};
+        next if ( $file !~ m{\Alib(.*)\.pod\z} );
 
         my $module_name = $self->file2mod( $file );
 
@@ -201,20 +222,33 @@ sub process_cookbooks {
             'iCPAN::Meta::Schema::Result::Module' )
             ->find( { name => $module_name } );
 
+
+        # this is a hack. there is a file locking issue with SQLite when I
+        # try to insert.  i don't need a new row, just an object.  in fact,
+        # i probably don't really need an object, but i'll leave the code in
+        # case the locking gets sorted out
         if ( !$found ) {
             $found = $self->metadata->copy( { name => $module_name } );
+
+            #my %cols = $self->metadata->get_columns;
+            #delete $cols{'id'};
+            #$cols{'name'} = $module_name;
+            #
+            #$found = $self->meta_index->schema->resultset(
+            #'iCPAN::Meta::Schema::Result::Module' )->new( \%cols );
         }
 
         $self->module(
             iCPAN::Module->new(
                 metadata => $found,
                 tar      => $self->tar,
-                schema   => $self->schema
+                schema   => $self->schema,
+                author   => $self->author,
             )
         );
 
-        my $success = $self->module->process( $file );
-        say '=' x 20 . " found cookbook: " . $file if $self->debug;
+        my $success = $self->module->process( $self->archive_parent . $file );
+        say '=' x 20 . "cookbook ok: " . $file if $self->debug;
     }
 
     return;
@@ -234,18 +268,29 @@ sub _build_files {
 
     my @files  = $tar->list_files;
     my %files  = ();
-    my $parent = $self->metadata->distvname . '/';
+    $self->archive_parent( $self->metadata->distvname . '/' );
 
     if ( $self->debug ) {
-        say '^' x 20 . "building files";
         my %cols = $self->metadata->get_columns;
-        say dump( \%cols );
+        say dump( \%cols ) if $self->debug;
     }
+
+    if ( @files ) {
+        # some dists expand to: ./AFS-2.6.2/src/Utils/Utils.pm
+        if ( $files[0] =~ m{\A\.\/} ) {
+            my $parent = $self->archive_parent;
+            $self->archive_parent( './' . $parent );
+        }
+    }
+
+    say "parent ".":"x20 . $self->archive_parent if $self->debug;
 
     foreach my $file ( @files ) {
         if ( $file =~ m{\.(pod|pm)\z}i ) {
 
+            my $parent = $self->archive_parent;
             $file =~ s{\A$parent}{};
+
             $files{$file} = 1;
         }
     }
@@ -271,7 +316,25 @@ sub _build_tar {
 
     my $self = shift;
     say "archive path: " . $self->archive_path if $self->debug;
-    return Archive::Tar->new( $self->archive_path );
+    my $tar = undef;
+    no warnings;
+    try { $tar = Archive::Tar->new( $self->archive_path ) };
+
+    use warnings;
+
+    if ( !$tar ) {
+        say "*"x30 . ' no tar object created';
+        return 0;
+    }
+
+    if ( $tar->error ) {
+        say "*"x30 . ' tar error: ' . $tar->error;
+        $tar->clear;
+        $self->tar( undef );
+        return 0;
+    }
+
+    return $tar;
 
 }
 

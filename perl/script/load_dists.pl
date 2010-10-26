@@ -36,9 +36,16 @@ else {
         ->search( {},
         { columns => ['dist'], distinct => 1, order_by => 'id asc' } );
 
+    my @dist_list = ( );
+
     while ( my $row = $search->next ) {
-        my $dist = process_dist( $row->dist );
+        push @dist_list,  $row->dist;
     }
+
+    foreach my $name ( @dist_list ) {
+        my $dist = process_dist( $name );
+    }
+
 }
 
 my $t_elapsed = tv_interval( $t_begin, [gettimeofday] );

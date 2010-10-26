@@ -7,20 +7,22 @@ use Find::Lib '../lib';
 
 use iCPAN;
 my $icpan = iCPAN->new;
-my $meta  = $icpan->meta_index;
+my $rs  = $icpan->meta_index->schema->resultset( 'iCPAN::Meta::Schema::Result::Module' );
 
 my $index = $icpan->pkg_index;
 my $count = 0;
 
+my @rows = ();
 foreach my $key ( sort keys %{$index} ) {
-    my $module
-        = $meta->schema->resultset( 'iCPAN::Meta::Schema::Result::Module' )
-        ->find_or_create( { name => $key } );
 
+    my %create = ( name => $key );
     foreach my $col ( 'archive', 'pauseid', 'version', 'dist', 'distvname' ) {
-        $module->$col( $index->{$key}->{$col} );
+        $create{$col} = $index->{$key}->{$col};
     }
 
-    $module->update;
-    say $key if every(100);
+    push @rows, \%create;
+
 }
+
+$rs->delete;
+$rs->populate( \@rows );
