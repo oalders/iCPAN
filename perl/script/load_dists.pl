@@ -33,8 +33,8 @@ else {
 
     my $search
         = $meta->schema->resultset( 'iCPAN::Meta::Schema::Result::Module' )
-        ->search( {},
-        { columns => ['dist'], distinct => 1, order_by => 'id asc' } );
+        ->search( { name => { like => 'a%' } },
+        { columns => ['dist'], distinct => 1, } );
 
     my @dist_list = ( );
 
@@ -42,7 +42,7 @@ else {
         push @dist_list,  $row->dist;
     }
 
-    foreach my $name ( @dist_list ) {
+    foreach my $name ( sort @dist_list ) {
         my $dist = process_dist( $name );
     }
 
@@ -55,6 +55,9 @@ sub process_dist {
 
     my $dist_name = shift;
     my $t0        = [gettimeofday];
+
+    say '+'x20 . " DIST: $dist_name" if $icpan->debug;
+
     my $dist      = $icpan->dist( $dist_name );
     $dist->process;
     if ( $dist->tar ) {

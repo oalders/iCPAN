@@ -8,15 +8,12 @@ use Devel::SimpleTrace;
 use Try::Tiny;
 
 use iCPAN::MetaIndex;
-use iCPAN::Module;
 
 with 'iCPAN::Role::Author';
 with 'iCPAN::Role::Common';
 with 'iCPAN::Role::DB';
 
-has 'archive_parent' => (
-    is => 'rw',
-);
+has 'archive_parent' => ( is => 'rw', );
 
 has 'name' => (
     is         => 'rw',
@@ -38,11 +35,16 @@ has 'pm_name' => (
     lazy_build => 1,
 );
 
-
 has 'files' => (
     is         => 'ro',
     isa        => "HashRef",
     lazy_build => 1,
+);
+
+has 'inserts' => (
+    is      => 'rw',
+    isa     => 'ArrayRef',
+    default => sub { return [] },
 );
 
 has 'tar' => (
@@ -77,19 +79,20 @@ should be.  After that, look at every available file to find a match.
 
 sub process {
 
-    my $self      = shift;
-    my $success   = 0;
+    my $self    = shift;
+    my $success = 0;
 
     return 0 if !$self->tar;
 
     my $module_rs = $self->modules;
 
-    my @modules = ( );
+    my @modules = ();
     while ( my $found = $module_rs->next ) {
         push @modules, $found;
     }
 
 MODULE:
+
     #while ( my $found = $module_rs->next ) {
     foreach my $found ( @modules ) {
 
@@ -103,7 +106,8 @@ MODULE:
 
         foreach my $extension ( '.pm', '.pod' ) {
             my $guess = $base_guess . $extension;
-            if ( $self->parse_pod( $guess ) ) {
+            say "*" x 10 . " about to guess: $guess" if $self->debug;
+            if ( $self->parse_pod( $found->name, $guess ) ) {
                 say "*" x 10 . " found guess: $guess" if $self->debug;
                 ++$success;
                 next MODULE;
@@ -114,7 +118,7 @@ MODULE:
     FILE:
         foreach my $file ( sort keys %{ $self->files } ) {
             say "checking files: $file " if $self->debug;
-            next FILE if !$self->parse_pod( $file );
+            next FILE if !$self->parse_pod( $found->name, $file );
 
             say "found: $file ";
             ++$success;
@@ -125,9 +129,13 @@ MODULE:
 
     $self->process_cookbooks;
 
-    if ( !$success && $self->debug ) {
+    if ( !$self->inserts && $self->debug ) {
         warn $self->name . " no success" . "!" x 20;
+        return;
     }
+
+    $self->tar->clear if $self->tar;
+    $self->insert_rows;
 
     return;
 
@@ -165,25 +173,6 @@ sub modules {
 
 }
 
-=head2 validate_file
-
-Remove the file from the list of pkg files if it can be processed
-
-=cut
-
-sub validate_file {
-
-    my $self     = shift;
-    my $filename = shift;
-
-    return 0 if !exists $self->files->{$filename};
-    return 0 if !$self->parse_pod( $self->archive_parent . $filename );
-
-    say "ok: $filename ";
-    delete $self->files->{$filename};
-
-}
-
 =head2 process_cookbooks
 
 Because manuals and cookbook pages don't appear in the minicpan index, they
@@ -200,35 +189,14 @@ docs explicitly pertain to.
 sub process_cookbooks {
 
     my $self = shift;
+    say ">"x20 . "looking for cookbooks" if $self->debug;
 
     foreach my $file ( sort keys %{ $self->files } ) {
         next if ( $file !~ m{\Alib(.*)\.pod\z} );
 
         my $module_name = $self->file2mod( $file );
 
-        # no need to create author entry.  that will be handled by Module.pm
-        my $found
-            = $self->meta_index->schema->resultset(
-            'iCPAN::Meta::Schema::Result::Module' )
-            ->find( { name => $module_name } );
-
-
-        # this is a hack. there is a file locking issue with SQLite when I
-        # try to insert.  i don't need a new row, just an object.  in fact,
-        # i probably don't really need an object, but i'll leave the code in
-        # case the locking gets sorted out
-        if ( !$found ) {
-            $found = $self->metadata->copy( { name => $module_name } );
-
-            #my %cols = $self->metadata->get_columns;
-            #delete $cols{'id'};
-            #$cols{'name'} = $module_name;
-            #
-            #$found = $self->meta_index->schema->resultset(
-            #'iCPAN::Meta::Schema::Result::Module' )->new( \%cols );
-        }
-
-        my $success = $self->parse_pod( $file );
+        my $success = $self->parse_pod( $module_name, $file );
         say '=' x 20 . "cookbook ok: " . $file if $self->debug;
     }
 
@@ -239,16 +207,18 @@ sub process_cookbooks {
 sub get_content {
 
     my $self        = shift;
+    my $module_name = shift;
     my $filename    = shift;
-    my $module_name = $self->metadata->name;
     my $pm_name     = $self->pm_name;
 
     return 0 if !exists $self->files->{$filename};
 
     # not every module contains POD
-    my $content = $self->tar->get_content( $self->archive_parent . $filename );
+    my $content
+        = $self->tar->get_content( $self->archive_parent . $filename );
     if ( !$content || $content !~ m{=head} ) {
         say "skipping -- no POD    -- $filename" if $self->debug;
+        delete $self->files->{$filename};
         return;
     }
 
@@ -257,7 +227,7 @@ sub get_content {
         return;
     }
 
-    say "ok: $filename ";
+    say "got pod ok: $filename ";
     delete $self->files->{$filename};
 
     return $content;
@@ -267,13 +237,14 @@ sub get_content {
 sub parse_pod {
 
     my $self        = shift;
+    my $module_name = shift;
     my $file        = shift;
-    my $content     = $self->get_content( $file );
+
+    my $content     = $self->get_content( $module_name, $file );
 
     return if !$content;
 
-    my $module_name = $self->metadata->name;
-    my $parser      = iCPAN::Pod->new();
+    my $parser = iCPAN::Pod->new();
 
     $parser->perldoc_url_prefix( '' );
     $parser->index( 1 );
@@ -312,25 +283,36 @@ sub parse_pod {
 
     $xhtml =~ s{<head>}{<head>\n$head_tags};
 
-    my $module_row
-        = $self->schema->resultset( 'iCPAN::Schema::Result::Zmodule' )
-        ->find_or_create( { zname => $module_name, } );
-
-    # author may have changed since last version
-    $module_row->zauthor( $self->author->z_pk );
+    my $insert = {
+        zname   => $module_name,
+        zauthor => $self->author->z_pk,
+        zpod    => $xhtml
+    };
 
     my $version = $self->metadata->version;
     if ( $version && $version ne 'undef' ) {
-        $module_row->zversion( $version );
-    }
-    else {
-        $module_row->zversion( undef );
+        $insert->{zversion} = $version;
     }
 
-    $module_row->zpod( $xhtml );
-    $module_row->update;
+    push @{ $self->inserts }, $insert;
+    return 1;
 
-    return;
+}
+
+sub insert_rows {
+
+    my $self = shift;
+    my $rs = $self->schema->resultset( 'iCPAN::Schema::Result::Zmodule' );
+
+    my @names = ();
+    my @inserts = @{ $self->inserts };
+    foreach my $insert ( @inserts ) {
+        push @names, $insert->{zname};
+    }
+    $rs->search( { zname => \@names } )->delete;
+    $rs->populate( $self->inserts ) if scalar @{ $self->inserts } > 0;
+
+    return scalar @{ $self->inserts };
 
 }
 
@@ -345,8 +327,8 @@ sub _build_files {
         return [];
     }
 
-    my @files  = $tar->list_files;
-    my %files  = ();
+    my @files = $tar->list_files;
+    my %files = ();
     $self->archive_parent( $self->metadata->distvname . '/' );
 
     if ( $self->debug ) {
@@ -355,6 +337,7 @@ sub _build_files {
     }
 
     if ( @files ) {
+
         # some dists expand to: ./AFS-2.6.2/src/Utils/Utils.pm
         if ( $files[0] =~ m{\A\.\/} ) {
             my $parent = $self->archive_parent;
@@ -362,13 +345,18 @@ sub _build_files {
         }
     }
 
-    say "parent ".":"x20 . $self->archive_parent if $self->debug;
+    say "parent " . ":" x 20 . $self->archive_parent if $self->debug;
 
     foreach my $file ( @files ) {
         if ( $file =~ m{\.(pod|pm)\z}i ) {
 
             my $parent = $self->archive_parent;
             $file =~ s{\A$parent}{};
+
+            next if $file =~ m{\At\/}; # avoid test modules
+
+            # avoid POD we can't properly name
+            next if $file =~ m{\.pod\z} && $file !~ m{\Alib\/};
 
             $files{$file} = 1;
         }
@@ -399,12 +387,12 @@ sub _build_tar {
     try { $tar = Archive::Tar->new( $self->archive_path ) };
 
     if ( !$tar ) {
-        say "*"x30 . ' no tar object created';
+        say "*" x 30 . ' no tar object created';
         return 0;
     }
 
     if ( $tar->error ) {
-        say "*"x30 . ' tar error: ' . $tar->error;
+        say "*" x 30 . ' tar error: ' . $tar->error;
         return 0;
     }
 
