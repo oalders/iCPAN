@@ -28,20 +28,25 @@ my $file = "$minicpan/authors/01mailrc.txt.gz";
 my $z = new IO::Uncompress::AnyInflate $file
     or die "anyinflate failed: $AnyInflateError\n";
 
-my $iCPAN  = iCPAN->new;
-my $schema = $iCPAN->schema;
+my $icpan = iCPAN->new;
+my $rs    = $icpan->schema->resultset( 'iCPAN::Schema::Result::Zauthor' );
+$rs->delete;
+
+my @authors = ();
 
 while ( my $line = $z->getline() ) {
 
     if ( $line =~ m{alias\s([\w\-]*)\s{1,}"(.*)<(.*)>"}gxms ) {
-        my $author = $schema->resultset( 'iCPAN::Schema::Result::Zauthor' )
-            ->find_or_create( { zpauseid => $1 });
-        $author->zname( $2 );
-        $author->zemail( $3 );
-        $author->update;
-        
-        say $author->zpauseid if every(100);
+
+        push @authors,
+            {
+            zpauseid => $1,
+            zname    => $2,
+            zemail   => $3
+            }
+
     }
 
 }
 
+$rs->populate( \@authors );
