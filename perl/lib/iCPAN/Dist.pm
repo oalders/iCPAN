@@ -33,6 +33,12 @@ has 'metadata' => (
 
 has 'module' => ( is => 'rw', isa => 'iCPAN::Module' );
 
+has 'pm_name' => (
+    is         => 'rw',
+    lazy_build => 1,
+);
+
+
 has 'files' => (
     is         => 'ro',
     isa        => "HashRef",
@@ -74,12 +80,7 @@ sub process {
     my $self      = shift;
     my $success   = 0;
 
-    if ( !$self->tar || $self->tar->error ) {
-        say "!"x 20 . "bad tar file";
-        $self->tar->clear;
-        $self->tar( undef );
-        return 0;
-    }
+    return 0 if !$self->tar;
 
     my $module_rs = $self->modules;
 
@@ -94,15 +95,6 @@ MODULE:
 
         say "checking dist " . $found->name if $self->debug;
 
-        $self->module(
-            iCPAN::Module->new(
-                metadata => $found,
-                tar      => $self->tar,
-                schema   => $self->schema,
-                author   => $self->author,
-            )
-        );
-
         # take an educated guess at the correct file before we go through the
         # entire list
 
@@ -111,7 +103,7 @@ MODULE:
 
         foreach my $extension ( '.pm', '.pod' ) {
             my $guess = $base_guess . $extension;
-            if ( $self->validate_file( $guess ) ) {
+            if ( $self->parse_pod( $guess ) ) {
                 say "*" x 10 . " found guess: $guess" if $self->debug;
                 ++$success;
                 next MODULE;
@@ -122,7 +114,7 @@ MODULE:
     FILE:
         foreach my $file ( sort keys %{ $self->files } ) {
             say "checking files: $file " if $self->debug;
-            next FILE if !$self->validate_file( $file );
+            next FILE if !$self->parse_pod( $file );
 
             say "found: $file ";
             ++$success;
@@ -137,8 +129,6 @@ MODULE:
         warn $self->name . " no success" . "!" x 20;
     }
 
-    $self->tar->clear;
-    $self->tar( undef );
     return;
 
 }
@@ -187,7 +177,7 @@ sub validate_file {
     my $filename = shift;
 
     return 0 if !exists $self->files->{$filename};
-    return 0 if !$self->module->process( $self->archive_parent . $filename );
+    return 0 if !$self->parse_pod( $self->archive_parent . $filename );
 
     say "ok: $filename ";
     delete $self->files->{$filename};
@@ -238,18 +228,107 @@ sub process_cookbooks {
             #'iCPAN::Meta::Schema::Result::Module' )->new( \%cols );
         }
 
-        $self->module(
-            iCPAN::Module->new(
-                metadata => $found,
-                tar      => $self->tar,
-                schema   => $self->schema,
-                author   => $self->author,
-            )
-        );
-
-        my $success = $self->module->process( $self->archive_parent . $file );
+        my $success = $self->parse_pod( $file );
         say '=' x 20 . "cookbook ok: " . $file if $self->debug;
     }
+
+    return;
+
+}
+
+sub get_content {
+
+    my $self        = shift;
+    my $filename    = shift;
+    my $module_name = $self->metadata->name;
+    my $pm_name     = $self->pm_name;
+
+    return 0 if !exists $self->files->{$filename};
+
+    # not every module contains POD
+    my $content = $self->tar->get_content( $self->archive_parent . $filename );
+    if ( !$content || $content !~ m{=head} ) {
+        say "skipping -- no POD    -- $filename" if $self->debug;
+        return;
+    }
+
+    if ( $filename !~ m{\.pod\z} && $content !~ m{package\s*$module_name} ) {
+        say "skipping -- not the correct package name" if $self->debug;
+        return;
+    }
+
+    say "ok: $filename ";
+    delete $self->files->{$filename};
+
+    return $content;
+
+}
+
+sub parse_pod {
+
+    my $self        = shift;
+    my $file        = shift;
+    my $content     = $self->get_content( $file );
+
+    return if !$content;
+
+    my $module_name = $self->metadata->name;
+    my $parser      = iCPAN::Pod->new();
+
+    $parser->perldoc_url_prefix( '' );
+    $parser->index( 1 );
+    $parser->html_css( 'style.css' );
+
+    my $xhtml = "";
+    $parser->output_string( \$xhtml );
+    $parser->parse_string_document( $content );
+
+    # modify HTML directly
+
+    my $head_tags = '
+<link rel="stylesheet" type="text/css" media="all" href="shCore.css" />
+<link rel="stylesheet" type="text/css" media="all" href="shThemeDefault.css" />
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="shCore.js"></script>
+<script type="text/javascript" src="shBrushPerl.js"></script>
+<script type="text/javascript" src="iCPAN.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        icpan_highlight();
+    });
+</script>
+';
+
+    my $start_body = qq[<body><div class="pod">];
+    $start_body
+        .= qq[<div style="position:fixed;z-index: 5000;height:50px;width:100%;background-color:#fff;"><h1 id="iCPAN">$module_name];
+    if ( $self->metadata->version ) {
+        $start_body .= sprintf( ' (%s) ', $self->metadata->version );
+    }
+    $start_body .= qq[</h1><hr /></div><div style="height:50px">&nbsp;</div>];
+
+    $xhtml =~ s{<body>}{$start_body};
+    $xhtml =~ s{<\/body>}{<\/div>\n<\/body>};
+
+    $xhtml =~ s{<head>}{<head>\n$head_tags};
+
+    my $module_row
+        = $self->schema->resultset( 'iCPAN::Schema::Result::Zmodule' )
+        ->find_or_create( { zname => $module_name, } );
+
+    # author may have changed since last version
+    $module_row->zauthor( $self->author->z_pk );
+
+    my $version = $self->metadata->version;
+    if ( $version && $version ne 'undef' ) {
+        $module_row->zversion( $version );
+    }
+    else {
+        $module_row->zversion( undef );
+    }
+
+    $module_row->zpod( $xhtml );
+    $module_row->update;
 
     return;
 
@@ -317,10 +396,7 @@ sub _build_tar {
     my $self = shift;
     say "archive path: " . $self->archive_path if $self->debug;
     my $tar = undef;
-    no warnings;
     try { $tar = Archive::Tar->new( $self->archive_path ) };
-
-    use warnings;
 
     if ( !$tar ) {
         say "*"x30 . ' no tar object created';
@@ -329,13 +405,27 @@ sub _build_tar {
 
     if ( $tar->error ) {
         say "*"x30 . ' tar error: ' . $tar->error;
-        $tar->clear;
-        $self->tar( undef );
         return 0;
     }
 
     return $tar;
 
+}
+
+sub _build_pm_name {
+    my $self = shift;
+    return $self->_module_root . '.pm';
+}
+
+sub _build_pod_name {
+    my $self = shift;
+    return $self->_module_root . '.pod';
+}
+
+sub _module_root {
+    my $self = shift;
+    my @module_parts = split( "::", $self->metadata->name );
+    return pop( @module_parts );
 }
 
 1;

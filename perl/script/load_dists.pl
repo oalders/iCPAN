@@ -57,6 +57,9 @@ sub process_dist {
     my $t0        = [gettimeofday];
     my $dist      = $icpan->dist( $dist_name );
     $dist->process;
+    if ( $dist->tar ) {
+        $dist->tar->clear;
+    }
 
     my $iter_time = tv_interval( $t0,      [gettimeofday] );
     my $elapsed   = tv_interval( $t_begin, [gettimeofday] );

@@ -80,24 +80,6 @@ LINE:
 
 }
 
-sub module {
-
-    my $self = shift;
-
-    die "module name missing" if !$self->module_name;
-    my $ref = $self->pkg_index->{ $self->module_name };
-    return if !$ref;
-
-    return iCPAN::Module->new(
-        %{$ref},
-        name   => $self->module_name,
-        debug  => $self->debug,
-        icpan  => $self,
-        schema => $self->schema,
-    );
-
-}
-
 sub dist {
 
     my $self = shift;
