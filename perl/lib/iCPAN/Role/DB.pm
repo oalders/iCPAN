@@ -1,5 +1,6 @@
 package iCPAN::Role::DB;
 
+use Modern::Perl;
 use Moose::Role;
 use DBI;
 use Find::Lib;
@@ -26,11 +27,18 @@ has 'schema_class' => (
     default => 'iCPAN::Schema',
 );
 
-sub meta_index {
+has 'meta_index' => (
+    is         => 'rw',
+    lazy_build => 1,
+);
+
+sub _build_meta_index {
 
     my $self = shift;
     my $meta = iCPAN::MetaIndex->new();
     $meta->schema_class( 'iCPAN::Meta::Schema' );
+    
+    say "meta index " . "*"x80;
     return $meta;
 }
 
@@ -61,6 +69,7 @@ sub _build_schema {
     my $self   = shift;
     my $schema = $self->schema_class->connect( $self->dsn, '', '', '',
         { sqlite_use_immediate_transaction => 1, AutoCommit => 1 } );
+
     #$schema->storage->dbh->sqlite_busy_timeout(0);
     return $schema;
 }

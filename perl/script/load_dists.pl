@@ -6,6 +6,7 @@ use Every;
 use Find::Lib '../lib';
 use iCPAN;
 use Time::HiRes qw( gettimeofday tv_interval );
+use Unix::Lsof;
 
 my $t_begin = [gettimeofday];
 
@@ -18,6 +19,8 @@ $icpan->debug( $ENV{'DEBUG'} );
 my @dists = @ARGV;
 @ARGV = ();
 
+my $total_dists = 1;
+
 # need to reset @ARGV in order to avoid this nasty error in Perl::Tidy
 # "You may not specify any filenames when a source array is given"
 
@@ -28,22 +31,21 @@ if ( scalar @dists ) {
 }
 
 else {
-    my $schema      = $meta->schema;
-    my $constraints = {};
+    my $schema = $meta->schema;
+    my $constraints = { name => { like => 'a%' } };
+    $constraints = { };
 
     my $search
         = $meta->schema->resultset( 'iCPAN::Meta::Schema::Result::Module' )
-        ->search( { name => { like => 'a%' } },
-        { columns => ['dist'], distinct => 1, } );
+        ->search( $constraints, { columns => ['dist'], distinct => 1, } );
 
-    my @dist_list = ( );
+    $total_dists = $search->count;
+
+    my @dist_list = ();
 
     while ( my $row = $search->next ) {
-        push @dist_list,  $row->dist;
-    }
-
-    foreach my $name ( sort @dist_list ) {
-        my $dist = process_dist( $name );
+        process_dist( $row->dist );
+        push @dist_list, $row->dist;
     }
 
 }
@@ -56,24 +58,35 @@ sub process_dist {
     my $dist_name = shift;
     my $t0        = [gettimeofday];
 
-    say '+'x20 . " DIST: $dist_name" if $icpan->debug;
+    say '+' x 20 . " DIST: $dist_name" if $icpan->debug;
 
-    my $dist      = $icpan->dist( $dist_name );
+    my $dist = $icpan->dist( $dist_name );
+    $dist->meta_index( $meta );
     $dist->process;
-    if ( $dist->tar ) {
-        $dist->tar->clear;
-    }
-
+    
     my $iter_time = tv_interval( $t0,      [gettimeofday] );
     my $elapsed   = tv_interval( $t_begin, [gettimeofday] );
 
     ++$attempts;
     if ( every( $every ) ) {
+        
+        say '#'x78;
         say "$dist_name";    # if $icpan->debug;
         say "$iter_time to process dist";
-        say "$elapsed so far... ($attempts dists)";
+        say "$elapsed so far... ($attempts dists out of $total_dists)";
+        
+        my $seconds_per_dist = $elapsed/$attempts;
+        say "average $seconds_per_dist per dist";
+        
+        my $total_duration = $seconds_per_dist * $total_dists;
+        my $total_hours = $total_duration / 3600;
+        say "estimated total time: $total_duration ($total_hours hours)";
+        say '#'x78;
+
     }
-
-    return $dist;
-
+    
+    $dist->tar->clear if $dist->tar;
+    $dist = undef;
+    return;
+    
 }

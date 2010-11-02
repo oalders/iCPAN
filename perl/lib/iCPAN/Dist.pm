@@ -387,7 +387,7 @@ sub _build_tar {
     try { $tar = Archive::Tar->new( $self->archive_path ) };
 
     if ( !$tar ) {
-        say "*" x 30 . ' no tar object created';
+        say "*" x 30 . ' no tar object created for ' . $self->archive_path;
         return 0;
     }
 

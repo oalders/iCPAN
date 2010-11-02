@@ -40,10 +40,8 @@ my $parser = Parse::CSV->new(
 
 while ( my $rating = $parser->fetch ) {
 
-    #say dump $rating;
     my $distro = $rating->{distribution};
     $distro =~ s{-}{::}g;
-    #say $distro;
 
     my $module = $schema->resultset( 'iCPAN::Schema::Result::Zmodule' )
         ->find( { zname => $distro } );
