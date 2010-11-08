@@ -5,6 +5,7 @@ use Moose;
 use Modern::Perl;
 use Data::Dump qw( dump );
 use Devel::SimpleTrace;
+use POSIX qw(ceil);
 use Try::Tiny;
 
 use iCPAN::MetaIndex;
@@ -189,7 +190,7 @@ docs explicitly pertain to.
 sub process_cookbooks {
 
     my $self = shift;
-    say ">"x20 . "looking for cookbooks" if $self->debug;
+    say ">" x 20 . "looking for cookbooks" if $self->debug;
 
     foreach my $file ( sort keys %{ $self->files } ) {
         next if ( $file !~ m{\Alib(.*)\.pod\z} );
@@ -240,7 +241,7 @@ sub parse_pod {
     my $module_name = shift;
     my $file        = shift;
 
-    my $content     = $self->get_content( $module_name, $file );
+    my $content = $self->get_content( $module_name, $file );
 
     return if !$content;
 
@@ -302,14 +303,34 @@ sub parse_pod {
 sub insert_rows {
 
     my $self = shift;
-    my $rs = $self->schema->resultset( 'iCPAN::Schema::Result::Zmodule' );
+    my $rs   = $self->schema->resultset( 'iCPAN::Schema::Result::Zmodule' );
 
-    my @names = ();
+    my @names   = ();
     my @inserts = @{ $self->inserts };
     foreach my $insert ( @inserts ) {
         push @names, $insert->{zname};
     }
-    $rs->search( { zname => \@names } )->delete;
+
+    say scalar @names . " placeholders";
+
+# sqlite has a placeholder limit. deal with it here.  we can delete differently
+# once we have a dist column in the table
+    my $names = scalar @names;
+    my $max   = 999;
+    if ( $names > $max ) {
+        my $slices = ceil( $names / $max );
+        foreach my $iter ( 0 .. $slices ) {
+            my $start  = $iter * $max;
+            my $end    = $start + $max - 1;
+            my @delete = @names[ $start .. $end ];
+            $rs->search( { zname => \@delete } )->delete;
+        }
+    }
+
+    else {
+        $rs->search( { zname => \@names } )->delete;
+    }
+
     $rs->populate( $self->inserts ) if scalar @{ $self->inserts } > 0;
 
     return scalar @{ $self->inserts };
@@ -353,7 +374,7 @@ sub _build_files {
             my $parent = $self->archive_parent;
             $file =~ s{\A$parent}{};
 
-            next if $file =~ m{\At\/}; # avoid test modules
+            next if $file =~ m{\At\/};    # avoid test modules
 
             # avoid POD we can't properly name
             next if $file =~ m{\.pod\z} && $file !~ m{\Alib\/};

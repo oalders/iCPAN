@@ -33,11 +33,12 @@ if ( scalar @dists ) {
 else {
     my $schema = $meta->schema;
     my $constraints = { name => { like => 'a%' } };
-    $constraints = { };
-
+    $constraints = {};
+    
     my $search
         = $meta->schema->resultset( 'iCPAN::Meta::Schema::Result::Module' )
-        ->search( $constraints, { columns => ['dist'], distinct => 1, } );
+        ->search( $constraints,
+        { columns => ['dist'], distinct => 1, order_by => 'dist ASC' } );
 
     $total_dists = $search->count;
 
@@ -63,30 +64,30 @@ sub process_dist {
     my $dist = $icpan->dist( $dist_name );
     $dist->meta_index( $meta );
     $dist->process;
-    
+
     my $iter_time = tv_interval( $t0,      [gettimeofday] );
     my $elapsed   = tv_interval( $t_begin, [gettimeofday] );
 
     ++$attempts;
     if ( every( $every ) ) {
-        
-        say '#'x78;
+
+        say '#' x 78;
         say "$dist_name";    # if $icpan->debug;
         say "$iter_time to process dist";
         say "$elapsed so far... ($attempts dists out of $total_dists)";
-        
-        my $seconds_per_dist = $elapsed/$attempts;
+
+        my $seconds_per_dist = $elapsed / $attempts;
         say "average $seconds_per_dist per dist";
-        
+
         my $total_duration = $seconds_per_dist * $total_dists;
-        my $total_hours = $total_duration / 3600;
+        my $total_hours    = $total_duration / 3600;
         say "estimated total time: $total_duration ($total_hours hours)";
-        say '#'x78;
+        say '#' x 78;
 
     }
-    
+
     $dist->tar->clear if $dist->tar;
     $dist = undef;
     return;
-    
+
 }

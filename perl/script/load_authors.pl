@@ -17,7 +17,7 @@ use iCPAN;
 use IO::File;
 use IO::Uncompress::AnyInflate qw(anyinflate $AnyInflateError);
 
-my $minicpan = "$ENV{'HOME'}/minicpan" || shift @ARGV;
+my $minicpan = shift @ARGV || "$ENV{'HOME'}/minicpan";
 
 if ( !-d $minicpan ) {
     die "Usage: perl script/load_authors.pl /path/to/minicpan";

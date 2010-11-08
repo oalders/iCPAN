@@ -19,7 +19,7 @@ use iCPAN;
 use Modern::Perl;
 
 my $iCPAN = iCPAN->new;
-my $dbh   = $iCPAN->dbh;
+my $dbh   = $iCPAN->schema->storage->dbh;
 
 my $last_id = shift @ARGV;
 if ( !$last_id ) {
