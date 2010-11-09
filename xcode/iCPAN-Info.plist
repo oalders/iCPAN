@@ -20,12 +20,12 @@
 	<string>${PRODUCT_NAME}</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0.2</string>
 	<key>CFBundleSignature</key>
 	<string>Mark Jubenville and Olaf Alders</string>
 	<key>CFBundleVersion</key>
-	<string>1.0.1</string>
-	<key>CFBundleShortVersionString</key>
-	<string>1.0.1</string>
+	<string>1.0.2</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSMainNibFile</key>
