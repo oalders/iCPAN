@@ -6,6 +6,8 @@ Bump up the version number in Settings.bundle/en.lproj/Root.strings  This is the
 
 Right-click on Targets/iCPAN  Choose "get info" and then select the "properties" pane.  The version # will need to be bumped up here as well.
 
+"Bundle versions string, short" in info.plist needs to be bumped up as well.
+
 =head2 DEBUG vs RELEASE vs DISTRIBUTION
 
 A debug build will record lots of handy info in the debugger.
