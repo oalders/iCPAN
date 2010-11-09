@@ -1,3 +1,27 @@
 =head1 BUILDING A RELEASE
 
+=head2 INCREASE VERSION #
+
+Bump up the version number in Settings.bundle/en.lproj/Root.strings  This is the version number which is visible on the preferences pane.
+
+Right-click on Targets/iCPAN  Choose "get info" and then select the "properties" pane.  The version # will need to be bumped up here as well.
+
+"Bundle versions string, short" in info.plist needs to be bumped up as well.
+
+=head2 DEBUG vs RELEASE vs DISTRIBUTION
+
+A debug build will record lots of handy info in the debugger.
+
+A release build will not include the same sort of debugging.  You can port a release build to your device and/or the simulator.
+
+A distribution build is what you will need to upload to the app store.  The target for this build will be your device.  
+
+=head2 RELEASING TO THE APP STORE
+
+Detailed instructions for this process can be found here:
+
 L<https://developer.apple.com/iphone/manage/distribution/index.action>
+
+To view the build log:
+
+L<http://stackoverflow.com/questions/1488931/how-do-you-show-xcodes-build-log-trying-to-verify-if-iphone-distribution-build>
