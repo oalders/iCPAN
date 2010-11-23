@@ -6,7 +6,6 @@ use Every;
 use Find::Lib '../lib';
 use iCPAN;
 use Time::HiRes qw( gettimeofday tv_interval );
-use Unix::Lsof;
 
 my $t_begin = [gettimeofday];
 
@@ -42,11 +41,8 @@ else {
 
     $total_dists = $search->count;
 
-    my @dist_list = ();
-
     while ( my $row = $search->next ) {
         process_dist( $row->dist );
-        push @dist_list, $row->dist;
     }
 
 }
