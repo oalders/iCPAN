@@ -1,0 +1,372 @@
+TiCPAN
+v7
+r0
+t305093270.534422
+cCheck dependencies
+cProcessInfoPlistFile /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator/iCPAN.app/Info.plist iCPAN-Info.plist
+cCompileXIB /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/MainWindow.xib
+cCompileXIB /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/DetailView.xib
+cCpResource build/Debug-iphonesimulator/iCPAN.app/iCPAN.sqlite iCPAN.sqlite
+cProcessPCH /var/folders/1y/1y4ygji-E7G559amnSpKMk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iCPAN_Prefix-fkeazeqbixprocdocvcwojxjhowy/iCPAN_Prefix.pch.gch iCPAN_Prefix.pch normal i386 objective-c com.apple.compilers.gcc.4_2
+cDataModelCompile /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator/iCPAN.app/iCPAN.mom /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/iCPAN.xcdatamodel
+cCompileC build/iCPAN.build/Debug-iphonesimulator/iCPAN.build/Objects-normal/i386/main.o /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/main.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/iCPAN.build/Debug-iphonesimulator/iCPAN.build/Objects-normal/i386/iCPANAppDelegate.o /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/Classes/iCPANAppDelegate.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/iCPAN.build/Debug-iphonesimulator/iCPAN.build/Objects-normal/i386/RootViewController.o /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/Classes/RootViewController.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/iCPAN.build/Debug-iphonesimulator/iCPAN.build/Objects-normal/i386/DetailViewController.o /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/Classes/DetailViewController.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cLd /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator/iCPAN.app/iCPAN normal i386
+cGenerateDSYMFile /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator/iCPAN.app.dSYM /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator/iCPAN.app/iCPAN
+cTouch /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator/iCPAN.app
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk
+c000000004C1391E40000000000000110
+t1276350948
+s272
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk/System/Library/Frameworks/CoreData.framework/CoreData
+c000000004B9F1E230000000000198F10
+t1268719139
+s1675024
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk/System/Library/Frameworks/CoreData.framework/Headers/CoreData.h
+c000000004B9F1E17000000000000046B
+t1268719127
+s1131
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics
+c000000004BA03AB3000000000026F020
+t1268791987
+s2551840
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk/System/Library/Frameworks/Foundation.framework/Foundation
+c000000004B9F1DE40000000000289C20
+t1268719076
+s2661408
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h
+c000000004B9F1DD60000000000001355
+t1268719062
+s4949
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.h
+c000000004BA6CAEC000000000000098F
+t1269222124
+s2447
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk/System/Library/Frameworks/UIKit.framework/UIKit
+c000000004BA6CB31000000000214E400
+t1269222193
+s34923520
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk/usr/include/Availability.h
+c000000004B9F1E7D0000000000001A1A
+t1268719229
+s6682
+
+N/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/../../../iCPAN/xcode/iCPAN.xcdatamodel
+c000000004C3A85F00000000000000088
+t1278903792
+s136
+
+N/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/Classes/DetailViewController.h
+c000000004C7F0B40000000000000035B
+t1283394368
+s859
+i<UIKit/UIKit.h>
+i<CoreData/CoreData.h>
+
+N/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/Classes/DetailViewController.m
+c000000004C7F0B400000000000000ED6
+t1283394368
+s3798
+i"DetailViewController.h"
+i"RootViewController.h"
+
+N/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/Classes/RootViewController.h
+c000000004C7F0B40000000000000030D
+t1283394368
+s781
+i<UIKit/UIKit.h>
+i<CoreData/CoreData.h>
+
+N/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/Classes/RootViewController.m
+c000000004C7F0F6E0000000000002C36
+t1283395438
+s11318
+i"RootViewController.h"
+i"DetailViewController.h"
+
+N/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/Classes/iCPANAppDelegate.h
+c000000004C7F0B4000000000000003BF
+t1283394368
+s959
+i<UIKit/UIKit.h>
+i<CoreData/CoreData.h>
+
+N/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/Classes/iCPANAppDelegate.m
+c000000004C7F216E000000000000165C
+t1283400046
+s5724
+i"iCPANAppDelegate.h"
+i"RootViewController.h"
+i"DetailViewController.h"
+
+N/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/DetailView.xib
+c000000004C7F0B400000000000005E42
+t1283394368
+s24130
+
+N/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/MainWindow.xib
+c000000004C7F0B40000000000000763F
+t1283394368
+s30271
+
+N/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator/iCPAN.app
+t1283400470
+s306
+
+N/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator/iCPAN.app.dSYM
+t1283400470
+s102
+
+N/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator/iCPAN.app/DetailView.nib
+t1283400469
+s1618
+
+N/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator/iCPAN.app/Info.plist
+t1283400467
+s790
+
+N/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator/iCPAN.app/MainWindow.nib
+t1283400468
+s1953
+
+N/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator/iCPAN.app/PkgInfo
+t1283400467
+s8
+
+N/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator/iCPAN.app/iCPAN
+t1283400470
+s37160
+
+N/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator/iCPAN.app/iCPAN.mom
+t1283400470
+s2847
+
+N/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator/iCPAN.app/iCPAN.momd
+t1283394865
+s136
+
+N/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator/iCPAN.app/iCPAN.sqlite
+t1283400469
+s8052736
+
+N/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/iCPAN.build/Debug-iphonesimulator/iCPAN.build/Objects-normal/i386/DetailViewController.o
+t1283400470
+s52760
+
+N/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/iCPAN.build/Debug-iphonesimulator/iCPAN.build/Objects-normal/i386/RootViewController.o
+t1283400470
+s62116
+
+N/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/iCPAN.build/Debug-iphonesimulator/iCPAN.build/Objects-normal/i386/iCPAN.LinkFileList
+c000000004C7F23130000000000000266
+t1283400467
+s614
+
+N/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/iCPAN.build/Debug-iphonesimulator/iCPAN.build/Objects-normal/i386/iCPANAppDelegate.o
+t1283400470
+s57740
+
+N/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/iCPAN.build/Debug-iphonesimulator/iCPAN.build/Objects-normal/i386/main.o
+t1283400470
+s5992
+
+N/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/iCPAN.sqlite
+c000000004C7F225800000000007AE000
+t1283400280
+s8052736
+
+N/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/iCPAN.xcdatamodel
+c000000004C7F0E9F0000000000000088
+t1283395231
+s136
+
+N/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/iCPAN.xcdatamodeld
+c000000004C7F0E150000000000000066
+t1283395093
+s102
+
+N/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/iCPAN_Prefix.pch
+c000000004C7F0B40000000000000013C
+t1283394368
+s316
+i<Availability.h>
+i<Foundation/Foundation.h>
+i<UIKit/UIKit.h>
+
+N/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/main.m
+c000000004C7F0B400000000000000169
+t1283394368
+s361
+i<UIKit/UIKit.h>
+
+N/var/folders/1y/1y4ygji-E7G559amnSpKMk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iCPAN_Prefix-fkeazeqbixprocdocvcwojxjhowy/iCPAN_Prefix.pch.gch
+t1283400470
+s13805456
+
+NiCPAN-Info.plist
+c000000004C7F0B4000000000000004D6
+t1283394368
+s1238
+
+CCheck dependencies
+r0
+lSLF07#2@18"Check dependencies305093267#305093267#0(0"0(0#1#0"4300911832#0"0#
+
+CCompileC build/iCPAN.build/Debug-iphonesimulator/iCPAN.build/Objects-normal/i386/DetailViewController.o /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/Classes/DetailViewController.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s305093270.376498
+e305093270.473421
+r1
+xCompileC
+xbuild/iCPAN.build/Debug-iphonesimulator/iCPAN.build/Objects-normal/i386/DetailViewController.o
+x/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/Classes/DetailViewController.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@102"Compile /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/Classes/DetailViewController.m305093270#305093270#0(0"0(0#0#94"/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/Classes/DetailViewController.m4300911832#2194"    cd /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/iCPAN.build/Debug-iphonesimulator/iCPAN.build/iCPAN-generated-files.hmap -I/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/iCPAN.build/Debug-iphonesimulator/iCPAN.build/iCPAN-own-target-headers.hmap -I/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/iCPAN.build/Debug-iphonesimulator/iCPAN.build/iCPAN-all-target-headers.hmap -iquote /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/iCPAN.build/Debug-iphonesimulator/iCPAN.build/iCPAN-project-headers.hmap -F/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator -I/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator/include -I/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/iCPAN.build/Debug-iphonesimulator/iCPAN.build/DerivedSources/i386 -I/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/iCPAN.build/Debug-iphonesimulator/iCPAN.build/DerivedSources -include /var/folders/1y/1y4ygji-E7G559amnSpKMk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iCPAN_Prefix-fkeazeqbixprocdocvcwojxjhowy/iCPAN_Prefix.pch -c /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/Classes/DetailViewController.m -o /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/iCPAN.build/Debug-iphonesimulator/iCPAN.build/Objects-normal/i386/DetailViewController.o0#
+
+CCompileC build/iCPAN.build/Debug-iphonesimulator/iCPAN.build/Objects-normal/i386/RootViewController.o /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/Classes/RootViewController.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s305093270.291956
+e305093270.441734
+r1
+xCompileC
+xbuild/iCPAN.build/Debug-iphonesimulator/iCPAN.build/Objects-normal/i386/RootViewController.o
+x/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/Classes/RootViewController.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@100"Compile /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/Classes/RootViewController.m305093270#305093270#0(0"0(0#0#92"/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/Classes/RootViewController.m4300911832#2190"    cd /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/iCPAN.build/Debug-iphonesimulator/iCPAN.build/iCPAN-generated-files.hmap -I/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/iCPAN.build/Debug-iphonesimulator/iCPAN.build/iCPAN-own-target-headers.hmap -I/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/iCPAN.build/Debug-iphonesimulator/iCPAN.build/iCPAN-all-target-headers.hmap -iquote /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/iCPAN.build/Debug-iphonesimulator/iCPAN.build/iCPAN-project-headers.hmap -F/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator -I/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator/include -I/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/iCPAN.build/Debug-iphonesimulator/iCPAN.build/DerivedSources/i386 -I/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/iCPAN.build/Debug-iphonesimulator/iCPAN.build/DerivedSources -include /var/folders/1y/1y4ygji-E7G559amnSpKMk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iCPAN_Prefix-fkeazeqbixprocdocvcwojxjhowy/iCPAN_Prefix.pch -c /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/Classes/RootViewController.m -o /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/iCPAN.build/Debug-iphonesimulator/iCPAN.build/Objects-normal/i386/RootViewController.o0#
+
+CCompileC build/iCPAN.build/Debug-iphonesimulator/iCPAN.build/Objects-normal/i386/iCPANAppDelegate.o /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/Classes/iCPANAppDelegate.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s305093270.248702
+e305093270.376397
+r1
+xCompileC
+xbuild/iCPAN.build/Debug-iphonesimulator/iCPAN.build/Objects-normal/i386/iCPANAppDelegate.o
+x/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/Classes/iCPANAppDelegate.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@98"Compile /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/Classes/iCPANAppDelegate.m305093270#305093270#0(0"0(0#0#90"/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/Classes/iCPANAppDelegate.m4300911832#2186"    cd /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/iCPAN.build/Debug-iphonesimulator/iCPAN.build/iCPAN-generated-files.hmap -I/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/iCPAN.build/Debug-iphonesimulator/iCPAN.build/iCPAN-own-target-headers.hmap -I/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/iCPAN.build/Debug-iphonesimulator/iCPAN.build/iCPAN-all-target-headers.hmap -iquote /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/iCPAN.build/Debug-iphonesimulator/iCPAN.build/iCPAN-project-headers.hmap -F/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator -I/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator/include -I/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/iCPAN.build/Debug-iphonesimulator/iCPAN.build/DerivedSources/i386 -I/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/iCPAN.build/Debug-iphonesimulator/iCPAN.build/DerivedSources -include /var/folders/1y/1y4ygji-E7G559amnSpKMk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iCPAN_Prefix-fkeazeqbixprocdocvcwojxjhowy/iCPAN_Prefix.pch -c /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/Classes/iCPANAppDelegate.m -o /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/iCPAN.build/Debug-iphonesimulator/iCPAN.build/Objects-normal/i386/iCPANAppDelegate.o0#
+
+CCompileC build/iCPAN.build/Debug-iphonesimulator/iCPAN.build/Objects-normal/i386/main.o /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/main.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s305093270.193923
+e305093270.248602
+r1
+xCompileC
+xbuild/iCPAN.build/Debug-iphonesimulator/iCPAN.build/Objects-normal/i386/main.o
+x/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/main.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@78"Compile /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/main.m305093270#305093270#0(0"0(0#0#70"/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/main.m4300911832#2154"    cd /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/iCPAN.build/Debug-iphonesimulator/iCPAN.build/iCPAN-generated-files.hmap -I/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/iCPAN.build/Debug-iphonesimulator/iCPAN.build/iCPAN-own-target-headers.hmap -I/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/iCPAN.build/Debug-iphonesimulator/iCPAN.build/iCPAN-all-target-headers.hmap -iquote /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/iCPAN.build/Debug-iphonesimulator/iCPAN.build/iCPAN-project-headers.hmap -F/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator -I/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator/include -I/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/iCPAN.build/Debug-iphonesimulator/iCPAN.build/DerivedSources/i386 -I/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/iCPAN.build/Debug-iphonesimulator/iCPAN.build/DerivedSources -include /var/folders/1y/1y4ygji-E7G559amnSpKMk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iCPAN_Prefix-fkeazeqbixprocdocvcwojxjhowy/iCPAN_Prefix.pch -c /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/main.m -o /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/iCPAN.build/Debug-iphonesimulator/iCPAN.build/Objects-normal/i386/main.o0#
+
+CCompileXIB /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/DetailView.xib
+s305093267.974560
+e305093269.221106
+r1
+xCompileXIB
+x/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/DetailView.xib
+lSLF07#2@25"CompileXIB DetailView.xib305093267#305093269#0(0"0(0#0#78"/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/DetailView.xib4300911832#615"    cd /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 3.2    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator/iCPAN.app/DetailView.nib /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/DetailView.xib0#
+
+CCompileXIB /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/MainWindow.xib
+s305093267.973627
+e305093268.984665
+r1
+xCompileXIB
+x/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/MainWindow.xib
+lSLF07#2@25"CompileXIB MainWindow.xib305093267#305093268#0(0"0(0#0#78"/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/MainWindow.xib4300911832#615"    cd /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 3.2    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator/iCPAN.app/MainWindow.nib /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/MainWindow.xib0#
+
+CCpResource build/Debug-iphonesimulator/iCPAN.app/iCPAN.sqlite iCPAN.sqlite
+s305093268.984762
+e305093269.077069
+r1
+xCpResource
+xbuild/Debug-iphonesimulator/iCPAN.app/iCPAN.sqlite
+xiCPAN.sqlite
+lSLF07#2@17"Copy iCPAN.sqlite305093268#305093269#0(0"0(0#0#76"/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/iCPAN.sqlite4300911832#591"    cd /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -resolve-src-symlinks /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/iCPAN.sqlite /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator/iCPAN.app0#
+
+CDataModelCompile /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator/iCPAN.app/iCPAN.mom /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/../../../iCPAN/xcode/iCPAN.xcdatamodel
+r0
+
+CDataModelCompile /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator/iCPAN.app/iCPAN.mom /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/iCPAN.xcdatamodel
+s305093270.192866
+e305093270.291844
+r1
+xDataModelCompile
+x/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator/iCPAN.app/iCPAN.mom
+x/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/iCPAN.xcdatamodel
+lSLF07#2@89"Compile /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/iCPAN.xcdatamodel305093270#305093270#0(0"0(0#0#81"/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/iCPAN.xcdatamodel4300911832#515"    cd /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/usr/bin/momc -XD_MOMC_TARGET_VERSION=10.5 /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/iCPAN.xcdatamodel /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator/iCPAN.app/iCPAN.mom0#
+
+CDataModelVersionCompile /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator/iCPAN.app/iCPAN.momd /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/iCPAN.xcdatamodeld
+s305087665.689018
+e305087665.746155
+r1
+xDataModelVersionCompile
+x/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator/iCPAN.app/iCPAN.momd
+x/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/iCPAN.xcdatamodeld
+lSLF07#2@91"DataModelVersionCompile build/Debug-iphonesimulator/iCPAN.app/iCPAN.momd iCPAN.xcdatamodeld305087665#305087665#0(0"0(0#0#82"/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/iCPAN.xcdatamodeld4300911832#517"    cd /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/usr/bin/momc -XD_MOMC_TARGET_VERSION=10.5 /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/iCPAN.xcdatamodeld /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator/iCPAN.app/iCPAN.momd0#
+
+CGenerateDSYMFile /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator/iCPAN.app.dSYM /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator/iCPAN.app/iCPAN
+s305093270.496673
+e305093270.530400
+r1
+xGenerateDSYMFile
+x/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator/iCPAN.app.dSYM
+x/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator/iCPAN.app/iCPAN
+lSLF07#2@103"GenerateDSYMFile build/Debug-iphonesimulator/iCPAN.app.dSYM build/Debug-iphonesimulator/iCPAN.app/iCPAN305093270#305093270#0(0"0(0#0#107"/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator/iCPAN.app/iCPAN4300911832#514"    cd /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/usr/bin/dsymutil /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator/iCPAN.app/iCPAN -o /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator/iCPAN.app.dSYM0#
+
+CLd /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator/iCPAN.app/iCPAN normal i386
+s305093270.473525
+e305093270.496574
+r1
+xLd
+x/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator/iCPAN.app/iCPAN
+xnormal
+xi386
+lSLF07#2@112"Link /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator/iCPAN.app/iCPAN305093270#305093270#0(0"0(0#0#0"4300911832#1059"    cd /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN    setenv MACOSX_DEPLOYMENT_TARGET 10.5    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -arch i386 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -L/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator -F/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator -filelist /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/iCPAN.build/Debug-iphonesimulator/iCPAN.build/Objects-normal/i386/iCPAN.LinkFileList -mmacosx-version-min=10.5 -framework Foundation -framework UIKit -framework CoreGraphics -framework CoreData -o /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator/iCPAN.app/iCPAN0#
+
+CProcessInfoPlistFile /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator/iCPAN.app/Info.plist iCPAN-Info.plist
+s305093267.953639
+e305093267.973528
+r1
+xProcessInfoPlistFile
+x/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator/iCPAN.app/Info.plist
+xiCPAN-Info.plist
+lSLF07#2@24"Process iCPAN-Info.plist305093267#305093267#0(0"0(0#0#80"/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/iCPAN-Info.plist4300911832#610"    cd /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    builtin-infoPlistUtility iCPAN-Info.plist -genpkginfo /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator/iCPAN.app/PkgInfo -expandbuildsettings -format binary -platform iphonesimulator -o /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator/iCPAN.app/Info.plist0#
+
+CProcessPCH /var/folders/1y/1y4ygji-E7G559amnSpKMk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iCPAN_Prefix-fkeazeqbixprocdocvcwojxjhowy/iCPAN_Prefix.pch.gch iCPAN_Prefix.pch normal i386 objective-c com.apple.compilers.gcc.4_2
+s305093269.221228
+e305093270.192683
+r1
+xProcessPCH
+x/var/folders/1y/1y4ygji-E7G559amnSpKMk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iCPAN_Prefix-fkeazeqbixprocdocvcwojxjhowy/iCPAN_Prefix.pch.gch
+xiCPAN_Prefix.pch
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@27"Precompile iCPAN_Prefix.pch305093269#305093270#0(0"0(0#0#80"/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/iCPAN_Prefix.pch4300911832#2023"    cd /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c-header -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30200 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.2.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/iCPAN.build/Debug-iphonesimulator/iCPAN.build/iCPAN-generated-files.hmap -I/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/iCPAN.build/Debug-iphonesimulator/iCPAN.build/iCPAN-own-target-headers.hmap -I/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/iCPAN.build/Debug-iphonesimulator/iCPAN.build/iCPAN-all-target-headers.hmap -iquote /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/iCPAN.build/Debug-iphonesimulator/iCPAN.build/iCPAN-project-headers.hmap -F/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator -I/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator/include -I/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/iCPAN.build/Debug-iphonesimulator/iCPAN.build/DerivedSources/i386 -I/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/iCPAN.build/Debug-iphonesimulator/iCPAN.build/DerivedSources -c /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/iCPAN_Prefix.pch -o /var/folders/1y/1y4ygji-E7G559amnSpKMk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/iCPAN_Prefix-fkeazeqbixprocdocvcwojxjhowy/iCPAN_Prefix.pch.gch0#
+
+CTouch /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator/iCPAN.app
+s305093270.530498
+e305093270.534373
+r1
+xTouch
+x/Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator/iCPAN.app
+lSLF07#2@107"Touch /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator/iCPAN.app305093270#305093270#0(0"0(0#0#0"4300911832#388"    cd /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"    /usr/bin/touch -c /Users/olaf/Documents/developer/iphone/iCPAN-sandbox/ipad/iCPAN/build/Debug-iphonesimulator/iCPAN.app0#
+
