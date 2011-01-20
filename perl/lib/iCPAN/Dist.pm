@@ -278,6 +278,7 @@ sub parse_pod {
     if ( $self->metadata->version ) {
         $start_body .= sprintf( ' (%s) ', $self->metadata->version );
     }
+    $start_body .= qq[ | <a href="http://search.metacpan.org/#/showsrc/$module_name">view source</a>];
     $start_body .= qq[</h1><hr /></div><div style="height:50px">&nbsp;</div>];
 
     $xhtml =~ s{<body>}{$start_body};

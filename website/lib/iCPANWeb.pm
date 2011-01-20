@@ -69,7 +69,7 @@ get '/source/:name' => sub {
 sub icpan {
 
     my $icpan = iCPAN->new;
-    $icpan->db_path( '/../iCPAN.sqlite' );
+    $icpan->db_path( '/Users/olaf/Documents/developer/iphone/iCPAN/iCPAN.sqlite' );
     return $icpan;
 
 }

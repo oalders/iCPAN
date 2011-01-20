@@ -55,6 +55,7 @@ sub _build_db_file {
     my @caller = caller();
 
     my $db_file = Find::Lib::base() . '/' . $self->db_path;
+    $db_file = $self->db_path if substr($self->db_path, 0, 1) eq '/';
 
     if ( !-e $db_file ) {
         die "$db_file not found";
