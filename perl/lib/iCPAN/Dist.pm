@@ -254,6 +254,7 @@ sub parse_pod {
     my $xhtml = "";
     $parser->output_string( \$xhtml );
     $parser->parse_string_document( $content );
+    $parser->no_errata_section( 1 );
 
     # modify HTML directly
 
