@@ -1,1 +1,0 @@
-No files in this folder should ever be under version control.

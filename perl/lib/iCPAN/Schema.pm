@@ -1,12 +1,19 @@
 package iCPAN::Schema;
-use base qw/DBIx::Class::Schema::Loader/;
 
-__PACKAGE__->loader_options(
-#    constraint              => '^foo.*',
-    debug                   => 0,
-);
+# Created by DBIx::Class::Schema::Loader
+# DO NOT MODIFY THE FIRST PART OF THIS FILE
 
-__PACKAGE__->naming('current');
-__PACKAGE__->use_namespaces(1);
+use strict;
+use warnings;
 
+use base 'DBIx::Class::Schema';
+
+__PACKAGE__->load_namespaces;
+
+
+# Created by DBIx::Class::Schema::Loader v0.07010 @ 2011-06-02 00:52:58
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:lbR7ukhJEvxfmZoBTiFfCw
+
+
+# You can replace this text with custom code or comments, and it will be preserved on regeneration
 1;
