@@ -64,8 +64,8 @@
                               initWithKey:@"name" ascending:YES selector:@selector(caseInsensitiveCompare:)];
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sort]];
     
-    [fetchRequest setFetchBatchSize:10];
-    [fetchRequest setFetchLimit:100];
+    [fetchRequest setFetchBatchSize:20];
+    [fetchRequest setFetchLimit:500];
     
     fetchedResultsController = 
     [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest 
@@ -195,8 +195,12 @@
     NSLog(@"search string: %@", searchTerm);
     self.searchString = searchTerm;
     
-    [self fetchedResultsController];
-    return YES;
+    //"as you type" searching on very short strings is likely pointless
+    if ([searchString length] > 2) {
+        [self fetchedResultsController];
+        return YES;
+    }
+    return NO;
 }
 
 
