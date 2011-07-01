@@ -21,6 +21,12 @@ Or, you can fork this on GitHub and then clone your own fork of the repo.  This
 would be the recommended way of doing things:
 
     git clone git@github.com:yournamehere/iCPAN.git
+
+You'll also need to get the submodules:
+
+    cd iCPAN
+    git submodule init
+    git submodule update
     
 =head2 GET THE DATABASE
 
@@ -47,24 +53,11 @@ To work with a tagged release, like version 1.0.0:
 At this point, you can click the Xcode "Build and Run" button to deploy the
 app to your iPhone simulator.
 
-=head3 OPTIMIZING BUILD AND RUN FOR SPEED
-
-Because the unzipped database is currently over 450 MB, a simple "build and
-run" can be quite slow. This is partially due to the fact that the database
-needs to be copied over to the iPhone emulator with each "build and run". You
-can speed up this process by using a smaller database. One strategy would be
-to drop all modules from the modules table with an id > 1000. This would leave
-you with a much smaller database and it speeds up the process considerably.
-
-Just keep the missing modules in mind when choosing which modules to search
-for while testing.  Try searching on modules starting with "A" when using this
-method.  If you decide to deploy to a device, you'll likely want to use the
-full database, so keep a copy of it handy as well.
+=head3 TROUBLESHOOTING 
 
 If you run into problems deploying to the simulator after altering the
 database, try resetting it and then building again. "iPhone Simulator" ->
 "Reset Content and Settings"
-
 
 =head1 CONTACT
 
