@@ -14,7 +14,7 @@
 			<key>DefaultValue</key>
 			<false/>
 			<key>Key</key>
-			<string>enabled_preference</string>
+			<string>as_you_type</string>
 			<key>Title</key>
 			<string>&quot;As You Type&quot; Search (experimental)</string>
 			<key>Type</key>

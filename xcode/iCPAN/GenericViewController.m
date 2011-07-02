@@ -191,6 +191,11 @@
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchTerm
 {
+    
+    if(![[NSUserDefaults standardUserDefaults] boolForKey:@"as_you_type"]) {
+        return NO;
+    }
+
     //at this point we could call an async method which would look up results and then reload the table
     NSLog(@"search string: %@", searchTerm);
     self.searchString = searchTerm;
