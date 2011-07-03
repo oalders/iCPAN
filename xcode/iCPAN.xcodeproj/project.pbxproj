@@ -41,6 +41,7 @@
 		ED725D85139DE5C60006EFA3 /* Module.m in Sources */ = {isa = PBXBuildFile; fileRef = ED725D84139DE5C60006EFA3 /* Module.m */; };
 		ED725D88139DE5C60006EFA3 /* Distribution.m in Sources */ = {isa = PBXBuildFile; fileRef = ED725D87139DE5C60006EFA3 /* Distribution.m */; };
 		ED7FC69B13BE78AF002505CC /* iCPAN.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = ED7FC69A13BE78AF002505CC /* iCPAN.sqlite */; };
+		ED7FC69D13BEB949002505CC /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = ED7FC69C13BEB949002505CC /* Settings.bundle */; };
 		EDF7CE24134438880012E9DA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF7CE23134438880012E9DA /* UIKit.framework */; };
 		EDF7CE26134438880012E9DA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF7CE25134438880012E9DA /* Foundation.framework */; };
 		EDF7CE28134438880012E9DA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF7CE27134438880012E9DA /* CoreGraphics.framework */; };
@@ -138,6 +139,7 @@
 		ED725D86139DE5C60006EFA3 /* Distribution.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Distribution.h; path = Model/Distribution.h; sourceTree = "<group>"; };
 		ED725D87139DE5C60006EFA3 /* Distribution.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Distribution.m; path = Model/Distribution.m; sourceTree = "<group>"; };
 		ED7FC69A13BE78AF002505CC /* iCPAN.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = iCPAN.sqlite; path = ../../iCPAN.sqlite; sourceTree = "<group>"; };
+		ED7FC69C13BEB949002505CC /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = iCPAN/Settings.bundle; sourceTree = SOURCE_ROOT; };
 		EDF7CE1F134438880012E9DA /* iCPAN.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iCPAN.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDF7CE23134438880012E9DA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		EDF7CE25134438880012E9DA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -390,6 +392,7 @@
 			isa = PBXGroup;
 			children = (
 				EDF7CE56134438890012E9DA /* iCPANTests-Info.plist */,
+				ED7FC69C13BEB949002505CC /* Settings.bundle */,
 				EDF7CE57134438890012E9DA /* InfoPlist.strings */,
 				EDF7CE5A134438890012E9DA /* iCPANTests-Prefix.pch */,
 			);
@@ -482,6 +485,7 @@
 				ED706AE713A7283700AAE86E /* shBrushPerl.js in Resources */,
 				ED706AE813A7283700AAE86E /* shCore.js in Resources */,
 				ED7FC69B13BE78AF002505CC /* iCPAN.sqlite in Resources */,
+				ED7FC69D13BEB949002505CC /* Settings.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -637,7 +641,7 @@
 					"\"$(SRCROOT)/inc/GRMustache/lib\"",
 					"\"$(SRCROOT)/../inc/GRMustache/lib\"",
 				);
-				"OTHER_LDFLAGS[sdk=iphoneos*][arch=*]" = "-all_load";
+				"OTHER_LDFLAGS[sdk=iphonesimulator4.3][arch=*]" = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos4.3;
 				WRAPPER_EXTENSION = app;

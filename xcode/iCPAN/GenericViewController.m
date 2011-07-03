@@ -189,16 +189,19 @@
     detailViewController.detailItem = module;
 }
 
+
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchTerm
 {
+
+    self.searchString = searchTerm;
     
+    NSLog(@"shouldreloadtable");
     if(![[NSUserDefaults standardUserDefaults] boolForKey:@"as_you_type"]) {
         return NO;
     }
 
     //at this point we could call an async method which would look up results and then reload the table
     NSLog(@"search string: %@", searchTerm);
-    self.searchString = searchTerm;
     
     //"as you type" searching on very short strings is likely pointless
     if ([searchString length] > 2) {
@@ -206,6 +209,12 @@
         return YES;
     }
     return NO;
+}
+
+-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    NSLog(@"search bar search button clicked");    
+    [self fetchedResultsController];
+    [[[self searchDisplayController] searchResultsTableView] reloadData];
 }
 
 
