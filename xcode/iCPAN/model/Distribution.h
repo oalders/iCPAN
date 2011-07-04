@@ -2,7 +2,7 @@
 //  Distribution.h
 //  iCPAN
 //
-//  Created by Olaf Alders on 11-06-07.
+//  Created by Olaf Alders on 11-07-04.
 //  Copyright (c) 2011 wundersolutions.com. All rights reserved.
 //
 
@@ -14,11 +14,12 @@
 @interface Distribution : NSManagedObject {
 @private
 }
-@property (nonatomic, retain) NSDate * release_date;
-@property (nonatomic, retain) NSString * version;
 @property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSDate * release_date;
 @property (nonatomic, retain) NSString * abstract;
-@property (nonatomic, retain) NSSet* modules;
+@property (nonatomic, retain) NSString * version;
+@property (nonatomic, retain) NSString * release_name;
 @property (nonatomic, retain) Author * author;
+@property (nonatomic, retain) NSSet* modules;
 
 @end

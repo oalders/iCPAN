@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ED3F622B13C2216D006255A9 /* Author.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3F622A13C2216D006255A9 /* Author.m */; };
+		ED3F622E13C2216D006255A9 /* Module.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3F622D13C2216D006255A9 /* Module.m */; };
+		ED3F623113C2216D006255A9 /* Distribution.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3F623013C2216D006255A9 /* Distribution.m */; };
+		ED3F623413C2216D006255A9 /* Pod.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3F623313C2216D006255A9 /* Pod.m */; };
+		ED3F623813C25647006255A9 /* iCPAN.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = ED3F623713C25646006255A9 /* iCPAN.sqlite */; };
 		ED4B5C091383761600386B42 /* iCPANAppDelegate_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = ED4B5C021383761600386B42 /* iCPANAppDelegate_iPad.m */; };
 		ED4B5C0A1383761600386B42 /* MainWindow_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED4B5C031383761600386B42 /* MainWindow_iPad.xib */; };
 		ED4B5C0B1383761600386B42 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED4B5C051383761600386B42 /* DetailViewController.m */; };
@@ -37,10 +42,6 @@
 		ED706AEF13A7285B00AAE86E /* shThemeEmacs.css in Resources */ = {isa = PBXBuildFile; fileRef = ED706AEB13A7285B00AAE86E /* shThemeEmacs.css */; };
 		ED706AF013A7285B00AAE86E /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = ED706AEC13A7285B00AAE86E /* style.css */; };
 		ED725D7E139DDF370006EFA3 /* ModuleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED725D7D139DDF370006EFA3 /* ModuleViewController.m */; };
-		ED725D82139DE5C60006EFA3 /* Author.m in Sources */ = {isa = PBXBuildFile; fileRef = ED725D81139DE5C60006EFA3 /* Author.m */; };
-		ED725D85139DE5C60006EFA3 /* Module.m in Sources */ = {isa = PBXBuildFile; fileRef = ED725D84139DE5C60006EFA3 /* Module.m */; };
-		ED725D88139DE5C60006EFA3 /* Distribution.m in Sources */ = {isa = PBXBuildFile; fileRef = ED725D87139DE5C60006EFA3 /* Distribution.m */; };
-		ED7FC69B13BE78AF002505CC /* iCPAN.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = ED7FC69A13BE78AF002505CC /* iCPAN.sqlite */; };
 		ED7FC69D13BEB949002505CC /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = ED7FC69C13BEB949002505CC /* Settings.bundle */; };
 		EDF7CE24134438880012E9DA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF7CE23134438880012E9DA /* UIKit.framework */; };
 		EDF7CE26134438880012E9DA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF7CE25134438880012E9DA /* Foundation.framework */; };
@@ -72,6 +73,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		ED3F622913C2216D006255A9 /* Author.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Author.h; path = model/Author.h; sourceTree = "<group>"; };
+		ED3F622A13C2216D006255A9 /* Author.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Author.m; path = model/Author.m; sourceTree = "<group>"; };
+		ED3F622C13C2216D006255A9 /* Module.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Module.h; path = model/Module.h; sourceTree = "<group>"; };
+		ED3F622D13C2216D006255A9 /* Module.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Module.m; path = model/Module.m; sourceTree = "<group>"; };
+		ED3F622F13C2216D006255A9 /* Distribution.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Distribution.h; path = model/Distribution.h; sourceTree = "<group>"; };
+		ED3F623013C2216D006255A9 /* Distribution.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Distribution.m; path = model/Distribution.m; sourceTree = "<group>"; };
+		ED3F623213C2216D006255A9 /* Pod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Pod.h; path = model/Pod.h; sourceTree = "<group>"; };
+		ED3F623313C2216D006255A9 /* Pod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Pod.m; path = model/Pod.m; sourceTree = "<group>"; };
+		ED3F623713C25646006255A9 /* iCPAN.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = iCPAN.sqlite; path = ../../iCPAN.sqlite; sourceTree = "<group>"; };
 		ED4B5C011383761600386B42 /* iCPANAppDelegate_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCPANAppDelegate_iPad.h; sourceTree = "<group>"; };
 		ED4B5C021383761600386B42 /* iCPANAppDelegate_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCPANAppDelegate_iPad.m; sourceTree = "<group>"; };
 		ED4B5C031383761600386B42 /* MainWindow_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow_iPad.xib; sourceTree = "<group>"; };
@@ -132,13 +142,6 @@
 		ED706AEC13A7285B00AAE86E /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
 		ED725D7C139DDF370006EFA3 /* ModuleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModuleViewController.h; sourceTree = "<group>"; };
 		ED725D7D139DDF370006EFA3 /* ModuleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModuleViewController.m; sourceTree = "<group>"; };
-		ED725D80139DE5C50006EFA3 /* Author.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Author.h; path = Model/Author.h; sourceTree = "<group>"; };
-		ED725D81139DE5C60006EFA3 /* Author.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Author.m; path = Model/Author.m; sourceTree = "<group>"; };
-		ED725D83139DE5C60006EFA3 /* Module.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Module.h; path = Model/Module.h; sourceTree = "<group>"; };
-		ED725D84139DE5C60006EFA3 /* Module.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Module.m; path = Model/Module.m; sourceTree = "<group>"; };
-		ED725D86139DE5C60006EFA3 /* Distribution.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Distribution.h; path = Model/Distribution.h; sourceTree = "<group>"; };
-		ED725D87139DE5C60006EFA3 /* Distribution.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Distribution.m; path = Model/Distribution.m; sourceTree = "<group>"; };
-		ED7FC69A13BE78AF002505CC /* iCPAN.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = iCPAN.sqlite; path = ../../iCPAN.sqlite; sourceTree = "<group>"; };
 		ED7FC69C13BEB949002505CC /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = iCPAN/Settings.bundle; sourceTree = SOURCE_ROOT; };
 		EDF7CE1F134438880012E9DA /* iCPAN.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iCPAN.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDF7CE23134438880012E9DA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -266,12 +269,14 @@
 		ED706ADB13A7277400AAE86E /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				ED725D86139DE5C60006EFA3 /* Distribution.h */,
-				ED725D87139DE5C60006EFA3 /* Distribution.m */,
-				ED725D83139DE5C60006EFA3 /* Module.h */,
-				ED725D84139DE5C60006EFA3 /* Module.m */,
-				ED725D80139DE5C50006EFA3 /* Author.h */,
-				ED725D81139DE5C60006EFA3 /* Author.m */,
+				ED3F623213C2216D006255A9 /* Pod.h */,
+				ED3F623313C2216D006255A9 /* Pod.m */,
+				ED3F622F13C2216D006255A9 /* Distribution.h */,
+				ED3F623013C2216D006255A9 /* Distribution.m */,
+				ED3F622C13C2216D006255A9 /* Module.h */,
+				ED3F622D13C2216D006255A9 /* Module.m */,
+				ED3F622913C2216D006255A9 /* Author.h */,
+				ED3F622A13C2216D006255A9 /* Author.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -326,7 +331,7 @@
 		EDF7CE2B134438880012E9DA /* iCPAN */ = {
 			isa = PBXGroup;
 			children = (
-				ED7FC69A13BE78AF002505CC /* iCPAN.sqlite */,
+				ED3F623713C25646006255A9 /* iCPAN.sqlite */,
 				EDF7CE34134438880012E9DA /* iCPANAppDelegate.h */,
 				EDF7CE35134438880012E9DA /* iCPANAppDelegate.m */,
 				ED706ADB13A7277400AAE86E /* Model */,
@@ -484,8 +489,8 @@
 				ED706AE613A7283700AAE86E /* shBrushJScript.js in Resources */,
 				ED706AE713A7283700AAE86E /* shBrushPerl.js in Resources */,
 				ED706AE813A7283700AAE86E /* shCore.js in Resources */,
-				ED7FC69B13BE78AF002505CC /* iCPAN.sqlite in Resources */,
 				ED7FC69D13BEB949002505CC /* Settings.bundle in Resources */,
+				ED3F623813C25647006255A9 /* iCPAN.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -529,9 +534,6 @@
 				ED4B5C0B1383761600386B42 /* DetailViewController.m in Sources */,
 				ED4B5C1F1383844A00386B42 /* GenericViewController.m in Sources */,
 				ED725D7E139DDF370006EFA3 /* ModuleViewController.m in Sources */,
-				ED725D82139DE5C60006EFA3 /* Author.m in Sources */,
-				ED725D85139DE5C60006EFA3 /* Module.m in Sources */,
-				ED725D88139DE5C60006EFA3 /* Distribution.m in Sources */,
 				ED6ADE5813BD767E006E5348 /* NSObject+SBJson.m in Sources */,
 				ED6ADE5913BD767E006E5348 /* SBJsonParser.m in Sources */,
 				ED6ADE5A13BD767E006E5348 /* SBJsonStreamParser.m in Sources */,
@@ -544,6 +546,10 @@
 				ED6ADE6113BD767E006E5348 /* SBJsonTokeniser.m in Sources */,
 				ED6ADE6213BD767E006E5348 /* SBJsonUTF8Stream.m in Sources */,
 				ED6ADE6313BD767E006E5348 /* SBJsonWriter.m in Sources */,
+				ED3F622B13C2216D006255A9 /* Author.m in Sources */,
+				ED3F622E13C2216D006255A9 /* Module.m in Sources */,
+				ED3F623113C2216D006255A9 /* Distribution.m in Sources */,
+				ED3F623413C2216D006255A9 /* Pod.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

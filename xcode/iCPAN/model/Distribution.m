@@ -2,7 +2,7 @@
 //  Distribution.m
 //  iCPAN
 //
-//  Created by Olaf Alders on 11-06-07.
+//  Created by Olaf Alders on 11-07-04.
 //  Copyright (c) 2011 wundersolutions.com. All rights reserved.
 //
 
@@ -12,12 +12,14 @@
 
 
 @implementation Distribution
-@dynamic release_date;
-@dynamic version;
 @dynamic name;
+@dynamic release_date;
 @dynamic abstract;
-@dynamic modules;
+@dynamic version;
+@dynamic release_name;
 @dynamic author;
+@dynamic modules;
+
 
 - (void)addModulesObject:(Module *)value {    
     NSSet *changedObjects = [[NSSet alloc] initWithObjects:&value count:1];
@@ -46,7 +48,6 @@
     [[self primitiveValueForKey:@"modules"] minusSet:value];
     [self didChangeValueForKey:@"modules" withSetMutation:NSKeyValueMinusSetMutation usingObjects:value];
 }
-
 
 
 @end

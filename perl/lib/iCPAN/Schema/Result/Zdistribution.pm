@@ -54,6 +54,11 @@ __PACKAGE__->table("ZDISTRIBUTION");
   data_type: 'varchar'
   is_nullable: 1
 
+=head2 zrelease_name
+
+  data_type: 'varchar'
+  is_nullable: 1
+
 =head2 zabstract
 
   data_type: 'varchar'
@@ -76,14 +81,16 @@ __PACKAGE__->add_columns(
   { data_type => "varchar", is_nullable => 1 },
   "zversion",
   { data_type => "varchar", is_nullable => 1 },
+  "zrelease_name",
+  { data_type => "varchar", is_nullable => 1 },
   "zabstract",
   { data_type => "varchar", is_nullable => 1 },
 );
 __PACKAGE__->set_primary_key("z_pk");
 
 
-# Created by DBIx::Class::Schema::Loader v0.07010 @ 2011-06-02 00:55:09
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:BTwyAK6PuyxInQ7ru3kIYg
+# Created by DBIx::Class::Schema::Loader v0.07010 @ 2011-07-03 23:55:39
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ULcPdtyoh1hvnZcggcvRjA
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

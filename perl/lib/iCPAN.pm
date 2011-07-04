@@ -227,23 +227,23 @@ sub insert_modules {
                         zrelease_date => $src->{date},
                         zname         => $src->{distribution},
                         zversion      => $src->{version_numified},
-                        zabstract     => $src->{abstract}
+                        zabstract => $src->{abstract} || 'abstract missing',
                     }
                 )->id;
             }
         }
 
         my $insert = {
-            z_ent         => $ent->z_ent,
-            z_opt         => 1,
-            zabstract     => $src->{'abstract.analyzed'},
+            z_ent     => $ent->z_ent,
+            z_opt     => 1,
+            zabstract => $src->{'abstract.analyzed'} || 'abstract missing',
             zdistribution => $dist_id{ $src->{distribution} },
             zname         => $src->{documentation},
             zpath         => $src->{path},
         };
         push @rows, $insert;
 
-        if ( scalar @rows >= 1000 ) {
+        if ( scalar @rows >= 5000 ) {
             $rs->populate( \@rows );
             @rows = ();
             say "rows in db: " . $rs->search( {} )->count;
@@ -291,27 +291,30 @@ sub update_ent {
 
 sub update_module_pod {
 
-    my $self   = shift;
-    my $rs     = $self->schema->resultset( 'Zmodule' );
-    my $mod_rs = $rs->search( { zpod => undef },
-        { join => { Distribution => 'Author' } } );
+    my $self = shift;
+    my $rs   = $self->schema->resultset( 'Zmodule' );
+
     my $converter = MetaCPAN::Pod->new;
 
-    my $dist_rs
-        = $self->schema->resultset( 'Zdistribution' )
-        ->search( { 'Modules.zpod' => undef },
-        { join => [ 'Modules', 'Author' ] } );
+    my $dist_rs = $self->schema->resultset( 'Zdistribution' )->search(
+        { 'Modules.zpod' => undef },
+        {   join     => [ 'Author', 'Modules' ],
+            group_by => [qw/zrelease_name/],
+            order_by => 'zrelease_date DESC',
+        }
+    );
 
-    #say dump $icpan->schema;
+    say $dist_rs->count;
 
     while ( my $dist = $dist_rs->next ) {
 
         my $mod_rs = $dist->Modules( { zpod => undef } );
-        $converter->build_tar( $dist->Author->zpauseid, $dist->zrelease_name );
-        say "starting: " . $dist->zrelease_name;
+        $converter->build_tar( $dist->Author->zpauseid,
+            $dist->zrelease_name );
+        say "starting dist: " . $dist->zrelease_name;
 
         while ( my $mod = $mod_rs->next ) {
-            say "starting: " . $mod->zpath;
+            say "starting module: " . $mod->zpath;
 
             my $pod = undef;
             try {
@@ -319,30 +322,38 @@ sub update_module_pod {
                     $mod->zpath );
             }
             catch {
-                warn "caught error: $_";    # not $@
+                say "local pod error: $_";    # not $@
             };
 
             if ( $pod ) {
                 my $xhtml;
                 try { $xhtml = $converter->parse_pod( $pod ) };
                 if ( $xhtml ) {
-                    $mod->update( { zpod => $xhtml } );
+                    my $pod_row
+                        = $mod->create_related( 'Pod', { zhtml => $xhtml } );
+                    $mod->update( { zpod => $pod_row->id } );
                     next;
-                }       
+                }
             }
 
             my $pod_url = $self->pod_server
                 . join( "/",
-                $dist->Author->zpauseid, $dist->zrelease_name,
-                $mod->zpath );
+                $dist->Author->zpauseid, $dist->zrelease_name, $mod->zpath );
             say $pod_url;
-            
+
             if ( $self->mech->get( $pod_url )->is_success ) {
-                $mod->update({ zpod => $self->mech->content })
+                my $pod_row = $mod->create_related( 'Pod',
+                    { zhtml => $self->mech->content } );
+                $mod->update( { zpod => $pod_row->id } );
+            }
+            else {
+                say "==============> could not find MetaCPAN Pod";
             }
 
         }
     }
+
+    $self->update_ent( $self->get_ent( 'Pod' ) );
 }
 
 #sub module_hits {
@@ -444,7 +455,7 @@ sub module_scroller {
             "path"
         ],
         scroll  => '15m',
-        size    => $self->scroll_size,
+        size    => 5000,
         explain => 0,
     );
 

@@ -2,19 +2,22 @@
 //  Module.m
 //  iCPAN
 //
-//  Created by Olaf Alders on 11-06-07.
+//  Created by Olaf Alders on 11-07-04.
 //  Copyright (c) 2011 wundersolutions.com. All rights reserved.
 //
 
 #import "Module.h"
+#import "Distribution.h"
+#import "Pod.h"
 
 
 @implementation Module
-@dynamic pod;
+@dynamic path;
 @dynamic name;
 @dynamic abstract;
 @dynamic distribution;
-@dynamic path;
+@dynamic pod;
+
 
 
 @end

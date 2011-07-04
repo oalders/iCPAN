@@ -1,11 +1,11 @@
 # folders to ignore
 build
 iCPAN.xcodeproj
-perl/cpanpod
-website/logs/*
+perl/log_file*
 
 # files to ignore
 .DS_Store
 *.sqlite*
 all_ratings.csv
 *.kpf
+*.komodoproject

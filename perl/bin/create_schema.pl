@@ -2,7 +2,7 @@
 
 use Data::Dump qw( dump );
 use DBIx::Class::Schema::Loader qw( make_schema_at );
-use Find::Lib '../lib';
+use Find::Lib '../lib', '../inc/Pod2HTML/lib';
 use Getopt::Long::Descriptive;
 use iCPAN;
 use Modern::Perl;
@@ -28,5 +28,7 @@ my $args = {
 };
 
 say "args: " . dump( $args ) if $opt->debug;
+
+say $icpan->dsn;
 
 make_schema_at( $icpan->schema_class, $args, [ $icpan->dsn ], );
