@@ -22,5 +22,4 @@
 @property (nonatomic, retain) UITableView *tableView;
 @property (nonatomic, retain) NSString *searchString;
 
-//- (void)getPredicate:(NSString *)searchText;
 @end

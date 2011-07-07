@@ -21,21 +21,15 @@
 
 
 @property (nonatomic, retain) IBOutlet UIToolbar *toolbar;
-
+@property (nonatomic, retain) IBOutlet UILabel *detailDescriptionLabel;
+@property (nonatomic, assign) IBOutlet GenericViewController *genericViewController;
+@property (nonatomic, retain) IBOutlet UIWebView *webView;
 @property (nonatomic, retain) Module *detailItem;
 
-@property (nonatomic, retain) IBOutlet UILabel *detailDescriptionLabel;
-
-@property (nonatomic, assign) IBOutlet GenericViewController *genericViewController;
-
-@property (nonatomic, retain) IBOutlet UIWebView *webView;
-
-@property (nonatomic, retain) NSString *moduleFile;
-
+/* UIWebView Navigation */
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *backButton;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *forwardButton;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *refreshButton;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *stopButton;
-
 
 @end

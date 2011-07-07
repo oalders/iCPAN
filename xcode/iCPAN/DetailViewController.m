@@ -24,16 +24,16 @@
 @implementation DetailViewController
 
 @synthesize toolbar=_toolbar;
-
 @synthesize detailItem=_detailItem;
-
 @synthesize detailDescriptionLabel=_detailDescriptionLabel;
-
 @synthesize popoverController=_myPopoverController;
-
 @synthesize genericViewController=_genericViewController;
 
-@synthesize webView, moduleFile, backButton, forwardButton, refreshButton, stopButton;
+@synthesize backButton;
+@synthesize forwardButton;
+@synthesize refreshButton;
+@synthesize stopButton;
+@synthesize webView;
 
 #pragma mark - Managing the detail item
 
@@ -279,6 +279,13 @@
     [_toolbar release];
     [_detailItem release];
     [_detailDescriptionLabel release];
+    
+    [backButton release];
+    [forwardButton release];
+    [refreshButton release];
+    [stopButton release];
+    [webView release];
+    
     [super dealloc];
 }
 

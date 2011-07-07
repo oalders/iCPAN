@@ -16,8 +16,8 @@
 @synthesize context;
 @synthesize detailViewController;
 @synthesize fetchedResultsController;
-@synthesize tableView;
 @synthesize searchString;
+@synthesize tableView;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -27,13 +27,6 @@
         // Custom initialization
     }
     return self;
-}
-
-- (void)dealloc
-{
-    self.fetchedResultsController.delegate = nil;
-    self.fetchedResultsController = nil;
-    [super dealloc];
 }
 
 - (void)didReceiveMemoryWarning
@@ -121,6 +114,7 @@
         // report error
     }
     
+    [predicateArgs release];
     [sort release];
     [fetchRequest release];
     
@@ -195,7 +189,6 @@
 
     self.searchString = searchTerm;
     
-    NSLog(@"shouldreloadtable");
     if(![[NSUserDefaults standardUserDefaults] boolForKey:@"as_you_type"]) {
         return NO;
     }
@@ -270,6 +263,17 @@
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     // The fetch controller has sent all current change notifications, so tell the table view to process all updates.
     [self.tableView endUpdates];
+}
+
+- (void)dealloc
+{
+    self.fetchedResultsController.delegate = nil;
+    self.fetchedResultsController = nil;
+    [context dealloc];
+    [searchString dealloc];
+    [tableView dealloc];
+    
+    [super dealloc];
 }
 
 @end

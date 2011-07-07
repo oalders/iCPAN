@@ -19,8 +19,6 @@
 
 @synthesize persistentStoreCoordinator=__persistentStoreCoordinator;
 
-@synthesize selectedModule;
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
@@ -67,7 +65,6 @@
 
 - (void)dealloc
 {
-    [selectedModule release];
     [_window release];
     [__managedObjectContext release];
     [__managedObjectModel release];
@@ -156,6 +153,7 @@
     NSLog(@"store url %@", storePath);
     
     // uncomment if recreating the database
+    //
     //storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"iCPAN.sqlite"];
     NSLog(@"DB: %@", storeURL);
     
@@ -189,7 +187,6 @@
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }    
-    [storeURL release];
     return __persistentStoreCoordinator;
 }
 
