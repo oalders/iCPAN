@@ -10,8 +10,29 @@
 
 @implementation iCPANAppDelegate_iPhone
 
+@synthesize tabBarController;
+@synthesize window;
+
+- (void)applicationDidFinishLaunching:(UIApplication *)application {
+    
+    // Add the tab bar controller's current view as a subview of the window
+    NSLog(@"did finish launching iPhone app");
+
+}
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    NSLog(@"did finish launching iPhone app");
+    [window addSubview:tabBarController.view];
+    return YES;
+
+}
+
 - (void)dealloc
 {
+    
+    [tabBarController release];
+    [window release];
 	[super dealloc];
 }
 

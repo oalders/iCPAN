@@ -22,7 +22,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-        
+    NSLog(@"did finish launching main app delegate");
     [self.window makeKeyAndVisible];
     return YES;
 }
