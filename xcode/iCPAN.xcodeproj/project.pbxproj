@@ -43,6 +43,13 @@
 		ED706AF013A7285B00AAE86E /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = ED706AEC13A7285B00AAE86E /* style.css */; };
 		ED725D7E139DDF370006EFA3 /* ModuleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED725D7D139DDF370006EFA3 /* ModuleViewController.m */; };
 		ED7FC69D13BEB949002505CC /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = ED7FC69C13BEB949002505CC /* Settings.bundle */; };
+		EDEEEAFD13EE3F3D00DB5195 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = EDEEEAFC13EE3F3D00DB5195 /* Default-Portrait~ipad.png */; };
+		EDEEEB0213EE429600DB5195 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = EDEEEAFF13EE410F00DB5195 /* Default-Landscape~ipad.png */; };
+		EDEEEB0413EE42BE00DB5195 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = EDEEEB0313EE42BE00DB5195 /* Default.png */; };
+		EDEEEB0613EE42C700DB5195 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = EDEEEB0513EE42C700DB5195 /* icon.png */; };
+		EDEEEB0813EE448A00DB5195 /* onion-72x72.png in Resources */ = {isa = PBXBuildFile; fileRef = EDEEEB0713EE448A00DB5195 /* onion-72x72.png */; };
+		EDEEEB0A13EE44F200DB5195 /* onion-114x114.png in Resources */ = {isa = PBXBuildFile; fileRef = EDEEEB0913EE44F200DB5195 /* onion-114x114.png */; };
+		EDEEEB0C13EE44FF00DB5195 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EDEEEB0B13EE44FF00DB5195 /* Default@2x.png */; };
 		EDF7CE24134438880012E9DA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF7CE23134438880012E9DA /* UIKit.framework */; };
 		EDF7CE26134438880012E9DA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF7CE25134438880012E9DA /* Foundation.framework */; };
 		EDF7CE28134438880012E9DA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF7CE27134438880012E9DA /* CoreGraphics.framework */; };
@@ -143,6 +150,13 @@
 		ED725D7C139DDF370006EFA3 /* ModuleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModuleViewController.h; sourceTree = "<group>"; };
 		ED725D7D139DDF370006EFA3 /* ModuleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModuleViewController.m; sourceTree = "<group>"; };
 		ED7FC69C13BEB949002505CC /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = iCPAN/Settings.bundle; sourceTree = SOURCE_ROOT; };
+		EDEEEAFC13EE3F3D00DB5195 /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = "<group>"; };
+		EDEEEAFF13EE410F00DB5195 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
+		EDEEEB0313EE42BE00DB5195 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		EDEEEB0513EE42C700DB5195 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		EDEEEB0713EE448A00DB5195 /* onion-72x72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "onion-72x72.png"; sourceTree = "<group>"; };
+		EDEEEB0913EE44F200DB5195 /* onion-114x114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "onion-114x114.png"; sourceTree = "<group>"; };
+		EDEEEB0B13EE44FF00DB5195 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		EDF7CE1F134438880012E9DA /* iCPAN.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iCPAN.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDF7CE23134438880012E9DA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		EDF7CE25134438880012E9DA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -301,6 +315,13 @@
 		EDF7CE14134438880012E9DA = {
 			isa = PBXGroup;
 			children = (
+				EDEEEB0B13EE44FF00DB5195 /* Default@2x.png */,
+				EDEEEB0913EE44F200DB5195 /* onion-114x114.png */,
+				EDEEEB0713EE448A00DB5195 /* onion-72x72.png */,
+				EDEEEB0513EE42C700DB5195 /* icon.png */,
+				EDEEEB0313EE42BE00DB5195 /* Default.png */,
+				EDEEEAFF13EE410F00DB5195 /* Default-Landscape~ipad.png */,
+				EDEEEAFC13EE3F3D00DB5195 /* Default-Portrait~ipad.png */,
 				EDF7CE2B134438880012E9DA /* iCPAN */,
 				EDF7CE54134438890012E9DA /* iCPANTests */,
 				EDF7CE22134438880012E9DA /* Frameworks */,
@@ -491,6 +512,13 @@
 				ED706AE813A7283700AAE86E /* shCore.js in Resources */,
 				ED7FC69D13BEB949002505CC /* Settings.bundle in Resources */,
 				ED3F623813C25647006255A9 /* iCPAN.sqlite in Resources */,
+				EDEEEAFD13EE3F3D00DB5195 /* Default-Portrait~ipad.png in Resources */,
+				EDEEEB0213EE429600DB5195 /* Default-Landscape~ipad.png in Resources */,
+				EDEEEB0413EE42BE00DB5195 /* Default.png in Resources */,
+				EDEEEB0613EE42C700DB5195 /* icon.png in Resources */,
+				EDEEEB0813EE448A00DB5195 /* onion-72x72.png in Resources */,
+				EDEEEB0A13EE44F200DB5195 /* onion-114x114.png in Resources */,
+				EDEEEB0C13EE44FF00DB5195 /* Default@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
