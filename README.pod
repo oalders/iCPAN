@@ -59,6 +59,11 @@ If you run into problems deploying to the simulator after altering the
 database, try resetting it and then building again. "iPhone Simulator" ->
 "Reset Content and Settings"
 
+If GRMustache throws an "unrecognized selector" error, check the 
+"Other Linker Flags" in your "Build Settings". Select "Any iOS" when 
+deploying to hardware.  Select "Any iOS Simulator" when deploying to
+the simulator. 
+
 =head1 CONTACT
 
 There is currently no mailing list. If you have any questions, feel free to
