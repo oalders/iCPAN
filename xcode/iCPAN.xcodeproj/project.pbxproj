@@ -265,6 +265,7 @@
 		ED706AD813A7272C00AAE86E /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				EDF7CE41134438880012E9DA /* iPad */,
 				ED6ADE6413BD76EC006E5348 /* GRMustache */,
 				ED6ADE3E13BD767E006E5348 /* json-framework */,
 			);
@@ -360,7 +361,6 @@
 				ED706AD813A7272C00AAE86E /* Classes */,
 				EDF7CE37134438880012E9DA /* iCPAN.xcdatamodeld */,
 				EDF7CE3A134438880012E9DA /* iPhone */,
-				EDF7CE41134438880012E9DA /* iPad */,
 				ED706ADC13A727C400AAE86E /* Resources */,
 				EDF7CE2C134438880012E9DA /* Supporting Files */,
 			);
@@ -657,7 +657,7 @@
 					"\"$(SRCROOT)/inc/GRMustache/lib\"",
 					"\"$(SRCROOT)/../inc/GRMustache/lib\"",
 				);
-				"OTHER_LDFLAGS[sdk=iphonesimulator*][arch=*]" = "-all_load";
+				"OTHER_LDFLAGS[sdk=iphoneos*][arch=*]" = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos4.3;
 				VALIDATE_PRODUCT = YES;
@@ -735,7 +735,7 @@
 					"\"$(SRCROOT)/inc/GRMustache/lib\"",
 					"\"$(SRCROOT)/../inc/GRMustache/lib\"",
 				);
-				"OTHER_LDFLAGS[sdk=iphonesimulator4.3][arch=*]" = "-all_load";
+				"OTHER_LDFLAGS[sdk=iphoneos*]" = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos4.3;
 				WRAPPER_EXTENSION = app;
@@ -755,7 +755,7 @@
 					"\"$(SRCROOT)/inc/GRMustache/lib\"",
 					"\"$(SRCROOT)/../inc/GRMustache/lib\"",
 				);
-				"OTHER_LDFLAGS[sdk=iphonesimulator*][arch=*]" = "-all_load";
+				"OTHER_LDFLAGS[sdk=iphoneos*][arch=*]" = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos4.3;
 				VALIDATE_PRODUCT = YES;
