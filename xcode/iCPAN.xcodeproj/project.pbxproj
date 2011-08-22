@@ -735,7 +735,7 @@
 					"\"$(SRCROOT)/inc/GRMustache/lib\"",
 					"\"$(SRCROOT)/../inc/GRMustache/lib\"",
 				);
-				"OTHER_LDFLAGS[sdk=iphoneos*]" = "-all_load";
+				"OTHER_LDFLAGS[sdk=*]" = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos4.3;
 				WRAPPER_EXTENSION = app;
