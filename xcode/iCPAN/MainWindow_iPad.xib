@@ -38,6 +38,7 @@
 				<int key="NSvFlags">292</int>
 				<string key="NSFrameSize">{768, 1024}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">1</int>
@@ -87,7 +88,8 @@
 					<array class="NSMutableArray" key="IBUIViewControllers">
 						<object class="IBUIViewController" id="628621953">
 							<object class="IBUINavigationItem" key="IBUINavigationItem" id="953066134">
-								<string key="IBUITitle">Item</string>
+								<reference key="IBUINavigationBar"/>
+								<string key="IBUITitle">Module Search</string>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 							</object>
 							<reference key="IBUIParentViewController" ref="500269011"/>
@@ -262,7 +264,132 @@
 			<nil key="sourceID"/>
 			<int key="maxID">59</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes"/>
+		<object class="IBClassDescriber" key="IBDocument.Classes">
+			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<object class="IBPartialClassDescription">
+					<string key="className">DetailViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="backButton">UIBarButtonItem</string>
+						<string key="detailDescriptionLabel">UILabel</string>
+						<string key="forwardButton">UIBarButtonItem</string>
+						<string key="genericViewController">GenericViewController</string>
+						<string key="refreshButton">UIBarButtonItem</string>
+						<string key="stopButton">UIBarButtonItem</string>
+						<string key="toolbar">UIToolbar</string>
+						<string key="webView">UIWebView</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="backButton">
+							<string key="name">backButton</string>
+							<string key="candidateClassName">UIBarButtonItem</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="detailDescriptionLabel">
+							<string key="name">detailDescriptionLabel</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="forwardButton">
+							<string key="name">forwardButton</string>
+							<string key="candidateClassName">UIBarButtonItem</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="genericViewController">
+							<string key="name">genericViewController</string>
+							<string key="candidateClassName">GenericViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="refreshButton">
+							<string key="name">refreshButton</string>
+							<string key="candidateClassName">UIBarButtonItem</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="stopButton">
+							<string key="name">stopButton</string>
+							<string key="candidateClassName">UIBarButtonItem</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="toolbar">
+							<string key="name">toolbar</string>
+							<string key="candidateClassName">UIToolbar</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="webView">
+							<string key="name">webView</string>
+							<string key="candidateClassName">UIWebView</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/DetailViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">GenericViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">detailViewController</string>
+						<string key="NS.object.0">DetailViewController</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">detailViewController</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">detailViewController</string>
+							<string key="candidateClassName">DetailViewController</string>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/GenericViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">iCPANAppDelegate</string>
+					<string key="superclassName">NSObject</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">window</string>
+						<string key="NS.object.0">UIWindow</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">window</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">window</string>
+							<string key="candidateClassName">UIWindow</string>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/iCPANAppDelegate.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">iCPANAppDelegate_iPad</string>
+					<string key="superclassName">iCPANAppDelegate</string>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="detailViewController">DetailViewController</string>
+						<string key="genericViewController">GenericViewController</string>
+						<string key="splitViewController">UISplitViewController</string>
+						<string key="window">UIWindow</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="detailViewController">
+							<string key="name">detailViewController</string>
+							<string key="candidateClassName">DetailViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="genericViewController">
+							<string key="name">genericViewController</string>
+							<string key="candidateClassName">GenericViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="splitViewController">
+							<string key="name">splitViewController</string>
+							<string key="candidateClassName">UISplitViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="window">
+							<string key="name">window</string>
+							<string key="candidateClassName">UIWindow</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/iCPANAppDelegate_iPad.h</string>
+					</object>
+				</object>
+			</array>
+		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBIPadFramework</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">
