@@ -110,6 +110,21 @@
     return YES;
 }
 
+
+// Called each time a rotation of the device is accomplished
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+    // CHECK: LANDSCAPE
+    if ( (self.interfaceOrientation == UIInterfaceOrientationLandscapeLeft) || (self.interfaceOrientation == UIInterfaceOrientationLandscapeRight) )
+    {
+        webView.frame = CGRectMake(webView.frame.origin.x, webView.frame.origin.y, 703, webView.frame.size.height);
+    }
+    // CHECK: PORTRAIT
+    else
+    {
+        webView.frame = CGRectMake(webView.frame.origin.x, webView.frame.origin.y, 768, webView.frame.size.height);
+    }
+}
+
 #pragma mark - Loading webView
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -229,6 +244,18 @@
 - (void)webViewDidFinishLoad:(UIWebView *)mwebView {
     backButton.enabled = (webView.canGoBack);
     forwardButton.enabled = (webView.canGoForward);
+    
+    // CHECK: LANDSCAPE
+    if ( (self.interfaceOrientation == UIInterfaceOrientationLandscapeLeft) || (self.interfaceOrientation == UIInterfaceOrientationLandscapeRight) )
+    {
+        self.webView.frame = CGRectMake(self.webView.frame.origin.x, self.webView.frame.origin.y, 703, self.webView.frame.size.height);
+    }
+    // CHECK: PORTRAIT
+    else
+    {
+        self.webView.frame = CGRectMake(self.webView.frame.origin.x, self.webView.frame.origin.y, 768, self.webView.frame.size.height);
+    }
+    
 }
 
 
