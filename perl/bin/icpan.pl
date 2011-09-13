@@ -32,4 +32,9 @@ if ( $opt->{debug} ) {
 }
 
 my $method = $opt->{action};
-$icpan->$method if $method;
+if ( $method ) {
+    $icpan->$method;
+}
+else {
+    say "no method found";
+}

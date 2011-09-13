@@ -41,7 +41,7 @@ sub _build_es {
 
     return ElasticSearch->new(
         servers      => $self->server,
-        transport    => 'httplite',
+        transport    => 'curl',
         max_requests => 0,               # default 10_000
         trace_calls  => 'log_file',
         no_refresh   => 1,
@@ -92,7 +92,8 @@ sub scroll {
 
 sub insert_authors {
 
-    my $self = shift;
+   my $self = shift;
+
     my $rs   = $self->schema->resultset( 'Zauthor' );
     if ( $self->purge ) {
         $rs->delete;
