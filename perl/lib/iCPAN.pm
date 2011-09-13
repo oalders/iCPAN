@@ -20,7 +20,8 @@ use iCPAN::Schema;
 
 has 'es'       => ( is => 'rw', isa => 'ElasticSearch', lazy_build => 1 );
 has 'children' => ( is => 'rw', isa => 'Int',           default    => 2 );
-has 'distribution_scroll_size' => ( is => 'rw', isa => 'Int', default => 100 );
+has 'distribution_scroll_size' =>
+    ( is => 'rw', isa => 'Int', default => 100 );
 has 'index' => ( is => 'rw', default => 'v0' );
 has 'mech' => ( is => 'rw', isa => 'WWW::Mechanize', lazy_build => 1 );
 has 'pod_server' =>
@@ -28,10 +29,10 @@ has 'pod_server' =>
 has 'search_prefix' => ( is => 'rw', isa => 'Str', default => 'DBIx::Class' );
 has 'dist_search_prefix' =>
     ( is => 'rw', isa => 'Str', default => 'DBIx-Class' );
-has 'limit'       => ( is => 'rw', isa => 'Int', default => 100000 );
+has 'limit'              => ( is => 'rw', isa => 'Int', default => 100000 );
 has 'module_scroll_size' => ( is => 'rw', isa => 'Int', default => 100 );
-has 'purge'       => ( is => 'rw', isa => 'Int', default => 0 );
-has 'scroll_size' => ( is => 'rw', isa => 'Int', default => 1000 );
+has 'purge'              => ( is => 'rw', isa => 'Int', default => 0 );
+has 'scroll_size'        => ( is => 'rw', isa => 'Int', default => 1000 );
 has 'server' => ( is => 'rw', default => 'api.beta.metacpan.org:80' );
 
 my @ROGUE_DISTRIBUTIONS
@@ -94,12 +95,12 @@ sub scroll {
 
 sub insert_authors {
 
-   my $self = shift;
+    my $self = shift;
 
-    my $rs   = $self->schema->resultset( 'Zauthor' );
+    my $rs = $self->schema->resultset('Zauthor');
     if ( $self->purge ) {
         $rs->delete;
-        $self->schema->storage->dbh->do( "VACUUM" );
+        $self->schema->storage->dbh->do("VACUUM");
     }
 
     my $scroller = $self->es->scrolled_search(
@@ -114,7 +115,7 @@ sub insert_authors {
     my @authors = ();
 
     say "found " . scalar @{$hits} . " hits";
-    my $ent = $self->get_ent( 'Author' );
+    my $ent = $self->get_ent('Author');
 
     foreach my $src ( @{$hits} ) {
 
@@ -138,7 +139,7 @@ sub insert_authors {
 sub insert_distributions {
 
     my $self = shift;
-    my $rs   = $self->schema->resultset( 'Zdistribution' );
+    my $rs   = $self->schema->resultset('Zdistribution');
     $rs->delete if $self->purge;
 
     my $scroller = $self->es->scrolled_search(
@@ -164,13 +165,13 @@ sub insert_distributions {
 
     say "found " . scalar @{$hits} . " hits";
 
-    my $ent = $self->get_ent( 'Distribution' );
+    my $ent = $self->get_ent('Distribution');
 
     foreach my $src ( @{$hits} ) {
 
         #say dump $src;
 
-        my $author = $self->schema->resultset( 'Zauthor' )
+        my $author = $self->schema->resultset('Zauthor')
             ->find( { zpauseid => $src->{author} } );
         if ( !$author ) {
             say "cannot find $src->{author}. skipping!!!";
@@ -199,19 +200,19 @@ sub insert_distributions {
 sub insert_modules {
 
     my $self    = shift;
-    my $rs      = $self->init_rs( 'Zmodule' );
-    my $dist_rs = $self->schema->resultset( 'Zdistribution' );
+    my $rs      = $self->init_rs('Zmodule');
+    my $dist_rs = $self->schema->resultset('Zdistribution');
 
     my $scroller = $self->module_scroller;
 
-    my $ent = $self->get_ent( 'Module' );
+    my $ent = $self->get_ent('Module');
 
     my %dist_id = ();
     my @hits    = ();
     my @rows    = ();
     while ( my $result = $scroller->next ) {
 
-        my $src = $self->extract_hit( $result );
+        my $src = $self->extract_hit($result);
         next if !$src;
         next if !$src->{documentation};
 
@@ -278,7 +279,7 @@ sub get_ent {
     my $self  = shift;
     my $table = shift;
 
-    return $self->schema->resultset( 'ZPrimarykey' )
+    return $self->schema->resultset('ZPrimarykey')
         ->find( { z_name => $table } );
 
 }
@@ -295,11 +296,11 @@ sub update_ent {
 sub update_module_pod {
 
     my $self = shift;
-    my $rs   = $self->schema->resultset( 'Zmodule' );
+    my $rs   = $self->schema->resultset('Zmodule');
 
     my $converter = MetaCPAN::Pod->new;
 
-    my $dist_rs = $self->schema->resultset( 'Zdistribution' )->search(
+    my $dist_rs = $self->schema->resultset('Zdistribution')->search(
         { 'Modules.zpod' => undef },
         {   join     => [ 'Author', 'Modules' ],
             group_by => [qw/zrelease_name/],
@@ -328,10 +329,10 @@ sub update_module_pod {
                 say "local pod error: $_";    # not $@
             };
 
-            if ( $pod ) {
+            if ($pod) {
                 my $xhtml;
-                try { $xhtml = $converter->parse_pod( $pod ) };
-                if ( $xhtml ) {
+                try { $xhtml = $converter->parse_pod($pod) };
+                if ($xhtml) {
                     my $pod_row
                         = $mod->create_related( 'Pod', { zhtml => $xhtml } );
                     $mod->update( { zpod => $pod_row->id } );
@@ -344,7 +345,7 @@ sub update_module_pod {
                 $dist->Author->zpauseid, $dist->zrelease_name, $mod->zpath );
             say $pod_url;
 
-            if ( $self->mech->get( $pod_url )->is_success ) {
+            if ( $self->mech->get($pod_url)->is_success ) {
                 my $pod_row = $mod->create_related( 'Pod',
                     { zhtml => $self->mech->content } );
                 $mod->update( { zpod => $pod_row->id } );
@@ -356,7 +357,7 @@ sub update_module_pod {
         }
     }
 
-    $self->update_ent( $self->get_ent( 'Pod' ) );
+    $self->update_ent( $self->get_ent('Pod') );
 }
 
 #sub module_hits {
@@ -468,11 +469,11 @@ sub init_rs {
 
     my $self = shift;
     my $name = shift;
-    my $rs   = $self->schema->resultset( $name );
+    my $rs   = $self->schema->resultset($name);
 
     if ( $self->purge ) {
         $rs->delete;
-        $self->schema->storage->dbh->do( "VACUUM" );
+        $self->schema->storage->dbh->do("VACUUM");
     }
 
     return $rs;
