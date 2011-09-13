@@ -20,6 +20,7 @@ use iCPAN::Schema;
 
 has 'es'       => ( is => 'rw', isa => 'ElasticSearch', lazy_build => 1 );
 has 'children' => ( is => 'rw', isa => 'Int',           default    => 2 );
+has 'distribution_scroll_size' => ( is => 'rw', isa => 'Int', default => 100 );
 has 'index' => ( is => 'rw', default => 'v0' );
 has 'mech' => ( is => 'rw', isa => 'WWW::Mechanize', lazy_build => 1 );
 has 'pod_server' =>
@@ -28,6 +29,7 @@ has 'search_prefix' => ( is => 'rw', isa => 'Str', default => 'DBIx::Class' );
 has 'dist_search_prefix' =>
     ( is => 'rw', isa => 'Str', default => 'DBIx-Class' );
 has 'limit'       => ( is => 'rw', isa => 'Int', default => 100000 );
+has 'module_scroll_size' => ( is => 'rw', isa => 'Int', default => 100 );
 has 'purge'       => ( is => 'rw', isa => 'Int', default => 0 );
 has 'scroll_size' => ( is => 'rw', isa => 'Int', default => 1000 );
 has 'server' => ( is => 'rw', default => 'api.beta.metacpan.org:80' );
@@ -153,7 +155,7 @@ sub insert_distributions {
             'name',   'date'
         ],
         scroll  => '30m',
-        size    => 5000,
+        size    => $self->distribution_scroll_size,
         explain => 0,
     );
 
@@ -244,7 +246,7 @@ sub insert_modules {
         };
         push @rows, $insert;
 
-        if ( scalar @rows >= 5000 ) {
+        if ( scalar @rows >= $self->module_scroll_size ) {
             $rs->populate( \@rows );
             @rows = ();
             say "rows in db: " . $rs->search( {} )->count;
@@ -456,7 +458,7 @@ sub module_scroller {
             "path"
         ],
         scroll  => '15m',
-        size    => 5000,
+        size    => $self->module_scroll_size,
         explain => 0,
     );
 
