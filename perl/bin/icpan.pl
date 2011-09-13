@@ -28,8 +28,8 @@ $icpan->children(10);
 my $schema = $icpan->schema;
 
 if ( $opt->{debug} ) {
-    say dump( $schema );    
+    say dump( $schema );
 }
 
 my $method = $opt->{action};
-$icpan->$method if $method;    
+$icpan->$method if $method;
