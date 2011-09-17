@@ -21,7 +21,7 @@ use iCPAN::Schema;
 has 'es'       => ( is => 'rw', isa => 'ElasticSearch', lazy_build => 1 );
 has 'children' => ( is => 'rw', isa => 'Int',           default    => 2 );
 has 'distribution_scroll_size' =>
-    ( is => 'rw', isa => 'Int', default => 100 );
+    ( is => 'rw', isa => 'Int', default => 1000 );
 has 'index' => ( is => 'rw', default => 'v0' );
 has 'mech' => ( is => 'rw', isa => 'WWW::Mechanize', lazy_build => 1 );
 has 'pod_server' =>
@@ -30,7 +30,7 @@ has 'search_prefix' => ( is => 'rw', isa => 'Str', default => 'DBIx::Class' );
 has 'dist_search_prefix' =>
     ( is => 'rw', isa => 'Str', default => 'DBIx-Class' );
 has 'limit'              => ( is => 'rw', isa => 'Int', default => 100000 );
-has 'module_scroll_size' => ( is => 'rw', isa => 'Int', default => 100 );
+has 'module_scroll_size' => ( is => 'rw', isa => 'Int', default => 1000 );
 has 'purge'              => ( is => 'rw', isa => 'Int', default => 0 );
 has 'scroll_size'        => ( is => 'rw', isa => 'Int', default => 1000 );
 has 'server' => ( is => 'rw', default => 'api.beta.metacpan.org:80' );
@@ -160,7 +160,7 @@ sub insert_distributions {
         explain => 0,
     );
 
-    my $hits = $self->scroll( $scroller, $self->limit );
+    my $hits = $self->scroll( $scroller, 30000 );
     my @rows = ();
 
     say "found " . scalar @{$hits} . " hits";
@@ -189,6 +189,13 @@ sub insert_distributions {
             zversion      => $src->{version_numified},
             zname         => $src->{distribution},
             };
+
+        if ( scalar @rows >= $self->distribution_scroll_size ) {
+            $rs->populate( \@rows );
+            @rows = ();
+            say "rows in db: " . $rs->search( {} )->count;
+        }
+
     }
 
     $rs->populate( \@rows ) if @rows;
