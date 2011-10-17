@@ -266,6 +266,7 @@
 			isa = PBXGroup;
 			children = (
 				EDF7CE41134438880012E9DA /* iPad */,
+				EDF7CE3A134438880012E9DA /* iPhone */,
 				ED6ADE6413BD76EC006E5348 /* GRMustache */,
 				ED6ADE3E13BD767E006E5348 /* json-framework */,
 			);
@@ -360,7 +361,6 @@
 				ED706ADA13A7275500AAE86E /* Reference */,
 				ED706AD813A7272C00AAE86E /* Classes */,
 				EDF7CE37134438880012E9DA /* iCPAN.xcdatamodeld */,
-				EDF7CE3A134438880012E9DA /* iPhone */,
 				ED706ADC13A727C400AAE86E /* Resources */,
 				EDF7CE2C134438880012E9DA /* Supporting Files */,
 			);
