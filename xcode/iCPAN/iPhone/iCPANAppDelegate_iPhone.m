@@ -7,6 +7,7 @@
 //
 
 #import "iCPANAppDelegate_iPhone.h"
+#import "ModuleController.h"
 
 @implementation iCPANAppDelegate_iPhone
 
