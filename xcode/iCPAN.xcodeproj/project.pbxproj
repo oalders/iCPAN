@@ -52,6 +52,8 @@
 		EDEEEB0C13EE44FF00DB5195 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EDEEEB0B13EE44FF00DB5195 /* Default@2x.png */; };
 		EDF1F450144BDD2500386258 /* ModuleController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF1F44E144BDD2500386258 /* ModuleController.m */; };
 		EDF1F451144BDD2500386258 /* ModuleController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDF1F44F144BDD2500386258 /* ModuleController.xib */; };
+		EDF1F455144BEB2A00386258 /* BookmarkController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF1F453144BEB2900386258 /* BookmarkController.m */; };
+		EDF1F456144BEB2A00386258 /* BookmarkController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDF1F454144BEB2A00386258 /* BookmarkController.xib */; };
 		EDF7CE24134438880012E9DA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF7CE23134438880012E9DA /* UIKit.framework */; };
 		EDF7CE26134438880012E9DA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF7CE25134438880012E9DA /* Foundation.framework */; };
 		EDF7CE28134438880012E9DA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF7CE27134438880012E9DA /* CoreGraphics.framework */; };
@@ -162,6 +164,9 @@
 		EDF1F44D144BDD2500386258 /* ModuleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModuleController.h; sourceTree = "<group>"; };
 		EDF1F44E144BDD2500386258 /* ModuleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModuleController.m; sourceTree = "<group>"; };
 		EDF1F44F144BDD2500386258 /* ModuleController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ModuleController.xib; sourceTree = "<group>"; };
+		EDF1F452144BEB2900386258 /* BookmarkController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookmarkController.h; sourceTree = "<group>"; };
+		EDF1F453144BEB2900386258 /* BookmarkController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookmarkController.m; sourceTree = "<group>"; };
+		EDF1F454144BEB2A00386258 /* BookmarkController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookmarkController.xib; sourceTree = "<group>"; };
 		EDF7CE1F134438880012E9DA /* iCPAN.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iCPAN.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDF7CE23134438880012E9DA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		EDF7CE25134438880012E9DA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -392,6 +397,9 @@
 				EDF1F44D144BDD2500386258 /* ModuleController.h */,
 				EDF1F44E144BDD2500386258 /* ModuleController.m */,
 				EDF1F44F144BDD2500386258 /* ModuleController.xib */,
+				EDF1F452144BEB2900386258 /* BookmarkController.h */,
+				EDF1F453144BEB2900386258 /* BookmarkController.m */,
+				EDF1F454144BEB2A00386258 /* BookmarkController.xib */,
 			);
 			name = iPhone;
 			sourceTree = "<group>";
@@ -528,6 +536,7 @@
 				EDEEEB0C13EE44FF00DB5195 /* Default@2x.png in Resources */,
 				ED12AA1E142466A0007F8079 /* iCPAN.sqlite in Resources */,
 				EDF1F451144BDD2500386258 /* ModuleController.xib in Resources */,
+				EDF1F456144BEB2A00386258 /* BookmarkController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -588,6 +597,7 @@
 				ED3F623113C2216D006255A9 /* Distribution.m in Sources */,
 				ED3F623413C2216D006255A9 /* Pod.m in Sources */,
 				EDF1F450144BDD2500386258 /* ModuleController.m in Sources */,
+				EDF1F455144BEB2A00386258 /* BookmarkController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
