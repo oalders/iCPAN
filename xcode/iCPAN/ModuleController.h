@@ -14,5 +14,6 @@
 }
 
 @property (nonatomic, retain) IBOutlet UITableView *tv;
+@property (nonatomic, retain) NSArray *modules;
 
 @end
