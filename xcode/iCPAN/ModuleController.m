@@ -103,10 +103,11 @@
 
     // Configure the cell...
     NSLog(@"cell row: %i", indexPath.row );
+    NSLog(@"results: %i", [modules count]);
     Module *module = [modules objectAtIndex:indexPath.row];
-    cell.textLabel.text = module.name;
     NSLog(@"created cell %@", modules );
     NSLog(@"created cell %@", module.name );
+    cell.textLabel.text = module.name;
 
     return cell;
 }
@@ -163,7 +164,6 @@
     if (searchString == nil ) {
         return;
     }
-    //csearchString = @"CGI";
     
     //NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K ==[cd] %@", @"name", searchString];
     NSPredicate *beginsWith = [NSPredicate predicateWithFormat:@"%K BEGINSWITH[cd] %@", @"name", searchString];
@@ -173,14 +173,13 @@
     [request setFetchBatchSize:5];
     [request setFetchLimit:10];
     
-    
     NSEntityDescription *entity = [NSEntityDescription 
                                    entityForName:@"Module" inManagedObjectContext:context];
     [request setEntity:entity];
     
     NSError *error;
-    modules = [context executeFetchRequest:request error:&error];
-    
+    NSArray *searchResults = [context executeFetchRequest:request error:&error];
+    self.modules = searchResults;
     [request release];
 }
 
