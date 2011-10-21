@@ -166,6 +166,7 @@
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
         cell.accessoryType = UITableViewCellAccessoryNone;
+        cell.textLabel.font = [UIFont systemFontOfSize:16];
     }
         
     // Configure the cell.
@@ -173,7 +174,6 @@
     NSLog(@"fetched result: %@", [module name]);
 
     cell.textLabel.text = [module name];
-    cell.textLabel.font = [UIFont systemFontOfSize:16];
     return cell;
 }
 
