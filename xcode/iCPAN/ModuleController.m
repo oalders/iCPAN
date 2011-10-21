@@ -12,11 +12,14 @@
 
 @implementation ModuleController
 
-@synthesize tv, modules;
+@synthesize  modules, searchBar, searchString, tableView;
 
 - (void)dealloc
 {
-    [tv release];
+    [modules release];
+    [searchBar release];
+    [searchString release];
+    [tableView release];
     [super dealloc];
 }
 
@@ -37,8 +40,6 @@
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)viewDidUnload
@@ -82,29 +83,16 @@
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger)tableView:(UITableView *)atableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
+    // Return the number of rows in the section.    
+    [self searchModules];
 
-    iCPANAppDelegate *del = [[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *context = del.managedObjectContext;
-
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K ==[cd] %@", @"name", @"Plack"];
-
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    [request setPredicate:predicate];
-
-    NSEntityDescription *entity = [NSEntityDescription 
-                                   entityForName:@"Module" inManagedObjectContext:context];
-    [request setEntity:entity];
-    
-    NSError *error;
-    modules = [context executeFetchRequest:request error:&error];
-
+    NSLog(@"numberOfRowsInSection: %u", [modules count] );
     return [modules count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)atableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
 
@@ -114,49 +102,15 @@
     }
 
     // Configure the cell...
-    cell.textLabel.text = [[modules objectAtIndex:indexPath.row] name];
+    NSLog(@"cell row: %i", indexPath.row );
+    Module *module = [modules objectAtIndex:indexPath.row];
+    cell.textLabel.text = module.name;
+    NSLog(@"created cell %@", modules );
+    NSLog(@"created cell %@", module.name );
 
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 
@@ -170,6 +124,64 @@
      [self.navigationController pushViewController:detailViewController animated:YES];
      [detailViewController release];
      */
+}
+
+-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    NSLog(@"==========================search bar search button clicked");
+    [self searchModules];
+    [tableView reloadData];
+}
+
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchTerm
+{
+    
+    self.searchString = searchTerm;
+    return YES;
+    
+    if(![[NSUserDefaults standardUserDefaults] boolForKey:@"as_you_type"]) {
+        return NO;
+    }
+    
+    return NO;
+    
+    //at this point we could call an async method which would look up results and then reload the table
+    NSLog(@"search string: %@", searchTerm);
+    
+    //"as you type" searching on very short strings is likely pointless
+    if ([searchString length] > 2) {
+        [tableView reloadData];
+        return YES;
+    }
+    return NO;
+}
+
+-(void) searchModules {
+    NSLog(@"======================================= about to search modules");
+    iCPANAppDelegate *del = [[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = del.managedObjectContext;
+    
+    if (searchString == nil ) {
+        return;
+    }
+    //csearchString = @"CGI";
+    
+    //NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K ==[cd] %@", @"name", searchString];
+    NSPredicate *beginsWith = [NSPredicate predicateWithFormat:@"%K BEGINSWITH[cd] %@", @"name", searchString];
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setPredicate:beginsWith];
+    [request setFetchBatchSize:5];
+    [request setFetchLimit:10];
+    
+    
+    NSEntityDescription *entity = [NSEntityDescription 
+                                   entityForName:@"Module" inManagedObjectContext:context];
+    [request setEntity:entity];
+    
+    NSError *error;
+    modules = [context executeFetchRequest:request error:&error];
+    
+    [request release];
 }
 
 @end

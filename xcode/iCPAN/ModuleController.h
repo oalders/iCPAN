@@ -11,9 +11,15 @@
 
 @interface ModuleController : UIViewController <UITableViewDataSource, UITableViewDelegate> {
     UITableView *tv;
+    UISearchBar *searchBar;
+    NSString *searchString;
 }
 
-@property (nonatomic, retain) IBOutlet UITableView *tv;
+@property (nonatomic, retain) IBOutlet UITableView *tableView;
 @property (nonatomic, retain) NSArray *modules;
+@property (nonatomic, retain) IBOutlet UISearchBar *searchBar;
+@property (nonatomic, retain) NSString *searchString;
+
+-(void) searchModules;
 
 @end
