@@ -486,6 +486,7 @@
 		EDF7CE16134438880012E9DA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0420;
 				ORGANIZATIONNAME = wundersolutions.com;
 			};
 			buildConfigurationList = EDF7CE19134438880012E9DA /* Build configuration list for PBXProject "iCPAN" */;
@@ -671,6 +672,7 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iCPAN/iCPAN-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "iCPAN/iCPAN-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -679,7 +681,7 @@
 				);
 				"OTHER_LDFLAGS[sdk=iphoneos*][arch=*]" = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos4.3;
+				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
@@ -696,6 +698,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iCPANTests/iCPANTests-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "iCPANTests/iCPANTests-Info.plist";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -749,6 +752,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iCPAN/iCPAN-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "iCPAN/iCPAN-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -757,7 +761,7 @@
 				);
 				"OTHER_LDFLAGS[sdk=*]" = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos4.3;
+				SDKROOT = iphoneos;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -769,6 +773,7 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iCPAN/iCPAN-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "iCPAN/iCPAN-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -777,7 +782,7 @@
 				);
 				"OTHER_LDFLAGS[sdk=iphoneos*][arch=*]" = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos4.3;
+				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
@@ -794,6 +799,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iCPANTests/iCPANTests-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "iCPANTests/iCPANTests-Info.plist";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -816,6 +822,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iCPANTests/iCPANTests-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "iCPANTests/iCPANTests-Info.plist";
 				OTHER_LDFLAGS = (
 					"-framework",
