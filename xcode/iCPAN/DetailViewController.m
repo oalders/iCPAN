@@ -206,7 +206,7 @@
                 
                 NSString *tmplFile = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"template.html"];
                 NSString *text = [GRMustacheTemplate renderObject:module fromContentsOfFile: tmplFile error:nil];
-                NSLog(@"testing pod: %@", [[module distribution] version]);
+                //NSLog(@"testing pod: %@", [[module distribution] version]);
                 [text writeToFile:podPath atomically:YES encoding:NSUTF8StringEncoding error:nil];
                 NSLog(@"template file %@", tmplFile);
 			}
