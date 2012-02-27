@@ -8,6 +8,7 @@
 
 #import "ModuleController.h"
 #import "iCPANAppDelegate_iPhone.h"
+#import "ModuleViewController.h"
 
 
 @implementation ModuleController
@@ -36,7 +37,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
 
@@ -119,13 +119,15 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
+    
+    ModuleViewController *webView = [[ModuleViewController alloc] initWithNibName:@"ModuleViewController" bundle:nil];
      // ...
      // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
+
+    [self.navigationController pushViewController:webView animated:YES];
+    [webView release];
+    
+     
 }
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {

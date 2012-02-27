@@ -10,14 +10,11 @@
 #import "iCPANAppDelegate.h"
 
 @interface iCPANAppDelegate_iPhone : iCPANAppDelegate {
- 
     UIWindow *window;
     UITabBarController *tabBarController;
-    //SearchModuleViewController *searchModuleController;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
-//@property (nonatomic, retain) IBOutlet SearchModuleViewController *searchModuleController;
 @property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;
 
 @end

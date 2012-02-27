@@ -41,8 +41,9 @@
 		ED706AEE13A7285B00AAE86E /* shThemeDefault.css in Resources */ = {isa = PBXBuildFile; fileRef = ED706AEA13A7285B00AAE86E /* shThemeDefault.css */; };
 		ED706AEF13A7285B00AAE86E /* shThemeEmacs.css in Resources */ = {isa = PBXBuildFile; fileRef = ED706AEB13A7285B00AAE86E /* shThemeEmacs.css */; };
 		ED706AF013A7285B00AAE86E /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = ED706AEC13A7285B00AAE86E /* style.css */; };
-		ED725D7E139DDF370006EFA3 /* ModuleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED725D7D139DDF370006EFA3 /* ModuleViewController.m */; };
 		ED7FC69D13BEB949002505CC /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = ED7FC69C13BEB949002505CC /* Settings.bundle */; };
+		EDBDA4AF14C94731008F241E /* ModuleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBDA4AD14C94730008F241E /* ModuleViewController.m */; };
+		EDBDA4B014C94731008F241E /* ModuleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDBDA4AE14C94730008F241E /* ModuleViewController.xib */; };
 		EDEEEAFD13EE3F3D00DB5195 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = EDEEEAFC13EE3F3D00DB5195 /* Default-Portrait~ipad.png */; };
 		EDEEEB0213EE429600DB5195 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = EDEEEAFF13EE410F00DB5195 /* Default-Landscape~ipad.png */; };
 		EDEEEB0413EE42BE00DB5195 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = EDEEEB0313EE42BE00DB5195 /* Default.png */; };
@@ -151,9 +152,10 @@
 		ED706AEA13A7285B00AAE86E /* shThemeDefault.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = shThemeDefault.css; sourceTree = "<group>"; };
 		ED706AEB13A7285B00AAE86E /* shThemeEmacs.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = shThemeEmacs.css; sourceTree = "<group>"; };
 		ED706AEC13A7285B00AAE86E /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
-		ED725D7C139DDF370006EFA3 /* ModuleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModuleViewController.h; sourceTree = "<group>"; };
-		ED725D7D139DDF370006EFA3 /* ModuleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModuleViewController.m; sourceTree = "<group>"; };
 		ED7FC69C13BEB949002505CC /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = iCPAN/Settings.bundle; sourceTree = SOURCE_ROOT; };
+		EDBDA4AC14C94730008F241E /* ModuleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ModuleViewController.h; path = iPhone/ModuleViewController.h; sourceTree = "<group>"; };
+		EDBDA4AD14C94730008F241E /* ModuleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ModuleViewController.m; path = iPhone/ModuleViewController.m; sourceTree = "<group>"; };
+		EDBDA4AE14C94730008F241E /* ModuleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ModuleViewController.xib; path = iPhone/ModuleViewController.xib; sourceTree = "<group>"; };
 		EDEEEAFC13EE3F3D00DB5195 /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = "<group>"; };
 		EDEEEAFF13EE410F00DB5195 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
 		EDEEEB0313EE42BE00DB5195 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
@@ -286,8 +288,6 @@
 		ED706ADA13A7275500AAE86E /* Reference */ = {
 			isa = PBXGroup;
 			children = (
-				ED725D7C139DDF370006EFA3 /* ModuleViewController.h */,
-				ED725D7D139DDF370006EFA3 /* ModuleViewController.m */,
 			);
 			name = Reference;
 			sourceTree = "<group>";
@@ -395,11 +395,14 @@
 				EDF7CE3C134438880012E9DA /* iCPANAppDelegate_iPhone.m */,
 				EDF7CE3E134438880012E9DA /* MainWindow_iPhone.xib */,
 				EDF1F44D144BDD2500386258 /* ModuleController.h */,
-				EDF1F44F144BDD2500386258 /* ModuleController.xib */,
 				EDF1F44E144BDD2500386258 /* ModuleController.m */,
+				EDF1F44F144BDD2500386258 /* ModuleController.xib */,
 				EDF1F452144BEB2900386258 /* BookmarkController.h */,
 				EDF1F453144BEB2900386258 /* BookmarkController.m */,
 				EDF1F454144BEB2A00386258 /* BookmarkController.xib */,
+				EDBDA4AC14C94730008F241E /* ModuleViewController.h */,
+				EDBDA4AD14C94730008F241E /* ModuleViewController.m */,
+				EDBDA4AE14C94730008F241E /* ModuleViewController.xib */,
 			);
 			name = iPhone;
 			sourceTree = "<group>";
@@ -538,6 +541,7 @@
 				ED12AA1E142466A0007F8079 /* iCPAN.sqlite in Resources */,
 				EDF1F451144BDD2500386258 /* ModuleController.xib in Resources */,
 				EDF1F456144BEB2A00386258 /* BookmarkController.xib in Resources */,
+				EDBDA4B014C94731008F241E /* ModuleViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -580,7 +584,6 @@
 				ED4B5C091383761600386B42 /* iCPANAppDelegate_iPad.m in Sources */,
 				ED4B5C0B1383761600386B42 /* DetailViewController.m in Sources */,
 				ED4B5C1F1383844A00386B42 /* GenericViewController.m in Sources */,
-				ED725D7E139DDF370006EFA3 /* ModuleViewController.m in Sources */,
 				ED6ADE5813BD767E006E5348 /* NSObject+SBJson.m in Sources */,
 				ED6ADE5913BD767E006E5348 /* SBJsonParser.m in Sources */,
 				ED6ADE5A13BD767E006E5348 /* SBJsonStreamParser.m in Sources */,
@@ -599,6 +602,7 @@
 				ED3F623413C2216D006255A9 /* Pod.m in Sources */,
 				EDF1F450144BDD2500386258 /* ModuleController.m in Sources */,
 				EDF1F455144BEB2A00386258 /* BookmarkController.m in Sources */,
+				EDBDA4AF14C94731008F241E /* ModuleViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
