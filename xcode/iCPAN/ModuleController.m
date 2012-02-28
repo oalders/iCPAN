@@ -10,11 +10,13 @@
 #import "iCPANAppDelegate_iPhone.h"
 #import "ModuleViewController.h"
 
-
 @implementation ModuleController
 
-@synthesize  modules, searchBar, searchString, tableView;
 @synthesize fetchedResultsController;
+@synthesize modules; 
+@synthesize searchBar; 
+@synthesize searchString;
+@synthesize tableView;
 
 - (void)dealloc
 {
@@ -120,18 +122,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    Module *module = [fetchedResultsController objectAtIndexPath:indexPath];
-    NSLog(@"selected row %@", module);
-    NSLog(@"index path %@", indexPath);
+    Module *module = [self.modules objectAtIndex:indexPath.row];
 
-    NSLog(@"selected thingy %@", [self.modules objectAtIndex:indexPath.row]);
-    //detailViewController.detailItem = module
-    
-    // Navigation logic may go here. Create and push another view controller.
-    
+    NSLog(@"selected module %@", module);
+        
     ModuleViewController *webView = [[ModuleViewController alloc] initWithNibName:@"ModuleViewController" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
 
     [self.navigationController pushViewController:webView animated:YES];
     [webView release];
