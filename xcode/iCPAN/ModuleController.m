@@ -14,6 +14,7 @@
 @implementation ModuleController
 
 @synthesize  modules, searchBar, searchString, tableView;
+@synthesize fetchedResultsController;
 
 - (void)dealloc
 {
@@ -118,6 +119,14 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    Module *module = [fetchedResultsController objectAtIndexPath:indexPath];
+    NSLog(@"selected row %@", module);
+    NSLog(@"index path %@", indexPath);
+
+    NSLog(@"selected thingy %@", [self.modules objectAtIndex:indexPath.row]);
+    //detailViewController.detailItem = module
+    
     // Navigation logic may go here. Create and push another view controller.
     
     ModuleViewController *webView = [[ModuleViewController alloc] initWithNibName:@"ModuleViewController" bundle:nil];

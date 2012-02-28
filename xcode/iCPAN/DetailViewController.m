@@ -7,13 +7,9 @@
 //
 
 #import "DetailViewController.h"
-
 #import "GenericViewController.h"
-
 #import "iCPANAppDelegate.h"
-
 #import "Module.h"
-
 #import "GRMustache.h"
 
 @interface DetailViewController ()

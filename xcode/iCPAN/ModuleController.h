@@ -8,16 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ModuleController : UIViewController <UITableViewDataSource, UITableViewDelegate> {
+@interface ModuleController : UIViewController <UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate> {
     UITableView *tv;
     UISearchBar *searchBar;
     NSString *searchString;
+    NSFetchedResultsController *fetchedResultsController;
 }
 
 @property (nonatomic, retain) IBOutlet UISearchBar *searchBar;
 @property (nonatomic, retain) IBOutlet UITableView *tableView;
 @property (nonatomic, retain) NSArray *modules;
 @property (nonatomic, retain) NSString *searchString;
+@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 
 -(void) searchModules;
 
