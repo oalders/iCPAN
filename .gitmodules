@@ -4,6 +4,3 @@
 [submodule "inc/Pod2HTML"]
 	path = inc/Pod2HTML
 	url = git@github.com:oalders/Pod2HTML.git
-[submodule "inc/json-framework"]
-	path = inc/json-framework
-	url = https://github.com/stig/json-framework.git
