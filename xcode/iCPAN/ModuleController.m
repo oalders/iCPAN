@@ -18,14 +18,6 @@
 @synthesize searchString;
 @synthesize tableView;
 
-- (void)dealloc
-{
-    [modules release];
-    [searchBar release];
-    [searchString release];
-    [tableView release];
-    [super dealloc];
-}
 
 - (void)didReceiveMemoryWarning
 {
@@ -101,7 +93,7 @@
 
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         cell.textLabel.font = [UIFont systemFontOfSize:12];
     }
 
@@ -129,7 +121,6 @@
     ModuleViewController *webView = [[ModuleViewController alloc] initWithNibName:@"ModuleViewController" bundle:nil];
 
     [self.navigationController pushViewController:webView animated:YES];
-    [webView release];
     
      
 }
@@ -187,7 +178,6 @@
     NSError *error;
     NSArray *searchResults = [context executeFetchRequest:request error:&error];
     self.modules = searchResults;
-    [request release];
 }
 
 @end

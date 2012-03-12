@@ -14,10 +14,10 @@
 @interface Module : NSManagedObject {
 @private
 }
-@property (nonatomic, retain) NSString * path;
-@property (nonatomic, retain) NSString * name;
-@property (nonatomic, retain) NSString * abstract;
-@property (nonatomic, retain) Distribution * distribution;
-@property (nonatomic, retain) Pod * pod;
+@property (nonatomic, strong) NSString * path;
+@property (nonatomic, strong) NSString * name;
+@property (nonatomic, strong) NSString * abstract;
+@property (nonatomic, strong) Distribution * distribution;
+@property (nonatomic, strong) Pod * pod;
 
 @end

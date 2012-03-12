@@ -20,16 +20,16 @@
 }
 
 
-@property (nonatomic, retain) IBOutlet UIToolbar *toolbar;
-@property (nonatomic, retain) IBOutlet UILabel *detailDescriptionLabel;
-@property (nonatomic, assign) IBOutlet GenericViewController *genericViewController;
-@property (nonatomic, retain) IBOutlet UIWebView *webView;
-@property (nonatomic, retain) Module *detailItem;
+@property (nonatomic, strong) IBOutlet UIToolbar *toolbar;
+@property (nonatomic, strong) IBOutlet UILabel *detailDescriptionLabel;
+@property (nonatomic, weak) IBOutlet GenericViewController *genericViewController;
+@property (nonatomic, strong) IBOutlet UIWebView *webView;
+@property (nonatomic, strong) Module *detailItem;
 
 /* UIWebView Navigation */
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *backButton;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *forwardButton;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *refreshButton;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *stopButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *backButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *forwardButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *refreshButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *stopButton;
 
 @end

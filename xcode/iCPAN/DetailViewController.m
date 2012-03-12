@@ -13,7 +13,7 @@
 #import "GRMustache.h"
 
 @interface DetailViewController ()
-@property (nonatomic, retain) UIPopoverController *popoverController;
+@property (nonatomic, strong) UIPopoverController *popoverController;
 - (void)configureView;
 @end
 
@@ -39,8 +39,7 @@
 - (void)setDetailItem:(Module *)managedObject
 {
 	if (_detailItem != managedObject) {
-		[_detailItem release];
-		_detailItem = [managedObject retain];
+		_detailItem = managedObject;
 		
         // Update the view.
         [self configureView];
@@ -218,7 +217,6 @@
 		}
         refreshButton.enabled = FALSE;
         stopButton.enabled = FALSE;
-		[req release];
 	}
 	else {
 		// we are now online
@@ -263,7 +261,6 @@
     NSMutableArray *items = [[self.toolbar items] mutableCopy];
     [items insertObject:barButtonItem atIndex:0];
     [self.toolbar setItems:items animated:YES];
-    [items release];
     self.popoverController = pc;
 }
 
@@ -273,7 +270,6 @@
     NSMutableArray *items = [[self.toolbar items] mutableCopy];
     [items removeObjectAtIndex:0];
     [self.toolbar setItems:items animated:YES];
-    [items release];
     self.popoverController = nil;
 }
 
@@ -296,20 +292,5 @@
 	// Release any cached data, images, etc that aren't in use.
 }
 
-- (void)dealloc
-{
-    [_myPopoverController release];
-    [_toolbar release];
-    [_detailItem release];
-    [_detailDescriptionLabel release];
-    
-    [backButton release];
-    [forwardButton release];
-    [refreshButton release];
-    [stopButton release];
-    [webView release];
-    
-    [super dealloc];
-}
 
 @end

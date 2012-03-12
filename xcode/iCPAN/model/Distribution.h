@@ -14,12 +14,12 @@
 @interface Distribution : NSManagedObject {
 @private
 }
-@property (nonatomic, retain) NSString * name;
-@property (nonatomic, retain) NSDate * release_date;
-@property (nonatomic, retain) NSString * abstract;
-@property (nonatomic, retain) NSString * version;
-@property (nonatomic, retain) NSString * release_name;
-@property (nonatomic, retain) Author * author;
-@property (nonatomic, retain) NSSet* modules;
+@property (nonatomic, strong) NSString * name;
+@property (nonatomic, strong) NSDate * release_date;
+@property (nonatomic, strong) NSString * abstract;
+@property (nonatomic, strong) NSString * version;
+@property (nonatomic, strong) NSString * release_name;
+@property (nonatomic, strong) Author * author;
+@property (nonatomic, strong) NSSet* modules;
 
 @end

@@ -14,7 +14,7 @@
 @interface Pod : NSManagedObject {
 @private
 }
-@property (nonatomic, retain) NSString * html;
-@property (nonatomic, retain) Module * module;
+@property (nonatomic, strong) NSString * html;
+@property (nonatomic, strong) Module * module;
 
 @end

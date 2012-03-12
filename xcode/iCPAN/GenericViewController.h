@@ -16,10 +16,10 @@
     UITableView *tableView;
 }
 
-@property (nonatomic, retain) IBOutlet DetailViewController *detailViewController;
-@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
-@property (nonatomic, retain) NSManagedObjectContext *context;
-@property (nonatomic, retain) UITableView *tableView;
-@property (nonatomic, retain) NSString *searchString;
+@property (nonatomic, strong) IBOutlet DetailViewController *detailViewController;
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, strong) NSManagedObjectContext *context;
+@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) NSString *searchString;
 
 @end

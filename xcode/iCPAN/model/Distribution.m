@@ -26,7 +26,6 @@
     [self willChangeValueForKey:@"modules" withSetMutation:NSKeyValueUnionSetMutation usingObjects:changedObjects];
     [[self primitiveValueForKey:@"modules"] addObject:value];
     [self didChangeValueForKey:@"modules" withSetMutation:NSKeyValueUnionSetMutation usingObjects:changedObjects];
-    [changedObjects release];
 }
 
 - (void)removeModulesObject:(Module *)value {
@@ -34,7 +33,6 @@
     [self willChangeValueForKey:@"modules" withSetMutation:NSKeyValueMinusSetMutation usingObjects:changedObjects];
     [[self primitiveValueForKey:@"modules"] removeObject:value];
     [self didChangeValueForKey:@"modules" withSetMutation:NSKeyValueMinusSetMutation usingObjects:changedObjects];
-    [changedObjects release];
 }
 
 - (void)addModules:(NSSet *)value {    

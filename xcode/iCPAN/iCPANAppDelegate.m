@@ -63,14 +63,6 @@
     [self saveContext];
 }
 
-- (void)dealloc
-{
-    [_window release];
-    [__managedObjectContext release];
-    [__managedObjectModel release];
-    [__persistentStoreCoordinator release];
-    [super dealloc];
-}
 
 - (void)awakeFromNib
 {
@@ -207,7 +199,7 @@
 	NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
 	
 	if([prefs dictionaryForKey:@"bookmarks"] == nil) {
-		NSDictionary *bookmarks = [[[NSDictionary alloc] init] autorelease];
+		NSDictionary *bookmarks = [[NSDictionary alloc] init];
         [prefs setObject:bookmarks forKey:@"bookmarks"];
 		[prefs synchronize];        
 		return bookmarks;
@@ -236,7 +228,7 @@
 	NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
 	
 	if([prefs arrayForKey:@"recentlyViewed"] == nil) {
-		NSArray *recentlyViewed = [[[NSArray alloc] init] autorelease];
+		NSArray *recentlyViewed = [[NSArray alloc] init];
         [prefs setObject:recentlyViewed forKey:@"recentlyViewed"];
 		[prefs synchronize];        
 		return recentlyViewed;
@@ -268,19 +260,18 @@
 -(void) createPodFolder {
     
 	NSFileManager *FM= [NSFileManager defaultManager]; 
-    NSError **createError = nil;
+    NSError *createError;
 	NSError *error = nil;
-    NSError **readError = nil;
 	
 	//start clean each time
-    if ([FM removeItemAtPath:self.podDir error:readError] ) {
+    if ([FM removeItemAtPath:self.podDir error:&error] ) {
         //NSLog (@"Remove successful");
 	}
 	else {
         NSLog (@"Remove failed");
 	}
         
-	[FM createDirectoryAtPath:self.podDir withIntermediateDirectories:NO attributes:nil error:createError];
+	[FM createDirectoryAtPath:self.podDir withIntermediateDirectories:NO attributes:nil error:&createError];
     
     NSLog(@"error: %@", createError);
     
@@ -288,7 +279,7 @@
     
     NSLog(@"resource path: %@", resourcePath);
 	
-	NSArray *dirContents = [FM contentsOfDirectoryAtPath:resourcePath error:createError];
+	NSArray *dirContents = [FM contentsOfDirectoryAtPath:resourcePath error:&createError];
     
     NSLog(@"dircontents %@", dirContents);
 	NSArray *css = [dirContents filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self ENDSWITH 's'"]];

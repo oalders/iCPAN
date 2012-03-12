@@ -14,9 +14,9 @@
 @interface Author : NSManagedObject {
 @private
 }
-@property (nonatomic, retain) NSString * email;
-@property (nonatomic, retain) NSString * name;
-@property (nonatomic, retain) NSString * pauseid;
-@property (nonatomic, retain) NSSet* distributions;
+@property (nonatomic, strong) NSString * email;
+@property (nonatomic, strong) NSString * name;
+@property (nonatomic, strong) NSString * pauseid;
+@property (nonatomic, strong) NSSet* distributions;
 
 @end

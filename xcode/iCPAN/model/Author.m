@@ -21,7 +21,6 @@
     [self willChangeValueForKey:@"distributions" withSetMutation:NSKeyValueUnionSetMutation usingObjects:changedObjects];
     [[self primitiveValueForKey:@"distributions"] addObject:value];
     [self didChangeValueForKey:@"distributions" withSetMutation:NSKeyValueUnionSetMutation usingObjects:changedObjects];
-    [changedObjects release];
 }
 
 - (void)removeDistributionsObject:(Distribution *)value {
@@ -29,7 +28,6 @@
     [self willChangeValueForKey:@"distributions" withSetMutation:NSKeyValueMinusSetMutation usingObjects:changedObjects];
     [[self primitiveValueForKey:@"distributions"] removeObject:value];
     [self didChangeValueForKey:@"distributions" withSetMutation:NSKeyValueMinusSetMutation usingObjects:changedObjects];
-    [changedObjects release];
 }
 
 - (void)addDistributions:(NSSet *)value {    

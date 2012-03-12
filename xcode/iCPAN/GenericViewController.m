@@ -114,9 +114,6 @@
         // report error
     }
     
-    [predicateArgs release];
-    [sort release];
-    [fetchRequest release];
     
     return fetchedResultsController;    
     
@@ -164,7 +161,7 @@
     // Dequeue or create a cell of the appropriate type.
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         cell.accessoryType = UITableViewCellAccessoryNone;
         cell.textLabel.font = [UIFont systemFontOfSize:16];
     }
@@ -268,12 +265,7 @@
 - (void)dealloc
 {
     self.fetchedResultsController.delegate = nil;
-    self.fetchedResultsController = nil;
-    [context dealloc];
-    [searchString dealloc];
-    [tableView dealloc];
     
-    [super dealloc];
 }
 
 @end

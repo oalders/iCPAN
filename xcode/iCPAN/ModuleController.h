@@ -15,11 +15,11 @@
     NSFetchedResultsController *fetchedResultsController;
 }
 
-@property (nonatomic, retain) IBOutlet UISearchBar *searchBar;
-@property (nonatomic, retain) IBOutlet UITableView *tableView;
-@property (nonatomic, retain) NSArray *modules;
-@property (nonatomic, retain) NSString *searchString;
-@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, strong) IBOutlet UISearchBar *searchBar;
+@property (nonatomic, strong) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) NSArray *modules;
+@property (nonatomic, strong) NSString *searchString;
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 
 -(void) searchModules;
 

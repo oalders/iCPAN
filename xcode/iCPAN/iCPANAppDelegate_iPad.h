@@ -16,12 +16,12 @@
 @interface iCPANAppDelegate_iPad : iCPANAppDelegate {
 }
 
-@property (nonatomic, retain) IBOutlet UIWindow *window;
+@property (nonatomic, strong) IBOutlet UIWindow *window;
 
-@property (nonatomic, retain) IBOutlet UISplitViewController *splitViewController;
+@property (nonatomic, strong) IBOutlet UISplitViewController *splitViewController;
 
-@property (nonatomic, retain) IBOutlet GenericViewController *genericViewController;
+@property (nonatomic, strong) IBOutlet GenericViewController *genericViewController;
 
-@property (nonatomic, retain) IBOutlet DetailViewController *detailViewController;
+@property (nonatomic, strong) IBOutlet DetailViewController *detailViewController;
 
 @end

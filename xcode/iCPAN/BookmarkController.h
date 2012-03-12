@@ -13,6 +13,6 @@
     UITableView *tv;
 }
 
-@property (nonatomic, retain) IBOutlet UITableView *tv;
+@property (nonatomic, strong) IBOutlet UITableView *tv;
 
 @end
