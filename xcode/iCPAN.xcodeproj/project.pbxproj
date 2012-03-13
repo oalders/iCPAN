@@ -91,19 +91,7 @@
 		ED4B5C1C1383844900386B42 /* GenericViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenericViewController.h; sourceTree = "<group>"; };
 		ED4B5C1D1383844900386B42 /* GenericViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenericViewController.m; sourceTree = "<group>"; };
 		ED4B5C1E1383844900386B42 /* GenericViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GenericViewController.xib; sourceTree = "<group>"; };
-		ED6ADE6513BD76EC006E5348 /* GRBoolean.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRBoolean.h; sourceTree = "<group>"; };
 		ED6ADE6613BD76EC006E5348 /* GRMustache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRMustache.h; sourceTree = "<group>"; };
-		ED6ADE6713BD76EC006E5348 /* GRMustacheConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRMustacheConfiguration.h; sourceTree = "<group>"; };
-		ED6ADE6813BD76EC006E5348 /* GRMustacheContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRMustacheContext.h; sourceTree = "<group>"; };
-		ED6ADE6913BD76EC006E5348 /* GRMustacheEnvironment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRMustacheEnvironment.h; sourceTree = "<group>"; };
-		ED6ADE6A13BD76EC006E5348 /* GRMustacheError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRMustacheError.h; sourceTree = "<group>"; };
-		ED6ADE6B13BD76EC006E5348 /* GRMustacheLambda.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRMustacheLambda.h; sourceTree = "<group>"; };
-		ED6ADE6C13BD76EC006E5348 /* GRMustacheRendering.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRMustacheRendering.h; sourceTree = "<group>"; };
-		ED6ADE6D13BD76EC006E5348 /* GRMustacheSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRMustacheSection.h; sourceTree = "<group>"; };
-		ED6ADE6E13BD76EC006E5348 /* GRMustacheTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRMustacheTemplate.h; sourceTree = "<group>"; };
-		ED6ADE6F13BD76EC006E5348 /* GRMustacheTemplateLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRMustacheTemplateLoader.h; sourceTree = "<group>"; };
-		ED6ADE7013BD76EC006E5348 /* GRMustacheTemplateLoader_protected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRMustacheTemplateLoader_protected.h; sourceTree = "<group>"; };
-		ED6ADE7113BD76EC006E5348 /* GRMustacheVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRMustacheVersion.h; sourceTree = "<group>"; };
 		ED6ADE7213BD77AD006E5348 /* libGRMustache1-ios4.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libGRMustache1-ios4.a"; path = "../lib/libGRMustache1-ios4.a"; sourceTree = "<group>"; };
 		ED706ADD13A7280800AAE86E /* template.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = template.html; sourceTree = "<group>"; };
 		ED706ADF13A7283700AAE86E /* iCPAN.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = iCPAN.js; sourceTree = "<group>"; };
@@ -186,19 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				ED6ADE7213BD77AD006E5348 /* libGRMustache1-ios4.a */,
-				ED6ADE6513BD76EC006E5348 /* GRBoolean.h */,
 				ED6ADE6613BD76EC006E5348 /* GRMustache.h */,
-				ED6ADE6713BD76EC006E5348 /* GRMustacheConfiguration.h */,
-				ED6ADE6813BD76EC006E5348 /* GRMustacheContext.h */,
-				ED6ADE6913BD76EC006E5348 /* GRMustacheEnvironment.h */,
-				ED6ADE6A13BD76EC006E5348 /* GRMustacheError.h */,
-				ED6ADE6B13BD76EC006E5348 /* GRMustacheLambda.h */,
-				ED6ADE6C13BD76EC006E5348 /* GRMustacheRendering.h */,
-				ED6ADE6D13BD76EC006E5348 /* GRMustacheSection.h */,
-				ED6ADE6E13BD76EC006E5348 /* GRMustacheTemplate.h */,
-				ED6ADE6F13BD76EC006E5348 /* GRMustacheTemplateLoader.h */,
-				ED6ADE7013BD76EC006E5348 /* GRMustacheTemplateLoader_protected.h */,
-				ED6ADE7113BD76EC006E5348 /* GRMustacheVersion.h */,
 			);
 			name = GRMustache;
 			path = ../../inc/GRMustache/include;
