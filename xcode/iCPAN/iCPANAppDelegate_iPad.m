@@ -8,7 +8,7 @@
 
 #import "iCPANAppDelegate_iPad.h"
 
-#import "GenericViewController.h"
+#import "SearchViewController_iPad.h"
 #import "DetailViewController.h"
 
 @implementation iCPANAppDelegate_iPad

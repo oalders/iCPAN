@@ -7,11 +7,12 @@
 //
 
 #import "iCPANAppDelegate_iPad.h"
-#import "GenericViewController.h"
+#import "SearchViewController_iPad.h"
 #import "DetailViewController.h"
 
 
-@implementation GenericViewController
+@implementation SearchViewController_iPad
+
 
 @synthesize context;
 @synthesize detailViewController;

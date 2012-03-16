@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@class DetailViewController;
+@class SearchViewController_iPad;
 
-@interface GenericViewController : UIViewController <UISearchDisplayDelegate, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate> {
+@interface SearchViewController_iPad : UIViewController <UISearchDisplayDelegate, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate> {
     NSFetchedResultsController *fetchedResultsController;
     NSManagedObjectContext *context;
     UITableView *tableView;

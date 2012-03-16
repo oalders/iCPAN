@@ -16,8 +16,8 @@
 		ED4B5C0A1383761600386B42 /* MainWindow_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED4B5C031383761600386B42 /* MainWindow_iPad.xib */; };
 		ED4B5C0B1383761600386B42 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED4B5C051383761600386B42 /* DetailViewController.m */; };
 		ED4B5C0C1383761600386B42 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED4B5C061383761600386B42 /* DetailViewController.xib */; };
-		ED4B5C1F1383844A00386B42 /* GenericViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED4B5C1D1383844900386B42 /* GenericViewController.m */; };
-		ED4B5C201383844A00386B42 /* GenericViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED4B5C1E1383844900386B42 /* GenericViewController.xib */; };
+		ED4B5C1F1383844A00386B42 /* SearchViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = ED4B5C1D1383844900386B42 /* SearchViewController_iPad.m */; };
+		ED4B5C201383844A00386B42 /* SearchViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED4B5C1E1383844900386B42 /* SearchViewController_iPad.xib */; };
 		ED6ADE7313BD77AD006E5348 /* libGRMustache1-ios4.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ED6ADE7213BD77AD006E5348 /* libGRMustache1-ios4.a */; };
 		ED706ADE13A7280800AAE86E /* template.html in Resources */ = {isa = PBXBuildFile; fileRef = ED706ADD13A7280800AAE86E /* template.html */; };
 		ED706AE413A7283700AAE86E /* iCPAN.js in Resources */ = {isa = PBXBuildFile; fileRef = ED706ADF13A7283700AAE86E /* iCPAN.js */; };
@@ -88,9 +88,9 @@
 		ED4B5C041383761600386B42 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		ED4B5C051383761600386B42 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		ED4B5C061383761600386B42 /* DetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DetailViewController.xib; path = iCPAN/DetailViewController.xib; sourceTree = "<group>"; };
-		ED4B5C1C1383844900386B42 /* GenericViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenericViewController.h; sourceTree = "<group>"; };
-		ED4B5C1D1383844900386B42 /* GenericViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenericViewController.m; sourceTree = "<group>"; };
-		ED4B5C1E1383844900386B42 /* GenericViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GenericViewController.xib; path = iCPAN/GenericViewController.xib; sourceTree = "<group>"; };
+		ED4B5C1C1383844900386B42 /* SearchViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; path = SearchViewController_iPad.h; sourceTree = "<group>"; };
+		ED4B5C1D1383844900386B42 /* SearchViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController_iPad.m; sourceTree = "<group>"; };
+		ED4B5C1E1383844900386B42 /* SearchViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SearchViewController_iPad.xib; path = iCPAN/SearchViewController_iPad.xib; sourceTree = "<group>"; };
 		ED6ADE6613BD76EC006E5348 /* GRMustache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRMustache.h; sourceTree = "<group>"; };
 		ED6ADE7213BD77AD006E5348 /* libGRMustache1-ios4.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libGRMustache1-ios4.a"; path = "../lib/libGRMustache1-ios4.a"; sourceTree = "<group>"; };
 		ED706ADD13A7280800AAE86E /* template.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = template.html; sourceTree = "<group>"; };
@@ -229,7 +229,7 @@
 			isa = PBXGroup;
 			children = (
 				ED4B5C061383761600386B42 /* DetailViewController.xib */,
-				ED4B5C1E1383844900386B42 /* GenericViewController.xib */,
+				ED4B5C1E1383844900386B42 /* SearchViewController_iPad.xib */,
 				ED4B5C031383761600386B42 /* MainWindow_iPad.xib */,
 			);
 			name = "Resources-iPad";
@@ -381,8 +381,8 @@
 				ED4B5C021383761600386B42 /* iCPANAppDelegate_iPad.m */,
 				ED4B5C041383761600386B42 /* DetailViewController.h */,
 				ED4B5C051383761600386B42 /* DetailViewController.m */,
-				ED4B5C1C1383844900386B42 /* GenericViewController.h */,
-				ED4B5C1D1383844900386B42 /* GenericViewController.m */,
+				ED4B5C1C1383844900386B42 /* SearchViewController_iPad.h */,
+				ED4B5C1D1383844900386B42 /* SearchViewController_iPad.m */,
 			);
 			name = iPad;
 			sourceTree = "<group>";
@@ -483,7 +483,7 @@
 				EDF7CE40134438880012E9DA /* MainWindow_iPhone.xib in Resources */,
 				ED4B5C0A1383761600386B42 /* MainWindow_iPad.xib in Resources */,
 				ED4B5C0C1383761600386B42 /* DetailViewController.xib in Resources */,
-				ED4B5C201383844A00386B42 /* GenericViewController.xib in Resources */,
+				ED4B5C201383844A00386B42 /* SearchViewController_iPad.xib in Resources */,
 				ED706ADE13A7280800AAE86E /* template.html in Resources */,
 				ED706AED13A7285B00AAE86E /* shCore.css in Resources */,
 				ED706AEE13A7285B00AAE86E /* shThemeDefault.css in Resources */,
@@ -547,7 +547,7 @@
 				EDF7CE3D134438880012E9DA /* iCPANAppDelegate_iPhone.m in Sources */,
 				ED4B5C091383761600386B42 /* iCPANAppDelegate_iPad.m in Sources */,
 				ED4B5C0B1383761600386B42 /* DetailViewController.m in Sources */,
-				ED4B5C1F1383844A00386B42 /* GenericViewController.m in Sources */,
+				ED4B5C1F1383844A00386B42 /* SearchViewController_iPad.m in Sources */,
 				ED3F622B13C2216D006255A9 /* Author.m in Sources */,
 				ED3F622E13C2216D006255A9 /* Module.m in Sources */,
 				ED3F623113C2216D006255A9 /* Distribution.m in Sources */,

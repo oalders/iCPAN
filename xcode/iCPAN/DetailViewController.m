@@ -7,7 +7,7 @@
 //
 
 #import "DetailViewController.h"
-#import "GenericViewController.h"
+#import "SearchViewController_iPad.h"
 #import "iCPANAppDelegate.h"
 #import "Module.h"
 #import "GRMustache.h"
