@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DetailViewController_iPad.h"
 
 @class SearchViewController_iPad;
 
@@ -16,7 +17,7 @@
     UITableView *tableView;
 }
 
-@property (nonatomic, strong) IBOutlet DetailViewController *detailViewController;
+@property (nonatomic, strong) IBOutlet DetailViewController_iPad *detailViewController;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, strong) NSManagedObjectContext *context;
 @property (nonatomic, strong) UITableView *tableView;

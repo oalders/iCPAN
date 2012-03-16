@@ -14,8 +14,8 @@
 		ED3F623413C2216D006255A9 /* Pod.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3F623313C2216D006255A9 /* Pod.m */; };
 		ED4B5C091383761600386B42 /* iCPANAppDelegate_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = ED4B5C021383761600386B42 /* iCPANAppDelegate_iPad.m */; };
 		ED4B5C0A1383761600386B42 /* MainWindow_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED4B5C031383761600386B42 /* MainWindow_iPad.xib */; };
-		ED4B5C0B1383761600386B42 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED4B5C051383761600386B42 /* DetailViewController.m */; };
-		ED4B5C0C1383761600386B42 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED4B5C061383761600386B42 /* DetailViewController.xib */; };
+		ED4B5C0B1383761600386B42 /* DetailViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = ED4B5C051383761600386B42 /* DetailViewController_iPad.m */; };
+		ED4B5C0C1383761600386B42 /* DetailViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED4B5C061383761600386B42 /* DetailViewController_iPad.xib */; };
 		ED4B5C1F1383844A00386B42 /* SearchViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = ED4B5C1D1383844900386B42 /* SearchViewController_iPad.m */; };
 		ED4B5C201383844A00386B42 /* SearchViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED4B5C1E1383844900386B42 /* SearchViewController_iPad.xib */; };
 		ED6ADE7313BD77AD006E5348 /* libGRMustache1-ios4.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ED6ADE7213BD77AD006E5348 /* libGRMustache1-ios4.a */; };
@@ -85,9 +85,9 @@
 		ED4B5C011383761600386B42 /* iCPANAppDelegate_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCPANAppDelegate_iPad.h; sourceTree = "<group>"; };
 		ED4B5C021383761600386B42 /* iCPANAppDelegate_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCPANAppDelegate_iPad.m; sourceTree = "<group>"; };
 		ED4B5C031383761600386B42 /* MainWindow_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainWindow_iPad.xib; path = iCPAN/MainWindow_iPad.xib; sourceTree = "<group>"; };
-		ED4B5C041383761600386B42 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
-		ED4B5C051383761600386B42 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
-		ED4B5C061383761600386B42 /* DetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DetailViewController.xib; path = iCPAN/DetailViewController.xib; sourceTree = "<group>"; };
+		ED4B5C041383761600386B42 /* DetailViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; path = DetailViewController_iPad.h; sourceTree = "<group>"; };
+		ED4B5C051383761600386B42 /* DetailViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController_iPad.m; sourceTree = "<group>"; };
+		ED4B5C061383761600386B42 /* DetailViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DetailViewController_iPad.xib; path = iCPAN/DetailViewController_iPad.xib; sourceTree = "<group>"; };
 		ED4B5C1C1383844900386B42 /* SearchViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; path = SearchViewController_iPad.h; sourceTree = "<group>"; };
 		ED4B5C1D1383844900386B42 /* SearchViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController_iPad.m; sourceTree = "<group>"; };
 		ED4B5C1E1383844900386B42 /* SearchViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SearchViewController_iPad.xib; path = iCPAN/SearchViewController_iPad.xib; sourceTree = "<group>"; };
@@ -228,7 +228,7 @@
 		EDCF8B8F1510687E00AB37E4 /* Resources-iPad */ = {
 			isa = PBXGroup;
 			children = (
-				ED4B5C061383761600386B42 /* DetailViewController.xib */,
+				ED4B5C061383761600386B42 /* DetailViewController_iPad.xib */,
 				ED4B5C1E1383844900386B42 /* SearchViewController_iPad.xib */,
 				ED4B5C031383761600386B42 /* MainWindow_iPad.xib */,
 			);
@@ -379,8 +379,8 @@
 			children = (
 				ED4B5C011383761600386B42 /* iCPANAppDelegate_iPad.h */,
 				ED4B5C021383761600386B42 /* iCPANAppDelegate_iPad.m */,
-				ED4B5C041383761600386B42 /* DetailViewController.h */,
-				ED4B5C051383761600386B42 /* DetailViewController.m */,
+				ED4B5C041383761600386B42 /* DetailViewController_iPad.h */,
+				ED4B5C051383761600386B42 /* DetailViewController_iPad.m */,
 				ED4B5C1C1383844900386B42 /* SearchViewController_iPad.h */,
 				ED4B5C1D1383844900386B42 /* SearchViewController_iPad.m */,
 			);
@@ -482,7 +482,7 @@
 				EDF7CE30134438880012E9DA /* InfoPlist.strings in Resources */,
 				EDF7CE40134438880012E9DA /* MainWindow_iPhone.xib in Resources */,
 				ED4B5C0A1383761600386B42 /* MainWindow_iPad.xib in Resources */,
-				ED4B5C0C1383761600386B42 /* DetailViewController.xib in Resources */,
+				ED4B5C0C1383761600386B42 /* DetailViewController_iPad.xib in Resources */,
 				ED4B5C201383844A00386B42 /* SearchViewController_iPad.xib in Resources */,
 				ED706ADE13A7280800AAE86E /* template.html in Resources */,
 				ED706AED13A7285B00AAE86E /* shCore.css in Resources */,
@@ -546,7 +546,7 @@
 				EDF7CE39134438880012E9DA /* iCPAN.xcdatamodeld in Sources */,
 				EDF7CE3D134438880012E9DA /* iCPANAppDelegate_iPhone.m in Sources */,
 				ED4B5C091383761600386B42 /* iCPANAppDelegate_iPad.m in Sources */,
-				ED4B5C0B1383761600386B42 /* DetailViewController.m in Sources */,
+				ED4B5C0B1383761600386B42 /* DetailViewController_iPad.m in Sources */,
 				ED4B5C1F1383844A00386B42 /* SearchViewController_iPad.m in Sources */,
 				ED3F622B13C2216D006255A9 /* Author.m in Sources */,
 				ED3F622E13C2216D006255A9 /* Module.m in Sources */,

@@ -6,18 +6,19 @@
 //  Copyright 2011 wundersolutions.com. All rights reserved.
 //
 
-#import "DetailViewController.h"
+#import "DetailViewController_iPad.h"
 #import "SearchViewController_iPad.h"
 #import "iCPANAppDelegate.h"
 #import "Module.h"
 #import "GRMustache.h"
 
-@interface DetailViewController ()
+@interface DetailViewController_iPad ()
 @property (nonatomic, strong) UIPopoverController *popoverController;
 - (void)configureView;
 @end
 
-@implementation DetailViewController
+@implementation DetailViewController_iPad
+
 
 @synthesize toolbar=_toolbar;
 @synthesize detailItem=_detailItem;

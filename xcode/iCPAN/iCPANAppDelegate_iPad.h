@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "iCPANAppDelegate.h"
 
-@class GenericViewController;
+@class SearchViewController_iPad;
 
-@class DetailViewController;
+@class DetailViewController_iPad;
 
 @interface iCPANAppDelegate_iPad : iCPANAppDelegate {
 }
@@ -20,8 +20,8 @@
 
 @property (nonatomic, strong) IBOutlet UISplitViewController *splitViewController;
 
-@property (nonatomic, strong) IBOutlet GenericViewController *genericViewController;
+@property (nonatomic, strong) IBOutlet SearchViewController_iPad *genericViewController;
 
-@property (nonatomic, strong) IBOutlet DetailViewController *detailViewController;
+@property (nonatomic, strong) IBOutlet DetailViewController_iPad *detailViewController;
 
 @end

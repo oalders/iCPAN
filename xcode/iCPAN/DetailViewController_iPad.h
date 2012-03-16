@@ -11,7 +11,7 @@
 
 @class GenericViewController;
 
-@interface DetailViewController : UIViewController <UIPopoverControllerDelegate, UISplitViewControllerDelegate,UIWebViewDelegate> {
+@interface DetailViewController_iPad : UIViewController <UIPopoverControllerDelegate, UISplitViewControllerDelegate,UIWebViewDelegate> {
     UIWebView *webView;
     UIBarButtonItem *backButton;
     UIBarButtonItem *forwardButton;
