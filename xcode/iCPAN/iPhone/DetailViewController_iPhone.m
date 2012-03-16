@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 wundersolutions.com. All rights reserved.
 //
 
-#import "ModuleViewController.h"
+#import "DetailViewController_iPhone.h"
 
-@implementation ModuleViewController
+@implementation DetailViewController_iPhone
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

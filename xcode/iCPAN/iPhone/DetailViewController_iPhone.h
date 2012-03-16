@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ModuleViewController : UIViewController
+@interface DetailViewController_iPhone : UIViewController
 
 @end

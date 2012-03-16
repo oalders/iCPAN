@@ -8,7 +8,7 @@
 
 #import "SearchViewController_iPhone.h"
 #import "iCPANAppDelegate_iPhone.h"
-#import "ModuleViewController.h"
+#import "DetailViewController_iPhone.h"
 
 @implementation SearchViewController_iPhone
 
@@ -118,7 +118,7 @@
 
     NSLog(@"selected module %@", module);
         
-    ModuleViewController *webView = [[ModuleViewController alloc] initWithNibName:@"ModuleViewController" bundle:nil];
+    DetailViewController_iPhone *webView = [[DetailViewController_iPhone alloc] initWithNibName:@"ModuleViewController" bundle:nil];
 
     [self.navigationController pushViewController:webView animated:YES];
     
