@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ModuleController : UIViewController <UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate> {
+@interface SearchViewController_iPhone : UIViewController <UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate> {
     UITableView *tv;
     UISearchBar *searchBar;
     NSString *searchString;

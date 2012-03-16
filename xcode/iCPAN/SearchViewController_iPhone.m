@@ -6,11 +6,11 @@
 //  Copyright 2011 wundersolutions.com. All rights reserved.
 //
 
-#import "ModuleController.h"
+#import "SearchViewController_iPhone.h"
 #import "iCPANAppDelegate_iPhone.h"
 #import "ModuleViewController.h"
 
-@implementation ModuleController
+@implementation SearchViewController_iPhone
 
 @synthesize fetchedResultsController;
 @synthesize modules; 
