@@ -24,7 +24,7 @@
 @synthesize detailItem=_detailItem;
 @synthesize detailDescriptionLabel=_detailDescriptionLabel;
 @synthesize popoverController=_myPopoverController;
-@synthesize genericViewController=_genericViewController;
+@synthesize searchViewController=_searchViewController;
 
 @synthesize backButton;
 @synthesize forwardButton;
