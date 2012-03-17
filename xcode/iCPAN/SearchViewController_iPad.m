@@ -1,5 +1,5 @@
 //
-//  GenericViewController.m
+//  SearchViewController_iPad.m
 //  iCPAN
 //
 //  Created by Olaf Alders on 11-05-18.

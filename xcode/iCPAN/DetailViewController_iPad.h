@@ -1,5 +1,5 @@
 //
-//  DetailViewController.h
+//  DetailViewController_iPad.h
 //  iCPAN
 //
 //  Created by Olaf Alders on 11-05-17.

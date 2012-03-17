@@ -1,5 +1,5 @@
 //
-//  ModuleController.h
+//  SearchViewController_iPhone.h
 //  iCPAN
 //
 //  Created by Olaf Alders on 11-10-16.

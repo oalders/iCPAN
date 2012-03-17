@@ -32,6 +32,7 @@
 		ED7FC69D13BEB949002505CC /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = ED7FC69C13BEB949002505CC /* Settings.bundle */; };
 		EDBDA4AF14C94731008F241E /* DetailViewController_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBDA4AD14C94730008F241E /* DetailViewController_iPhone.m */; };
 		EDBDA4B014C94731008F241E /* DetailViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDBDA4AE14C94730008F241E /* DetailViewController_iPhone.xib */; };
+		EDCDAB7B151439A1000DFC1F /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDCDAB7A151439A1000DFC1F /* DetailViewController.m */; };
 		EDEEEAFD13EE3F3D00DB5195 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = EDEEEAFC13EE3F3D00DB5195 /* Default-Portrait~ipad.png */; };
 		EDEEEB0213EE429600DB5195 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = EDEEEAFF13EE410F00DB5195 /* Default-Landscape~ipad.png */; };
 		EDEEEB0413EE42BE00DB5195 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = EDEEEB0313EE42BE00DB5195 /* Default.png */; };
@@ -85,10 +86,10 @@
 		ED4B5C011383761600386B42 /* iCPANAppDelegate_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCPANAppDelegate_iPad.h; sourceTree = "<group>"; };
 		ED4B5C021383761600386B42 /* iCPANAppDelegate_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCPANAppDelegate_iPad.m; sourceTree = "<group>"; };
 		ED4B5C031383761600386B42 /* MainWindow_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainWindow_iPad.xib; path = iCPAN/MainWindow_iPad.xib; sourceTree = "<group>"; };
-		ED4B5C041383761600386B42 /* DetailViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; path = DetailViewController_iPad.h; sourceTree = "<group>"; };
+		ED4B5C041383761600386B42 /* DetailViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController_iPad.h; sourceTree = "<group>"; };
 		ED4B5C051383761600386B42 /* DetailViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController_iPad.m; sourceTree = "<group>"; };
 		ED4B5C061383761600386B42 /* DetailViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DetailViewController_iPad.xib; path = iCPAN/DetailViewController_iPad.xib; sourceTree = "<group>"; };
-		ED4B5C1C1383844900386B42 /* SearchViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; path = SearchViewController_iPad.h; sourceTree = "<group>"; };
+		ED4B5C1C1383844900386B42 /* SearchViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController_iPad.h; sourceTree = "<group>"; };
 		ED4B5C1D1383844900386B42 /* SearchViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController_iPad.m; sourceTree = "<group>"; };
 		ED4B5C1E1383844900386B42 /* SearchViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SearchViewController_iPad.xib; path = iCPAN/SearchViewController_iPad.xib; sourceTree = "<group>"; };
 		ED6ADE6613BD76EC006E5348 /* GRMustache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRMustache.h; sourceTree = "<group>"; };
@@ -104,9 +105,11 @@
 		ED706AEB13A7285B00AAE86E /* shThemeEmacs.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = shThemeEmacs.css; sourceTree = "<group>"; };
 		ED706AEC13A7285B00AAE86E /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
 		ED7FC69C13BEB949002505CC /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = iCPAN/Settings.bundle; sourceTree = SOURCE_ROOT; };
-		EDBDA4AC14C94730008F241E /* DetailViewController_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; name = DetailViewController_iPhone.h; path = iPhone/DetailViewController_iPhone.h; sourceTree = "<group>"; };
+		EDBDA4AC14C94730008F241E /* DetailViewController_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailViewController_iPhone.h; path = iPhone/DetailViewController_iPhone.h; sourceTree = "<group>"; };
 		EDBDA4AD14C94730008F241E /* DetailViewController_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailViewController_iPhone.m; path = iPhone/DetailViewController_iPhone.m; sourceTree = "<group>"; };
 		EDBDA4AE14C94730008F241E /* DetailViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DetailViewController_iPhone.xib; path = iCPAN/iPhone/DetailViewController_iPhone.xib; sourceTree = "<group>"; };
+		EDCDAB79151439A1000DFC1F /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		EDCDAB7A151439A1000DFC1F /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		EDEEEAFC13EE3F3D00DB5195 /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Portrait~ipad.png"; path = "../Default-Portrait~ipad.png"; sourceTree = "<group>"; };
 		EDEEEAFF13EE410F00DB5195 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape~ipad.png"; path = "../Default-Landscape~ipad.png"; sourceTree = "<group>"; };
 		EDEEEB0313EE42BE00DB5195 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
@@ -114,7 +117,7 @@
 		EDEEEB0713EE448A00DB5195 /* onion-72x72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "onion-72x72.png"; path = "../onion-72x72.png"; sourceTree = "<group>"; };
 		EDEEEB0913EE44F200DB5195 /* onion-114x114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "onion-114x114.png"; path = "../onion-114x114.png"; sourceTree = "<group>"; };
 		EDEEEB0B13EE44FF00DB5195 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
-		EDF1F44D144BDD2500386258 /* SearchViewController_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; path = SearchViewController_iPhone.h; sourceTree = "<group>"; };
+		EDF1F44D144BDD2500386258 /* SearchViewController_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController_iPhone.h; sourceTree = "<group>"; };
 		EDF1F44E144BDD2500386258 /* SearchViewController_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController_iPhone.m; sourceTree = "<group>"; };
 		EDF1F44F144BDD2500386258 /* SearchViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SearchViewController_iPhone.xib; path = iCPAN/SearchViewController_iPhone.xib; sourceTree = "<group>"; };
 		EDF1F452144BEB2900386258 /* BookmarkController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookmarkController.h; sourceTree = "<group>"; };
@@ -284,6 +287,8 @@
 		EDCF8B9515106A0B00AB37E4 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				EDCDAB79151439A1000DFC1F /* DetailViewController.h */,
+				EDCDAB7A151439A1000DFC1F /* DetailViewController.m */,
 			);
 			name = Shared;
 			sourceTree = "<group>";
@@ -555,6 +560,7 @@
 				EDF1F450144BDD2500386258 /* SearchViewController_iPhone.m in Sources */,
 				EDF1F455144BEB2A00386258 /* BookmarkController.m in Sources */,
 				EDBDA4AF14C94731008F241E /* DetailViewController_iPhone.m in Sources */,
+				EDCDAB7B151439A1000DFC1F /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

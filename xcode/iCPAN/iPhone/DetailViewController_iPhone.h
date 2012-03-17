@@ -1,5 +1,5 @@
 //
-//  ModuleViewController.h
+//  DetailViewController_iPhone.h
 //  iCPAN
 //
 //  Created by Alders Olaf on 12-01-20.

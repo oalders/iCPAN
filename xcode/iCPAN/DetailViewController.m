@@ -1,14 +1,14 @@
 //
-//  DetailViewController_iPhone.m
+//  DetailViewController.m
 //  iCPAN
 //
-//  Created by Alders Olaf on 12-01-20.
+//  Created by Alders Olaf on 12-03-16.
 //  Copyright (c) 2012 wundersolutions.com. All rights reserved.
 //
 
-#import "DetailViewController_iPhone.h"
+#import "DetailViewController.h"
 
-@implementation DetailViewController_iPhone
+@implementation DetailViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -29,11 +29,20 @@
 
 #pragma mark - View lifecycle
 
+/*
+// Implement loadView to create a view hierarchy programmatically, without using a nib.
+- (void)loadView
+{
+}
+*/
+
+/*
+// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
 }
+*/
 
 - (void)viewDidUnload
 {
