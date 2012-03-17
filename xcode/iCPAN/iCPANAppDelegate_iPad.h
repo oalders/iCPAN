@@ -20,7 +20,7 @@
 
 @property (nonatomic, strong) IBOutlet UISplitViewController *splitViewController;
 
-@property (nonatomic, strong) IBOutlet SearchViewController_iPad *genericViewController;
+@property (nonatomic, strong) IBOutlet SearchViewController_iPad *searchViewController;
 
 @property (nonatomic, strong) IBOutlet DetailViewController_iPad *detailViewController;
 

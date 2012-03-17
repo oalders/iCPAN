@@ -13,13 +13,9 @@
 
 @implementation iCPANAppDelegate_iPad
 
-
 @synthesize window=_window;
-
 @synthesize splitViewController=_splitViewController;
-
-@synthesize genericViewController=_genericViewController;
-
+@synthesize searchViewController=_genericViewController;
 @synthesize detailViewController=_detailViewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions

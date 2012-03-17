@@ -8,25 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "Module.h"
+#import "DetailViewController.h"
 
-@interface DetailViewController_iPad : UIViewController <UIPopoverControllerDelegate, UISplitViewControllerDelegate,UIWebViewDelegate> {
-    UIWebView *webView;
-    UIBarButtonItem *backButton;
-    UIBarButtonItem *forwardButton;
-    UIBarButtonItem *refreshButton;
-    UIBarButtonItem *stopButton;
+@interface DetailViewController_iPad : DetailViewController <UIPopoverControllerDelegate, UISplitViewControllerDelegate> {
 }
 
-
-@property (nonatomic, strong) IBOutlet UIToolbar *toolbar;
-@property (nonatomic, strong) IBOutlet UILabel *detailDescriptionLabel;
-@property (nonatomic, strong) IBOutlet UIWebView *webView;
-@property (nonatomic, strong) Module *detailItem;
-
-/* UIWebView Navigation */
-@property (nonatomic, strong) IBOutlet UIBarButtonItem *backButton;
-@property (nonatomic, strong) IBOutlet UIBarButtonItem *forwardButton;
-@property (nonatomic, strong) IBOutlet UIBarButtonItem *refreshButton;
-@property (nonatomic, strong) IBOutlet UIBarButtonItem *stopButton;
+@property (nonatomic, strong) UIPopoverController *popoverController;
 
 @end
