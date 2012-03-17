@@ -9,8 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "Module.h"
 
-@class SearchViewController_iPad;
-
 @interface DetailViewController_iPad : UIViewController <UIPopoverControllerDelegate, UISplitViewControllerDelegate,UIWebViewDelegate> {
     UIWebView *webView;
     UIBarButtonItem *backButton;
@@ -22,7 +20,6 @@
 
 @property (nonatomic, strong) IBOutlet UIToolbar *toolbar;
 @property (nonatomic, strong) IBOutlet UILabel *detailDescriptionLabel;
-@property (nonatomic, weak) IBOutlet SearchViewController_iPad *searchViewController;
 @property (nonatomic, strong) IBOutlet UIWebView *webView;
 @property (nonatomic, strong) Module *detailItem;
 

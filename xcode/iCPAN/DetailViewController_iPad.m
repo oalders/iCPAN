@@ -7,7 +7,6 @@
 //
 
 #import "DetailViewController_iPad.h"
-#import "SearchViewController_iPad.h"
 #import "iCPANAppDelegate.h"
 #import "Module.h"
 #import "GRMustache.h"
@@ -24,7 +23,6 @@
 @synthesize detailItem=_detailItem;
 @synthesize detailDescriptionLabel=_detailDescriptionLabel;
 @synthesize popoverController=_myPopoverController;
-@synthesize searchViewController=_searchViewController;
 
 @synthesize backButton;
 @synthesize forwardButton;
