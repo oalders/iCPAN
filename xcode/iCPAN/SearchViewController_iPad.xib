@@ -242,7 +242,7 @@
 							<string>refreshButton</string>
 							<string>stopButton</string>
 							<string>toolbar</string>
-							<string>webView</string>
+							<string>podViewer</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -267,7 +267,7 @@
 							<string>refreshButton</string>
 							<string>stopButton</string>
 							<string>toolbar</string>
-							<string>webView</string>
+							<string>podViewer</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -300,7 +300,7 @@
 								<string key="candidateClassName">UIToolbar</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">webView</string>
+								<string key="name">podViewer</string>
 								<string key="candidateClassName">UIWebView</string>
 							</object>
 						</object>

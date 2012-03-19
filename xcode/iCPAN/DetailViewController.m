@@ -13,18 +13,34 @@
 
 @implementation DetailViewController
 
-@synthesize toolbar=_toolbar;
+@synthesize toolbar;
 @synthesize detailItem;
-@synthesize detailDescriptionLabel=_detailDescriptionLabel;
+@synthesize detailDescriptionLabel;
 
 @synthesize backButton;
 @synthesize forwardButton;
 @synthesize refreshButton;
 @synthesize stopButton;
-@synthesize webView;
+@synthesize podViewer;
 
 #pragma mark - Managing the detail item
 
+/*
+ When setting the detail item, update the view and dismiss the popover controller if it's showing.
+ */
+- (void)setDetailItem:(Module *)managedObject
+{
+    NSLog(@"setDetailItem (shared)");
+
+	if (detailItem != managedObject) {
+		detailItem = managedObject;
+		
+        // Update the view.
+        [self configureView];
+	}
+    
+	
+}
 
 
 - (void)configureView
@@ -33,7 +49,7 @@
     // Basically, we'll initiate the page load here, but we'll write the page to disk later
     // This method will only ever be called when the user selects a module from the table
     // in the GenericView
-    
+
     NSString *name = [self.detailItem valueForKey:@"name"];
     iCPANAppDelegate *del = [[UIApplication sharedApplication] delegate];
     
@@ -45,14 +61,12 @@
     
 	NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
     
-    NSLog(@"about to load webview: ==============================================");
-	[webView loadRequest:requestObj];
+	[podViewer loadRequest:requestObj];
     
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    //NSLog(@"detail view will appear");
     backButton.enabled = FALSE;
     forwardButton.enabled = FALSE;
     refreshButton.enabled = FALSE;
@@ -63,13 +77,11 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    //NSLog(@"detail view did appear");
     [super viewDidAppear:animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    //NSLog(@"view will disappear");
 	[super viewWillDisappear:animated];
 }
 
@@ -88,12 +100,12 @@
     // CHECK: LANDSCAPE
     if ( (self.interfaceOrientation == UIInterfaceOrientationLandscapeLeft) || (self.interfaceOrientation == UIInterfaceOrientationLandscapeRight) )
     {
-        webView.frame = CGRectMake(webView.frame.origin.x, webView.frame.origin.y, 703, webView.frame.size.height);
+        podViewer.frame = CGRectMake(podViewer.frame.origin.x, podViewer.frame.origin.y, 703, podViewer.frame.size.height);
     }
     // CHECK: PORTRAIT
     else
     {
-        webView.frame = CGRectMake(webView.frame.origin.x, webView.frame.origin.y, 768, webView.frame.size.height);
+        podViewer.frame = CGRectMake(podViewer.frame.origin.x, podViewer.frame.origin.y, 768, podViewer.frame.size.height);
     }
 }
 
@@ -105,7 +117,7 @@
     NSLog(@"viewDidLoad");
     
 	// allow users to pinch/zoom.  also scales the page by default
-	webView.scalesPageToFit = YES;
+	podViewer.scalesPageToFit = YES;
     
 	// Override point for customization after application launch
 	[super viewDidLoad];
@@ -113,7 +125,7 @@
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
 	
-    NSLog(@"shouldStartLoadWithRequest");
+    NSLog(@"shouldStartLoadWithRequest begins");
     
 	iCPANAppDelegate *del = [[UIApplication sharedApplication] delegate];
     
@@ -203,10 +215,13 @@
         stopButton.enabled = TRUE;
     }
     
+    NSLog(@"shouldStartLoadWithRequest ends");
+    
+    
 	return TRUE;
 }
 
-- (void)webViewDidStartLoad:(UIWebView *)mwebView {
+- (void)webViewDidStartLoad:(UIWebView *)webView {
     backButton.enabled = (webView.canGoBack);
     forwardButton.enabled = (webView.canGoForward);
 }

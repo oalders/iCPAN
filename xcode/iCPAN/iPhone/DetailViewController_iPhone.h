@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DetailViewController.h"
 
-@interface DetailViewController_iPhone : UIViewController
+@interface DetailViewController_iPhone : DetailViewController
 
 @end

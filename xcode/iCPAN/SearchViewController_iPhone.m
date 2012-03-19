@@ -118,10 +118,14 @@
 
     NSLog(@"selected module %@", module);
         
-    DetailViewController_iPhone *webView = [[DetailViewController_iPhone alloc] initWithNibName:@"ModuleViewController" bundle:nil];
-
-    [self.navigationController pushViewController:webView animated:YES];
+    DetailViewController_iPhone *detailView = [[DetailViewController_iPhone alloc] init];
     
+    detailView.detailItem = module;
+    detailView.title = module.name;
+    detailView.hidesBottomBarWhenPushed = YES;
+	
+    [[self navigationController] pushViewController:detailView animated:YES];
+    [detailView configureView];
      
 }
 

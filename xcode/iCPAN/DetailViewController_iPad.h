@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Module.h"
 #import "DetailViewController.h"
 
 @interface DetailViewController_iPad : DetailViewController <UIPopoverControllerDelegate, UISplitViewControllerDelegate> {

@@ -280,7 +280,7 @@
 						<string key="refreshButton">UIBarButtonItem</string>
 						<string key="stopButton">UIBarButtonItem</string>
 						<string key="toolbar">UIToolbar</string>
-						<string key="webView">UIWebView</string>
+						<string key="podViewer">UIWebView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<object class="IBToOneOutletInfo" key="backButton">
@@ -311,8 +311,8 @@
 							<string key="name">toolbar</string>
 							<string key="candidateClassName">UIToolbar</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="webView">
-							<string key="name">webView</string>
+						<object class="IBToOneOutletInfo" key="podViewer">
+							<string key="name">podViewer</string>
 							<string key="candidateClassName">UIWebView</string>
 						</object>
 					</dictionary>

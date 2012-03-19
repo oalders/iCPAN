@@ -20,31 +20,27 @@
  */
 - (void)setDetailItem:(Module *)managedObject
 {
-	if ([ super detailItem ] != managedObject) {
-		super.detailItem = managedObject;
-		
-        // Update the view.
-        [super configureView];
-	}
     
     if (self.popoverController != nil) {
         [self.popoverController dismissPopoverAnimated:YES];
-    }		
+    }	
+	
+    [super setDetailItem:managedObject];
 }
 
-- (void)webViewDidFinishLoad:(UIWebView *)mwebView {
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
     backButton.enabled = (webView.canGoBack);
     forwardButton.enabled = (webView.canGoForward);
     
     // CHECK: LANDSCAPE
     if ( (self.interfaceOrientation == UIInterfaceOrientationLandscapeLeft) || (self.interfaceOrientation == UIInterfaceOrientationLandscapeRight) )
     {
-        self.webView.frame = CGRectMake(self.webView.frame.origin.x, self.webView.frame.origin.y, 703, self.webView.frame.size.height);
+        self.podViewer.frame = CGRectMake(self.podViewer.frame.origin.x, self.podViewer.frame.origin.y, 703, self.podViewer.frame.size.height);
     }
     // CHECK: PORTRAIT
     else
     {
-        self.webView.frame = CGRectMake(self.webView.frame.origin.x, self.webView.frame.origin.y, 768, self.webView.frame.size.height);
+        self.podViewer.frame = CGRectMake(self.podViewer.frame.origin.x, self.podViewer.frame.origin.y, 768, self.podViewer.frame.size.height);
     }
     
 }

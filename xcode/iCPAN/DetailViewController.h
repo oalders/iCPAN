@@ -12,7 +12,7 @@
 
 
 @interface DetailViewController : UIViewController <UIWebViewDelegate> {
-    UIWebView *webView;
+    UIWebView *podViewer;
     UIBarButtonItem *backButton;
     UIBarButtonItem *forwardButton;
     UIBarButtonItem *refreshButton;
@@ -22,7 +22,7 @@
 
 @property (nonatomic, strong) IBOutlet UIToolbar *toolbar;
 @property (nonatomic, strong) IBOutlet UILabel *detailDescriptionLabel;
-@property (nonatomic, strong) IBOutlet UIWebView *webView;
+@property (nonatomic, strong) IBOutlet UIWebView *podViewer;
 @property (nonatomic, strong) Module *detailItem;
 
 /* UIWebView Navigation */
