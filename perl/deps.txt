@@ -1,5 +1,6 @@
-  CHI
-  ElasticSearch
-  ElasticSearch::Transport::Curl
-  Parallel/ForkManager.pm
-  Pod::POM
+Cache::FastMmap
+CHI
+ElasticSearch
+ElasticSearch::Transport::Curl
+Parallel/ForkManager.pm
+Pod::POM
