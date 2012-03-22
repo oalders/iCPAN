@@ -287,7 +287,7 @@ sub get_ent {
     my $table = shift;
 
     return $self->schema->resultset('ZPrimarykey')
-        ->find( { z_name => $table } );
+        ->find_or_create( { z_name => $table } );
 
 }
 
