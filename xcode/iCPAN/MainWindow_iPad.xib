@@ -110,7 +110,7 @@
 				<object class="IBUIViewController" key="IBUIDetailViewController" id="23693665">
 					<reference key="IBUIToolbarItems" ref="0"/>
 					<reference key="IBUIParentViewController" ref="1001026670"/>
-					<string key="IBUINibName">DetailViewController</string>
+					<string key="IBUINibName">DetailViewController_iPad</string>
 					<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
 						<int key="IBUIInterfaceOrientation">1</int>
 						<int key="interfaceOrientation">1</int>
@@ -270,17 +270,16 @@
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<object class="IBPartialClassDescription">
-					<string key="className">DetailViewController_iPad</string>
+					<string key="className">DetailViewController</string>
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="backButton">UIBarButtonItem</string>
 						<string key="detailDescriptionLabel">UILabel</string>
 						<string key="forwardButton">UIBarButtonItem</string>
-						<string key="genericViewController">GenericViewController</string>
+						<string key="podViewer">UIWebView</string>
 						<string key="refreshButton">UIBarButtonItem</string>
 						<string key="stopButton">UIBarButtonItem</string>
 						<string key="toolbar">UIToolbar</string>
-						<string key="podViewer">UIWebView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<object class="IBToOneOutletInfo" key="backButton">
@@ -295,9 +294,9 @@
 							<string key="name">forwardButton</string>
 							<string key="candidateClassName">UIBarButtonItem</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="genericViewController">
-							<string key="name">genericViewController</string>
-							<string key="candidateClassName">GenericViewController</string>
+						<object class="IBToOneOutletInfo" key="podViewer">
+							<string key="name">podViewer</string>
+							<string key="candidateClassName">UIWebView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="refreshButton">
 							<string key="name">refreshButton</string>
@@ -311,11 +310,15 @@
 							<string key="name">toolbar</string>
 							<string key="candidateClassName">UIToolbar</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="podViewer">
-							<string key="name">podViewer</string>
-							<string key="candidateClassName">UIWebView</string>
-						</object>
 					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/DetailViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">DetailViewController_iPad</string>
+					<string key="superclassName">DetailViewController</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/DetailViewController_iPad.h</string>
@@ -364,7 +367,7 @@
 					<string key="superclassName">iCPANAppDelegate</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="detailViewController">DetailViewController_iPad</string>
-						<string key="genericViewController">SearchViewController_iPad</string>
+						<string key="searchViewController">SearchViewController_iPad</string>
 						<string key="splitViewController">UISplitViewController</string>
 						<string key="window">UIWindow</string>
 					</dictionary>
@@ -373,8 +376,8 @@
 							<string key="name">detailViewController</string>
 							<string key="candidateClassName">DetailViewController_iPad</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="genericViewController">
-							<string key="name">genericViewController</string>
+						<object class="IBToOneOutletInfo" key="searchViewController">
+							<string key="name">searchViewController</string>
 							<string key="candidateClassName">SearchViewController_iPad</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="splitViewController">

@@ -172,8 +172,8 @@
     
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setPredicate:beginsWith];
-    [request setFetchBatchSize:5];
-    [request setFetchLimit:10];
+    [request setFetchBatchSize:10];
+    [request setFetchLimit:100];
     
     NSEntityDescription *entity = [NSEntityDescription 
                                    entityForName:@"Module" inManagedObjectContext:context];

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		ED12AA1E142466A0007F8079 /* iCPAN.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = ED12AA1D142466A0007F8079 /* iCPAN.sqlite */; };
+		ED2BF6A91519923E00E37F08 /* ModuleBookmark.m in Sources */ = {isa = PBXBuildFile; fileRef = ED2BF6A81519923E00E37F08 /* ModuleBookmark.m */; };
 		ED3F622B13C2216D006255A9 /* Author.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3F622A13C2216D006255A9 /* Author.m */; };
 		ED3F622E13C2216D006255A9 /* Module.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3F622D13C2216D006255A9 /* Module.m */; };
 		ED3F623113C2216D006255A9 /* Distribution.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3F623013C2216D006255A9 /* Distribution.m */; };
@@ -30,9 +30,11 @@
 		ED706AEF13A7285B00AAE86E /* shThemeEmacs.css in Resources */ = {isa = PBXBuildFile; fileRef = ED706AEB13A7285B00AAE86E /* shThemeEmacs.css */; };
 		ED706AF013A7285B00AAE86E /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = ED706AEC13A7285B00AAE86E /* style.css */; };
 		ED7FC69D13BEB949002505CC /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = ED7FC69C13BEB949002505CC /* Settings.bundle */; };
+		EDA1A9C2151D19FB00B822A4 /* iCPAN.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = EDA1A9C1151D19FB00B822A4 /* iCPAN.sqlite */; };
 		EDBDA4AF14C94731008F241E /* DetailViewController_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBDA4AD14C94730008F241E /* DetailViewController_iPhone.m */; };
 		EDBDA4B014C94731008F241E /* DetailViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDBDA4AE14C94730008F241E /* DetailViewController_iPhone.xib */; };
 		EDCDAB7B151439A1000DFC1F /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDCDAB7A151439A1000DFC1F /* DetailViewController.m */; };
+		EDEEBB19151ADAE2000826DF /* ModuleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EDEEBB18151ADAE2000826DF /* ModuleTableViewCell.m */; };
 		EDEEEAFD13EE3F3D00DB5195 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = EDEEEAFC13EE3F3D00DB5195 /* Default-Portrait~ipad.png */; };
 		EDEEEB0213EE429600DB5195 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = EDEEEAFF13EE410F00DB5195 /* Default-Landscape~ipad.png */; };
 		EDEEEB0413EE42BE00DB5195 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = EDEEEB0313EE42BE00DB5195 /* Default.png */; };
@@ -42,7 +44,7 @@
 		EDEEEB0C13EE44FF00DB5195 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EDEEEB0B13EE44FF00DB5195 /* Default@2x.png */; };
 		EDF1F450144BDD2500386258 /* SearchViewController_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF1F44E144BDD2500386258 /* SearchViewController_iPhone.m */; };
 		EDF1F451144BDD2500386258 /* SearchViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDF1F44F144BDD2500386258 /* SearchViewController_iPhone.xib */; };
-		EDF1F455144BEB2A00386258 /* BookmarkController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF1F453144BEB2900386258 /* BookmarkController.m */; };
+		EDF1F455144BEB2A00386258 /* BookmarkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF1F453144BEB2900386258 /* BookmarkViewController.m */; };
 		EDF1F456144BEB2A00386258 /* BookmarkController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDF1F454144BEB2A00386258 /* BookmarkController.xib */; };
 		EDF7CE24134438880012E9DA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF7CE23134438880012E9DA /* UIKit.framework */; };
 		EDF7CE26134438880012E9DA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF7CE25134438880012E9DA /* Foundation.framework */; };
@@ -74,7 +76,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		ED12AA1D142466A0007F8079 /* iCPAN.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = iCPAN.sqlite; path = ../iCPAN.sqlite; sourceTree = "<group>"; };
+		ED2BF6A71519923E00E37F08 /* ModuleBookmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModuleBookmark.h; sourceTree = "<group>"; };
+		ED2BF6A81519923E00E37F08 /* ModuleBookmark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModuleBookmark.m; sourceTree = "<group>"; };
 		ED3F622913C2216D006255A9 /* Author.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Author.h; path = model/Author.h; sourceTree = "<group>"; };
 		ED3F622A13C2216D006255A9 /* Author.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Author.m; path = model/Author.m; sourceTree = "<group>"; };
 		ED3F622C13C2216D006255A9 /* Module.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Module.h; path = model/Module.h; sourceTree = "<group>"; };
@@ -105,11 +108,14 @@
 		ED706AEB13A7285B00AAE86E /* shThemeEmacs.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = shThemeEmacs.css; sourceTree = "<group>"; };
 		ED706AEC13A7285B00AAE86E /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
 		ED7FC69C13BEB949002505CC /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = iCPAN/Settings.bundle; sourceTree = SOURCE_ROOT; };
+		EDA1A9C1151D19FB00B822A4 /* iCPAN.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = iCPAN.sqlite; sourceTree = "<group>"; };
 		EDBDA4AC14C94730008F241E /* DetailViewController_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailViewController_iPhone.h; path = iPhone/DetailViewController_iPhone.h; sourceTree = "<group>"; };
 		EDBDA4AD14C94730008F241E /* DetailViewController_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailViewController_iPhone.m; path = iPhone/DetailViewController_iPhone.m; sourceTree = "<group>"; };
 		EDBDA4AE14C94730008F241E /* DetailViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DetailViewController_iPhone.xib; path = iCPAN/iPhone/DetailViewController_iPhone.xib; sourceTree = "<group>"; };
 		EDCDAB79151439A1000DFC1F /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		EDCDAB7A151439A1000DFC1F /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		EDEEBB17151ADAE2000826DF /* ModuleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModuleTableViewCell.h; sourceTree = "<group>"; };
+		EDEEBB18151ADAE2000826DF /* ModuleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModuleTableViewCell.m; sourceTree = "<group>"; };
 		EDEEEAFC13EE3F3D00DB5195 /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Portrait~ipad.png"; path = "../Default-Portrait~ipad.png"; sourceTree = "<group>"; };
 		EDEEEAFF13EE410F00DB5195 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape~ipad.png"; path = "../Default-Landscape~ipad.png"; sourceTree = "<group>"; };
 		EDEEEB0313EE42BE00DB5195 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
@@ -120,8 +126,8 @@
 		EDF1F44D144BDD2500386258 /* SearchViewController_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController_iPhone.h; sourceTree = "<group>"; };
 		EDF1F44E144BDD2500386258 /* SearchViewController_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController_iPhone.m; sourceTree = "<group>"; };
 		EDF1F44F144BDD2500386258 /* SearchViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SearchViewController_iPhone.xib; path = iCPAN/SearchViewController_iPhone.xib; sourceTree = "<group>"; };
-		EDF1F452144BEB2900386258 /* BookmarkController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookmarkController.h; sourceTree = "<group>"; };
-		EDF1F453144BEB2900386258 /* BookmarkController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookmarkController.m; sourceTree = "<group>"; };
+		EDF1F452144BEB2900386258 /* BookmarkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookmarkViewController.h; sourceTree = "<group>"; };
+		EDF1F453144BEB2900386258 /* BookmarkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookmarkViewController.m; sourceTree = "<group>"; };
 		EDF1F454144BEB2A00386258 /* BookmarkController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BookmarkController.xib; path = iCPAN/BookmarkController.xib; sourceTree = "<group>"; };
 		EDF7CE1F134438880012E9DA /* iCPAN.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iCPAN.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDF7CE23134438880012E9DA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -287,8 +293,14 @@
 		EDCF8B9515106A0B00AB37E4 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				ED2BF6A71519923E00E37F08 /* ModuleBookmark.h */,
+				ED2BF6A81519923E00E37F08 /* ModuleBookmark.m */,
+				EDF1F452144BEB2900386258 /* BookmarkViewController.h */,
+				EDF1F453144BEB2900386258 /* BookmarkViewController.m */,
 				EDCDAB79151439A1000DFC1F /* DetailViewController.h */,
 				EDCDAB7A151439A1000DFC1F /* DetailViewController.m */,
+				EDEEBB17151ADAE2000826DF /* ModuleTableViewCell.h */,
+				EDEEBB18151ADAE2000826DF /* ModuleTableViewCell.m */,
 			);
 			name = Shared;
 			sourceTree = "<group>";
@@ -310,7 +322,6 @@
 		EDF7CE14134438880012E9DA = {
 			isa = PBXGroup;
 			children = (
-				ED12AA1D142466A0007F8079 /* iCPAN.sqlite */,
 				EDF7CE2B134438880012E9DA /* iCPAN */,
 				EDF7CE54134438890012E9DA /* iCPANTests */,
 				EDF7CE22134438880012E9DA /* Frameworks */,
@@ -341,6 +352,7 @@
 		EDF7CE2B134438880012E9DA /* iCPAN */ = {
 			isa = PBXGroup;
 			children = (
+				EDA1A9C1151D19FB00B822A4 /* iCPAN.sqlite */,
 				EDF7CE34134438880012E9DA /* iCPANAppDelegate.h */,
 				EDF7CE35134438880012E9DA /* iCPANAppDelegate.m */,
 				ED706ADA13A7275500AAE86E /* Reference */,
@@ -371,8 +383,6 @@
 				EDF7CE3C134438880012E9DA /* iCPANAppDelegate_iPhone.m */,
 				EDF1F44D144BDD2500386258 /* SearchViewController_iPhone.h */,
 				EDF1F44E144BDD2500386258 /* SearchViewController_iPhone.m */,
-				EDF1F452144BEB2900386258 /* BookmarkController.h */,
-				EDF1F453144BEB2900386258 /* BookmarkController.m */,
 				EDBDA4AC14C94730008F241E /* DetailViewController_iPhone.h */,
 				EDBDA4AD14C94730008F241E /* DetailViewController_iPhone.m */,
 			);
@@ -507,10 +517,10 @@
 				EDEEEB0813EE448A00DB5195 /* onion-72x72.png in Resources */,
 				EDEEEB0A13EE44F200DB5195 /* onion-114x114.png in Resources */,
 				EDEEEB0C13EE44FF00DB5195 /* Default@2x.png in Resources */,
-				ED12AA1E142466A0007F8079 /* iCPAN.sqlite in Resources */,
 				EDF1F451144BDD2500386258 /* SearchViewController_iPhone.xib in Resources */,
 				EDF1F456144BEB2A00386258 /* BookmarkController.xib in Resources */,
 				EDBDA4B014C94731008F241E /* DetailViewController_iPhone.xib in Resources */,
+				EDA1A9C2151D19FB00B822A4 /* iCPAN.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -558,9 +568,11 @@
 				ED3F623113C2216D006255A9 /* Distribution.m in Sources */,
 				ED3F623413C2216D006255A9 /* Pod.m in Sources */,
 				EDF1F450144BDD2500386258 /* SearchViewController_iPhone.m in Sources */,
-				EDF1F455144BEB2A00386258 /* BookmarkController.m in Sources */,
+				EDF1F455144BEB2A00386258 /* BookmarkViewController.m in Sources */,
 				EDBDA4AF14C94731008F241E /* DetailViewController_iPhone.m in Sources */,
 				EDCDAB7B151439A1000DFC1F /* DetailViewController.m in Sources */,
+				ED2BF6A91519923E00E37F08 /* ModuleBookmark.m in Sources */,
+				EDEEBB19151ADAE2000826DF /* ModuleTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
