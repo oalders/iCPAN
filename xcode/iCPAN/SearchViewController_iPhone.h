@@ -7,20 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SearchViewController.h"
 
-@interface SearchViewController_iPhone : UIViewController <UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate> {
-    UITableView *tv;
-    UISearchBar *searchBar;
-    NSString *searchString;
-    NSFetchedResultsController *fetchedResultsController;
+@interface SearchViewController_iPhone : SearchViewController {
 }
-
-@property (nonatomic, strong) IBOutlet UISearchBar *searchBar;
-@property (nonatomic, strong) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) NSArray *modules;
-@property (nonatomic, strong) NSString *searchString;
-@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
-
--(void) searchModules;
 
 @end
