@@ -16,8 +16,6 @@
 
 @synthesize context;
 @synthesize detailViewController;
-@synthesize fetchedResultsController;
-@synthesize searchString;
 @synthesize tableView;
 
 
