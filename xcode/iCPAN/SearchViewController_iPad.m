@@ -10,31 +10,12 @@
 #import "SearchViewController_iPad.h"
 #import "DetailViewController_iPad.h"
 
-
 @implementation SearchViewController_iPad
-
 
 @synthesize context;
 @synthesize detailViewController;
 @synthesize tableView;
 
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
 
 - (NSFetchedResultsController *)fetchedResultsController {
     
@@ -120,13 +101,6 @@
 
 #pragma mark - View lifecycle
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    
-}
-
 - (void)viewDidUnload
 {
     [super viewDidUnload];
@@ -141,10 +115,6 @@
 	return YES;
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)aTableView {
-    // Return the number of sections.
-    return 1;
-}
 
 - (NSInteger)tableView:(UITableView *)aTableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
@@ -206,19 +176,6 @@
     [[[self searchDisplayController] searchResultsTableView] reloadData];
 }
 
-
-// Apple boilerplate
-
-- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
-    // The fetch controller is about to start sending change notifications, so prepare the table view for updates.
-    [self.tableView beginUpdates];
-}
-
-
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-    // The fetch controller has sent all current change notifications, so tell the table view to process all updates.
-    [self.tableView endUpdates];
-}
 
 - (void)dealloc
 {
