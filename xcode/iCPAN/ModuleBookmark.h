@@ -11,5 +11,6 @@
 @interface ModuleBookmark : NSObject
 
 +(NSDictionary *)getBookmarks;
++(BOOL)isBookmarked:(NSString *)moduleName;
 
 @end

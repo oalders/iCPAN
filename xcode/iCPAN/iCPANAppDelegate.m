@@ -192,37 +192,6 @@
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
 
-// We'll need to implement a check here to make sure all bookmarks still exist
-// in the db.  Should only run when the app initializes
-- (NSDictionary *)getBookmarks {
-	
-	NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-	
-	if([prefs dictionaryForKey:@"bookmarks"] == nil) {
-		NSDictionary *bookmarks = [[NSDictionary alloc] init];
-        [prefs setObject:bookmarks forKey:@"bookmarks"];
-		[prefs synchronize];        
-		return bookmarks;
-	} else {
-		return [prefs dictionaryForKey:@"bookmarks"];
-	}
-	
-}
-
-
-- (BOOL)isBookmarked:(NSString *)moduleName {
-    
-	NSDictionary *bookmarks = [self getBookmarks];
-	
-	for (id key in bookmarks) {
-		if( [key isEqualToString:moduleName]) {
-			return 1;
-		}
-	}
-	
-	return 0;
-}
-
 
 - (NSArray *)getRecentlyViewed {
 	NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];

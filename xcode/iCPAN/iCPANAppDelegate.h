@@ -13,21 +13,19 @@
 
 }
 
-@property (nonatomic, strong) IBOutlet UIWindow *window;
+@property (nonatomic, strong) IBOutlet UIWindow                      *window;
 
-@property (nonatomic, strong, readonly) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic, strong, readonly) NSManagedObjectModel *managedObjectModel;
+@property (nonatomic, strong, readonly) NSManagedObjectContext       *managedObjectContext;
+@property (nonatomic, strong, readonly) NSManagedObjectModel         *managedObjectModel;
 @property (nonatomic, strong, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
-- (void) saveContext;
-- (void) createPodFolder;
-- (NSURL *)applicationDocumentsDirectory;
-- (NSURL *)docURL;
-- (NSURL *)podURL;
+- (NSURL *)    applicationDocumentsDirectory;
+- (void)       createPodFolder;
+- (NSURL *)    docURL;
 - (NSString *) docDir;
-- (NSString *)podDir;
-- (NSDictionary *)getBookmarks;
-- (NSArray *)getRecentlyViewed;
-- (BOOL)isBookmarked:(NSString *)moduleName;
+- (NSArray *)  getRecentlyViewed;
+- (NSString *) podDir;
+- (NSURL *)    podURL;
+- (void)       saveContext;
 
 @end

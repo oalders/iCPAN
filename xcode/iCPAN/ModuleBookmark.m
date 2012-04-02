@@ -25,4 +25,19 @@
 	
 }
 
++ (BOOL)isBookmarked:(NSString *)moduleName {
+    
+	NSDictionary *bookmarks = [ModuleBookmark getBookmarks];
+	
+	for (id key in bookmarks) {
+		if( [key isEqualToString:moduleName]) {
+			return 1;
+		}
+	}
+	
+	return 0;
+}
+
+
+
 @end
