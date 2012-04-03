@@ -1,5 +1,5 @@
 //
-//  BookmarkController.m
+//  BookmarkViewController.m
 //  iCPAN
 //
 //  Created by Olaf Alders on 11-10-17.
@@ -96,7 +96,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    
+    NSLog(@"bookmark count %@", [[ModuleBookmark getBookmarks] count]);
 	return[[ ModuleBookmark getBookmarks] count];
 	
 }
