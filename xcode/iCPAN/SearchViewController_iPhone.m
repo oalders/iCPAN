@@ -21,14 +21,14 @@
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     NSLog(@"==========================search bar search button clicked");
-    [self searchModules];
+    [self performSearch];
     [super.myTableView reloadData];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    Module *module = [self.modules objectAtIndex:indexPath.row];
+    Module *module = [self.myFetchedResultsController objectAtIndexPath:indexPath];
     
     NSLog(@"selected module %@", module);
     

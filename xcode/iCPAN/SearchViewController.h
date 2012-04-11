@@ -20,7 +20,6 @@
 @property (nonatomic, strong) NSString *searchString;
 @property (nonatomic, strong) IBOutlet UITableView *myTableView;
 
--(void) searchModules;
 -(void) performSearch;
 -(NSFetchedResultsController *)fetchedResultsController;
 

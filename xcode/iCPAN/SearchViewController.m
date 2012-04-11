@@ -23,14 +23,6 @@
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    // Return the number of rows in the section.    
-    [self searchModules];
-    
-    NSLog(@"numberOfRowsInSection: %u", [modules count] );
-    return [modules count];
-}
 
 - (NSFetchedResultsController *)fetchedResultsController {
     
@@ -59,55 +51,6 @@
                                         managedObjectContext:MOC sectionNameKeyPath:nil 
                                                    cacheName:nil];
     return myFetchedResultsController;    
-}
-
--(void) searchModules {
-    NSLog(@"======================================= about to search modules");
-    iCPANAppDelegate *del = [[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *context = del.managedObjectContext;
-    
-    if (searchString == nil ) {
-        return;
-    }
-    
-    //NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K ==[cd] %@", @"name", searchString];
-    NSPredicate *beginsWith = [NSPredicate predicateWithFormat:@"%K BEGINSWITH[cd] %@", @"name", searchString];
-    
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    [request setPredicate:beginsWith];
-    [request setFetchBatchSize:10];
-    [request setFetchLimit:100];
-    
-    NSEntityDescription *entity = [NSEntityDescription 
-                                   entityForName:@"Module" inManagedObjectContext:context];
-    [request setEntity:entity];
-    
-    NSError *error;
-    NSArray *searchResults = [context executeFetchRequest:request error:&error];
-    self.modules = searchResults;
-}
-
-#pragma mark - Table view data source
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *CellIdentifier = @"Cell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        cell.textLabel.font = [UIFont systemFontOfSize:12];
-    }
-    
-    // Configure the cell...
-    NSLog(@"cell row: %i", indexPath.row );
-    NSLog(@"results: %i", [modules count]);
-    Module *module = [modules objectAtIndex:indexPath.row];
-    NSLog(@"created cell %@", modules );
-    NSLog(@"created cell %@", module.name );
-    cell.textLabel.text = module.name;
-    
-    return cell;
 }
 
 
@@ -189,6 +132,34 @@
     
     
 }
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    // Return the number of rows in the section.
+    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.myFetchedResultsController sections] objectAtIndex:section];
+    
+    return [sectionInfo numberOfObjects];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    static NSString *CellIdentifier = @"CellIdentifier";
+    
+    // Dequeue or create a cell of the appropriate type.
+    UITableViewCell *cell = [self.myTableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        cell.textLabel.font = [UIFont systemFontOfSize:16];
+    }
+    
+    // Configure the cell.
+    Module *module = [self.myFetchedResultsController objectAtIndexPath:indexPath];
+    NSLog(@"fetched result: %@", [module name]);
+    
+    cell.textLabel.text = [module name];
+    return cell;
+}
+
 
 
 - (void)viewDidUnload

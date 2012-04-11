@@ -24,33 +24,6 @@
 }
 
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
-    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.myFetchedResultsController sections] objectAtIndex:section];
-    
-    return [sectionInfo numberOfObjects];
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    static NSString *CellIdentifier = @"CellIdentifier";
-    
-    // Dequeue or create a cell of the appropriate type.
-    UITableViewCell *cell = [self.myTableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        cell.accessoryType = UITableViewCellAccessoryNone;
-        cell.textLabel.font = [UIFont systemFontOfSize:16];
-    }
-        
-    // Configure the cell.
-    Module *module = [self.myFetchedResultsController objectAtIndexPath:indexPath];
-    NSLog(@"fetched result: %@", [module name]);
-
-    cell.textLabel.text = [module name];
-    return cell;
-}
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Set the detail item in the detail view controller.
     Module *module = [self.myFetchedResultsController objectAtIndexPath:indexPath];
