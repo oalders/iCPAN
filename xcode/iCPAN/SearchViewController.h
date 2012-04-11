@@ -12,7 +12,6 @@
     NSFetchedResultsController *myFetchedResultsController;
     UISearchBar *searchBar;
     NSString *searchString;
-    UITableView *tv;
 }
 
 @property (nonatomic, strong) NSArray *modules;

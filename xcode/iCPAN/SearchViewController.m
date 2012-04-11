@@ -36,12 +36,8 @@
     
     NSLog(@"===================== search %@", self.searchString);
     if (self.myFetchedResultsController != nil) {
-        NSLog(@"******************************************** fetchedResultsController already exists");
         return myFetchedResultsController;
     }
-    
-    NSLog(@"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx controller init");
-    
     
     iCPANAppDelegate *del = [[UIApplication sharedApplication] delegate];
     NSManagedObjectContext *MOC = del.managedObjectContext;
@@ -116,12 +112,6 @@
 
 
 #pragma mark - Table view delegate
-
--(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    NSLog(@"==========================search bar search button clicked");
-    [self searchModules];
-    [tableView reloadData];
-}
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchTerm
 {
