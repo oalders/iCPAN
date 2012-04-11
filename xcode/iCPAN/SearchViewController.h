@@ -22,6 +22,7 @@
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 
 -(void) searchModules;
+-(void) performSearch;
 -(NSFetchedResultsController *)fetchedResultsController;
 
 @end
