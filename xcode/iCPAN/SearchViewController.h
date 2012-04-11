@@ -18,7 +18,7 @@
 @property (nonatomic, strong) NSFetchedResultsController *myFetchedResultsController;
 @property (nonatomic, strong) IBOutlet UISearchBar *searchBar;
 @property (nonatomic, strong) NSString *searchString;
-@property (nonatomic, strong) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) IBOutlet UITableView *myTableView;
 
 -(void) searchModules;
 -(void) performSearch;

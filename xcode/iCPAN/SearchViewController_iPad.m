@@ -36,7 +36,7 @@
     static NSString *CellIdentifier = @"CellIdentifier";
     
     // Dequeue or create a cell of the appropriate type.
-    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UITableViewCell *cell = [self.myTableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         cell.accessoryType = UITableViewCellAccessoryNone;

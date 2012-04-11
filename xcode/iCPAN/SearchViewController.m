@@ -14,7 +14,7 @@
 @synthesize myFetchedResultsController;
 @synthesize searchBar; 
 @synthesize searchString;
-@synthesize tableView;
+@synthesize myTableView;
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -23,7 +23,7 @@
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)atableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.    
     [self searchModules];
@@ -89,7 +89,7 @@
 
 #pragma mark - Table view data source
 
-- (UITableViewCell *)tableView:(UITableView *)atableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
     
