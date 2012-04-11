@@ -14,16 +14,20 @@
 
 @synthesize context;
 @synthesize detailViewController;
+@synthesize myFetchedResultsController;
 @synthesize tableView;
 
 
 - (NSFetchedResultsController *)fetchedResultsController {
     
     NSLog(@"===================== search %@", self.searchString);
-    //if (fetchedResultsController != nil) {
-    //    NSLog(@"fetchedResultsController already exists");
-    //    return fetchedResultsController;
-    //}
+    if (self.myFetchedResultsController != nil) {
+        NSLog(@"******************************************** fetchedResultsController already exists");
+        return myFetchedResultsController;
+    }
+    
+    NSLog(@"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx controller init");
+    
 
     iCPANAppDelegate *del = [[UIApplication sharedApplication] delegate];
     NSManagedObjectContext *MOC = del.managedObjectContext;
@@ -44,6 +48,11 @@
     [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest 
                                         managedObjectContext:MOC sectionNameKeyPath:nil 
                                                    cacheName:nil];
+    self.myFetchedResultsController = fetchedResultsController;
+    return fetchedResultsController;    
+}
+
+- (void)performSearch {
     
     NSString *searchText = self.searchString;
     searchText = [searchText stringByReplacingOccurrencesOfString:@"-" withString:@"::"];
@@ -84,18 +93,19 @@
     }
     
     NSLog(@"predicate is now: %@", predicate);
+    
+    [self fetchedResultsController];
 
-    [fetchedResultsController.fetchRequest setPredicate:predicate];
-    fetchedResultsController.delegate = self;
+    [myFetchedResultsController.fetchRequest setPredicate:predicate];
+    myFetchedResultsController.delegate = self;
     
     NSError * error = nil;
-    [fetchedResultsController performFetch:&error];
+    [myFetchedResultsController performFetch:&error];
     if (error) {
         // report error
     }
     
     
-    return fetchedResultsController;    
     
 }
 
@@ -116,7 +126,7 @@
 }
 
 
-- (NSInteger)tableView:(UITableView *)aTableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
     id <NSFetchedResultsSectionInfo> sectionInfo = [[fetchedResultsController sections] objectAtIndex:section];
     
@@ -164,7 +174,7 @@
     
     //"as you type" searching on very short strings is likely pointless
     if ([searchString length] > 2) {
-        [self fetchedResultsController];
+        [self performSearch];
         return YES;
     }
     return NO;
@@ -172,14 +182,13 @@
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     NSLog(@"search bar search button clicked");    
-    [self fetchedResultsController];
     [[[self searchDisplayController] searchResultsTableView] reloadData];
 }
 
 
 - (void)dealloc
 {
-    self.fetchedResultsController.delegate = nil;
+    self.myFetchedResultsController.delegate = nil;
     
 }
 
