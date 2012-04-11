@@ -53,7 +53,7 @@
     NSString *name = [self.detailItem valueForKey:@"name"];
     iCPANAppDelegate *del = [[UIApplication sharedApplication] delegate];
     
-    name = [name stringByReplacingOccurrencesOfString:@"::" withString:@"-"];
+    name = [name stringByReplacingOccurrencesOfString:@"::" withString:@"_"];
     name = [name stringByAppendingString:@".html"];
     
     NSURL *podURL = [[del podURL] URLByAppendingPathComponent:@"/"];
@@ -142,7 +142,7 @@
         //
 		path = [path stringByReplacingOccurrencesOfString:[del podDir] withString:@""];
 		path = [path stringByReplacingOccurrencesOfString:@"/" withString:@""]; // too many slashes
-		path = [path stringByReplacingOccurrencesOfString:@"-" withString:@"::"];
+		path = [path stringByReplacingOccurrencesOfString:@"_" withString:@"::"];
 		path = [path stringByReplacingOccurrencesOfString:@".html" withString:@""];
 		
 		NSLog(@"module to search for: %@", path);
@@ -182,7 +182,7 @@
              */
 			
 			NSString *fileName = module.name;
-			fileName = [fileName stringByReplacingOccurrencesOfString:@"::" withString:@"-"];
+			fileName = [fileName stringByReplacingOccurrencesOfString:@"::" withString:@"_"];
 			fileName = [fileName stringByAppendingString:@".html"];
             NSString *podPath = [[del podDir] stringByAppendingPathComponent:fileName];
             

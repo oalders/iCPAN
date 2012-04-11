@@ -79,7 +79,6 @@
 - (void)performSearch {
     
     NSString *searchText = self.searchString;
-    searchText = [searchText stringByReplacingOccurrencesOfString:@"-" withString:@"::"];
     searchText = [searchText stringByReplacingOccurrencesOfString:@"/" withString:@"::"];
     searchText = [searchText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     
