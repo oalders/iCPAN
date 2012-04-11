@@ -36,11 +36,4 @@
     [[[self searchDisplayController] searchResultsTableView] reloadData];
 }
 
-
-- (void)dealloc
-{
-    self.myFetchedResultsController.delegate = nil;
-    
-}
-
 @end
