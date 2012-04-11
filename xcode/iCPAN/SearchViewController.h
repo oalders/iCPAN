@@ -9,18 +9,19 @@
 #import <UIKit/UIKit.h>
 
 @interface SearchViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate> {
-    NSFetchedResultsController *fetchedResultsController;
+    NSFetchedResultsController *myFetchedResultsController;
     UISearchBar *searchBar;
     NSString *searchString;
     UITableView *tv;
 }
 
-@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, strong) NSArray *modules;
+@property (nonatomic, strong) NSFetchedResultsController *myFetchedResultsController;
 @property (nonatomic, strong) IBOutlet UISearchBar *searchBar;
 @property (nonatomic, strong) NSString *searchString;
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 
 -(void) searchModules;
+-(NSFetchedResultsController *)fetchedResultsController;
 
 @end

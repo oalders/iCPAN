@@ -10,8 +10,8 @@
 #import "iCPANAppDelegate.h"
 
 @implementation SearchViewController
-@synthesize fetchedResultsController;
 @synthesize modules;
+@synthesize myFetchedResultsController;
 @synthesize searchBar; 
 @synthesize searchString;
 @synthesize tableView;
@@ -30,6 +30,39 @@
     
     NSLog(@"numberOfRowsInSection: %u", [modules count] );
     return [modules count];
+}
+
+- (NSFetchedResultsController *)fetchedResultsController {
+    
+    NSLog(@"===================== search %@", self.searchString);
+    if (self.myFetchedResultsController != nil) {
+        NSLog(@"******************************************** fetchedResultsController already exists");
+        return myFetchedResultsController;
+    }
+    
+    NSLog(@"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx controller init");
+    
+    
+    iCPANAppDelegate *del = [[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *MOC = del.managedObjectContext;
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription 
+                                   entityForName:@"Module" inManagedObjectContext:MOC];
+    [fetchRequest setEntity:entity];
+    
+    NSSortDescriptor *sort = [[NSSortDescriptor alloc] 
+                              initWithKey:@"name" ascending:YES selector:@selector(caseInsensitiveCompare:)];
+    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sort]];
+    
+    [fetchRequest setFetchBatchSize:20];
+    [fetchRequest setFetchLimit:500];
+    
+    myFetchedResultsController = 
+    [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest 
+                                        managedObjectContext:MOC sectionNameKeyPath:nil 
+                                                   cacheName:nil];
+    return myFetchedResultsController;    
 }
 
 -(void) searchModules {
@@ -114,5 +147,12 @@
 }
 
 
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    // Release any retained subviews of the main view.
+    // e.g. self.myOutlet = nil;
+    self.myFetchedResultsController = nil;
+}
 
 @end

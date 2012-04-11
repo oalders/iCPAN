@@ -14,43 +14,7 @@
 
 @synthesize context;
 @synthesize detailViewController;
-@synthesize myFetchedResultsController;
 @synthesize tableView;
-
-
-- (NSFetchedResultsController *)fetchedResultsController {
-    
-    NSLog(@"===================== search %@", self.searchString);
-    if (self.myFetchedResultsController != nil) {
-        NSLog(@"******************************************** fetchedResultsController already exists");
-        return myFetchedResultsController;
-    }
-    
-    NSLog(@"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx controller init");
-    
-
-    iCPANAppDelegate *del = [[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *MOC = del.managedObjectContext;
-    
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription 
-                                   entityForName:@"Module" inManagedObjectContext:MOC];
-    [fetchRequest setEntity:entity];
-    
-    NSSortDescriptor *sort = [[NSSortDescriptor alloc] 
-                              initWithKey:@"name" ascending:YES selector:@selector(caseInsensitiveCompare:)];
-    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sort]];
-    
-    [fetchRequest setFetchBatchSize:20];
-    [fetchRequest setFetchLimit:500];
-    
-    fetchedResultsController = 
-    [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest 
-                                        managedObjectContext:MOC sectionNameKeyPath:nil 
-                                                   cacheName:nil];
-    self.myFetchedResultsController = fetchedResultsController;
-    return fetchedResultsController;    
-}
 
 - (void)performSearch {
     
@@ -94,7 +58,7 @@
     
     NSLog(@"predicate is now: %@", predicate);
     
-    [self fetchedResultsController];
+    [super fetchedResultsController];
 
     [myFetchedResultsController.fetchRequest setPredicate:predicate];
     myFetchedResultsController.delegate = self;
@@ -111,13 +75,6 @@
 
 #pragma mark - View lifecycle
 
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-    self.fetchedResultsController = nil;
-}
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -128,7 +85,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    id <NSFetchedResultsSectionInfo> sectionInfo = [[fetchedResultsController sections] objectAtIndex:section];
+    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.myFetchedResultsController sections] objectAtIndex:section];
     
     return [sectionInfo numberOfObjects];
 }
@@ -146,7 +103,7 @@
     }
         
     // Configure the cell.
-    Module *module = [fetchedResultsController objectAtIndexPath:indexPath];
+    Module *module = [self.myFetchedResultsController objectAtIndexPath:indexPath];
     NSLog(@"fetched result: %@", [module name]);
 
     cell.textLabel.text = [module name];
@@ -155,7 +112,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Set the detail item in the detail view controller.
-    Module *module = [fetchedResultsController objectAtIndexPath:indexPath];
+    Module *module = [self.myFetchedResultsController objectAtIndexPath:indexPath];
     detailViewController.detailItem = module;
 }
 

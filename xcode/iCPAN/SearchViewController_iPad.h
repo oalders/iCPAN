@@ -14,13 +14,11 @@
 
 @interface SearchViewController_iPad : SearchViewController <UISearchDisplayDelegate, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate> {
     NSManagedObjectContext *context;
-    NSFetchedResultsController *myFetchedResultsController;
     UITableView *tableView;
 }
 
 @property (nonatomic, strong) IBOutlet DetailViewController_iPad *detailViewController;
 @property (nonatomic, strong) NSManagedObjectContext *context;
-@property (nonatomic, strong) NSFetchedResultsController *myFetchedResultsController;
 @property (nonatomic, strong) UITableView *tableView;
 
 @end
