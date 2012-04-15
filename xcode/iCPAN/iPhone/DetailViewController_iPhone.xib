@@ -95,12 +95,6 @@
 								<reference key="IBUIToolbar" ref="500261530"/>
 								<int key="IBUISystemItemIdentifier">6</int>
 							</object>
-							<object class="IBUIBarButtonItem" id="721819113">
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<int key="IBUIStyle">1</int>
-								<reference key="IBUIToolbar" ref="500261530"/>
-								<int key="IBUISystemItemIdentifier">11</int>
-							</object>
 						</array>
 					</object>
 				</array>
@@ -220,7 +214,6 @@
 							<reference ref="444478799"/>
 							<reference ref="465702248"/>
 							<reference ref="393905509"/>
-							<reference ref="721819113"/>
 						</array>
 						<reference key="parent" ref="191373211"/>
 					</object>
@@ -249,11 +242,6 @@
 						<reference key="object" ref="465702248"/>
 						<reference key="parent" ref="500261530"/>
 					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">24</int>
-						<reference key="object" ref="721819113"/>
-						<reference key="parent" ref="500261530"/>
-					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -268,14 +256,13 @@
 				<string key="14.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="15.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="16.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="24.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="4.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">24</int>
+			<int key="maxID">25</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -283,6 +270,7 @@
 					<string key="className">DetailViewController</string>
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="addBookmarkButton">UIBarButtonItem</string>
 						<string key="backButton">UIBarButtonItem</string>
 						<string key="detailDescriptionLabel">UILabel</string>
 						<string key="forwardButton">UIBarButtonItem</string>
@@ -292,6 +280,10 @@
 						<string key="toolbar">UIToolbar</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="addBookmarkButton">
+							<string key="name">addBookmarkButton</string>
+							<string key="candidateClassName">UIBarButtonItem</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="backButton">
 							<string key="name">backButton</string>
 							<string key="candidateClassName">UIBarButtonItem</string>

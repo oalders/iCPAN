@@ -11,4 +11,7 @@
 
 @interface DetailViewController_iPhone : DetailViewController
 
+- (void) activateBookmarkButton;
+- (void) activateTrashButton;
+
 @end

@@ -16,4 +16,39 @@
     [super setDetailItem:managedObject];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    NSLog(@"viewwillappear iphone");
+
+    [self activateBookmarkButton];
+    [super viewWillAppear:animated];
+
+}
+
+- (void)addBookmark:(id)sender {
+	
+    NSLog(@"adding bookmark");
+    [self activateTrashButton];
+    
+}
+
+- (void)removeBookmark:(id)sender {
+	
+    NSLog(@"removing bookmark");
+    [self activateBookmarkButton];
+    
+}
+
+- (void) activateBookmarkButton {
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemBookmarks target:self action:@selector(addBookmark:)];  
+    self.navigationItem.rightBarButtonItem = item;
+
+}
+
+- (void) activateTrashButton {
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemTrash target:self action:@selector(removeBookmark:)];    
+    self.navigationItem.rightBarButtonItem = item;
+
+}
+
 @end
