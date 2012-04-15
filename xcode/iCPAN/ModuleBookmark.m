@@ -28,13 +28,12 @@
 + (BOOL)isBookmarked:(NSString *)moduleName {
     
 	NSDictionary *bookmarks = [ModuleBookmark getBookmarks];
+    NSLog(@"module name %@ %@", moduleName, bookmarks);
 	
-	for (id key in bookmarks) {
-		if( [key isEqualToString:moduleName]) {
-			return 1;
-		}
+    if ([bookmarks objectForKey:moduleName]) {
+        return 1;
 	}
-	
+    	
 	return 0;
 }
 

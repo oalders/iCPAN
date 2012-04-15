@@ -8,10 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "DetailViewController.h"
+#import "ModuleBookmark.h"
 
 @interface DetailViewController_iPhone : DetailViewController
 
+- (void) addBookmark;
 - (void) activateBookmarkButton;
 - (void) activateTrashButton;
+- (void) removeBookmark;
 
 @end
