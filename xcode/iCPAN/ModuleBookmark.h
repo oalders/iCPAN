@@ -12,5 +12,7 @@
 
 +(NSDictionary *)getBookmarks;
 +(BOOL)isBookmarked:(NSString *)moduleName;
-
++ (void) addBookmark: (NSString *)moduleName;
++ (void) removeBookmark: (NSString *)moduleName;
++ (void) syncBookmarks: (NSMutableDictionary *) bookmarks;
 @end

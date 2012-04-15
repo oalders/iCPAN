@@ -32,6 +32,7 @@
 - (void) addBookmark {
 	
     NSLog(@"adding bookmark");
+    [ModuleBookmark addBookmark:[self.detailItem valueForKey:@"name"]];
     [self activateTrashButton];
     
 }
@@ -39,6 +40,7 @@
 - (void) removeBookmark {
 	
     NSLog(@"removing bookmark");
+    [ModuleBookmark removeBookmark:[self.detailItem valueForKey:@"name"]];
     [self activateBookmarkButton];
     
 }

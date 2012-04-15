@@ -37,6 +37,31 @@
 	return 0;
 }
 
++ (void) addBookmark: (NSString *)moduleName {
+    
+    NSMutableDictionary *mutable_bookmarks = [[self getBookmarks] mutableCopy];
+    
+    [mutable_bookmarks setValue:moduleName forKey:moduleName];
+    
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    [prefs setObject:mutable_bookmarks forKey:@"bookmarks"];
+    [prefs synchronize];
+}
+
++ (void) removeBookmark: (NSString *)moduleName {
+    NSMutableDictionary *mutable_bookmarks = [[self getBookmarks] mutableCopy];
+    
+    [mutable_bookmarks removeObjectForKey:moduleName];
+    [ModuleBookmark syncBookmarks:mutable_bookmarks];
+
+}
+
++ (void) syncBookmarks: (NSMutableDictionary *) bookmarks {
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    [prefs setObject:bookmarks forKey:@"bookmarks"];
+    [prefs synchronize];    
+    
+}
 
 
 @end
