@@ -12,14 +12,15 @@
 
 @interface BookmarkViewController : UITableViewController <NSFetchedResultsControllerDelegate> {
     
-    NSFetchedResultsController *fetchedResultsController;
+    NSFetchedResultsController *myFetchedResultsController;
     NSManagedObjectContext     *managedObjectContext;
 
 }
 
-@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, strong) NSFetchedResultsController *myFetchedResultsController;
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 
 - (void)configureCell:(ModuleTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
+- (NSFetchedResultsController *)fetchedResultsController;
 
 @end

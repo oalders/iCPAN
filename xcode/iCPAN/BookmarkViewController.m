@@ -12,7 +12,7 @@
 
 @implementation BookmarkViewController
 
-@synthesize fetchedResultsController;
+@synthesize myFetchedResultsController;
 @synthesize managedObjectContext;
 
 
@@ -60,9 +60,9 @@
 
 - (NSFetchedResultsController *)fetchedResultsController {
 
-    //if (self.fetchedResultsController != nil) {
-    //    return self.fetchedResultsController;
-    //}
+    if (self.myFetchedResultsController != nil) {
+        return self.myFetchedResultsController;
+    }
     
     // Create the fetch request for the entity.
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
@@ -80,18 +80,19 @@
     
     // Edit the section name key path and cache name if appropriate.
     // nil for section name key path means "no sections".
-    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:managedObjectContext sectionNameKeyPath:nil cacheName:@"Root"];
+    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:managedObjectContext sectionNameKeyPath:nil cacheName:nil];
     aFetchedResultsController.delegate = self;
-    self.fetchedResultsController = aFetchedResultsController;
+    self.myFetchedResultsController = aFetchedResultsController;
     
     NSDictionary *bookmarks = [ModuleBookmark getBookmarks];
+    NSLog(@"all values: %@", [bookmarks allKeys]);
     if([bookmarks count]) {
         NSString *attributeName = @"name";
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K IN[cd] %@", attributeName, [bookmarks allValues]];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K IN[cd] %@", attributeName, [bookmarks allKeys]];
         [fetchRequest setPredicate:predicate];
     }
     
-	return fetchedResultsController;
+	return self.myFetchedResultsController;
 }
 
 
@@ -101,7 +102,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {    
-    id <NSFetchedResultsSectionInfo> sectionInfo = [[fetchedResultsController sections] objectAtIndex:section];
+    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.myFetchedResultsController sections] objectAtIndex:section];
     return [sectionInfo numberOfObjects];	
 }
 
@@ -126,34 +127,18 @@
 
 - (void)configureCell:(ModuleTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     // Configure the cell
-	Module *module = (Module *)[fetchedResultsController objectAtIndexPath:indexPath];
+	Module *module = (Module *)[self.myFetchedResultsController objectAtIndexPath:indexPath];
     cell.module = module;
 }
-
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-    DetailViewController *bookmarksViewController = [[DetailViewController alloc] init];
-    
-    Module *module = nil;
-    module = (Module *)[fetchedResultsController objectAtIndexPath:indexPath];
-    
-	bookmarksViewController.hidesBottomBarWhenPushed = YES;
-		
-    [[self navigationController] pushViewController:bookmarksViewController animated:YES];
-    
-}
-
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
 	
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-
+        
 		NSDictionary *bookmarks = [ModuleBookmark getBookmarks];
 		
 		NSMutableDictionary *mutable_bookmarks = [bookmarks mutableCopy];
-		Module *module = (Module *)[fetchedResultsController objectAtIndexPath:indexPath];
+		Module *module = (Module *)[self.myFetchedResultsController objectAtIndexPath:indexPath];
         
 		[mutable_bookmarks removeObjectForKey:module.name];
 		
@@ -183,7 +168,7 @@
 	// Release any retained subviews of the main view.
 	// e.g. self.myOutlet = nil;
     
-    self.fetchedResultsController = nil;
+    self.myFetchedResultsController = nil;
 }
 
 @end
