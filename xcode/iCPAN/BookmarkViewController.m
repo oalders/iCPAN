@@ -9,11 +9,11 @@
 #import "BookmarkViewController.h"
 #import "DetailViewController.h"
 #import "iCPANAppDelegate.h"
-#import "ModuleTableViewCell.h"
 
 @implementation BookmarkViewController
 
-@synthesize fetchedResultsController, managedObjectContext;
+@synthesize fetchedResultsController;
+@synthesize managedObjectContext;
 
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -59,10 +59,11 @@
 #pragma mark Fetched results controller
 
 - (NSFetchedResultsController *)fetchedResultsController {
-    // Set up the fetched results controller if needed.
-	// Am creating a new controller each time so that the bookmarks list is refreshed every time the
-	// page is viewed.  
-    NSDictionary *bookmarks = [ModuleBookmark getBookmarks];
+
+    //if (self.fetchedResultsController != nil) {
+    //    return self.fetchedResultsController;
+    //}
+    
     // Create the fetch request for the entity.
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     // Edit the entity name as appropriate.
@@ -75,17 +76,21 @@
     
     [fetchRequest setSortDescriptors:sortDescriptors];        
     [fetchRequest setFetchBatchSize:20];
-    if([bookmarks count]) {
-        NSString *attributeName = @"name";
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K IN[cd] %@", attributeName, [bookmarks allValues]];
-        [fetchRequest setPredicate:predicate];
-    }
+
     
     // Edit the section name key path and cache name if appropriate.
     // nil for section name key path means "no sections".
     NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:managedObjectContext sectionNameKeyPath:nil cacheName:@"Root"];
     aFetchedResultsController.delegate = self;
     self.fetchedResultsController = aFetchedResultsController;
+    
+    NSDictionary *bookmarks = [ModuleBookmark getBookmarks];
+    if([bookmarks count]) {
+        NSString *attributeName = @"name";
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K IN[cd] %@", attributeName, [bookmarks allValues]];
+        [fetchRequest setPredicate:predicate];
+    }
+    
 	return fetchedResultsController;
 }
 
@@ -95,10 +100,9 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    NSLog(@"bookmark count %@", [[ModuleBookmark getBookmarks] count]);
-	return[[ ModuleBookmark getBookmarks] count];
-	
+{    
+    id <NSFetchedResultsSectionInfo> sectionInfo = [[fetchedResultsController sections] objectAtIndex:section];
+    return [sectionInfo numberOfObjects];	
 }
 
 
@@ -113,7 +117,7 @@
 		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
-	//[self configureCell:cell atIndexPath:indexPath];
+	[self configureCell:cell atIndexPath:indexPath];
     
     return cell;
     

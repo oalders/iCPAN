@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ModuleBookmark.h"
-
+#import "ModuleTableViewCell.h"
 
 @interface BookmarkViewController : UITableViewController <NSFetchedResultsControllerDelegate> {
     
@@ -19,5 +19,7 @@
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+
+- (void)configureCell:(ModuleTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 
 @end

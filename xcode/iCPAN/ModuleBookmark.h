@@ -10,8 +10,8 @@
 
 @interface ModuleBookmark : NSObject
 
-+(NSDictionary *)getBookmarks;
-+(BOOL)isBookmarked:(NSString *)moduleName;
++ (NSDictionary *)getBookmarks;
++ (BOOL)isBookmarked:(NSString *)moduleName;
 + (void) addBookmark: (NSString *)moduleName;
 + (void) removeBookmark: (NSString *)moduleName;
 + (void) syncBookmarks: (NSMutableDictionary *) bookmarks;
