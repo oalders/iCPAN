@@ -17,14 +17,6 @@
 
 
 - (void)viewWillAppear:(BOOL)animated {
-	
-	NSDictionary *bookmarks = [ModuleBookmark getBookmarks];
-	
-	if( bookmarks.count == 0 ) {
-		[self.tableView reloadData];
-		self.navigationItem.rightBarButtonItem = nil;
-		return;
-	}
     
 	self.tableView.scrollEnabled = YES;
 	self.navigationItem.rightBarButtonItem = self.editButtonItem;
@@ -87,19 +79,21 @@
 - (void) performSearch {
     NSDictionary *bookmarks = [ModuleBookmark getBookmarks];
     NSLog(@"performSearch begins");
-    if([bookmarks count]) {
-        NSString *attributeName = @"name";
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K IN[cd] %@", attributeName, [bookmarks allKeys]];
-        [[self fetchedResultsController].fetchRequest setPredicate:predicate];
-        NSError *error = nil;
-        [self fetchedResultsController];
-        if (![[self fetchedResultsController] performFetch:&error]) {
-            // Replace this implementation with code to handle the error appropriately.
-            
-            //NSLog(@"fetchedResultsController error %@, %@", error, [error userInfo]);
-            exit(1);
-        }
+    NSString *attributeName = @"name";
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K IN[cd] %@", attributeName, [bookmarks allKeys]];
+    [[self fetchedResultsController].fetchRequest setPredicate:predicate];
+    NSError *error = nil;
+    [self fetchedResultsController];
+    if (![[self fetchedResultsController] performFetch:&error]) {
+        // Replace this implementation with code to handle the error appropriately.
+        //NSLog(@"fetchedResultsController error %@, %@", error, [error userInfo]);
+        exit(1);
     }
+    
+	if( [[[[self fetchedResultsController] sections] objectAtIndex:0] numberOfObjects] == 0 ) {
+		self.navigationItem.rightBarButtonItem = nil;
+	}
+
 }
 
 
@@ -146,19 +140,10 @@
 
         [tableView beginUpdates];
         
-
         [ModuleBookmark removeBookmark:module.name];
-        
-        //self.myFetchedResultsController = nil;
-        //[self fetchedResultsController];  
-        NSError *error = nil;
 
-        if (![[self fetchedResultsController] performFetch:&error]) {
-            // Replace this implementation with code to handle the error appropriately.
-            
-            //NSLog(@"fetchedResultsController error %@, %@", error, [error userInfo]);
-            exit(1);
-        }
+        [self performSearch];
+        
 		// this always throws an error
 		[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] 
 						 withRowAnimation:UITableViewRowAnimationFade]; 
