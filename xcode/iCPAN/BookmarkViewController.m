@@ -92,6 +92,7 @@
     
 	if( [[[[self fetchedResultsController] sections] objectAtIndex:0] numberOfObjects] == 0 ) {
 		self.navigationItem.rightBarButtonItem = nil;
+        [super setEditing:NO animated:YES];
 	}
 
 }
