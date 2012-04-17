@@ -31,18 +31,15 @@
     
 	// get the contex object -- for some reason it the order of loading of our files is causing this
     // implementation to load before the AppDelegate, so pushing the context into here doesn't work.
-    if (managedObjectContext == nil) 
-    {
+    if (managedObjectContext == nil) {
         iCPANAppDelegate *del = [[UIApplication sharedApplication] delegate];
-        managedObjectContext = del.managedObjectContext;    }
+        managedObjectContext = del.managedObjectContext;    
+    }
     
-    NSError *error = nil;
-	if (![[self fetchedResultsController] performFetch:&error]) {
-		// Replace this implementation with code to handle the error appropriately.
-        
-		//NSLog(@"fetchedResultsController error %@, %@", error, [error userInfo]);
-		exit(1);
-	}
+    [self performSearch];
+
+
+    NSLog(@"bookmarkview willappear");
     
 	[self.tableView reloadData];
     
@@ -83,16 +80,26 @@
     NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:managedObjectContext sectionNameKeyPath:nil cacheName:nil];
     aFetchedResultsController.delegate = self;
     self.myFetchedResultsController = aFetchedResultsController;
+	return self.myFetchedResultsController;
     
+}
+
+- (void) performSearch {
     NSDictionary *bookmarks = [ModuleBookmark getBookmarks];
-    NSLog(@"all values: %@", [bookmarks allKeys]);
+    NSLog(@"performSearch begins");
     if([bookmarks count]) {
         NSString *attributeName = @"name";
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K IN[cd] %@", attributeName, [bookmarks allKeys]];
-        [fetchRequest setPredicate:predicate];
+        [[self fetchedResultsController].fetchRequest setPredicate:predicate];
+        NSError *error = nil;
+        [self fetchedResultsController];
+        if (![[self fetchedResultsController] performFetch:&error]) {
+            // Replace this implementation with code to handle the error appropriately.
+            
+            //NSLog(@"fetchedResultsController error %@, %@", error, [error userInfo]);
+            exit(1);
+        }
     }
-    
-	return self.myFetchedResultsController;
 }
 
 
@@ -102,7 +109,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {    
-    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.myFetchedResultsController sections] objectAtIndex:section];
+    id <NSFetchedResultsSectionInfo> sectionInfo = [[[self fetchedResultsController] sections] objectAtIndex:section];
     return [sectionInfo numberOfObjects];	
 }
 
@@ -127,32 +134,35 @@
 
 - (void)configureCell:(ModuleTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     // Configure the cell
-	Module *module = (Module *)[self.myFetchedResultsController objectAtIndexPath:indexPath];
+	Module *module = (Module *)[[self fetchedResultsController] objectAtIndexPath:indexPath];
     cell.module = module;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
 	
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+        //UITableView *tableView = self.tableView;
+		Module *module = (Module *)[[self fetchedResultsController] objectAtIndexPath:indexPath];
+
+        [tableView beginUpdates];
         
-		NSDictionary *bookmarks = [ModuleBookmark getBookmarks];
-		
-		NSMutableDictionary *mutable_bookmarks = [bookmarks mutableCopy];
-		Module *module = (Module *)[self.myFetchedResultsController objectAtIndexPath:indexPath];
+
+        [ModuleBookmark removeBookmark:module.name];
         
-		[mutable_bookmarks removeObjectForKey:module.name];
-		
-		NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-        
-		[prefs setObject:mutable_bookmarks forKey:@"bookmarks"];
-		[prefs synchronize];
-		
-		//NSLog(@"mod  name: %@", module.name);
-        
+        //self.myFetchedResultsController = nil;
+        //[self fetchedResultsController];  
+        NSError *error = nil;
+
+        if (![[self fetchedResultsController] performFetch:&error]) {
+            // Replace this implementation with code to handle the error appropriately.
+            
+            //NSLog(@"fetchedResultsController error %@, %@", error, [error userInfo]);
+            exit(1);
+        }
 		// this always throws an error
 		[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] 
 						 withRowAnimation:UITableViewRowAnimationFade]; 
-		
+        [tableView endUpdates];
 	}
 	
 }

@@ -22,5 +22,5 @@
 
 - (void)configureCell:(ModuleTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 - (NSFetchedResultsController *)fetchedResultsController;
-
+- (void) performSearch;
 @end
