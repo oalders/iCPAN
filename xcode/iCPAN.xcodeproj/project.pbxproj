@@ -19,7 +19,6 @@
 		ED4B5C0C1383761600386B42 /* DetailViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED4B5C061383761600386B42 /* DetailViewController_iPad.xib */; };
 		ED4B5C1F1383844A00386B42 /* SearchViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = ED4B5C1D1383844900386B42 /* SearchViewController_iPad.m */; };
 		ED4B5C201383844A00386B42 /* SearchViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED4B5C1E1383844900386B42 /* SearchViewController_iPad.xib */; };
-		ED6ADE7313BD77AD006E5348 /* libGRMustache1-ios4.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ED6ADE7213BD77AD006E5348 /* libGRMustache1-ios4.a */; };
 		ED706ADE13A7280800AAE86E /* template.html in Resources */ = {isa = PBXBuildFile; fileRef = ED706ADD13A7280800AAE86E /* template.html */; };
 		ED706AE413A7283700AAE86E /* iCPAN.js in Resources */ = {isa = PBXBuildFile; fileRef = ED706ADF13A7283700AAE86E /* iCPAN.js */; };
 		ED706AE513A7283700AAE86E /* jquery.min.js in Resources */ = {isa = PBXBuildFile; fileRef = ED706AE013A7283700AAE86E /* jquery.min.js */; };
@@ -35,6 +34,7 @@
 		EDA1A9C2151D19FB00B822A4 /* iCPAN.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = EDA1A9C1151D19FB00B822A4 /* iCPAN.sqlite */; };
 		EDBDA4AF14C94731008F241E /* DetailViewController_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBDA4AD14C94730008F241E /* DetailViewController_iPhone.m */; };
 		EDBDA4B014C94731008F241E /* DetailViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDBDA4AE14C94730008F241E /* DetailViewController_iPhone.xib */; };
+		EDC0634C153E7CCB00C22AD5 /* libGRMustache3-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDC0634B153E7CCB00C22AD5 /* libGRMustache3-iOS.a */; };
 		EDCDAB7B151439A1000DFC1F /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDCDAB7A151439A1000DFC1F /* DetailViewController.m */; };
 		EDEEBB19151ADAE2000826DF /* ModuleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EDEEBB18151ADAE2000826DF /* ModuleTableViewCell.m */; };
 		EDEEEAFD13EE3F3D00DB5195 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = EDEEEAFC13EE3F3D00DB5195 /* Default-Portrait~ipad.png */; };
@@ -100,7 +100,6 @@
 		ED4B5C1D1383844900386B42 /* SearchViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController_iPad.m; sourceTree = "<group>"; };
 		ED4B5C1E1383844900386B42 /* SearchViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SearchViewController_iPad.xib; path = iCPAN/SearchViewController_iPad.xib; sourceTree = "<group>"; };
 		ED6ADE6613BD76EC006E5348 /* GRMustache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRMustache.h; sourceTree = "<group>"; };
-		ED6ADE7213BD77AD006E5348 /* libGRMustache1-ios4.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libGRMustache1-ios4.a"; path = "../lib/libGRMustache1-ios4.a"; sourceTree = "<group>"; };
 		ED706ADD13A7280800AAE86E /* template.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = template.html; sourceTree = "<group>"; };
 		ED706ADF13A7283700AAE86E /* iCPAN.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = iCPAN.js; sourceTree = "<group>"; };
 		ED706AE013A7283700AAE86E /* jquery.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.min.js; sourceTree = "<group>"; };
@@ -118,6 +117,7 @@
 		EDBDA4AC14C94730008F241E /* DetailViewController_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailViewController_iPhone.h; path = iPhone/DetailViewController_iPhone.h; sourceTree = "<group>"; };
 		EDBDA4AD14C94730008F241E /* DetailViewController_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailViewController_iPhone.m; path = iPhone/DetailViewController_iPhone.m; sourceTree = "<group>"; };
 		EDBDA4AE14C94730008F241E /* DetailViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DetailViewController_iPhone.xib; path = iCPAN/iPhone/DetailViewController_iPhone.xib; sourceTree = "<group>"; };
+		EDC0634B153E7CCB00C22AD5 /* libGRMustache3-iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libGRMustache3-iOS.a"; path = "../lib/libGRMustache3-iOS.a"; sourceTree = "<group>"; };
 		EDCDAB79151439A1000DFC1F /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		EDCDAB7A151439A1000DFC1F /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		EDEEBB17151ADAE2000826DF /* ModuleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModuleTableViewCell.h; sourceTree = "<group>"; };
@@ -167,7 +167,7 @@
 				EDF7CE26134438880012E9DA /* Foundation.framework in Frameworks */,
 				EDF7CE28134438880012E9DA /* CoreGraphics.framework in Frameworks */,
 				EDF7CE2A134438880012E9DA /* CoreData.framework in Frameworks */,
-				ED6ADE7313BD77AD006E5348 /* libGRMustache1-ios4.a in Frameworks */,
+				EDC0634C153E7CCB00C22AD5 /* libGRMustache3-iOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,7 +188,7 @@
 		ED6ADE6413BD76EC006E5348 /* GRMustache */ = {
 			isa = PBXGroup;
 			children = (
-				ED6ADE7213BD77AD006E5348 /* libGRMustache1-ios4.a */,
+				EDC0634B153E7CCB00C22AD5 /* libGRMustache3-iOS.a */,
 				ED6ADE6613BD76EC006E5348 /* GRMustache.h */,
 			);
 			name = GRMustache;
