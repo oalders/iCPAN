@@ -12,7 +12,7 @@
 
 
 @interface DetailViewController : UIViewController <UIWebViewDelegate> {
-    UIWebView *podViewer;
+    UIWebView       *podViewer;
     UIBarButtonItem *backButton;
     UIBarButtonItem *forwardButton;
     UIBarButtonItem *refreshButton;

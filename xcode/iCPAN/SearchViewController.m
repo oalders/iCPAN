@@ -43,8 +43,9 @@
                               initWithKey:@"name" ascending:YES selector:@selector(caseInsensitiveCompare:)];
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sort]];
     
+    // the fetchLimit should be configurable
+    [fetchRequest setFetchLimit:150];
     [fetchRequest setFetchBatchSize:20];
-    [fetchRequest setFetchLimit:500];
     
     myFetchedResultsController = 
     [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest 

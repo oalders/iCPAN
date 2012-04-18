@@ -13,15 +13,14 @@
 
 @implementation DetailViewController
 
-@synthesize toolbar;
+@synthesize backButton;
 @synthesize detailItem;
 @synthesize detailDescriptionLabel;
-
-@synthesize backButton;
 @synthesize forwardButton;
+@synthesize podViewer;
 @synthesize refreshButton;
 @synthesize stopButton;
-@synthesize podViewer;
+@synthesize toolbar;
 
 #pragma mark - Managing the detail item
 
@@ -39,7 +38,6 @@
         [self configureView];
 	}
     
-	
 }
 
 
@@ -67,28 +65,14 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    backButton.enabled = FALSE;
+    backButton.enabled    = FALSE;
     forwardButton.enabled = FALSE;
     refreshButton.enabled = FALSE;
-    stopButton.enabled = FALSE;
+    stopButton.enabled    = FALSE;
     
     [super viewWillAppear:animated];
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-	[super viewWillDisappear:animated];
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-	[super viewDidDisappear:animated];
-}
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return YES;
@@ -134,7 +118,6 @@
     
 	NSLog(@"path: %@", path );
     
-    
 	if ([[url absoluteString] rangeOfString:@"http://"].location == NSNotFound ) {
         
         NSLog(@"Offline page view ------------------------------------------");
@@ -164,22 +147,12 @@
 			//exit(1);
 		} 
         
-        
 		if ( results.count > 0 ) {
 			
 			Module *module = [results objectAtIndex:0];
 			NSLog(@"results for single module search %@", module.name );
             
 			self.title = module.name;
-			//self.currentlyViewing = module.name;
-			//NSInteger is_bookmarked = [del isBookmarked:path];
-			/*if ( is_bookmarked == 1 ) {
-             [self removeBookmarkButton];
-             }
-             else {
-             [self addBookmarkButton];
-             }
-             */
 			
 			NSString *fileName = module.name;
 			fileName = [fileName stringByReplacingOccurrencesOfString:@"::" withString:@"_"];
@@ -190,7 +163,7 @@
                 
                 NSString *tmplFile = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"template.html"];
                 NSString *text = [GRMustacheTemplate renderObject:module fromContentsOfFile: tmplFile error:nil];
-                //NSLog(@"testing pod: %@", [[module distribution] version]);
+                NSLog(@"testing pod: %@", text);
                 [text writeToFile:podPath atomically:YES encoding:NSUTF8StringEncoding error:nil];
                 NSLog(@"template file %@", tmplFile);
 			}
@@ -222,19 +195,8 @@
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView {
-    backButton.enabled = (webView.canGoBack);
+    backButton.enabled    = (webView.canGoBack);
     forwardButton.enabled = (webView.canGoForward);
-}
-
-
-#pragma mark - Memory management
-
-- (void)didReceiveMemoryWarning
-{
-	// Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-	
-	// Release any cached data, images, etc that aren't in use.
 }
 
 @end
