@@ -112,11 +112,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	
-    static NSString *kCellID = @"cellID";
+    static NSString *module_cell = @"cellID";
     
-    ModuleTableViewCell *cell = (ModuleTableViewCell *)[tableView dequeueReusableCellWithIdentifier:kCellID];
+    ModuleTableViewCell *cell = (ModuleTableViewCell *)[tableView dequeueReusableCellWithIdentifier:module_cell];
     if (cell == nil) {
-        cell = [[ModuleTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kCellID];
+        cell = [[ModuleTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:module_cell];
 		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     

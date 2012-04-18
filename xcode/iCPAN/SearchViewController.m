@@ -137,26 +137,28 @@
     return [sectionInfo numberOfObjects];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	
+    static NSString *module_cell = @"cellID";
     
-    static NSString *CellIdentifier = @"CellIdentifier";
-    
-    // Dequeue or create a cell of the appropriate type.
-    UITableViewCell *cell = [self.myTableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    ModuleTableViewCell *cell = (ModuleTableViewCell *)[tableView dequeueReusableCellWithIdentifier:module_cell];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        cell.accessoryType = UITableViewCellAccessoryNone;
-        cell.textLabel.font = [UIFont systemFontOfSize:16];
+        cell = [[ModuleTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:module_cell];
+		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
-    // Configure the cell.
-    Module *module = [self.myFetchedResultsController objectAtIndexPath:indexPath];
-    NSLog(@"fetched result: %@", [module name]);
+	[self configureCell:cell atIndexPath:indexPath];
     
-    cell.textLabel.text = [module name];
     return cell;
+    
 }
 
+- (void)configureCell:(ModuleTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    // Configure the cell
+	Module *module = (Module *)[[self fetchedResultsController] objectAtIndexPath:indexPath];
+    cell.module = module;
+}
 
 
 - (void)viewDidUnload
