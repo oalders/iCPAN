@@ -20,9 +20,8 @@
 @property (nonatomic, strong, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 - (NSURL *)    applicationDocumentsDirectory;
+- (NSString *) cacheDir;
 - (void)       createPodFolder;
-- (NSURL *)    docURL;
-- (NSString *) docDir;
 - (NSArray *)  getRecentlyViewed;
 - (NSString *) podDir;
 - (NSURL *)    podURL;

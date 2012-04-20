@@ -114,17 +114,13 @@
 	iCPANAppDelegate *del = [[UIApplication sharedApplication] delegate];
     
 	NSURL *url = [request URL];
-	NSString *path = [url relativePath];
-    
-	NSLog(@"path: %@", path );
-    
+        
 	if ([[url absoluteString] rangeOfString:@"http://"].location == NSNotFound ) {
         
         NSLog(@"Offline page view ------------------------------------------");
         // This is an offline page view. We need to handle all of the details.
         //
-		path = [path stringByReplacingOccurrencesOfString:[del podDir] withString:@""];
-		path = [path stringByReplacingOccurrencesOfString:@"/" withString:@""]; // too many slashes
+		NSString *path = [url lastPathComponent];
 		path = [path stringByReplacingOccurrencesOfString:@"_" withString:@"::"];
 		path = [path stringByReplacingOccurrencesOfString:@".html" withString:@""];
 		
@@ -161,11 +157,17 @@
             
 			if ( ![[NSFileManager defaultManager] fileExistsAtPath:podPath] ) {
                 
+                NSLog(@"creating file at %@", podPath);
+                
                 NSString *tmplFile = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"template.html"];
-                NSString *text = [GRMustacheTemplate renderObject:module fromContentsOfFile: tmplFile error:nil];
-                NSLog(@"testing pod: %@", text);
-                [text writeToFile:podPath atomically:YES encoding:NSUTF8StringEncoding error:nil];
+                NSString *text = [GRMustacheTemplate renderObject:module fromContentsOfFile: tmplFile error:nil];                
+                NSError *writeError = nil;
+                
+                [text writeToFile:podPath atomically:YES encoding:NSUTF8StringEncoding error:&writeError];
                 NSLog(@"template file %@", tmplFile);
+                if (writeError) {
+                    NSLog(@"there was an error writing the file %@", writeError);
+                }
 			}
             else {
                 NSLog(@"page exists at %@", podPath);

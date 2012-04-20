@@ -24,6 +24,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     NSLog(@"did finish launching iPhone app");
+    [self createPodFolder];
     [window addSubview:tabBarController.view];
     return YES;
 

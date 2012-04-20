@@ -23,6 +23,7 @@
 {
     // Override point for customization after application launch.
     NSLog(@"did finish launching main app delegate");
+    
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -210,19 +211,15 @@
 - (NSString *)podDir {
 	//NSLog(@"docs dir %@", [self applicationDocumentsDirectory]);
     //return [self applicationDocumentsDirectory];
-    return [[self docDir] stringByAppendingString:@"/cpanpod/"];
-}
-
-- (NSURL *)docURL {
-    return [self applicationDocumentsDirectory];
+    return [[self cacheDir] stringByAppendingString:@"/cpanpod/"];
 }
 
 - (NSURL *)podURL {
-    return [[self applicationDocumentsDirectory] URLByAppendingPathComponent :@"cpanpod"];
+    return [NSURL fileURLWithPath:[self podDir]];
 }
 
-- (NSString *) docDir {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+- (NSString *) cacheDir {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     return documentsDirectory;
 }
