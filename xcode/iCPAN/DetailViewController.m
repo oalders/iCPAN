@@ -48,14 +48,13 @@
     // This method will only ever be called when the user selects a module from the table
     // in the GenericView
 
-    NSString *name = [self.detailItem valueForKey:@"name"];
     iCPANAppDelegate *del = [[UIApplication sharedApplication] delegate];
     
-    name = [name stringByReplacingOccurrencesOfString:@"::" withString:@"_"];
-    name = [name stringByAppendingString:@".html"];
+    NSString *pageName = [self module2url:detailItem];
+    NSLog(@"pageName %@", pageName);
     
     NSURL *podURL = [[del podURL] URLByAppendingPathComponent:@"/"];
-    NSURL *url = [NSURL URLWithString:name relativeToURL:podURL];
+    NSURL *url = [NSURL URLWithString:pageName relativeToURL:podURL];
     
 	NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
     
@@ -120,9 +119,7 @@
         NSLog(@"Offline page view ------------------------------------------");
         // This is an offline page view. We need to handle all of the details.
         //
-		NSString *path = [url lastPathComponent];
-		path = [path stringByReplacingOccurrencesOfString:@"_" withString:@"::"];
-		path = [path stringByReplacingOccurrencesOfString:@".html" withString:@""];
+        NSString *path = [self url2module:[url lastPathComponent]];
 		
 		NSLog(@"module to search for: %@", path);
 		
@@ -149,10 +146,7 @@
 			NSLog(@"results for single module search %@", module.name );
             
 			self.title = module.name;
-			
-			NSString *fileName = module.name;
-			fileName = [fileName stringByReplacingOccurrencesOfString:@"::" withString:@"_"];
-			fileName = [fileName stringByAppendingString:@".html"];
+            NSString *fileName = [self module2url:module];
             NSString *podPath = [[del podDir] stringByAppendingPathComponent:fileName];
             
 			if ( ![[NSFileManager defaultManager] fileExistsAtPath:podPath] ) {
@@ -199,6 +193,19 @@
 - (void)webViewDidStartLoad:(UIWebView *)webView {
     backButton.enabled    = (webView.canGoBack);
     forwardButton.enabled = (webView.canGoForward);
+}
+
+-(NSString*)url2module:(NSString *)pageName {
+    pageName = [pageName stringByReplacingOccurrencesOfString:@"__" withString:@"::"];
+    pageName = [pageName stringByReplacingOccurrencesOfString:@".html" withString:@""];
+    return pageName;
+}
+
+-(NSString*)module2url:(Module *)Module {
+    NSString *name = Module.name;
+    name = [name stringByReplacingOccurrencesOfString:@"::" withString:@"__"];
+    name = [name stringByAppendingString:@".html"];
+    return name;
 }
 
 @end

@@ -32,5 +32,7 @@
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *stopButton;
 
 -(void) configureView;
+-(NSString*)module2url:(Module *)module;
+-(NSString*)url2module:(NSString *)pageName;
 
 @end
