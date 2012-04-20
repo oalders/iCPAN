@@ -44,7 +44,7 @@
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sort]];
     
     // the fetchLimit should be configurable
-    [fetchRequest setFetchLimit:150];
+    [fetchRequest setFetchLimit:100];
     [fetchRequest setFetchBatchSize:20];
     
     myFetchedResultsController = 
@@ -100,6 +100,7 @@
     }
     
     NSPredicate *predicate = nil;
+    // Does the user want an exact match?
 	if ( [searchWords count] == 1 && !([searchText rangeOfString:@".pm" options:NSBackwardsSearch].location == NSNotFound) ) {
 		searchText = [searchText stringByReplacingOccurrencesOfString:@".pm" withString:@""];
 		predicate = [NSPredicate predicateWithFormat:@"%K ==[cd] %@", attributeName, searchText];
@@ -107,9 +108,13 @@
     else if([predicateArgs count] > 0) {
         predicate = [NSCompoundPredicate andPredicateWithSubpredicates:predicateArgs];
         if([predicateArgs count] ==1) {
-            NSPredicate *beginsPred = [NSPredicate predicateWithFormat:@"%K BEGINSWITH[cd] %@", attributeName, searchText];
-            predicate = [NSCompoundPredicate orPredicateWithSubpredicates:[NSArray arrayWithObjects:beginsPred, predicate, nil]];
+            predicate = [NSPredicate predicateWithFormat:@"%K BEGINSWITH[cd] %@", attributeName, searchText];
         }
+        else {
+            // this search will bypass the db index and be very slow
+        }
+        
+    // default to a list of recently viewed docs. i don't think we ever reach this code anymore
     } else {
         iCPANAppDelegate *del = [[UIApplication sharedApplication] delegate];
         NSArray *recentlyViewed = del.getRecentlyViewed;
