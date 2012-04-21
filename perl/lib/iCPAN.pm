@@ -364,7 +364,8 @@ sub update_module_pod {
         }
     }
 
-    $self->update_ent( $self->get_ent('Pod') );
+    my $pod_rs = $self->schema->resultset('Zpod')
+    $self->update_ent( $pod_rs, $self->get_ent('Pod') );
 }
 
 #sub module_hits {
