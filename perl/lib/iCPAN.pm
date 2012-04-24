@@ -18,21 +18,23 @@ use iCPAN::Schema;
 
 # ssh -L 9201:localhost:9200 metacpan@api.beta.metacpan.org -p222 -N
 
-has 'es'       => ( is => 'rw', isa => 'ElasticSearch', lazy_build => 1 );
-has 'children' => ( is => 'rw', isa => 'Int',           default    => 2 );
-has 'distribution_scroll_size' =>
-    ( is => 'rw', isa => 'Int', default => 1000 );
-has 'index' => ( is => 'rw', default => 'v0' );
-has 'mech' => ( is => 'rw', isa => 'WWW::Mechanize', lazy_build => 1 );
-has 'pod_server' =>
-    ( is => 'rw', default => 'http://localhost:5000/podpath/' );
-has 'search_prefix' => ( is => 'rw', isa => 'Str', default => 'DBIx::Class' );
+has 'children' => ( is => 'rw', isa => 'Int', default => 2 );
+has 'cached_pod' =>
+    ( is => 'rw', default => 'http://localhost:5000/is_cached/' );
 has 'dist_search_prefix' =>
     ( is => 'rw', isa => 'Str', default => 'DBIx-Class' );
-has 'limit'              => ( is => 'rw', isa => 'Int', default => 100000 );
+has 'distribution_scroll_size' =>
+    ( is => 'rw', isa => 'Int', default => 1000 );
+has 'es' => ( is => 'rw', isa => 'ElasticSearch', lazy_build => 1 );
+has 'index' => ( is => 'rw', default => 'v0' );
+has 'limit' => ( is => 'rw', isa     => 'Int', default => 100000 );
+has 'mech'  => ( is => 'rw', isa     => 'WWW::Mechanize', lazy_build => 1 );
 has 'module_scroll_size' => ( is => 'rw', isa => 'Int', default => 1000 );
-has 'purge'              => ( is => 'rw', isa => 'Int', default => 0 );
-has 'scroll_size'        => ( is => 'rw', isa => 'Int', default => 1000 );
+has 'pod_server' =>
+    ( is => 'rw', default => 'http://localhost:5000/podpath/' );
+has 'purge'         => ( is => 'rw', isa => 'Int', default => 0 );
+has 'scroll_size'   => ( is => 'rw', isa => 'Int', default => 1000 );
+has 'search_prefix' => ( is => 'rw', isa => 'Str', default => 'DBIx::Class' );
 has 'server' => ( is => 'rw', default => 'api.beta.metacpan.org:80' );
 
 my @ROGUE_DISTRIBUTIONS
@@ -108,7 +110,7 @@ sub insert_authors {
         type   => 'author',
         query  => { match_all => {}, },
         scroll => '5m',
-        size   => 10000,
+        size   => 5000,
     );
 
     my $hits = $self->scroll( $scroller, 10000 );
@@ -303,11 +305,11 @@ sub update_ent {
 sub update_module_pod {
 
     my $self = shift;
-    my $rs   = $self->schema->resultset('Zmodule');
+    my $rs   = $self->schema->resultset( 'Zmodule' );
 
     my $converter = MetaCPAN::Pod->new;
 
-    my $dist_rs = $self->schema->resultset('Zdistribution')->search(
+    my $dist_rs = $self->schema->resultset( 'Zdistribution' )->search(
         { 'Modules.zpod' => undef },
         {   join     => [ 'Author', 'Modules' ],
             group_by => [qw/zrelease_name/],
@@ -315,31 +317,45 @@ sub update_module_pod {
         }
     );
 
-    say $dist_rs->count;
+    my $total_dists = $dist_rs->count;
+    my $dist_count  = 0;
+    say "looking at $total_dists dists";
 
     while ( my $dist = $dist_rs->next ) {
 
+        ++$dist_count;
         my $mod_rs = $dist->Modules( { zpod => undef } );
         $converter->build_tar( $dist->Author->zpauseid,
             $dist->zrelease_name );
-        say "starting dist: " . $dist->zrelease_name;
+        say "starting dist $dist_count of $total_dists: "
+            . $dist->zrelease_name;
 
         while ( my $mod = $mod_rs->next ) {
             say "starting module: " . $mod->zpath;
 
-            my $pod = undef;
-            try {
-                $pod = $converter->pod_from_tar( $dist->zrelease_name,
-                    $mod->zpath );
-            }
-            catch {
-                say "local pod error: $_";    # not $@
-            };
+            my $relative_url = join( "/",
+                $dist->Author->zpauseid, $dist->zrelease_name, $mod->zpath );
 
-            if ($pod) {
+            my $pod = undef;
+            $self->mech->get( $self->cached_pod . $relative_url );
+
+            if ( $self->mech->success ) {
+                $pod = $self->mech->content;
+            }
+            else {
+                try {
+                    $pod = $converter->pod_from_tar( $dist->zrelease_name,
+                        $mod->zpath );
+                }
+                catch {
+                    say "local pod error: $_";    # not $@
+                };
+            }
+
+            if ( $pod ) {
                 my $xhtml;
-                try { $xhtml = $converter->parse_pod($pod) };
-                if ($xhtml) {
+                try { $xhtml = $converter->parse_pod( $pod ) };
+                if ( $xhtml ) {
                     my $pod_row
                         = $mod->create_related( 'Pod', { zhtml => $xhtml } );
                     $mod->update( { zpod => $pod_row->id } );
@@ -347,12 +363,7 @@ sub update_module_pod {
                 }
             }
 
-            my $pod_url = $self->pod_server
-                . join( "/",
-                $dist->Author->zpauseid, $dist->zrelease_name, $mod->zpath );
-            say $pod_url;
-
-            if ( $self->mech->get($pod_url)->is_success ) {
+            if ( $self->mech->get( $self->pod_server . $relative_url )->is_success ) {
                 my $pod_row = $mod->create_related( 'Pod',
                     { zhtml => $self->mech->content } );
                 $mod->update( { zpod => $pod_row->id } );
@@ -364,53 +375,9 @@ sub update_module_pod {
         }
     }
 
-    my $pod_rs = $self->schema->resultset('Zpod')
-    $self->update_ent( $pod_rs, $self->get_ent('Pod') );
+    my $pod_rs = $self->schema->resultset( 'Zpod' );
+    $self->update_ent( $pod_rs, $self->get_ent( 'Pod' ) );
 }
-
-#sub module_hits {
-#
-#    my $self = shift;
-#    my $hits = shift;
-#    my $ent  = shift;
-#    my $rs   = shift;
-#
-#    my @rows = ();
-#
-#    foreach my $result ( @{$hits} ) {
-#
-#
-#
-#        #say dump $src;
-#        say sprintf( "%s: %s (%s)",
-#            $src->{distribution}, $src->{documentation}, $src->{date} );
-#
-#        my $pod_url = $self->pod_server
-#            . join( "/", $src->{author}, $src->{release}, $src->{path} );
-#
-#        say "GETting: $pod_url";
-#
-#        my $pod
-#            = $self->mech->get( $pod_url )->is_success
-#            ? $self->mech->content
-#            : undef;
-#
-#        if ( !$pod ) {
-#            say "no pod found.  skipping!!!";
-#            next;
-#        }
-#
-#
-#
-#    }
-#
-#    $rs->populate( \@rows ) if @rows;
-#    say "inserted " . @rows . " modules";
-#    say "total inserts: " . $rs->search( {} )->count;
-#
-#    return;
-#
-#}
 
 sub module_scroller {
 
