@@ -21,10 +21,13 @@ my ( $opt, $usage ) = describe_options(
 my $icpan = iCPAN->new;
 
 my $args = {
-    constraint => $opt->constraint || qr{.*},
+#    constraint => $opt->constraint || qr{.*},
     debug => $opt->debug,
     dump_directory          => Find::Lib::base() . '/../lib',
     overwrite_modifications => $opt->overwrite_modifications || 0,
+    naming                  => 'current',
+    use_namespaces          => 1,
+    use_moose               => 1,
 };
 
 say "args: " . dump( $args ) if $opt->debug;

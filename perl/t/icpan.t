@@ -7,7 +7,6 @@ use Cwd;
 use Find::Lib '../../inc/Pod2HTML/lib';
 use iCPAN;
 
-
 new_ok( 'iCPAN' );
 
 done_testing();
