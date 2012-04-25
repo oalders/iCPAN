@@ -109,6 +109,7 @@
         predicate = [NSCompoundPredicate andPredicateWithSubpredicates:predicateArgs];
         if([predicateArgs count] ==1) {
             predicate = [NSPredicate predicateWithFormat:@"%K BEGINSWITH[cd] %@", attributeName, searchText];
+            NSLog(@"-------------------------------------> starts with search");
         }
         else {
             // this search will bypass the db index and be very slow

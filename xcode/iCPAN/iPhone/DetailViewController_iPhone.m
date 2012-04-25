@@ -34,6 +34,7 @@
     NSLog(@"adding bookmark");
     [ModuleBookmark addBookmark:[self.detailItem valueForKey:@"name"]];
     [self activateTrashButton];
+    NSLog(@"items %@", self.toolbarItems);
     
 }
 

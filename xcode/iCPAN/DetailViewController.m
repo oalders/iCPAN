@@ -103,6 +103,7 @@
 	podViewer.scalesPageToFit = YES;
     
 	// Override point for customization after application launch
+    podViewer.delegate = self;
 	[super viewDidLoad];
 }
 
@@ -145,10 +146,18 @@
 			Module *module = [results objectAtIndex:0];
 			NSLog(@"results for single module search %@", module.name );
             
-			self.title = module.name;
             NSString *fileName = [self module2url:module];
             NSString *podPath = [[del podDir] stringByAppendingPathComponent:fileName];
             
+            UILabel *label = [[UILabel alloc] init];
+            label.font = [UIFont fontWithName:@"Helvetica-Bold" size: 12.0];
+            // Optional - label.text = @"NavLabel";
+            [label setBackgroundColor:[UIColor clearColor]];
+            [label setTextColor:[UIColor whiteColor]];
+            [label setText:module.name];
+            [label sizeToFit];
+            [self.navigationController.navigationBar.topItem setTitleView:label];
+
 			if ( ![[NSFileManager defaultManager] fileExistsAtPath:podPath] ) {
                 
                 NSLog(@"creating file at %@", podPath);
@@ -186,7 +195,6 @@
     
     NSLog(@"shouldStartLoadWithRequest ends");
     
-    
 	return TRUE;
 }
 
@@ -196,6 +204,8 @@
 }
 
 -(NSString*)url2module:(NSString *)pageName {
+    // remove after regenerating db
+    pageName = [pageName stringByReplacingOccurrencesOfString:@"-" withString:@"::"];
     pageName = [pageName stringByReplacingOccurrencesOfString:@"__" withString:@"::"];
     pageName = [pageName stringByReplacingOccurrencesOfString:@".html" withString:@""];
     return pageName;
