@@ -7,6 +7,7 @@ use MetaCPAN::Pod;
 use Modern::Perl;
 use Moose;
 use Parallel::ForkManager;
+use Perl6::Junction qw( any );
 use Try::Tiny;
 use WWW::Mechanize;
 use WWW::Mechanize::Cached;
@@ -36,6 +37,7 @@ has 'purge'         => ( is => 'rw', isa => 'Int', default => 0 );
 has 'scroll_size'   => ( is => 'rw', isa => 'Int', default => 1000 );
 has 'search_prefix' => ( is => 'rw', isa => 'Str', default => 'DBIx::Class' );
 has 'server' => ( is => 'rw', default => 'api.beta.metacpan.org:80' );
+has 'update_undef_only' => ( is => 'rw', default => 0 );
 
 my @ROGUE_DISTRIBUTIONS
     = qw(kurila perl_debug perl-5.005_02+apache1.3.3+modperl pod2texi perlbench spodcxx);
@@ -302,15 +304,17 @@ sub update_ent {
 
 }
 
-sub update_module_pod {
+sub pod_by_dist {
 
     my $self = shift;
     my $rs   = $self->schema->resultset( 'Zmodule' );
 
-    my $converter = MetaCPAN::Pod->new;
-
+    my %search = ( );
+    if ( $self->update_undef_only ) {
+        $search{'Modules.zpod'} = undef;
+    }
     my $dist_rs = $self->schema->resultset( 'Zdistribution' )->search(
-        { 'Modules.zpod' => undef },
+        \%search,
         {   join     => [ 'Author', 'Modules' ],
             group_by => [qw/zrelease_name/],
             order_by => 'zrelease_date DESC',
@@ -322,61 +326,78 @@ sub update_module_pod {
     say "looking at $total_dists dists";
 
     while ( my $dist = $dist_rs->next ) {
-
         ++$dist_count;
-        my $mod_rs = $dist->Modules( { zpod => undef } );
-        $converter->build_tar( $dist->Author->zpauseid,
-            $dist->zrelease_name );
+
         say "starting dist $dist_count of $total_dists: "
             . $dist->zrelease_name;
 
-        while ( my $mod = $mod_rs->next ) {
-            say "starting module: " . $mod->zpath;
-
-            my $relative_url = join( "/",
-                $dist->Author->zpauseid, $dist->zrelease_name, $mod->zpath );
-
-            my $pod = undef;
-            $self->mech->get( $self->cached_pod . $relative_url );
-
-            if ( $self->mech->success ) {
-                $pod = $self->mech->content;
-            }
-            else {
-                try {
-                    $pod = $converter->pod_from_tar( $dist->zrelease_name,
-                        $mod->zpath );
-                }
-                catch {
-                    say "local pod error: $_";    # not $@
-                };
-            }
-
-            if ( $pod ) {
-                my $xhtml;
-                try { $xhtml = $converter->parse_pod( $pod ) };
-                if ( $xhtml ) {
-                    my $pod_row
-                        = $mod->create_related( 'Pod', { zhtml => $xhtml } );
-                    $mod->update( { zpod => $pod_row->id } );
-                    next;
-                }
-            }
-
-            if ( $self->mech->get( $self->pod_server . $relative_url )->is_success ) {
-                my $pod_row = $mod->create_related( 'Pod',
-                    { zhtml => $self->mech->content } );
-                $mod->update( { zpod => $pod_row->id } );
-            }
-            else {
-                say "==============> could not find MetaCPAN Pod";
-            }
-
-        }
+        $self->update_pod_in_single_dist( $dist );
     }
 
     my $pod_rs = $self->schema->resultset( 'Zpod' );
     $self->update_ent( $pod_rs, $self->get_ent( 'Pod' ) );
+}
+
+sub update_pod_in_single_dist {
+
+    my $self = shift;
+    my $dist = shift;
+
+    my $converter = MetaCPAN::Pod->new;
+
+    my %search = ( );
+    $search{zpod} = undef if $self->update_undef_only;
+
+    my $mod_rs = $dist->Modules( \%search );
+    $converter->build_tar( $dist->Author->zpauseid, $dist->zrelease_name );
+
+    while ( my $mod = $mod_rs->next ) {
+        say "starting module: " . $mod->zpath;
+
+        my $relative_url = join( "/",
+            $dist->Author->zpauseid, $dist->zrelease_name, $mod->zpath );
+
+        my $pod = undef;
+        $self->mech->get( $self->cached_pod . $relative_url );
+
+        if ( $self->mech->success ) {
+            $pod = $self->mech->content;
+        }
+        else {
+            try {
+                $pod = $converter->pod_from_tar( $dist->zrelease_name,
+                    $mod->zpath );
+            }
+            catch {
+                say "local pod error: $_";    # not $@
+            };
+        }
+
+        if ( $pod ) {
+            my $xhtml;
+            try { $xhtml = $converter->parse_pod( $pod ) };
+            catch { say "*************** could not parse pod" };
+
+            if ( $xhtml ) {
+                my $pod_row = $mod->find_or_create_related( 'Pod',
+                    { zhtml => $xhtml } );
+                $mod->update( { zpod => $pod_row->id } );
+                next;
+            }
+        }
+
+        if ( $self->mech->get( $self->pod_server . $relative_url )
+            ->is_success )
+        {
+            my $pod_row = $mod->find_or_create_related( 'Pod',
+                { zhtml => $self->mech->content } );
+            $mod->update( { zpod => $pod_row->id } );
+        }
+        else {
+            say "==============> could not find MetaCPAN Pod";
+        }
+
+    }
 }
 
 sub module_scroller {
