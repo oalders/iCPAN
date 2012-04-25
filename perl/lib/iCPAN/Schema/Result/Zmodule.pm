@@ -114,7 +114,7 @@ __PACKAGE__->belongs_to(
 
 __PACKAGE__->has_one(
     Pod => 'iCPAN::Schema::Result::Zpod',
-    { 'foreign.zmodule' => 'self.z_pk' }
+    { 'foreign.zmodule' => 'self.z_pk' }, { join_type => 'left' }
 );
 
 1;
