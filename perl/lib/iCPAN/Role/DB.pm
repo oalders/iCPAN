@@ -6,9 +6,9 @@ use DBI;
 use Find::Lib;
 
 has 'db_file' => (
-    is         => 'rw',
-    isa        => 'Str',
-    default    => 'iCPAN.sqlite',
+    is      => 'rw',
+    isa     => 'Str',
+    default => 'iCPAN.sqlite',
 );
 
 has 'dsn' => (

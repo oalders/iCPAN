@@ -17,8 +17,6 @@ with 'iCPAN::Role::Common';
 
 use iCPAN::Schema;
 
-# ssh -L 9201:localhost:9200 metacpan@api.beta.metacpan.org -p222 -N
-
 has 'children' => ( is => 'rw', isa => 'Int', default => 2 );
 has 'cached_pod' =>
     ( is => 'rw', default => 'http://localhost:5000/is_cached/' );
@@ -101,10 +99,10 @@ sub insert_authors {
 
     my $self = shift;
 
-    my $rs = $self->schema->resultset('Zauthor');
+    my $rs = $self->schema->resultset( 'Zauthor' );
     if ( $self->purge ) {
         $rs->delete;
-        $self->schema->storage->dbh->do("VACUUM");
+        $self->schema->storage->dbh->do( "VACUUM" );
     }
 
     my $scroller = $self->es->scrolled_search(
@@ -119,7 +117,7 @@ sub insert_authors {
     my @authors = ();
 
     say "found " . scalar @{$hits} . " hits";
-    my $ent = $self->get_ent('Author');
+    my $ent = $self->get_ent( 'Author' );
 
     foreach my $src ( @{$hits} ) {
 
@@ -143,7 +141,7 @@ sub insert_authors {
 sub insert_distributions {
 
     my $self = shift;
-    my $rs   = $self->schema->resultset('Zdistribution');
+    my $rs   = $self->schema->resultset( 'Zdistribution' );
     $rs->delete if $self->purge;
 
     my $scroller = $self->es->scrolled_search(
@@ -169,13 +167,13 @@ sub insert_distributions {
 
     say "found " . scalar @{$hits} . " hits";
 
-    my $ent = $self->get_ent('Distribution');
+    my $ent = $self->get_ent( 'Distribution' );
 
     foreach my $src ( @{$hits} ) {
 
         #say dump $src;
 
-        my $author = $self->schema->resultset('Zauthor')
+        my $author = $self->schema->resultset( 'Zauthor' )
             ->find( { zpauseid => $src->{author} } );
         if ( !$author ) {
             say "cannot find $src->{author}. skipping!!!";
@@ -211,19 +209,19 @@ sub insert_distributions {
 sub insert_modules {
 
     my $self    = shift;
-    my $rs      = $self->init_rs('Zmodule');
-    my $dist_rs = $self->schema->resultset('Zdistribution');
+    my $rs      = $self->init_rs( 'Zmodule' );
+    my $dist_rs = $self->schema->resultset( 'Zdistribution' );
 
     my $scroller = $self->module_scroller;
 
-    my $ent = $self->get_ent('Module');
+    my $ent = $self->get_ent( 'Module' );
 
     my %dist_id = ();
     my @hits    = ();
     my @rows    = ();
     while ( my $result = $scroller->next ) {
 
-        my $src = $self->extract_hit($result);
+        my $src = $self->extract_hit( $result );
         next if !$src;
         next if !$src->{documentation};
 
@@ -290,7 +288,7 @@ sub get_ent {
     my $self  = shift;
     my $table = shift;
 
-    return $self->schema->resultset('ZPrimarykey')
+    return $self->schema->resultset( 'ZPrimarykey' )
         ->find_or_create( { z_name => $table } );
 
 }
@@ -309,7 +307,7 @@ sub pod_by_dist {
     my $self = shift;
     my $rs   = $self->schema->resultset( 'Zmodule' );
 
-    my %search = ( );
+    my %search = ();
     if ( $self->update_undef_only ) {
         $search{'Modules.zpod'} = undef;
     }
@@ -345,7 +343,7 @@ sub update_pod_in_single_dist {
 
     my $converter = MetaCPAN::Pod->new;
 
-    my %search = ( );
+    my %search = ();
     $search{zpod} = undef if $self->update_undef_only;
 
     my $mod_rs = $dist->Modules( \%search );
@@ -465,11 +463,11 @@ sub init_rs {
 
     my $self = shift;
     my $name = shift;
-    my $rs   = $self->schema->resultset($name);
+    my $rs   = $self->schema->resultset( $name );
 
     if ( $self->purge ) {
         $rs->delete;
-        $self->schema->storage->dbh->do("VACUUM");
+        $self->schema->storage->dbh->do( "VACUUM" );
     }
 
     return $rs;
