@@ -204,8 +204,6 @@
 }
 
 -(NSString*)url2module:(NSString *)pageName {
-    // remove after regenerating db
-    pageName = [pageName stringByReplacingOccurrencesOfString:@"-" withString:@"::"];
     pageName = [pageName stringByReplacingOccurrencesOfString:@"__" withString:@"::"];
     pageName = [pageName stringByReplacingOccurrencesOfString:@".html" withString:@""];
     return pageName;
