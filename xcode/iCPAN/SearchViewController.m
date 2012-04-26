@@ -43,6 +43,9 @@
                               initWithKey:@"name" ascending:YES selector:@selector(caseInsensitiveCompare:)];
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sort]];
     
+    NSArray *keyPaths = [NSArray arrayWithObjects:@"distribution", @"distribution.author", nil];
+    [fetchRequest setRelationshipKeyPathsForPrefetching:keyPaths];
+    
     // the fetchLimit should be configurable
     [fetchRequest setFetchLimit:100];
     [fetchRequest setFetchBatchSize:20];
