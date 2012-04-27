@@ -21,7 +21,7 @@
 @property (nonatomic, strong) NSString *searchString;
 @property (nonatomic, strong) IBOutlet UITableView *myTableView;
 
-- (void)configureCell:(ModuleTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
+-(void)configureCell:(ModuleTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 -(void) performSearch;
 -(NSFetchedResultsController *)fetchedResultsController;
 

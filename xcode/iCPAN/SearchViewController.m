@@ -80,6 +80,13 @@
     return NO;
 }
 
+- (void)searchBarSearchButtonClicked:(UISearchBar*)searchBar
+{
+    NSLog(@"search bar clicked in shared class");
+    [self performSearch];
+    [self.searchDisplayController.searchResultsTableView reloadData];
+}
+
 - (void)performSearch {
     
     NSString *searchText = self.searchString;

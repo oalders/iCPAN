@@ -19,12 +19,6 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
--(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    NSLog(@"==========================search bar search button clicked");
-    [self performSearch];
-    [super.myTableView reloadData];
-}
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     

@@ -30,10 +30,4 @@
     detailViewController.detailItem = module;
 }
 
-
--(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    NSLog(@"search bar search button clicked");    
-    [[[self searchDisplayController] searchResultsTableView] reloadData];
-}
-
 @end
