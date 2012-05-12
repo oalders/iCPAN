@@ -17,10 +17,18 @@
 <title></title>
 <link rel='stylesheet' href='style.css' type='text/css'>
 </head>
-    <body><div class="pod"><div style="position:fixed;z-index: 5000;height:50px;width:100%;background-color:#fff;"><h1 id="iCPAN">{{{name}}} ({{distribution.version}}) by: {{distribution.author.name}} ({{distribution.author.pauseid}}) | <a href="http://js.metacpan.org/#/showsrc/{{{name}}}">view source</a></h1><hr /></div><div style="height:50px">&nbsp;</div>
-
-{{{pod.html}}}
-
-</div>
+<body>
+    <div class="pod">
+        <div style="position:fixed;z-index: 5000;height:50px;width:100%;background-color:#fff;">
+            <h1 id="iCPAN">{{{module.name}}} ({{module.distribution.version}}) by: {{module.distribution.author.name}} ({{module.distribution.author.pauseid}}) | <a href="http://js.metacpan.org/#/showsrc/{{{module.name}}}">view source</a>
+            </h1>
+            <hr />
+        </div>
+        <div style="height:50px">&nbsp;</div>
+        {{{module.pod.html}}}
+    </div>
+    <!-- hack to fix the shortened viewport on iPad in landscape mode -->
+    <hr />
+    <div style="height:{{bottomSpacerHeight}}px;width=500px">&nbsp;</div>
 </body>
 </html>

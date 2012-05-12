@@ -31,18 +31,6 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     backButton.enabled = (webView.canGoBack);
     forwardButton.enabled = (webView.canGoForward);
-    
-    // CHECK: LANDSCAPE
-    if ( (self.interfaceOrientation == UIInterfaceOrientationLandscapeLeft) || (self.interfaceOrientation == UIInterfaceOrientationLandscapeRight) )
-    {
-        self.podViewer.frame = CGRectMake(self.podViewer.frame.origin.x, self.podViewer.frame.origin.y, 703, self.podViewer.frame.size.height);
-    }
-    // CHECK: PORTRAIT
-    else
-    {
-        self.podViewer.frame = CGRectMake(self.podViewer.frame.origin.x, self.podViewer.frame.origin.y, 768, self.podViewer.frame.size.height);
-    }
-    
 }
 
 
@@ -55,6 +43,8 @@
     [items insertObject:barButtonItem atIndex:0];
     [self.toolbar setItems:items animated:YES];
     self.popoverController = pc;
+    NSLog(@"setting bottom spacer height for ipad");
+    super.bottomSpacerHeight = [NSNumber numberWithInt:400];
 }
 
 // Called when the view is shown again in the split view, invalidating the button and popover controller.

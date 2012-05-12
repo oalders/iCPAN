@@ -14,6 +14,7 @@
 {
 	NSLog(@"setDetailItem in iPhone");
     [super setDetailItem:managedObject];
+    super.bottomSpacerHeight = [NSNumber numberWithInt:1];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

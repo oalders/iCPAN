@@ -20,6 +20,7 @@
 }
 
 
+@property (nonatomic, strong) NSNumber *bottomSpacerHeight;
 @property (nonatomic, strong) IBOutlet UIToolbar *toolbar;
 @property (nonatomic, strong) IBOutlet UILabel *detailDescriptionLabel;
 @property (nonatomic, strong) IBOutlet UIWebView *podViewer;

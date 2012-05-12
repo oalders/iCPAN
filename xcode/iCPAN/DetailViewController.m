@@ -14,6 +14,7 @@
 @implementation DetailViewController
 
 @synthesize backButton;
+@synthesize bottomSpacerHeight;
 @synthesize detailItem;
 @synthesize detailDescriptionLabel;
 @synthesize forwardButton;
@@ -160,10 +161,11 @@
 
 			if ( ![[NSFileManager defaultManager] fileExistsAtPath:podPath] ) {
                 
-                NSLog(@"creating file at %@", podPath);
+                NSLog(@"creating file at %@ with height %@", podPath, bottomSpacerHeight);
+                NSDictionary *templateVars = [ [NSDictionary alloc] initWithObjectsAndKeys: module, @"module", bottomSpacerHeight, @"bottomSpacerHeight", nil];
                 
                 NSString *tmplFile = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"template.html"];
-                NSString *text = [GRMustacheTemplate renderObject:module fromContentsOfFile: tmplFile error:nil];                
+                NSString *text = [GRMustacheTemplate renderObject:templateVars fromContentsOfFile: tmplFile error:nil];                
                 NSError *writeError = nil;
                 
                 [text writeToFile:podPath atomically:YES encoding:NSUTF8StringEncoding error:&writeError];
