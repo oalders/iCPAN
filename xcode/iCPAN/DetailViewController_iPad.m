@@ -15,6 +15,10 @@
 
 @synthesize popoverController=_myPopoverController;
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    return YES;
+}
+
 /*
  When setting the detail item, update the view and dismiss the popover controller if it's showing.
  */

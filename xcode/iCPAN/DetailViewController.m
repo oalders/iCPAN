@@ -74,25 +74,6 @@
 }
 
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return YES;
-}
-
-
-// Called each time a rotation of the device is accomplished
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
-    // CHECK: LANDSCAPE
-    if ( (self.interfaceOrientation == UIInterfaceOrientationLandscapeLeft) || (self.interfaceOrientation == UIInterfaceOrientationLandscapeRight) )
-    {
-        podViewer.frame = CGRectMake(podViewer.frame.origin.x, podViewer.frame.origin.y, 703, podViewer.frame.size.height);
-    }
-    // CHECK: PORTRAIT
-    else
-    {
-        podViewer.frame = CGRectMake(podViewer.frame.origin.x, podViewer.frame.origin.y, 768, podViewer.frame.size.height);
-    }
-}
-
 #pragma mark - Loading webView
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -155,8 +136,8 @@
             // Optional - label.text = @"NavLabel";
             [label setBackgroundColor:[UIColor clearColor]];
             [label setTextColor:[UIColor whiteColor]];
-            [label setText:module.name];
             [label sizeToFit];
+            [label setText:module.name];
             [self.navigationController.navigationBar.topItem setTitleView:label];
 
 			if ( ![[NSFileManager defaultManager] fileExistsAtPath:podPath] ) {

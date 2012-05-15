@@ -10,6 +10,10 @@
 
 @implementation DetailViewController_iPhone
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    return NO;
+}
+
 - (void)setDetailItem:(Module *)managedObject
 {
 	NSLog(@"setDetailItem in iPhone");
