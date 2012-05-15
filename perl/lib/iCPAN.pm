@@ -99,11 +99,7 @@ sub insert_authors {
 
     my $self = shift;
 
-    my $rs = $self->schema->resultset( 'Zauthor' );
-    if ( $self->purge ) {
-        $rs->delete;
-        $self->schema->storage->dbh->do( "VACUUM" );
-    }
+    my $rs = $self->init_rs( 'Zauthor' );
 
     my $scroller = $self->es->scrolled_search(
         index  => $self->index,
@@ -141,8 +137,7 @@ sub insert_authors {
 sub insert_distributions {
 
     my $self = shift;
-    my $rs   = $self->schema->resultset( 'Zdistribution' );
-    $rs->delete if $self->purge;
+    my $rs      = $self->init_rs( 'Zdistribution' );
 
     my $scroller = $self->es->scrolled_search(
         index => $self->index,
@@ -205,6 +200,14 @@ sub insert_distributions {
     return;
 
 }
+
+=head2 insert_modules
+
+Do bulk inserts of all modules returned by the API. Fetch Pod later.
+This allows us to cut down on expensive API calls as well as avoiding
+a constantly changing list of modules.
+
+=cut
 
 sub insert_modules {
 
@@ -302,9 +305,19 @@ sub update_ent {
 
 }
 
+=head2 pod_by_dist
+
+Updates all of the Pod in the db on a per dist basis.  We generally want to
+truncate the Pod table before proceeding, so that we don't have Pod pointing to
+the wrong Module.
+
+=cut
+
 sub pod_by_dist {
 
     my $self = shift;
+    $self->purge( 1 );
+    my $zpod = $self->init_rs( 'Zpod' ); # truncates Pod table
     my $rs   = $self->schema->resultset( 'Zmodule' );
 
     my %search = ();
@@ -459,6 +472,12 @@ sub module_scroller {
 
 }
 
+=head2 init_rs( $dbic_table_name )
+
+Truncates table if required.  Returns a resultset for the table.
+
+=cut
+
 sub init_rs {
 
     my $self = shift;
@@ -474,17 +493,3 @@ sub init_rs {
 }
 
 1;
-
-=pod
-
-=head2 init_rs( $dbic_table_name )
-
-Truncates table if required.  Returns a resultset for the table.
-
-=head2 insert_modules
-
-Do bulk inserts of all modules returned by the API. Fetch Pod later.
-This allows us to cut down on expensive API calls as well as avoiding
-a constantly changing list of modules.
-
-=cut
