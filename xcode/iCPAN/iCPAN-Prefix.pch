@@ -13,3 +13,6 @@
     #import <Foundation/Foundation.h>
     #import <CoreData/CoreData.h>
 #endif
+
+// Uncomment this line when building for the app store
+//#define NSLog(...)
