@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ED03CFA41562DBD700CD5436 /* iCPAN.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = ED03CFA31562DBD700CD5436 /* iCPAN.sqlite */; };
 		ED2BF6A91519923E00E37F08 /* ModuleBookmark.m in Sources */ = {isa = PBXBuildFile; fileRef = ED2BF6A81519923E00E37F08 /* ModuleBookmark.m */; };
 		ED2E76D6151D7DCE0095B6A4 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED2E76D5151D7DCE0095B6A4 /* SearchViewController.m */; };
 		ED3F622B13C2216D006255A9 /* Author.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3F622A13C2216D006255A9 /* Author.m */; };
@@ -31,7 +32,6 @@
 		ED706AF013A7285B00AAE86E /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = ED706AEC13A7285B00AAE86E /* style.css */; };
 		ED7FC69D13BEB949002505CC /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = ED7FC69C13BEB949002505CC /* Settings.bundle */; };
 		ED9E2729152A9A26002B541C /* BookmarkViewController_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = ED9E2728152A9A26002B541C /* BookmarkViewController_iPhone.m */; };
-		EDA1A9C2151D19FB00B822A4 /* iCPAN.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = EDA1A9C1151D19FB00B822A4 /* iCPAN.sqlite */; };
 		EDBDA4AF14C94731008F241E /* DetailViewController_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBDA4AD14C94730008F241E /* DetailViewController_iPhone.m */; };
 		EDBDA4B014C94731008F241E /* DetailViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDBDA4AE14C94730008F241E /* DetailViewController_iPhone.xib */; };
 		EDC0634C153E7CCB00C22AD5 /* libGRMustache3-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDC0634B153E7CCB00C22AD5 /* libGRMustache3-iOS.a */; };
@@ -78,6 +78,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		ED03CFA31562DBD700CD5436 /* iCPAN.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = iCPAN.sqlite; path = ../../iCPAN.sqlite; sourceTree = "<group>"; };
 		ED2BF6A71519923E00E37F08 /* ModuleBookmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModuleBookmark.h; sourceTree = "<group>"; };
 		ED2BF6A81519923E00E37F08 /* ModuleBookmark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModuleBookmark.m; sourceTree = "<group>"; };
 		ED2E76D4151D7DCE0095B6A4 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
@@ -113,7 +114,6 @@
 		ED7FC69C13BEB949002505CC /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = iCPAN/Settings.bundle; sourceTree = SOURCE_ROOT; };
 		ED9E2727152A9A26002B541C /* BookmarkViewController_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookmarkViewController_iPhone.h; sourceTree = "<group>"; };
 		ED9E2728152A9A26002B541C /* BookmarkViewController_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookmarkViewController_iPhone.m; sourceTree = "<group>"; };
-		EDA1A9C1151D19FB00B822A4 /* iCPAN.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = iCPAN.sqlite; sourceTree = "<group>"; };
 		EDBDA4AC14C94730008F241E /* DetailViewController_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailViewController_iPhone.h; path = iPhone/DetailViewController_iPhone.h; sourceTree = "<group>"; };
 		EDBDA4AD14C94730008F241E /* DetailViewController_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailViewController_iPhone.m; path = iPhone/DetailViewController_iPhone.m; sourceTree = "<group>"; };
 		EDBDA4AE14C94730008F241E /* DetailViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DetailViewController_iPhone.xib; path = iCPAN/iPhone/DetailViewController_iPhone.xib; sourceTree = "<group>"; };
@@ -360,7 +360,7 @@
 		EDF7CE2B134438880012E9DA /* iCPAN */ = {
 			isa = PBXGroup;
 			children = (
-				EDA1A9C1151D19FB00B822A4 /* iCPAN.sqlite */,
+				ED03CFA31562DBD700CD5436 /* iCPAN.sqlite */,
 				EDF7CE34134438880012E9DA /* iCPANAppDelegate.h */,
 				EDF7CE35134438880012E9DA /* iCPANAppDelegate.m */,
 				ED706ADA13A7275500AAE86E /* Reference */,
@@ -530,7 +530,7 @@
 				EDF1F451144BDD2500386258 /* SearchViewController_iPhone.xib in Resources */,
 				EDF1F456144BEB2A00386258 /* BookmarkViewController_iPhone.xib in Resources */,
 				EDBDA4B014C94731008F241E /* DetailViewController_iPhone.xib in Resources */,
-				EDA1A9C2151D19FB00B822A4 /* iCPAN.sqlite in Resources */,
+				ED03CFA41562DBD700CD5436 /* iCPAN.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -657,7 +657,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iCPAN/iCPAN-Prefix.pch";
@@ -761,6 +761,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = NO;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};
