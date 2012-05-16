@@ -22,7 +22,6 @@
     DetailViewController_iPhone *detailView = [[DetailViewController_iPhone alloc] init];
     
     detailView.detailItem = module;
-    detailView.title = module.name;
     detailView.hidesBottomBarWhenPushed = YES;
 	
     [[self navigationController] pushViewController:detailView animated:YES];

@@ -131,14 +131,6 @@
             NSString *fileName = [self module2url:module];
             NSString *podPath = [[del podDir] stringByAppendingPathComponent:fileName];
             
-            UILabel *label = [[UILabel alloc] init];
-            label.font = [UIFont fontWithName:@"Helvetica-Bold" size: 12.0];
-            // Optional - label.text = @"NavLabel";
-            [label setBackgroundColor:[UIColor clearColor]];
-            [label setTextColor:[UIColor whiteColor]];
-            [label sizeToFit];
-            [label setText:module.name];
-            [self.navigationController.navigationBar.topItem setTitleView:label];
 
 			if ( ![[NSFileManager defaultManager] fileExistsAtPath:podPath] ) {
                 
@@ -163,7 +155,8 @@
 		else {
             NSLog(@"module not found: %@", path);
 			self.navigationItem.rightBarButtonItem = nil;
-			self.title = @"404: Page Not Found";
+            // load a custom 404 page here
+			//self.title = @"404: Page Not Found";
 		}
         refreshButton.enabled = FALSE;
         stopButton.enabled = FALSE;
@@ -171,7 +164,7 @@
 	else {
 		// we are now online
 		self.navigationItem.rightBarButtonItem = nil;
-		self.title = [url absoluteString];
+		//self.title = [url absoluteString];
         refreshButton.enabled = TRUE;
         stopButton.enabled = TRUE;
     }
