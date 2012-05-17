@@ -14,5 +14,7 @@
     #import <CoreData/CoreData.h>
 #endif
 
-// Uncomment this line when building for the app store
-//#define NSLog(...)
+// turns of NSLog when shipped to app store
+#ifndef DEBUG
+#define NSLog(...)
+#endif
