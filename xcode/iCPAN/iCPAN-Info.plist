@@ -19,7 +19,7 @@
 		<string>onion-114x114.png</string>
 	</array>
 	<key>CFBundleIdentifier</key>
-	<string>com.wundercounter.${PRODUCT_NAME:rfc1034identifier}</string>
+	<string>${PRODUCT_NAME:rfc1034identifier}</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
