@@ -6,7 +6,7 @@
 	<array>
 		<dict>
 			<key>Title</key>
-			<string>iCPAN v1.9.0</string>
+			<string>iCPAN v2.0.0</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 		</dict>
@@ -16,7 +16,7 @@
 			<key>Key</key>
 			<string>as_you_type</string>
 			<key>Title</key>
-			<string>&quot;As You Type&quot; Search (experimental)</string>
+			<string>&quot;As You Type&quot; Search</string>
 			<key>Type</key>
 			<string>PSToggleSwitchSpecifier</string>
 		</dict>
