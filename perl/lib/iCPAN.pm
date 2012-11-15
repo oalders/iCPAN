@@ -109,7 +109,7 @@ sub insert_authors {
         size   => 5000,
     );
 
-    my $hits = $self->scroll( $scroller, 10000 );
+    my $hits = $self->scroll( $scroller, 15000 );
     my @authors = ();
 
     say "found " . scalar @{$hits} . " hits";
