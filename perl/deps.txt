@@ -5,10 +5,12 @@ Data::Dump
 Data::Printer
 ElasticSearch
 ElasticSearch::Transport::Curl
+File::Slurp
 Getopt::Long::Descriptive
 MooseX/NonMoose.pm
 MooseX::MarkAsMethods
 Parallel::ForkManager
 Perl6::Junction
+Perl::Tidy
 Pod::POM
 SQL::Translator

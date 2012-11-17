@@ -3,6 +3,7 @@ package iCPAN;
 use CHI;
 use Data::Dump qw( dump );
 use ElasticSearch;
+use File::Slurp;
 use MetaCPAN::Pod;
 use Modern::Perl;
 use Moose;
@@ -409,6 +410,41 @@ sub update_pod_in_single_dist {
         }
 
     }
+}
+
+=head2 finish_db
+
+Perform some final db cleanup.  Mostly this needs to be done in order to have
+valid metadata in the db which Core Data relies on.
+
+=cut
+
+sub finish_db {
+
+    my $self = shift;
+    my $pod_rs
+        = $self->schema->resultset( 'Zmodule' )
+        ->search( { 'Pod.ZHTML' => undef },
+        { order_by => 'zname ASC', prefetch => 'Pod' } );
+
+    my @missing;
+    while ( my $module = $pod_rs->next ) {
+        push @missing, $module->zname;
+    }
+
+    write_file( 'MISSING_MODULES.txt', @missing );
+
+    $pod_rs->reset;
+    $pod_rs->delete;
+
+    foreach my $table ( 'author', 'distribution', 'module', 'pod' ) {
+        my $name = "Z$table";
+        my $rs   = $self->schema->resultset( $name );
+        $self->update_ent( $rs, $self->get_ent( $name ) );
+    }
+
+    $self->schema->storage->dbh->do( "VACUUM" );
+
 }
 
 sub module_scroller {
