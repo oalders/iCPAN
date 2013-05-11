@@ -1,7 +1,7 @@
 package iCPAN;
 
 use CHI;
-use Data::Dump qw( dump );
+use Data::Printer;
 use ElasticSearch;
 use File::Slurp;
 use MetaCPAN::Pod;
@@ -18,25 +18,90 @@ with 'iCPAN::Role::Common';
 
 use iCPAN::Schema;
 
-has 'children' => ( is => 'rw', isa => 'Int', default => 2 );
-has 'cached_pod' =>
-    ( is => 'rw', default => 'http://localhost:5000/is_cached/' );
-has 'dist_search_prefix' =>
-    ( is => 'rw', isa => 'Str', default => 'DBIx-Class' );
-has 'distribution_scroll_size' =>
-    ( is => 'rw', isa => 'Int', default => 1000 );
-has 'es' => ( is => 'rw', isa => 'ElasticSearch', lazy_build => 1 );
-has 'index' => ( is => 'rw', default => 'v0' );
-has 'limit' => ( is => 'rw', isa     => 'Int', default => 100000 );
-has 'mech'  => ( is => 'rw', isa     => 'WWW::Mechanize', lazy_build => 1 );
-has 'module_scroll_size' => ( is => 'rw', isa => 'Int', default => 1000 );
-has 'pod_server' =>
-    ( is => 'rw', default => 'http://localhost:5000/podpath/' );
-has 'purge'         => ( is => 'rw', isa => 'Int', default => 0 );
-has 'scroll_size'   => ( is => 'rw', isa => 'Int', default => 1000 );
-has 'search_prefix' => ( is => 'rw', isa => 'Str', default => 'DBIx::Class' );
-has 'server' => ( is => 'rw', default => 'api.beta.metacpan.org:80' );
-has 'update_undef_only' => ( is => 'rw', default => 0 );
+has children => (
+    is      => 'rw',
+    isa     => 'Int',
+    default => 2
+);
+
+has cached_pod => (
+    is      => 'rw',
+    default => 'http://localhost:5000/is_cached/'
+);
+
+has dist_search_prefix => (
+    is      => 'rw',
+    isa     => 'Str',
+    default => 'DBIx-Class'
+);
+
+has distribution_scroll_size => (
+    is      => 'rw',
+    isa     => 'Int',
+    default => 1000
+);
+
+has es => (
+    is         => 'rw',
+    isa        => 'ElasticSearch',
+    lazy_build => 1
+);
+
+has index => (
+    is      => 'rw',
+    default => 'v0'
+);
+
+has limit => (
+    is      => 'rw',
+    isa     => 'Int',
+    default => 100000
+);
+
+has mech => (
+    is         => 'rw',
+    isa        => 'WWW::Mechanize',
+    lazy_build => 1
+);
+
+has module_scroll_size => (
+    is      => 'rw',
+    isa     => 'Int',
+    default => 1000
+);
+
+has pod_server => (
+    is      => 'rw',
+    default => 'http://localhost:5000/podpath/'
+);
+
+has purge => (
+    is      => 'rw',
+    isa     => 'Int',
+    default => 0
+);
+
+has scroll_size => (
+    is      => 'rw',
+    isa     => 'Int',
+    default => 1000
+);
+
+has search_prefix => (
+    is      => 'rw',
+    isa     => 'Str',
+    default => 'DBIx::Class'
+);
+
+has server => (
+    is      => 'rw',
+    default => 'api.metacpan.org'
+);
+
+has update_undef_only => (
+    is      => 'rw',
+    default => 0
+);
 
 my @ROGUE_DISTRIBUTIONS
     = qw(kurila perl_debug perl-5.005_02+apache1.3.3+modperl pod2texi perlbench spodcxx);
@@ -86,8 +151,8 @@ sub scroll {
             ? $result->{'_source'}
             : $result->{fields};
 
-        #say dump $hits[-1];
-        #say @hits . ' results so far';
+        p $hits[-1] if $self->debug;
+        say @hits . ' results so far' if $self->debug;
 
         last if scalar @hits > $limit;
 
@@ -99,7 +164,6 @@ sub scroll {
 sub insert_authors {
 
     my $self = shift;
-
     my $rs = $self->init_rs( 'Zauthor' );
 
     my $scroller = $self->es->scrolled_search(
@@ -118,7 +182,7 @@ sub insert_authors {
 
     foreach my $src ( @{$hits} ) {
 
-        #say dump $src;
+        p $src if $self->debug;
         push @authors,
             {
             z_ent    => $ent->z_ent,
@@ -138,7 +202,7 @@ sub insert_authors {
 sub insert_distributions {
 
     my $self = shift;
-    my $rs      = $self->init_rs( 'Zdistribution' );
+    my $rs   = $self->init_rs( 'Zdistribution' );
 
     my $scroller = $self->es->scrolled_search(
         index => $self->index,
@@ -161,13 +225,13 @@ sub insert_distributions {
     my $hits = $self->scroll( $scroller, 30000 );
     my @rows = ();
 
-    say "found " . scalar @{$hits} . " hits";
+    say "found " . scalar @{$hits} . " hits" if $self->debug;
 
     my $ent = $self->get_ent( 'Distribution' );
 
     foreach my $src ( @{$hits} ) {
 
-        #say dump $src;
+        p $src if $self->debug;
 
         my $author = $self->schema->resultset( 'Zauthor' )
             ->find( { zpauseid => $src->{author} } );
@@ -318,7 +382,7 @@ sub pod_by_dist {
 
     my $self = shift;
     $self->purge( 1 );
-    my $zpod = $self->init_rs( 'Zpod' ); # truncates Pod table
+    my $zpod = $self->init_rs( 'Zpod' );                # truncates Pod table
     my $rs   = $self->schema->resultset( 'Zmodule' );
 
     my %search = ();
@@ -367,7 +431,8 @@ sub update_pod_in_single_dist {
         say "starting module: " . $mod->zpath;
 
         my $relative_url = join( "/",
-            $dist->Author->zpauseid, $dist->zrelease_name, $mod->zpath );
+            $dist->Author->zpauseid,
+            $dist->zrelease_name, $mod->zpath );
 
         my $pod = undef;
         $self->mech->get( $self->cached_pod . $relative_url );
@@ -463,7 +528,7 @@ sub module_scroller {
                             or => [
                                 map {
                                     { term => { 'file.distribution' => $_ } }
-                                    } @ROGUE_DISTRIBUTIONS
+                                } @ROGUE_DISTRIBUTIONS
                             ]
                         }
                     }
