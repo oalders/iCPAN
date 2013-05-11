@@ -25,7 +25,7 @@ $icpan->purge(1);
 $icpan->children(10);
 my $schema = $icpan->schema;
 
-say p( $schema ) if $opt->{debug};
+p( $schema ) if $opt->{debug};
 
 my $method = $opt->{action};
 if ( $method ) {
