@@ -27,7 +27,7 @@ You'll also need to get the submodules:
     cd iCPAN
     git submodule init
     git submodule update
-    
+
 =head2 GET THE DATABASE
 
 You can find the database snapshots at:
@@ -39,7 +39,7 @@ the very latest version of the code:
     cd iCPAN
     curl -C - -O http://icpan.wundercounter.com/sqlite/latest/iCPAN.sqlite.zip
     unzip iCPAN.sqlite.zip
-    
+
 To work with a tagged release, like version 1.0.0:
 
     cd iCPAN
@@ -53,16 +53,16 @@ To work with a tagged release, like version 1.0.0:
 At this point, you can click the Xcode "Build and Run" button to deploy the
 app to your iPhone simulator.
 
-=head3 TROUBLESHOOTING 
+=head3 TROUBLESHOOTING
 
 If you run into problems deploying to the simulator after altering the
 database, try resetting it and then building again. "iPhone Simulator" ->
 "Reset Content and Settings"
 
-If GRMustache throws an "unrecognized selector" error, check the 
-"Other Linker Flags" in your "Build Settings". Select "Any iOS" when 
+If GRMustache throws an "unrecognized selector" error, check the
+"Other Linker Flags" in your "Build Settings". Select "Any iOS" when
 deploying to hardware.  Select "Any iOS Simulator" when deploying to
-the simulator. 
+the simulator.
 
 =head1 CONTACT
 
