@@ -1,11 +1,9 @@
 #!/usr/bin/env perl
 
-use Data::Dump qw( dump );
-use ElasticSearch;
-use Find::Lib '../lib', '../../inc/Pod2HTML/lib';
-use Getopt::Long::Descriptive;
 use Modern::Perl;
-use Scalar::Util qw( reftype );
+
+use Data::Printer;
+use Getopt::Long::Descriptive qw( describe_options );
 use iCPAN;
 
 my ( $opt, $usage ) = describe_options(
@@ -27,9 +25,7 @@ $icpan->purge(1);
 $icpan->children(10);
 my $schema = $icpan->schema;
 
-if ( $opt->{debug} ) {
-    say dump( $schema );
-}
+say p( $schema ) if $opt->{debug};
 
 my $method = $opt->{action};
 if ( $method ) {

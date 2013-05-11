@@ -1,0 +1,17 @@
+requires 'CHI';
+requires 'Cache::FastMmap';
+requires 'DBIx::Class::Schema';
+requires 'Data::Printer';
+requires 'ElasticSearch';
+requires 'ElasticSearch::Transport::Curl';
+requires 'File::Slurp';
+requires 'Furl';
+requires 'Getopt::Long::Descriptive';
+requires 'Modern::Perl';
+requires 'MooseX::MarkAsMethods';
+requires 'MooseX::NonMoose';
+requires 'Parallel::ForkManager';
+requires 'Perl6::Junction';
+requires 'Pod::POM';
+requires 'SQL::Translator';
+requires 'WWW::Mechanize::Cached';

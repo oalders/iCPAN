@@ -2,11 +2,11 @@
 
 #minicpan
 
-#perl bin/icpan.pl --action insert_authors
-#perl bin/icpan.pl --action insert_distributions
-#perl bin/icpan.pl --action insert_modules
-#perl bin/icpan.pl --action pod_by_dist
-perl bin/icpan.pl --action finish_db
+bin/carton bin/icpan.pl --action insert_authors
+bin/carton bin/icpan.pl --action insert_distributions
+bin/carton bin/icpan.pl --action insert_modules
+bin/carton bin/icpan.pl --action pod_by_dist
+bin/carton bin/icpan.pl --action finish_db
 
 cd ..
 mv iCPAN.sqlite.zip iCPAN.sqlite.zip.old
