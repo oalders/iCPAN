@@ -110,13 +110,15 @@ sub _build_es {
 
     my $self = shift;
 
-    return ElasticSearch->new(
+    my $es = ElasticSearch->new(
         servers      => $self->server,
         transport    => 'curl',
         max_requests => 0,               # default 10_000
-        trace_calls  => 'log_file',
         no_refresh   => 1,
     );
+
+    $es->trace_calls(\*STDOUT);
+    return $es;
 
 }
 
