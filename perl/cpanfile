@@ -8,6 +8,7 @@ requires 'File::Slurp';
 requires 'Furl';
 requires 'Getopt::Long::Descriptive';
 requires 'Modern::Perl';
+requires 'Module::Version::App';
 requires 'MooseX::MarkAsMethods';
 requires 'MooseX::NonMoose';
 requires 'Parallel::ForkManager';
