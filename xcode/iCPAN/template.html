@@ -2,6 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=0.88">
 <link rel="stylesheet" type="text/css" media="all" href="shCore.css" />
 <link rel="stylesheet" type="text/css" media="all" href="shThemeDefault.css" />
 <link rel="stylesheet" href="bootstrap.css">
@@ -20,17 +21,10 @@
 <link rel='stylesheet' href='style.css' type='text/css'>
 </head>
 <body>
-    <div class="pod">
-        <div style="position:fixed;z-index: 5000;height:50px;width:100%;background-color:#fff;">
-            <h1 id="iCPAN">{{{module.name}}} ({{module.distribution.version}}) by: {{module.distribution.author.name}} ({{module.distribution.author.pauseid}}) | <a href="http://js.metacpan.org/#/showsrc/{{{module.name}}}">view source</a>
-            </h1>
-            <hr />
-        </div>
-        <div style="height:50px">&nbsp;</div>
+    <div class="container">
+        <h4>{{{module.name}}} ({{module.distribution.version}}) by: {{module.distribution.author.name}} ({{module.distribution.author.pauseid}}) | <a href="https://metacpan.org/source/{{module.distribution.author.pauseid}}/{{module.distribution.release_name}}/{{{module.path}}}">view source</a>
+        </h4>
         {{{module.pod.html}}}
     </div>
-    <!-- hack to fix the shortened viewport on iPad in landscape mode -->
-    <hr />
-    <div style="height:{{bottomSpacerHeight}}px;width=500px">&nbsp;</div>
 </body>
 </html>
