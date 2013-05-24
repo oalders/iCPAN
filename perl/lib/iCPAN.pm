@@ -170,16 +170,18 @@ sub insert_authors {
 
     my $self = shift;
     my $rs = $self->init_rs( 'Zauthor' );
+    $self->debug( 1 );
 
     my $scroller = $self->es->scrolled_search(
         index  => $self->index,
         type   => 'author',
         query  => { match_all => {}, },
+        fields => ['pauseid', 'name', 'email'],
         scroll => '5m',
-        size   => 5000,
+        size   => 1000,
     );
 
-    my $hits = $self->scroll( $scroller, 15000 );
+    my $hits = $self->scroll( $scroller, 11000 );
     my @authors = ();
 
     say "found " . scalar @{$hits} . " hits";
@@ -194,7 +196,7 @@ sub insert_authors {
             z_opt    => 1,
             zpauseid => $src->{pauseid},
             zname    => ( ref $src->{name} ) ? undef : $src->{name},
-            zemail   => shift @{ $src->{email} },
+            zemail   => ref $src->{email} ? shift @{ $src->{email} } : $src->{email},
             };
     }
 
@@ -502,7 +504,7 @@ sub finish_db {
         push @missing, $module->zname;
     }
 
-    write_file( 'MISSING_MODULES.txt', @missing );
+    write_file( 'MISSING_MODULES.txt', join( "\n", @missing );
 
     $pod_rs->reset;
     $pod_rs->delete;
