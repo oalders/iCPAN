@@ -30,6 +30,7 @@
 		ED706AEE13A7285B00AAE86E /* shThemeDefault.css in Resources */ = {isa = PBXBuildFile; fileRef = ED706AEA13A7285B00AAE86E /* shThemeDefault.css */; };
 		ED706AEF13A7285B00AAE86E /* shThemeEmacs.css in Resources */ = {isa = PBXBuildFile; fileRef = ED706AEB13A7285B00AAE86E /* shThemeEmacs.css */; };
 		ED706AF013A7285B00AAE86E /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = ED706AEC13A7285B00AAE86E /* style.css */; };
+		ED747881174F28CE00026179 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED747880174F28CE00026179 /* Default-568h@2x.png */; };
 		ED7FC69D13BEB949002505CC /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = ED7FC69C13BEB949002505CC /* Settings.bundle */; };
 		ED9E2729152A9A26002B541C /* BookmarkViewController_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = ED9E2728152A9A26002B541C /* BookmarkViewController_iPhone.m */; };
 		EDBDA4AF14C94731008F241E /* DetailViewController_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBDA4AD14C94730008F241E /* DetailViewController_iPhone.m */; };
@@ -114,6 +115,7 @@
 		ED706AEA13A7285B00AAE86E /* shThemeDefault.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = shThemeDefault.css; sourceTree = "<group>"; };
 		ED706AEB13A7285B00AAE86E /* shThemeEmacs.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = shThemeEmacs.css; sourceTree = "<group>"; };
 		ED706AEC13A7285B00AAE86E /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
+		ED747880174F28CE00026179 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		ED7FC69C13BEB949002505CC /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = iCPAN/Settings.bundle; sourceTree = SOURCE_ROOT; };
 		ED9E2727152A9A26002B541C /* BookmarkViewController_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookmarkViewController_iPhone.h; sourceTree = "<group>"; };
 		ED9E2728152A9A26002B541C /* BookmarkViewController_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookmarkViewController_iPhone.m; sourceTree = "<group>"; };
@@ -339,6 +341,7 @@
 		EDF7CE14134438880012E9DA = {
 			isa = PBXGroup;
 			children = (
+				ED747880174F28CE00026179 /* Default-568h@2x.png */,
 				EDF7CE2B134438880012E9DA /* iCPAN */,
 				EDF7CE54134438890012E9DA /* iCPANTests */,
 				EDF7CE22134438880012E9DA /* Frameworks */,
@@ -542,6 +545,7 @@
 				ED03CFA41562DBD700CD5436 /* iCPAN.sqlite in Resources */,
 				EDED5C60174F1AAC00FEE421 /* bootstrap-responsive.css in Resources */,
 				EDED5C61174F1AAC00FEE421 /* bootstrap.css in Resources */,
+				ED747881174F28CE00026179 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
