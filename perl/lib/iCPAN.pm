@@ -117,6 +117,9 @@ sub _build_es {
         no_refresh   => 1,
     );
 
+    my $t = $es->transport;
+    $t->deflate(1);
+
     $es->trace_calls(\*STDOUT);
     return $es;
 
