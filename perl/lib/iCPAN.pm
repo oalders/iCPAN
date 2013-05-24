@@ -159,7 +159,7 @@ sub scroll {
         p $hits[-1] if $self->debug;
         say @hits . ' results so far' if $self->debug;
 
-        last if scalar @hits > $limit;
+        last if scalar @hits >= $limit;
 
     }
 
