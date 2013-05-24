@@ -2,7 +2,7 @@ requires 'CHI';
 requires 'Cache::FastMmap';
 requires 'DBIx::Class::Schema';
 requires 'Data::Printer';
-requires 'ElasticSearch';
+requires 'ElasticSearch', '0.65';
 requires 'ElasticSearch::Transport::Curl';
 requires 'File::Slurp';
 requires 'Furl';
