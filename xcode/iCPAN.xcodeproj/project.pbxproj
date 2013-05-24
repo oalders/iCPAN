@@ -36,6 +36,9 @@
 		EDBDA4B014C94731008F241E /* DetailViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDBDA4AE14C94730008F241E /* DetailViewController_iPhone.xib */; };
 		EDC0634C153E7CCB00C22AD5 /* libGRMustache3-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDC0634B153E7CCB00C22AD5 /* libGRMustache3-iOS.a */; };
 		EDCDAB7B151439A1000DFC1F /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDCDAB7A151439A1000DFC1F /* DetailViewController.m */; };
+		EDED5C60174F1AAC00FEE421 /* bootstrap-responsive.css in Resources */ = {isa = PBXBuildFile; fileRef = EDED5C5E174F1AAC00FEE421 /* bootstrap-responsive.css */; };
+		EDED5C61174F1AAC00FEE421 /* bootstrap.css in Resources */ = {isa = PBXBuildFile; fileRef = EDED5C5F174F1AAC00FEE421 /* bootstrap.css */; };
+		EDED6473174F1AF900FEE421 /* bootstrap.min.js in Sources */ = {isa = PBXBuildFile; fileRef = EDED6472174F1AF900FEE421 /* bootstrap.min.js */; };
 		EDEEBB19151ADAE2000826DF /* ModuleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EDEEBB18151ADAE2000826DF /* ModuleTableViewCell.m */; };
 		EDEEEAFD13EE3F3D00DB5195 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = EDEEEAFC13EE3F3D00DB5195 /* Default-Portrait~ipad.png */; };
 		EDEEEB0213EE429600DB5195 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = EDEEEAFF13EE410F00DB5195 /* Default-Landscape~ipad.png */; };
@@ -120,6 +123,9 @@
 		EDC0634B153E7CCB00C22AD5 /* libGRMustache3-iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libGRMustache3-iOS.a"; path = "../lib/libGRMustache3-iOS.a"; sourceTree = "<group>"; };
 		EDCDAB79151439A1000DFC1F /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		EDCDAB7A151439A1000DFC1F /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		EDED5C5E174F1AAC00FEE421 /* bootstrap-responsive.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = "bootstrap-responsive.css"; path = "../../inc/bootstrap/docs/assets/css/bootstrap-responsive.css"; sourceTree = "<group>"; };
+		EDED5C5F174F1AAC00FEE421 /* bootstrap.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = bootstrap.css; path = ../../inc/bootstrap/docs/assets/css/bootstrap.css; sourceTree = "<group>"; };
+		EDED6472174F1AF900FEE421 /* bootstrap.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = bootstrap.min.js; path = ../../inc/bootstrap/docs/assets/js/bootstrap.min.js; sourceTree = "<group>"; };
 		EDEEBB17151ADAE2000826DF /* ModuleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModuleTableViewCell.h; sourceTree = "<group>"; };
 		EDEEBB18151ADAE2000826DF /* ModuleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModuleTableViewCell.m; sourceTree = "<group>"; };
 		EDEEEAFC13EE3F3D00DB5195 /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Portrait~ipad.png"; path = "../Default-Portrait~ipad.png"; sourceTree = "<group>"; };
@@ -276,6 +282,8 @@
 		EDCF8B93151069B500AB37E4 /* CSS */ = {
 			isa = PBXGroup;
 			children = (
+				EDED5C5E174F1AAC00FEE421 /* bootstrap-responsive.css */,
+				EDED5C5F174F1AAC00FEE421 /* bootstrap.css */,
 				ED706AE913A7285B00AAE86E /* shCore.css */,
 				ED706AEA13A7285B00AAE86E /* shThemeDefault.css */,
 				ED706AEB13A7285B00AAE86E /* shThemeEmacs.css */,
@@ -287,6 +295,7 @@
 		EDCF8B94151069C400AB37E4 /* JS */ = {
 			isa = PBXGroup;
 			children = (
+				EDED6472174F1AF900FEE421 /* bootstrap.min.js */,
 				ED706ADF13A7283700AAE86E /* iCPAN.js */,
 				ED706AE013A7283700AAE86E /* jquery.min.js */,
 				ED706AE113A7283700AAE86E /* shBrushJScript.js */,
@@ -531,6 +540,8 @@
 				EDF1F456144BEB2A00386258 /* BookmarkViewController_iPhone.xib in Resources */,
 				EDBDA4B014C94731008F241E /* DetailViewController_iPhone.xib in Resources */,
 				ED03CFA41562DBD700CD5436 /* iCPAN.sqlite in Resources */,
+				EDED5C60174F1AAC00FEE421 /* bootstrap-responsive.css in Resources */,
+				EDED5C61174F1AAC00FEE421 /* bootstrap.css in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -585,6 +596,7 @@
 				EDEEBB19151ADAE2000826DF /* ModuleTableViewCell.m in Sources */,
 				ED2E76D6151D7DCE0095B6A4 /* SearchViewController.m in Sources */,
 				ED9E2729152A9A26002B541C /* BookmarkViewController_iPhone.m in Sources */,
+				EDED6473174F1AF900FEE421 /* bootstrap.min.js in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
