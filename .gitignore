@@ -1,11 +1,8 @@
-# folders to ignore
+*.sqlite*
+.DS_Store
+all_ratings.csv
 build
 iCPAN.xcodeproj
+perl/.carton
+perl/local
 perl/log_file*
-
-# files to ignore
-.DS_Store
-*.sqlite*
-all_ratings.csv
-*.kpf
-*.komodoproject
