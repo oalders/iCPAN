@@ -7,3 +7,6 @@
 [submodule "inc/metacpan-web"]
 	path = inc/metacpan-web
 	url = https://github.com/CPAN-API/metacpan-web
+[submodule "inc/bootstrap"]
+	path = inc/bootstrap
+	url = git://github.com/twitter/bootstrap.git
