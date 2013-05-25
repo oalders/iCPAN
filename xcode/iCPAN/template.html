@@ -7,6 +7,7 @@
 <link rel="stylesheet" type="text/css" media="all" href="shThemeDefault.css" />
 <link rel="stylesheet" href="bootstrap.css">
 <link rel="stylesheet" href="bootstrap-responsive.css">
+<link rel="stylesheet" href="style.css">
 <script type="text/javascript" src="jquery.min.js"></script>
 <script type="text/javascript" src="shCore.js"></script>
 <script type="text/javascript" src="shBrushPerl.js"></script>
@@ -16,13 +17,12 @@
         icpan_highlight();
     });
 </script>
-
+    
 <title></title>
-<link rel='stylesheet' href='style.css' type='text/css'>
 </head>
 <body>
     <div class="container">
-        <h4>{{{module.name}}} ({{module.distribution.version}}) by: {{module.distribution.author.name}} ({{module.distribution.author.pauseid}}) | <a href="https://metacpan.org/source/{{module.distribution.author.pauseid}}/{{module.distribution.release_name}}/{{{module.path}}}">view source</a>
+        <h4>{{{module.name}}} ({{module.distribution.version}}) by: {{module.distribution.author.name}} ({{module.distribution.author.pauseid}}) | <a class="btn btn-custom" href="https://metacpan.org/source/{{module.distribution.author.pauseid}}/{{module.distribution.release_name}}/{{{module.path}}}">view source</a>
         </h4>
         {{{module.pod.html}}}
     </div>
