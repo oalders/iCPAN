@@ -673,7 +673,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Olaf Alders";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Olaf Alders";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iCPAN/iCPAN-Prefix.pch";
@@ -687,7 +688,8 @@
 				);
 				"OTHER_LDFLAGS[sdk=iphoneos*][arch=*]" = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "EDA8E77C-144C-4075-9A43-A66C3DB83E46";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EDA8E77C-144C-4075-9A43-A66C3DB83E46";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = armv7;
@@ -760,7 +762,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Olaf Alders (N3P7K426KT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Olaf Alders (N3P7K426KT)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -775,7 +778,8 @@
 				);
 				"OTHER_LDFLAGS[sdk=*]" = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "C5C01C7E-7EFD-4CC5-9892-19790A711D5D";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C5C01C7E-7EFD-4CC5-9892-19790A711D5D";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = NO;
 				VALID_ARCHS = armv7;
@@ -788,7 +792,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Olaf Alders (35987J47V8)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Olaf Alders (35987J47V8)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iCPAN/iCPAN-Prefix.pch";
@@ -802,7 +807,8 @@
 				);
 				"OTHER_LDFLAGS[sdk=iphoneos*][arch=*]" = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "79B6E022-AEEE-4A5B-864F-70F437E1FFD6";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "79B6E022-AEEE-4A5B-864F-70F437E1FFD6";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = armv7;
