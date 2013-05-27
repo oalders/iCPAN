@@ -39,7 +39,7 @@
 		EDCDAB7B151439A1000DFC1F /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDCDAB7A151439A1000DFC1F /* DetailViewController.m */; };
 		EDED5C60174F1AAC00FEE421 /* bootstrap-responsive.css in Resources */ = {isa = PBXBuildFile; fileRef = EDED5C5E174F1AAC00FEE421 /* bootstrap-responsive.css */; };
 		EDED5C61174F1AAC00FEE421 /* bootstrap.css in Resources */ = {isa = PBXBuildFile; fileRef = EDED5C5F174F1AAC00FEE421 /* bootstrap.css */; };
-		EDED6473174F1AF900FEE421 /* bootstrap.min.js in Sources */ = {isa = PBXBuildFile; fileRef = EDED6472174F1AF900FEE421 /* bootstrap.min.js */; };
+		EDED6473174F1AF900FEE421 /* bootstrap.min.js in Resources */ = {isa = PBXBuildFile; fileRef = EDED6472174F1AF900FEE421 /* bootstrap.min.js */; };
 		EDEEBB19151ADAE2000826DF /* ModuleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EDEEBB18151ADAE2000826DF /* ModuleTableViewCell.m */; };
 		EDEEEAFD13EE3F3D00DB5195 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = EDEEEAFC13EE3F3D00DB5195 /* Default-Portrait~ipad.png */; };
 		EDEEEB0213EE429600DB5195 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = EDEEEAFF13EE410F00DB5195 /* Default-Landscape~ipad.png */; };
@@ -516,6 +516,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDED6473174F1AF900FEE421 /* bootstrap.min.js in Resources */,
 				EDF7CE30134438880012E9DA /* InfoPlist.strings in Resources */,
 				EDF7CE40134438880012E9DA /* MainWindow_iPhone.xib in Resources */,
 				ED4B5C0A1383761600386B42 /* MainWindow_iPad.xib in Resources */,
@@ -600,7 +601,6 @@
 				EDEEBB19151ADAE2000826DF /* ModuleTableViewCell.m in Sources */,
 				ED2E76D6151D7DCE0095B6A4 /* SearchViewController.m in Sources */,
 				ED9E2729152A9A26002B541C /* BookmarkViewController_iPhone.m in Sources */,
-				EDED6473174F1AF900FEE421 /* bootstrap.min.js in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
