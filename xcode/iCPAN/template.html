@@ -22,7 +22,22 @@
 </head>
 <body>
     <div class="container">
-        <h4><a href="https://metacpan.org/module/{{{module.name}}}">{{{module.name}}}</a> ({{module.distribution.version}}) by: {{module.distribution.author.name}}</a> <a href="https://metacpan.org/author/{{module.distribution.author.pauseid}}">({{module.distribution.author.pauseid}})</a> | <a class="btn btn-custom" href="https://metacpan.org/source/{{module.distribution.author.pauseid}}/{{module.distribution.release_name}}/{{{module.path}}}">view source</a>
+        <h4>
+            <ul class="breadcrumb">
+                <li><a href="https://metacpan.org/author/{{module.distribution.author.pauseid}}">{{module.distribution.author.pauseid}}</a>
+                    <span class="divider">/</span>
+                </li>
+                <li><a href="https://metacpan.org/release/{{module.distribution.release_name}}">{{module.distribution.release_name}}</a>
+                    <span class="divider">/</span>
+                </li>
+                <li class="active"><a href="https://metacpan.org/module/{{{module.name}}}">{{{module.name}}}</a>
+                </li>
+            </ul>
+            {{module.distribution.author.name}} <!-- {{module.distribution.release_date}} -->
+            <a
+                class="btn btn-custom"
+                href="https://metacpan.org/source/{{module.distribution.author.pauseid}}/{{module.distribution.release_name}}/{{{module.path}}}">view source
+            </a>
         </h4>
         {{{module.pod.html}}}
     </div>
