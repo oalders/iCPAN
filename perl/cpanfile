@@ -1,4 +1,5 @@
 requires 'CHI';
+requires 'CPAN::Mini';
 requires 'Cache::FastMmap';
 requires 'DBIx::Class::Schema';
 requires 'Data::Printer';
