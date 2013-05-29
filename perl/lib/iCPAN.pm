@@ -504,7 +504,7 @@ sub finish_db {
         push @missing, $module->zname;
     }
 
-    write_file( 'MISSING_MODULES.txt', join( "\n", @missing );
+    write_file( 'MISSING_MODULES.txt', join( "\n", @missing ) );
 
     $pod_rs->reset;
     $pod_rs->delete;
