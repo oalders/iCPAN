@@ -4,7 +4,6 @@ use Modern::Perl;
 use Data::Printer;
 use Test::More;
 
-use Find::Lib '../../inc/Pod2HTML/lib';
 use iCPAN;
 
 my $icpan  = iCPAN->new;
