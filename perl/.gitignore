@@ -1,2 +1,4 @@
+*.swp
 cpanfile.snapshot
 .tidyall.d/
+tidyall.ERR

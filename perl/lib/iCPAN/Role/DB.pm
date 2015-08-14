@@ -28,14 +28,11 @@ has 'schema_class' => (
 );
 
 sub _build_dsn {
-
     my $self = shift;
     return "dbi:SQLite:dbname=" . $self->db_file;
-
 }
 
 sub _build_schema {
-
     my $self   = shift;
     my $schema = $self->schema_class->connect(
         $self->dsn, '', '', '',

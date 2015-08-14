@@ -108,7 +108,6 @@ my @ROGUE_DISTRIBUTIONS
     = qw(kurila perl_debug perl-5.005_02+apache1.3.3+modperl pod2texi perlbench spodcxx);
 
 sub _build_es {
-
     my $self = shift;
 
     my $es = Search::Elasticsearch->new(
@@ -124,7 +123,6 @@ sub _build_es {
 }
 
 sub _build_mech {
-
     my $self = shift;
 
     my $folder = "$ENV{HOME}/tmp/iCPAN";
@@ -142,7 +140,6 @@ sub _build_mech {
 }
 
 sub scroll {
-
     my $self     = shift;
     my $scroller = shift;
     my $limit    = shift || 100;
@@ -158,17 +155,14 @@ sub scroll {
         say @hits . ' results so far' if $self->debug;
 
         last if scalar @hits >= $limit;
-
     }
 
     return \@hits;
 }
 
 sub insert_authors {
-
     my $self = shift;
     my $rs   = $self->init_rs('Zauthor');
-    $self->debug(1);
 
     my $scroller = $self->es->scroll_helper(
         index  => $self->index,
@@ -179,7 +173,7 @@ sub insert_authors {
         size   => 1000,
     );
 
-    my $hits = $self->scroll( $scroller, 11000 );
+    my $hits = $self->scroll( $scroller, 20000 );
     my @authors = ();
 
     say "found " . scalar @{$hits} . " hits";
@@ -207,29 +201,27 @@ sub insert_authors {
 }
 
 sub insert_distributions {
-
     my $self = shift;
     my $rs   = $self->init_rs('Zdistribution');
 
-    my $scroller = $self->es->scrolled_search(
+    my $scroller = $self->es->scroll_helper(
         index => $self->index,
         type  => ['release'],
-        query => {
-            term => { status => 'latest' },
-
-            #match_all => {},
+        body  => {
+            query => { term => { status => 'latest' } },
+            filter =>
+                { prefix => { distribution => $self->dist_search_prefix } },
+            fields => [
+                'author', 'distribution', 'abstract', 'version_numified',
+                'name',   'date'
+            ],
         },
-        filter => { prefix => { distribution => $self->dist_search_prefix } },
-        fields => [
-            'author', 'distribution', 'abstract', 'version_numified',
-            'name',   'date'
-        ],
         scroll  => '30m',
         size    => $self->distribution_scroll_size,
         explain => 0,
     );
 
-    my $hits = $self->scroll( $scroller, 30000 );
+    my $hits = $self->scroll( $scroller, 100_000 );
     my @rows = ();
 
     say "found " . scalar @{$hits} . " hits" if $self->debug;
@@ -237,7 +229,6 @@ sub insert_distributions {
     my $ent = $self->get_ent('Distribution');
 
     foreach my $src ( @{$hits} ) {
-
         p $src if $self->debug;
 
         my $author = $self->schema->resultset('Zauthor')
@@ -270,7 +261,6 @@ sub insert_distributions {
     $rs->populate( \@rows ) if @rows;
     $self->update_ent( $rs, $ent );
     return;
-
 }
 
 =head2 insert_modules
@@ -282,7 +272,6 @@ a constantly changing list of modules.
 =cut
 
 sub insert_modules {
-
     my $self    = shift;
     my $rs      = $self->init_rs('Zmodule');
     my $dist_rs = $self->schema->resultset('Zdistribution');
@@ -346,37 +335,30 @@ sub insert_modules {
     $self->update_ent( $rs, $ent );
 
     return;
-
 }
 
 sub extract_hit {
-
     my $self   = shift;
     my $result = shift;
 
     return exists $result->{'_source'}
         ? $result->{'_source'}
         : $result->{fields};
-
 }
 
 sub get_ent {
-
     my $self  = shift;
     my $table = shift;
 
     return $self->schema->resultset('ZPrimarykey')
         ->find_or_create( { z_name => $table } );
-
 }
 
 sub update_ent {
-
     my ( $self, $rs, $ent ) = @_;
     my $last = $rs->search( {}, { order_by => 'z_pk DESC' } )->first;
     $ent->z_max( $last->id );
     $ent->update;
-
 }
 
 =head2 pod_by_dist
@@ -388,7 +370,6 @@ the wrong Module.
 =cut
 
 sub pod_by_dist {
-
     my $self = shift;
     $self->purge(1);
     my $zpod = $self->init_rs('Zpod');                # truncates Pod table
@@ -425,7 +406,6 @@ sub pod_by_dist {
 }
 
 sub update_pod_in_single_dist {
-
     my $self = shift;
     my $dist = shift;
 
@@ -490,7 +470,6 @@ sub update_pod_in_single_dist {
         else {
             say "==============> could not find MetaCPAN Pod";
         }
-
     }
 }
 
@@ -502,7 +481,6 @@ valid metadata in the db which Core Data relies on.
 =cut
 
 sub finish_db {
-
     my $self   = shift;
     my $pod_rs = $self->schema->resultset('Zmodule')->search(
         { 'Pod.ZHTML' => undef },
@@ -526,17 +504,15 @@ sub finish_db {
     }
 
     $self->schema->storage->dbh->do("VACUUM");
-
 }
 
 sub module_scroller {
-
     my $self = shift;
-    return $self->es->scrolled_search(
+    return $self->es->scroll_helper(
         index => $self->index,
         type  => ['file'],
 
-        query => { "match_all" => {} },
+        body => { query => { "match_all" => {} },
 
         filter => {
             and => [
@@ -587,12 +563,11 @@ sub module_scroller {
             "distribution",      "date",
             "author",            "release",
             "path"
-        ],
+        ],},
         scroll  => '15m',
         size    => $self->module_scroll_size,
         explain => 0,
     );
-
 }
 
 =head2 init_rs( $dbic_table_name )
@@ -602,7 +577,6 @@ Truncates table if required.  Returns a resultset for the table.
 =cut
 
 sub init_rs {
-
     my $self = shift;
     my $name = shift;
     my $rs   = $self->schema->resultset($name);
