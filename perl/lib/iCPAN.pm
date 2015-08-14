@@ -1,14 +1,15 @@
 package iCPAN;
 
+use Moose;
+
 use CHI;
 use Data::Printer;
-use ElasticSearch;
 use File::Slurp;
 use MetaCPAN::Pod;
 use Modern::Perl;
-use Moose;
 use Parallel::ForkManager;
 use Perl6::Junction qw( any );
+use Search::Elasticsearch;
 use Try::Tiny;
 use WWW::Mechanize;
 use WWW::Mechanize::Cached;
@@ -43,7 +44,7 @@ has distribution_scroll_size => (
 
 has es => (
     is         => 'rw',
-    isa        => 'ElasticSearch',
+    isa        => 'Search::Elasticsearch::Client::1_0::Direct',
     lazy_build => 1
 );
 
@@ -110,19 +111,16 @@ sub _build_es {
 
     my $self = shift;
 
-    my $es = ElasticSearch->new(
-        servers      => $self->server,
-        transport    => 'curl',
+    my $es = Search::Elasticsearch->new(
+        cxn   => 'NetCurl',
+        cxn_pool         => 'Static::NoPing',
         max_requests => 0,               # default 10_000
+        nodes => 'api.metacpan.org',
         no_refresh   => 1,
+        servers      => $self->server,
     );
 
-    my $t = $es->transport;
-    $t->deflate(1);
-
-    $es->trace_calls(\*STDOUT);
     return $es;
-
 }
 
 sub _build_mech {
@@ -172,10 +170,10 @@ sub insert_authors {
     my $rs = $self->init_rs( 'Zauthor' );
     $self->debug( 1 );
 
-    my $scroller = $self->es->scrolled_search(
+    my $scroller = $self->es->scroll_helper(
         index  => $self->index,
         type   => 'author',
-        query  => { match_all => {}, },
+        body => { query  => { match_all => {}, } },
         fields => ['pauseid', 'name', 'email'],
         scroll => '5m',
         size   => 1000,
