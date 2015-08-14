@@ -112,10 +112,10 @@ sub _build_es {
     my $self = shift;
 
     my $es = Search::Elasticsearch->new(
-        cxn   => 'NetCurl',
-        cxn_pool         => 'Static::NoPing',
-        max_requests => 0,               # default 10_000
-        nodes => 'api.metacpan.org',
+        cxn          => 'NetCurl',
+        cxn_pool     => 'Static::NoPing',
+        max_requests => 0,                  # default 10_000
+        nodes        => $self->server,
         no_refresh   => 1,
         servers      => $self->server,
     );
@@ -134,7 +134,7 @@ sub _build_mech {
         cache_size => '800m'
     );
 
-   #my $mech = WWW::Mechanize::Cached->new( autocheck => 0, cache => $cache );
+    #my $mech = WWW::Mechanize::Cached->new( autocheck => 0, cache => $cache );
 
     my $mech = WWW::Mechanize->new( autocheck => 0 );
     return $mech;
@@ -167,14 +167,14 @@ sub scroll {
 sub insert_authors {
 
     my $self = shift;
-    my $rs = $self->init_rs( 'Zauthor' );
-    $self->debug( 1 );
+    my $rs   = $self->init_rs('Zauthor');
+    $self->debug(1);
 
     my $scroller = $self->es->scroll_helper(
         index  => $self->index,
         type   => 'author',
-        body => { query  => { match_all => {}, } },
-        fields => ['pauseid', 'name', 'email'],
+        body   => { query => { match_all => {}, } },
+        fields => [ 'pauseid', 'name', 'email' ],
         scroll => '5m',
         size   => 1000,
     );
@@ -183,7 +183,7 @@ sub insert_authors {
     my @authors = ();
 
     say "found " . scalar @{$hits} . " hits";
-    my $ent = $self->get_ent( 'Author' );
+    my $ent = $self->get_ent('Author');
 
     foreach my $src ( @{$hits} ) {
 
@@ -194,7 +194,9 @@ sub insert_authors {
             z_opt    => 1,
             zpauseid => $src->{pauseid},
             zname    => ( ref $src->{name} ) ? undef : $src->{name},
-            zemail   => ref $src->{email} ? shift @{ $src->{email} } : $src->{email},
+            zemail   => ref $src->{email}
+            ? shift @{ $src->{email} }
+            : $src->{email},
             };
     }
 
@@ -207,7 +209,7 @@ sub insert_authors {
 sub insert_distributions {
 
     my $self = shift;
-    my $rs   = $self->init_rs( 'Zdistribution' );
+    my $rs   = $self->init_rs('Zdistribution');
 
     my $scroller = $self->es->scrolled_search(
         index => $self->index,
@@ -232,13 +234,13 @@ sub insert_distributions {
 
     say "found " . scalar @{$hits} . " hits" if $self->debug;
 
-    my $ent = $self->get_ent( 'Distribution' );
+    my $ent = $self->get_ent('Distribution');
 
     foreach my $src ( @{$hits} ) {
 
         p $src if $self->debug;
 
-        my $author = $self->schema->resultset( 'Zauthor' )
+        my $author = $self->schema->resultset('Zauthor')
             ->find( { zpauseid => $src->{author} } );
         if ( !$author ) {
             say "cannot find $src->{author}. skipping!!!";
@@ -282,34 +284,36 @@ a constantly changing list of modules.
 sub insert_modules {
 
     my $self    = shift;
-    my $rs      = $self->init_rs( 'Zmodule' );
-    my $dist_rs = $self->schema->resultset( 'Zdistribution' );
+    my $rs      = $self->init_rs('Zmodule');
+    my $dist_rs = $self->schema->resultset('Zdistribution');
 
     my $scroller = $self->module_scroller;
 
-    my $ent = $self->get_ent( 'Module' );
+    my $ent = $self->get_ent('Module');
 
     my %dist_id = ();
     my @hits    = ();
     my @rows    = ();
     while ( my $result = $scroller->next ) {
 
-        my $src = $self->extract_hit( $result );
+        my $src = $self->extract_hit($result);
         next if !$src;
         next if !$src->{documentation};
 
         # TODO why are there multiple dists with the same name in this table?
         if ( !exists $dist_id{ $src->{distribution} } ) {
-            my $dist
-                = $dist_rs->find_or_create( { zname => $src->{distribution} },
-                { rows => 1 } );
+            my $dist = $dist_rs->find_or_create(
+                { zname => $src->{distribution} },
+                { rows  => 1 }
+            );
 
             if ( $dist->id ) {
                 $dist_id{ $src->{distribution} } = $dist->id;
             }
             else {
                 $dist_id{ $src->{distribution} } = $dist_rs->update(
-                    {   zauthor       => $src->{author},
+                    {
+                        zauthor       => $src->{author},
                         zrelease_date => $src->{date},
                         zname         => $src->{distribution},
                         zversion      => $src->{version_numified},
@@ -361,7 +365,7 @@ sub get_ent {
     my $self  = shift;
     my $table = shift;
 
-    return $self->schema->resultset( 'ZPrimarykey' )
+    return $self->schema->resultset('ZPrimarykey')
         ->find_or_create( { z_name => $table } );
 
 }
@@ -386,17 +390,18 @@ the wrong Module.
 sub pod_by_dist {
 
     my $self = shift;
-    $self->purge( 1 );
-    my $zpod = $self->init_rs( 'Zpod' );                # truncates Pod table
-    my $rs   = $self->schema->resultset( 'Zmodule' );
+    $self->purge(1);
+    my $zpod = $self->init_rs('Zpod');                # truncates Pod table
+    my $rs   = $self->schema->resultset('Zmodule');
 
     my %search = ();
     if ( $self->update_undef_only ) {
         $search{'Modules.zpod'} = undef;
     }
-    my $dist_rs = $self->schema->resultset( 'Zdistribution' )->search(
+    my $dist_rs = $self->schema->resultset('Zdistribution')->search(
         \%search,
-        {   join     => [ 'Author', 'Modules' ],
+        {
+            join     => [ 'Author', 'Modules' ],
             group_by => [qw/zrelease_name/],
             order_by => 'zrelease_date DESC',
         }
@@ -412,11 +417,11 @@ sub pod_by_dist {
         say "starting dist $dist_count of $total_dists: "
             . $dist->zrelease_name;
 
-        $self->update_pod_in_single_dist( $dist );
+        $self->update_pod_in_single_dist($dist);
     }
 
-    my $pod_rs = $self->schema->resultset( 'Zpod' );
-    $self->update_ent( $pod_rs, $self->get_ent( 'Pod' ) );
+    my $pod_rs = $self->schema->resultset('Zpod');
+    $self->update_ent( $pod_rs, $self->get_ent('Pod') );
 }
 
 sub update_pod_in_single_dist {
@@ -435,9 +440,11 @@ sub update_pod_in_single_dist {
     while ( my $mod = $mod_rs->next ) {
         say "starting module: " . $mod->zpath;
 
-        my $relative_url = join( "/",
+        my $relative_url = join(
+            "/",
             $dist->Author->zpauseid,
-            $dist->zrelease_name, $mod->zpath );
+            $dist->zrelease_name, $mod->zpath
+        );
 
         my $pod = undef;
         $self->mech->get( $self->cached_pod . $relative_url );
@@ -447,32 +454,37 @@ sub update_pod_in_single_dist {
         }
         else {
             try {
-                $pod = $converter->pod_from_tar( $dist->zrelease_name,
-                    $mod->zpath );
+                $pod = $converter->pod_from_tar(
+                    $dist->zrelease_name,
+                    $mod->zpath
+                );
             }
             catch {
                 say "local pod error: $_";    # not $@
             };
         }
 
-        if ( $pod ) {
+        if ($pod) {
             my $xhtml;
-            try { $xhtml = $converter->parse_pod( $pod ) };
+            try { $xhtml = $converter->parse_pod($pod) };
             catch { say "*************** could not parse pod" };
 
-            if ( $xhtml ) {
-                my $pod_row = $mod->find_or_create_related( 'Pod',
-                    { zhtml => $xhtml } );
+            if ($xhtml) {
+                my $pod_row = $mod->find_or_create_related(
+                    'Pod',
+                    { zhtml => $xhtml }
+                );
                 $mod->update( { zpod => $pod_row->id } );
                 next;
             }
         }
 
         if ( $self->mech->get( $self->pod_server . $relative_url )
-            ->is_success )
-        {
-            my $pod_row = $mod->find_or_create_related( 'Pod',
-                { zhtml => $self->mech->content } );
+            ->is_success ) {
+            my $pod_row = $mod->find_or_create_related(
+                'Pod',
+                { zhtml => $self->mech->content }
+            );
             $mod->update( { zpod => $pod_row->id } );
         }
         else {
@@ -491,11 +503,11 @@ valid metadata in the db which Core Data relies on.
 
 sub finish_db {
 
-    my $self = shift;
-    my $pod_rs
-        = $self->schema->resultset( 'Zmodule' )
-        ->search( { 'Pod.ZHTML' => undef },
-        { order_by => 'zname ASC', prefetch => 'Pod' } );
+    my $self   = shift;
+    my $pod_rs = $self->schema->resultset('Zmodule')->search(
+        { 'Pod.ZHTML' => undef },
+        { order_by    => 'zname ASC', prefetch => 'Pod' }
+    );
 
     my @missing;
     while ( my $module = $pod_rs->next ) {
@@ -509,11 +521,11 @@ sub finish_db {
 
     foreach my $table ( 'author', 'distribution', 'module', 'pod' ) {
         my $name = "Z$table";
-        my $rs   = $self->schema->resultset( $name );
-        $self->update_ent( $rs, $self->get_ent( $name ) );
+        my $rs   = $self->schema->resultset($name);
+        $self->update_ent( $rs, $self->get_ent($name) );
     }
 
-    $self->schema->storage->dbh->do( "VACUUM" );
+    $self->schema->storage->dbh->do("VACUUM");
 
 }
 
@@ -528,7 +540,8 @@ sub module_scroller {
 
         filter => {
             and => [
-                {   not => {
+                {
+                    not => {
                         filter => {
                             or => [
                                 map {
@@ -539,7 +552,8 @@ sub module_scroller {
                     }
                 },
                 { term => { status => 'latest' } },
-                {   or => [
+                {
+                    or => [
 
                         # we are looking for files that have no authorized
                         # property (e.g. .pod files) and files that are
@@ -548,13 +562,16 @@ sub module_scroller {
                         { term => { 'file.authorized' => \1 } },
                     ]
                 },
-                {   or => [
-                        {   and => [
+                {
+                    or => [
+                        {
+                            and => [
                                 { exists => { field => 'file.module.name' } },
                                 { term => { 'file.module.indexed' => \1 } }
                             ]
                         },
-                        {   and => [
+                        {
+                            and => [
                                 { exists => { field => 'documentation' } },
                                 { term => { 'file.indexed' => \1 } }
                             ]
@@ -588,11 +605,11 @@ sub init_rs {
 
     my $self = shift;
     my $name = shift;
-    my $rs   = $self->schema->resultset( $name );
+    my $rs   = $self->schema->resultset($name);
 
     if ( $self->purge ) {
         $rs->delete;
-        $self->schema->storage->dbh->do( "VACUUM" );
+        $self->schema->storage->dbh->do("VACUUM");
     }
 
     return $rs;

@@ -11,7 +11,8 @@ my ( $opt, $usage ) = describe_options(
     'my-program %o <some-arg>',
     [ 'constraint=s', "table name regex" ],
     [ 'debug',        "print debugging info" ],
-    [   'overwrite-modifications',
+    [
+        'overwrite-modifications',
         'overwrite modifications (helpful in case of checksum mismatch)'
     ],
     [],
@@ -21,8 +22,9 @@ my ( $opt, $usage ) = describe_options(
 my $icpan = iCPAN->new;
 
 my $args = {
-#    constraint => $opt->constraint || qr{.*},
-    debug => $opt->debug,
+
+    #    constraint => $opt->constraint || qr{.*},
+    debug                   => $opt->debug,
     dump_directory          => Find::Lib::base() . '/../lib',
     overwrite_modifications => $opt->overwrite_modifications || 0,
     naming                  => 'current',
@@ -30,7 +32,7 @@ my $args = {
     use_moose               => 1,
 };
 
-say "args: " . dump( $args ) if $opt->debug;
+say "args: " . dump($args) if $opt->debug;
 
 say $icpan->dsn;
 

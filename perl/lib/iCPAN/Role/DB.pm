@@ -37,8 +37,10 @@ sub _build_dsn {
 sub _build_schema {
 
     my $self   = shift;
-    my $schema = $self->schema_class->connect( $self->dsn, '', '', '',
-        { sqlite_use_immediate_transaction => 1, AutoCommit => 1 } );
+    my $schema = $self->schema_class->connect(
+        $self->dsn, '', '', '',
+        { sqlite_use_immediate_transaction => 1, AutoCommit => 1 }
+    );
 
     #$schema->storage->dbh->sqlite_busy_timeout(0);
     return $schema;
