@@ -1,0 +1,3 @@
+#!/bin/bash
+
+carton exec -- prove -lvr t
