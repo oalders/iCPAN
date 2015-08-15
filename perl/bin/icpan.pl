@@ -12,7 +12,6 @@ my $icpan = iCPAN->new_with_options(
     db_file            => '../iCPAN.sqlite',
     search_prefix      => q{},
     dist_search_prefix => q{},
-    purge              => 1,
     children           => 10,
 );
 
