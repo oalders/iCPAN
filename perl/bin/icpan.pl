@@ -8,12 +8,13 @@ use warnings;
 use Data::Printer;
 use iCPAN;
 
-my $icpan = iCPAN->new_with_options;
-$icpan->db_file('../iCPAN.sqlite');
-$icpan->search_prefix(q{});
-$icpan->dist_search_prefix(q{});
-$icpan->purge(1);
-$icpan->children(10);
+my $icpan = iCPAN->new_with_options(
+    db_file            => '../iCPAN.sqlite',
+    search_prefix      => q{},
+    dist_search_prefix => q{},
+    purge              => 1,
+    children           => 10,
+);
 
 my $schema = $icpan->schema;
 

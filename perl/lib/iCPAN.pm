@@ -12,6 +12,8 @@ use Parallel::ForkManager;
 use Perl6::Junction qw( any );
 use Search::Elasticsearch;
 use Try::Tiny;
+use Types::Standard qw( Bool InstanceOf Int Str );
+use Types::URI -all;
 use WWW::Mechanize;
 use WWW::Mechanize::Cached;
 
@@ -21,92 +23,101 @@ use iCPAN::Schema;
 
 has action => (
     is        => 'ro',
-    isa       => 'Str',
+    isa       => Str,
     predicate => 'has_action',
 );
 
 has children => (
-    is      => 'rw',
-    isa     => 'Int',
+    is      => 'ro',
+    isa     => Int,
     default => 2
 );
 
 has cached_pod => (
-    is      => 'rw',
+    is      => 'ro',
+    isa     => Uri,
+    coerce  => 1,
     default => 'http://localhost:5000/is_cached/'
 );
 
 has dist_search_prefix => (
-    is      => 'rw',
-    isa     => 'Str',
-    default => 'DBIx-Class'
+    is      => 'ro',
+    isa     => Str,
+    default => 'DBIx-Class',
 );
 
 has distribution_scroll_size => (
-    is      => 'rw',
-    isa     => 'Int',
+    is      => 'ro',
+    isa     => Int,
     default => 1000
 );
 
 has es => (
-    is         => 'rw',
-    isa        => 'Search::Elasticsearch::Client::1_0::Direct',
-    lazy_build => 1
+    is      => 'ro',
+    isa     => InstanceOf ['Search::Elasticsearch::Client::1_0::Direct'],
+    lazy    => 1,
+    builder => '_build_es',
 );
 
 has index => (
-    is      => 'rw',
+    is      => 'ro',
+    isa     => Str,
     default => 'v0'
 );
 
 has limit => (
-    is      => 'rw',
-    isa     => 'Int',
+    is      => 'ro',
+    isa     => Int,
     default => 100000
 );
 
 has mech => (
-    is         => 'rw',
-    isa        => 'WWW::Mechanize',
-    lazy_build => 1
+    is      => 'ro',
+    isa     => InstanceOf ['WWW::Mechanize'],
+    lazy    => 1,
+    builder => '_build_mech',
 );
 
 has module_scroll_size => (
-    is      => 'rw',
-    isa     => 'Int',
+    is      => 'ro',
+    isa     => Int,
     default => 1000
 );
 
 has pod_server => (
-    is      => 'rw',
+    is      => 'ro',
+    isa     => Uri,
+    coerce  => 1,
     default => 'http://localhost:5000/podpath/'
 );
 
 has purge => (
-    is      => 'rw',
-    isa     => 'Int',
+    is      => 'ro',
+    isa     => Int,
     default => 0
 );
 
 has scroll_size => (
-    is      => 'rw',
-    isa     => 'Int',
+    is      => 'ro',
+    isa     => Int,
     default => 1000
 );
 
 has search_prefix => (
-    is      => 'rw',
-    isa     => 'Str',
+    is      => 'ro',
+    isa     => Str,
     default => 'DBIx::Class'
 );
 
 has server => (
-    is      => 'rw',
+    is      => 'ro',
+    isa     => Str,
     default => 'api.metacpan.org'
 );
 
 has update_undef_only => (
-    is      => 'rw',
+    is      => 'ro',
+    isa     => Bool,
     default => 0
 );
 
@@ -377,7 +388,6 @@ the wrong Module.
 
 sub pod_by_dist {
     my $self = shift;
-    $self->purge(1);
     my $zpod = $self->init_rs('Zpod');                # truncates Pod table
     my $rs   = $self->schema->resultset('Zmodule');
 
