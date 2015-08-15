@@ -33,13 +33,6 @@ has children => (
     default => 2
 );
 
-has cached_pod => (
-    is      => 'ro',
-    isa     => Uri,
-    coerce  => 1,
-    default => 'http://localhost:5000/is_cached/'
-);
-
 has dist_search_prefix => (
     is      => 'ro',
     isa     => Str,
@@ -75,6 +68,7 @@ has mech => (
     is      => 'ro',
     isa     => InstanceOf ['WWW::Mechanize'],
     lazy    => 1,
+    handles => { get => 'get' },
     builder => '_build_mech',
 );
 
@@ -149,11 +143,11 @@ sub _build_mech {
         cache_size => '800m'
     );
 
-    #my $mech = WWW::Mechanize::Cached->new( autocheck => 0, cache => $cache );
+    my $mech = WWW::Mechanize::Cached->new( autocheck => 0, cache => $cache );
 
-    my $mech = WWW::Mechanize->new( autocheck => 0 );
+    #my $mech = WWW::Mechanize->new( autocheck => 0 );
+    debug_ua($mech) if $self->debug;
     return $mech;
-
 }
 
 sub scroll {
@@ -433,6 +427,8 @@ sub update_pod_in_single_dist {
     my $mod_rs = $dist->Modules( \%search );
     $converter->build_tar( $dist->Author->zpauseid, $dist->zrelease_name );
 
+    my $found = 0;
+MODULE:
     while ( my $mod = $mod_rs->next ) {
         say "starting module: " . $mod->zpath;
 
@@ -442,23 +438,26 @@ sub update_pod_in_single_dist {
             $dist->zrelease_name, $mod->zpath
         );
 
-        my $pod = undef;
-        $self->mech->get( $self->cached_pod . $relative_url );
+        my $pod;
 
-        if ( $self->mech->success ) {
-            $pod = $self->mech->content;
+        # There was some code here that was supposed to find a cached version
+        # using a local web service, but it only returns 404s.  We'd have to
+        # tweak the web service to do the below:
+        #
+        # 1) Try to get the pod locally 2) Try to fetch the source from
+        # MetaCPAN
+        #
+        # The whole caching this is too convoluted.
+
+        try {
+            $pod = $converter->pod_from_tar(
+                $dist->zrelease_name,
+                $mod->zpath
+            );
         }
-        else {
-            try {
-                $pod = $converter->pod_from_tar(
-                    $dist->zrelease_name,
-                    $mod->zpath
-                );
-            }
-            catch {
-                say "local pod error: $_";    # not $@
-            };
-        }
+        catch {
+            say "local pod error: $_";
+        };
 
         if ($pod) {
             my $xhtml;
@@ -471,7 +470,8 @@ sub update_pod_in_single_dist {
                     { zhtml => $xhtml }
                 );
                 $mod->update( { zpod => $pod_row->id } );
-                next;
+                ++$found;
+                next MODULE;
             }
         }
 
@@ -487,6 +487,7 @@ sub update_pod_in_single_dist {
             say "==============> could not find MetaCPAN Pod";
         }
     }
+    return $found;
 }
 
 =head2 finish_db
