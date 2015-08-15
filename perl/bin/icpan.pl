@@ -1,39 +1,25 @@
 #!/usr/bin/env perl
 
-use Modern::Perl;
+# See bin/populate_db.sh for a list of available options
+
+use strict;
+use warnings;
 
 use Data::Printer;
-use Getopt::Long::Descriptive qw( describe_options );
 use iCPAN;
 
-my ( $opt, $usage ) = describe_options(
-    'update_db %o <some-arg>',
-    [
-        'action=s',
-        "method (insert_authors|insert_modules|insert_distributions|update_module_pod)"
-    ],
-    [ 'debug', "print debugging info" ],
-
-    [],
-    [ 'help', "print usage message and exit" ],
-);
-
-print( $usage->text ), exit if $opt->help;
-
-my $icpan = iCPAN->new;
+my $icpan = iCPAN->new_with_options;
 $icpan->db_file('../iCPAN.sqlite');
-$icpan->search_prefix("");
-$icpan->dist_search_prefix("");
+$icpan->search_prefix(q{});
+$icpan->dist_search_prefix(q{});
 $icpan->purge(1);
 $icpan->children(10);
+
 my $schema = $icpan->schema;
 
-p($schema) if $opt->{debug};
+p($schema) if $icpan->{debug};
 
-my $method = $opt->{action};
-if ($method) {
+if ($icpan->has_action) {
+    my $method = $icpan->action;
     $icpan->$method;
-}
-else {
-    say "no method found";
 }

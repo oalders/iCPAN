@@ -15,10 +15,15 @@ use Try::Tiny;
 use WWW::Mechanize;
 use WWW::Mechanize::Cached;
 
-with 'iCPAN::Role::DB';
-with 'iCPAN::Role::Common';
+with( 'iCPAN::Role::DB', 'iCPAN::Role::Common', 'MooseX::Getopt::Dashes' );
 
 use iCPAN::Schema;
+
+has action => (
+    is        => 'ro',
+    isa       => 'Str',
+    predicate => 'has_action',
+);
 
 has children => (
     is      => 'rw',

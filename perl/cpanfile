@@ -12,6 +12,7 @@ requires 'Getopt::Long::Descriptive';
 requires 'LWP::ConsoleLogger';
 requires 'Modern::Perl';
 requires 'Module::Version::App';
+requires 'MooseX::Getopt::Dashes';
 requires 'MooseX::MarkAsMethods';
 requires 'MooseX::NonMoose';
 requires 'Parallel::ForkManager';
