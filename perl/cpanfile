@@ -9,6 +9,7 @@ requires 'File::Slurp';
 requires 'Find::Lib';
 requires 'Furl';
 requires 'Getopt::Long::Descriptive';
+requires 'LWP::ConsoleLogger';
 requires 'Modern::Perl';
 requires 'Module::Version::App';
 requires 'MooseX::MarkAsMethods';

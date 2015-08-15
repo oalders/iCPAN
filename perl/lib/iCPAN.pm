@@ -5,6 +5,7 @@ use Moose;
 use CHI;
 use Data::Printer;
 use File::Slurp;
+use LWP::ConsoleLogger::Easy qw( debug_ua );
 use MetaCPAN::Pod;
 use Modern::Perl;
 use Parallel::ForkManager;
