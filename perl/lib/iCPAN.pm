@@ -446,7 +446,7 @@ sub update_pod_in_single_dist {
 
         if ($pod) {
             my $xhtml;
-            try { $xhtml = $converter->parse_pod($pod) };
+            try { $xhtml = $converter->parse_pod($pod) }
             catch { say "*************** could not parse pod" };
 
             if ($xhtml) {
