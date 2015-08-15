@@ -1,3 +1,3 @@
 #!/bin/bash
 
-carton exec -- prove -lvr -I ../inc/Pod2HTML/lib t
+carton exec -- prove -lvr -I ../inc/Pod2HTML/lib $@
