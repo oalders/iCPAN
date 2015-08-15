@@ -1,5 +1,7 @@
 [PerlTidy]
 select = {bin,lib,t}/**/*.{pl,pm,t,psgi}
+ignore = lib/iCPAN/Schema/**/*
+ignore = lib/iCPAN/Schema.pm
 
 ; [PerlCritic]
 ; select = {bin,lib,t}/**/*.{pl,pm,t,psgi}

@@ -19,7 +19,7 @@ my $schema = $icpan->schema;
 
 p($schema) if $icpan->{debug};
 
-if ($icpan->has_action) {
+if ( $icpan->has_action ) {
     my $method = $icpan->action;
     $icpan->$method;
 }

@@ -518,58 +518,70 @@ sub module_scroller {
         index => $self->index,
         type  => ['file'],
 
-        body => { query => { "match_all" => {} },
+        body => {
+            query => { "match_all" => {} },
 
-        filter => {
-            and => [
-                {
-                    not => {
-                        filter => {
-                            or => [
-                                map {
-                                    { term => { 'file.distribution' => $_ } }
-                                } @ROGUE_DISTRIBUTIONS
-                            ]
+            filter => {
+                and => [
+                    {
+                        not => {
+                            filter => {
+                                or => [
+                                    map {
+                                        { term =>
+                                                { 'file.distribution' => $_ }
+                                        }
+                                    } @ROGUE_DISTRIBUTIONS
+                                ]
+                            }
                         }
+                    },
+                    { term => { status => 'latest' } },
+                    {
+                        or => [
+
+                            # we are looking for files that have no authorized
+                            # property (e.g. .pod files) and files that are
+                            # authorized
+                            { missing => { field => 'file.authorized' } },
+                            { term => { 'file.authorized' => \1 } },
+                        ]
+                    },
+                    {
+                        or => [
+                            {
+                                and => [
+                                    {
+                                        exists =>
+                                            { field => 'file.module.name' }
+                                    },
+                                    {
+                                        term =>
+                                            { 'file.module.indexed' => \1 }
+                                    }
+                                ]
+                            },
+                            {
+                                and => [
+                                    {
+                                        exists => { field => 'documentation' }
+                                    },
+                                    { term => { 'file.indexed' => \1 } }
+                                ]
+                            }
+                        ]
                     }
-                },
-                { term => { status => 'latest' } },
-                {
-                    or => [
+                ]
+            },
 
-                        # we are looking for files that have no authorized
-                        # property (e.g. .pod files) and files that are
-                        # authorized
-                        { missing => { field => 'file.authorized' } },
-                        { term => { 'file.authorized' => \1 } },
-                    ]
-                },
-                {
-                    or => [
-                        {
-                            and => [
-                                { exists => { field => 'file.module.name' } },
-                                { term => { 'file.module.indexed' => \1 } }
-                            ]
-                        },
-                        {
-                            and => [
-                                { exists => { field => 'documentation' } },
-                                { term => { 'file.indexed' => \1 } }
-                            ]
-                        }
-                    ]
-                }
-            ]
+            sort   => [ { "date" => "desc" } ],
+            fields => [
+                "abstract.analyzed", "documentation",
+                "distribution",      "date",
+                "author",            "release",
+                "path"
+            ],
         },
-
-        sort   => [ { "date" => "desc" } ],
-        fields => [
-            "abstract.analyzed", "documentation",
-            "distribution",      "date",
-            "author",            "release",
-            "path"
-        ],},
         scroll  => '15m',
         size    => $self->module_scroll_size,
         explain => 0,
